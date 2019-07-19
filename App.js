@@ -2,10 +2,15 @@ import { AppLoading } from 'expo';
 import { Asset } from 'expo-asset';
 import * as Font from 'expo-font';
 import React, { useState } from 'react';
-import { Platform, StatusBar, StyleSheet, View } from 'react-native';
+import {Dimensions, Platform, StatusBar, StyleSheet, View} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-
 import AppNavigator from './navigation/AppNavigator';
+import LoginScreen from './screens/Sign/SignScreen';
+import ItemDetailScreen from './screens/ItemDetail';
+import MyPageScreen from './screens/MyPage';
+import PlannedListScreen from './screens/PlannedList';
+
+
 
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
@@ -21,8 +26,8 @@ export default function App(props) {
   } else {
     return (
       <View style={styles.container}>
-        {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-        <AppNavigator />
+
+          <PlannedListScreen style={styles.container}/>
       </View>
     );
   }
@@ -44,7 +49,7 @@ async function loadResourcesAsync() {
   ]);
 }
 
-function handleLoadingError(error: Error) {
+function handleLoadingError(error) {
   // In this case, you might want to report the error to your error reporting
   // service, for example Sentry
   console.warn(error);
@@ -59,4 +64,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
+    loginScreen : {
+      padding:30,
+      margin : 30,
+    }
+
 });
+
+
