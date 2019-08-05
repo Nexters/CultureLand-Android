@@ -31,7 +31,7 @@ export default function App(props) {
     return (
       <View style={styles.container}>
           {/* <AppNavigator/> */}
-          <MainScreen style={styles.container}/>
+          <NoteListScreen style={styles.container}/>
       </View>
     );
   }

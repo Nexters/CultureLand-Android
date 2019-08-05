@@ -12,9 +12,10 @@ export default styles = function(screenWidth,screenHeight,calc) {
         container: {
             width : "100%",
             height : "100%",
-            backgroundColor: '#fff',
-            paddingTop : calc.getRegHeightDp(24),
-
+            // backgroundColor: '#fff',
+            // paddingTop : calc.getRegHeightDp(24),
+            paddingTop: calc.getRegHeightDp(108),
+            backgroundColor: '#f6f6f6',
         },
 
 

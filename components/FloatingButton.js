@@ -3,14 +3,24 @@ import {
     View,
     Text,
     StyleSheet,
+    Dimensions,
     TouchableOpacity
 } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import {RatioCalculator} from "../util";
+
+const screenWidth = Math.round(Dimensions.get('window').width);
+const screenHeight = Math.round(Dimensions.get('window').height);
+
+const calc = new RatioCalculator(screenWidth, screenHeight);
 
 export class FloatingButton extends Component {
     render () {
         return (
-            <TouchableOpacity activeOpacity={0.7} style={styles.floating_button}>
+            <TouchableOpacity 
+                onPress={() => alert('FAB clicked')}
+                activeOpacity={0.7} 
+                style={styles.floating_button}
+            >
                 <Text style={styles.button_icon}>+</Text>
             </TouchableOpacity>
         );
@@ -24,11 +34,11 @@ const styles = StyleSheet.create({
         bottom: 85,
         alignItems: 'center',
         justifyContent: 'center',
-        width: 53.2,
-        height: 53.2,
-        borderRadius: 30, 
+        width: calc.getRegWidthDp(60),
+        height: calc.getRegWidthDp(60),
+        borderRadius: 60, 
         elevation: 8 ,
-        backgroundColor: "#434343",
+        backgroundColor: "#f15642",
     },
     button_icon : {
         fontSize: 40, 

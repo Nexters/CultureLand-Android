@@ -16,16 +16,16 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {RatioCalculator} from "../../util";
 import TabBarIcon from "../../components/TabBarIcon";
 import {FloatingButton} from "../../components/FloatingButton"
-import {List} from "../../components/List"
+import {ListComponent} from "../../components/ListComponent"
 
 const calc = new RatioCalculator(screenWidth, screenHeight);
 const styles = styleFn(screenWidth, screenHeight, calc);
 
-export default function NoteListScreen() {
+export default function PlannedListScreen() {
     return (
 
         <View style={styles.container}>
-            <List />
+            <ListComponent />
             <FloatingButton/>
         </View>
     )

@@ -4,9 +4,17 @@ import {
     Text,
     Image,
     StyleSheet,
-    Dimensions
+    Dimensions,
+    TouchableOpacity
 } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
+import {RatioCalculator} from "../util";
+import { Directions } from 'react-native-gesture-handler';
+
+const screenWidth = Math.round(Dimensions.get('window').width);
+const screenHeight = Math.round(Dimensions.get('window').height);
+
+const calc = new RatioCalculator(screenWidth, screenHeight);
 
 export class MainCarousel extends Component {
 
@@ -16,10 +24,25 @@ export class MainCarousel extends Component {
 
     _renderItem ({item, index}) {
         return (
-            <View style={styles.slide}>
-                <Image style={styles.image}/>
-                <Text style={styles.title}>{ item.title }</Text>
-            </View>
+            <TouchableOpacity
+                activeOpacity={1}
+                style={styles.slide_inner_container}
+                onPress={()=> {alert(`You've clicked this!`)}}
+            >
+                <View style={styles.slide}>
+                    <View style={styles.image_container}>
+                        <Image style={styles.image}/>
+                    </View>
+                    <View style={styles.text_container}>
+                        <Text style={styles.title}>{ item.title }</Text>
+                        <View style={styles.count_container}>
+                            <Image style={styles.count_icon}/>
+                            <Text style={styles.count}>{ item.count }</Text>
+                        </View>
+                    </View>
+                </View>
+                <View style={styles.shadow}/>
+            </TouchableOpacity>
         );
     }
     render () {
@@ -29,58 +52,123 @@ export class MainCarousel extends Component {
                 data={[
                     {
                         title: 'JUNE',
+                        count: 3,
                     },
                     {
                         title: 'JULY',
+                        count: 4,
                     },
                     {
                         title: 'AUGUST',
+                        count: 3,
                     },
                     {
                         title: 'SEPTEMBER',
+                        count: 4,
                     },
                 ]}
                 renderItem={this._renderItem}
                 sliderWidth={sliderWidth}
                 itemWidth={itemWidth}
-                containerCustomStyle={this.props.style}
+                firstItem={2}
+                containerCustomStyle={styles.slide_container}
+                // contentContainerCustomStyle={styles.slider_content_container}
+                layout={'default'}
+                inactiveSlideScale={1}
             />
         );
     }
 }
 
-const horizontalMargin = 14;
-const slideWidth = 280;
+const horizontalMargin = calc.getRegWidthDp(18);
+const verticalMargin = calc.getRegWidthDp(9);
+const slideWidth = calc.getRegWidthDp(216);
+const slideHeight = calc.getRegHeightDp(250);
 
 const sliderWidth = Dimensions.get('window').width;
 const itemWidth = slideWidth + horizontalMargin * 2;
+const itemHeight = slideHeight + verticalMargin;
 
 const styles = StyleSheet.create({
-    slide: {
-        width: itemWidth,
-        height: 462,
-        padding: horizontalMargin,
-        borderRadius: 7,
-        backgroundColor: "#ffffff",
-        borderStyle: "solid",
-        borderWidth: 1,
-        borderColor: "#979797"
+    slide_container : {
+        width: sliderWidth,
+        marginTop: calc.getRegHeightDp(12),
     },
-
-    image: {
-        resizeMode: "cover",
+    slide_inner_container : {
         flex: 1,
-        height: 336,
+        // position: 'relative',
+        width: itemWidth,
+        height: itemHeight,
+        paddingHorizontal: horizontalMargin,
+        paddingBottom: verticalMargin,
+        paddingTop: 0,
+    },  
+    slide : {
+        flex: 1,
+        borderRadius: 7,
+        padding: calc.getRegWidthDp(8),
+        elevation: 3,
+        shadowColor: '#787878',
+        shadowOpacity: 0.25,
+        shadowOffset: { width: 0, height: 2 },
+        shadowRadius: 10,
+        borderRadius: 8,
+    },
+    // shadow: {
+    //     position: 'absolute',
+    //     top: 0,
+    //     left: horizontalMargin,
+    //     right: horizontalMargin,
+    //     bottom: verticalMargin,
+    //     elevation: 6,
+    //     // opacity: .5,
+    //     shadowColor: '#787878',
+    //     shadowOpacity: 0.25,
+    //     shadowOffset: { width: 20, height: 20 },
+    //     shadowRadius: 10,
+    //     borderRadius: 8,
+    // },
+    image_container : {
+        flex: 1,
+        height: calc.getRegHeightDp(150),
+        borderRadius: 7,
+    },
+    image: {
+        flex: 1,
+        resizeMode: "cover",
         borderRadius: 7,
         backgroundColor: "#ebebeb"
     },
-
+    text_container : {
+        flexDirection: "row",
+        width: '100%',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginTop: calc.getRegHeightDp(45),
+        paddingHorizontal: calc.getRegWidthDp(6),
+    },
     title : {
-        marginVertical: 22,
-        fontSize: 40,
-        fontWeight: "bold",
+        fontSize: 22,
+        fontWeight: "300",
         fontStyle: "normal",
-        letterSpacing: 1.3,
-        color: "#292929"
+        letterSpacing: -0.45,
+        color: "#464646",
+    },
+    count_container : {
+        flexDirection: "row",
+        alignItems: 'center',
+    },
+    count : {
+        fontSize: 14,
+        fontWeight: "normal",
+        fontStyle: "normal",
+        letterSpacing: -0.29,
+        color: "#464646",
+    },
+    count_icon : {
+        width: calc.getRegWidthDp(22),
+        height: calc.getRegWidthDp(22),
+        marginRight: calc.getRegWidthDp(4),
+        backgroundColor: "#ebebeb"
     }
 })

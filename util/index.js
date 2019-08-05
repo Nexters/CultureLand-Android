@@ -14,8 +14,8 @@ export class RatioCalculator {
         this.WidthRegulationFactor =
             this.screenWidth > this.width ?
                 this.screenWidth/this.width : this.width/this.screenWidth;
-        console.log("스크린 가로 사이즈 : "+screenWidth);
-        console.log("상태바 세로 사이즈 : "+screenHeight);
+        // console.log("스크린 가로 사이즈 : "+screenWidth);
+        // console.log("상태바 세로 사이즈 : "+screenHeight);
 
     }
 
@@ -26,21 +26,21 @@ export class RatioCalculator {
         if(height < 1 ){
             throw "height of component should be greater than zero";
         }
-        console.log("얻어진 세로 비율 : "+(height/this.height)*100);
+        // console.log("얻어진 세로 비율 : "+(height/this.height)*100);
         let ratio = String((height/this.height)*100);
         return ratio+"%";
     }
 
     getWidthRatio(width){
         let ratio = String((width/this.width)*100);
-        console.log("얻어진 가로 비율 : "+ratio+"%");
+        // console.log("얻어진 가로 비율 : "+ratio+"%");
         return ratio+"%";
     }
 
 
     getRegHeightDp(height){
-        console.log("HeightregulationFactor :"+this.HeightRegulationFactor
-            +", RegularizedMargin : "+height*this.HeightRegulationFactor);
+        // console.log("HeightregulationFactor :"+this.HeightRegulationFactor
+        //     +", RegularizedMargin : "+height*this.HeightRegulationFactor);
         return height * this.HeightRegulationFactor;
     }
     getRegWidthDp(width){
