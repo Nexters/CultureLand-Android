@@ -1,5 +1,5 @@
 import * as WebBrowser from 'expo-web-browser';
-import React from 'react';
+import React, {Component} from 'react';
 import styleFn from "./styles"
 import {
     View,
@@ -16,20 +16,22 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {RatioCalculator} from "../../util";
 import TabBarIcon from "../../components/TabBarIcon";
 import {FloatingButton} from "../../components/FloatingButton"
+import {Header} from "../../components/Header"
 import {ListComponent} from "../../components/ListComponent"
 
 const calc = new RatioCalculator(screenWidth, screenHeight);
 const styles = styleFn(screenWidth, screenHeight, calc);
 
-export default function PlannedListScreen() {
-    return (
-
-        <View style={styles.container}>
-            <ListComponent />
-            <FloatingButton/>
-        </View>
-    )
-
+export class PlannedListScreen  extends Component {
+    render() {
+        return (
+            <View style={styles.container}>
+                <Header/>
+                <ListComponent />
+                <FloatingButton/>
+            </View>
+        )
+    }
 };
 
 

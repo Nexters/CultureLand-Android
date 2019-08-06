@@ -7,8 +7,8 @@ import {
     Dimensions,
     Image,
     Picker,
-    FlatList,
-    ScrollView
+    ScrollView,
+    StatusBar,
 
 } from 'react-native';
 import {RatioCalculator} from "../../util";
@@ -59,6 +59,18 @@ export default function MainScreen() {
                             <View style = {styles.main_title_line} />
                             <Text style={styles.main_title}>고민 중인 기록들</Text>
                             <View style={styles.wating_list}>
+                                <View style={styles.wating_item}>
+                                    <View style={styles.image_container}>
+                                        <Image style={styles.image}/>
+                                    </View>
+                                    <View style={styles.text_container}>
+                                        <Text style={styles.subtitle}>콘서트</Text>
+                                        <Text style={styles.title}>안녕 - 이것은 안녕</Text>
+                                    </View>
+                                    <View style={styles.icon_container}>
+                                        <Image style={styles.icon}/>
+                                    </View>
+                                </View>
                                 <View style={styles.wating_item}>
                                     <View style={styles.image_container}>
                                         <Image style={styles.image}/>

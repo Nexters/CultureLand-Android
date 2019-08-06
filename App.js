@@ -31,7 +31,7 @@ export default function App(props) {
     return (
       <View style={styles.container}>
           {/* <AppNavigator/> */}
-          <NoteListScreen style={styles.container}/>
+          <NoteDetailScreen style={styles.container}/>
       </View>
     );
   }
@@ -66,7 +66,9 @@ function handleFinishLoading(setLoadingComplete) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#f6f6f6',
+    marginTop: StatusBar.currentHeight,
+    overflow: 'hidden',
   },
     loginScreen : {
       padding:30,
