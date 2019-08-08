@@ -9,20 +9,26 @@ export default styles = function(screenWidth,screenHeight) {
 
 
     return StyleSheet.create({
-
         main_top_wrapper: {
             marginTop  : calc.getRegHeightDp(75),
             paddingHorizontal : calc.getRegWidthDp(45),
         },
-        main_top_year : {
-            width: calc.getRegWidthDp(100),
+        main_picker : {
+            width: calc.getRegWidthDp(90),
             height: calc.getRegHeightDp(36),
-            fontSize: 24,
+            marginLeft : calc.getRegWidthDp(18),
+            fontSize: 60,
             fontWeight: "bold",
             fontStyle: "normal",
             letterSpacing: -0.49,
             color: "#464646",
             textAlign: "left",
+            transform: [
+                { scaleX: 1.6 }, 
+                { scaleY: 1.6 },
+            ],
+            borderColor: 'red',
+            borderWidth: 1,
         },
         main_top_description: {
             fontSize: 16,

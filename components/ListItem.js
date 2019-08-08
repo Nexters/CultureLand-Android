@@ -24,6 +24,8 @@ export class ListItem extends Component {
         return (
             <View style={styles.list_item_wrapper}>
                 <TouchableOpacity>
+                {/* <View style={styles.list_shadow}></View> */}
+
                 <View style={styles.list_item}>
                     <View style={styles.list_item_left}>
                         <Text style={styles.item_tit}>{this.props.title}</Text>
@@ -37,7 +39,7 @@ export class ListItem extends Component {
                             <Text style={styles.item_info_text}>{this.props.where}</Text>
                         </View>
                         <TouchableOpacity style={styles.item_more}>
-                            <Text>· · ·</Text>
+                            <Image style={styles.item_more_icon}/>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.list_item_rip}>
@@ -53,7 +55,6 @@ export class ListItem extends Component {
                             <Image style={styles.item_like_image}/>
                         </TouchableOpacity>
                     </View>
-                    <View style={styles.list_shadow}></View>
                 </View>
                 </TouchableOpacity>
             </View>
@@ -64,23 +65,27 @@ export class ListItem extends Component {
 const styles = StyleSheet.create({
     list_item_wrapper : {
         position: 'relative',
+        width: '100%',
+        height: calc.getRegWidthDp(102),
         paddingHorizontal: calc.getRegWidthDp(21),
         paddingBottom: calc.getRegHeightDp(12),
     },
     list_shadow : {
         position: 'absolute',
-        zIndex: -1,
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
+        zIndex: 1,
+        top: calc.getRegWidthDp(10),
+        left: '2%',
+        width: '96%',
+        height: calc.getRegWidthDp(70),
+        padding: 10,
         right: 0,
         bottom: 0,
-        elevation: 20,
-        backgroundColor: 'transparent',
+        elevation: 5,
+        backgroundColor: '#fff',
     },
     list_item : {
-        position: 'relative',
+        position: 'absolute',
+        zIndex: 100,
         flexDirection: 'row',
         justifyContent: 'space-between',
         width: '100%',
@@ -88,15 +93,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
         borderRadius: 6,
         overflow: 'hidden',
-        // shadowColor: "#000",
-        // shadowOffset: {
-        //     width: 0,
-        //     height: 4,
-        // },
-        // shadowOpacity: 0.32,
-        // shadowRadius: 5.46,
-
-        // elevation: 7,
+        // elevation: 5,
     },
     list_item_left : {
         zIndex: 1,
@@ -156,11 +153,17 @@ const styles = StyleSheet.create({
         overflow: 'hidden'
     },
     item_more : {
+        zIndex: 100,
         position: 'absolute',
-        top: 0,
-        right: 0,
-        width: calc.getRegWidthDp(24),
-        height: calc.getRegWidthDp(24),
+        top: calc.getRegHeightDp(7),
+        right: calc.getRegWidthDp(5),
+        width: calc.getRegWidthDp(6),
+        height: calc.getRegWidthDp(20),
+    },
+    item_more_icon : {
+        width: calc.getRegWidthDp(5),
+        height: calc.getRegWidthDp(15),
+        backgroundColor: "#5e5e5e"
     },
     list_item_rip : {
         zIndex: 1,
@@ -213,6 +216,7 @@ const styles = StyleSheet.create({
         flex: 1,
         borderRadius: 6,
         backgroundColor: 'orange',
+        elevation: 5,
     },
     item_like : {
         position: 'absolute',

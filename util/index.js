@@ -1,4 +1,4 @@
-import styles from "../screens/Sign/styles";
+// import styles from "../screens/Sign/styles";
 
 export class RatioCalculator {
     constructor(screenWidth,screenHeight){

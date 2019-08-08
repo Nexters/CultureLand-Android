@@ -5,14 +5,11 @@ import React, { useState } from 'react';
 import {Dimensions, Platform, StatusBar, StyleSheet, View} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import AppNavigator from './navigation/AppNavigator';
-import LoginScreen from './screens/Sign/SignScreen';
-import ItemDetailScreen from './screens/ItemDetail';
-import MyPageScreen from './screens/MyPage';
-import PlannedListScreen from './screens/PlannedList';
 
 import MainScreen from './screens/Main';
 import NoteDetailScreen from './screens/NoteDetail';
 import NoteListScreen from './screens/NoteList';
+import MyPageListScreen from './screens/MyPageList';
 
 
 
@@ -31,7 +28,7 @@ export default function App(props) {
     return (
       <View style={styles.container}>
           {/* <AppNavigator/> */}
-          <NoteDetailScreen style={styles.container}/>
+          <NoteListScreen style={styles.container}/>
       </View>
     );
   }
@@ -66,15 +63,8 @@ function handleFinishLoading(setLoadingComplete) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f6f6f6',
-    marginTop: StatusBar.currentHeight,
-    overflow: 'hidden',
+    backgroundColor: '#fff',
   },
-    loginScreen : {
-      padding:30,
-      margin : 30,
-    }
-
 });
 
 

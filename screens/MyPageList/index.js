@@ -23,7 +23,7 @@ import {ListComponent} from "../../components/ListComponent"
 const calc = new RatioCalculator(screenWidth, screenHeight);
 const styles = styleFn(screenWidth, screenHeight, calc);
 
-export default function NoteListScreen() {
+export default function MyPageListScreen() {
     return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -34,7 +34,7 @@ export default function NoteListScreen() {
                 >
                     <Ionicons name="ios-arrow-back" size={24} color="#292929" style={styles.header_button}/>
                 </TouchableOpacity>
-                <Text style={styles.header_center}>2019</Text>
+                <Text style={styles.header_center}>전시</Text>
                 <Text style={styles.header_right}></Text>
             </View>
             <ListComponent/>

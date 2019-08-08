@@ -30,8 +30,8 @@ export default function MainScreen() {
             <ScrollView>
                 <View style={styles.main_top_wrapper}>
                     <Picker 
-                        style={styles.main_top_year}
-                        itemStyle={styles.main_top_year_item}
+                        style={styles.main_picker}
+                        itemStyle={styles.main_picker_item}
                     >
                         <Picker.Item label="2019" value="2019" />
                         <Picker.Item label="2018" value="2018" />

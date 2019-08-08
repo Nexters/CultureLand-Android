@@ -74,13 +74,14 @@ export class MainCarousel extends Component {
                 containerCustomStyle={styles.slide_container}
                 // contentContainerCustomStyle={styles.slider_content_container}
                 layout={'default'}
+                inactiveSlideOpacity={1}
                 inactiveSlideScale={1}
             />
         );
     }
 }
 
-const horizontalMargin = calc.getRegWidthDp(18);
+const horizontalMargin = calc.getRegWidthDp(9);
 const verticalMargin = calc.getRegWidthDp(9);
 const slideWidth = calc.getRegWidthDp(216);
 const slideHeight = calc.getRegHeightDp(250);
@@ -96,7 +97,6 @@ const styles = StyleSheet.create({
     },
     slide_inner_container : {
         flex: 1,
-        // position: 'relative',
         width: itemWidth,
         height: itemHeight,
         paddingHorizontal: horizontalMargin,
@@ -106,13 +106,8 @@ const styles = StyleSheet.create({
     slide : {
         flex: 1,
         borderRadius: 7,
-        padding: calc.getRegWidthDp(8),
+        padding: calc.getRegWidthDp(10),
         elevation: 3,
-        shadowColor: '#787878',
-        shadowOpacity: 0.25,
-        shadowOffset: { width: 0, height: 2 },
-        shadowRadius: 10,
-        borderRadius: 8,
     },
     // shadow: {
     //     position: 'absolute',
@@ -131,7 +126,9 @@ const styles = StyleSheet.create({
     image_container : {
         flex: 1,
         height: calc.getRegHeightDp(150),
+        // padding: calc.getRegWidthDp(8),
         borderRadius: 7,
+        elevation: 5,
     },
     image: {
         flex: 1,

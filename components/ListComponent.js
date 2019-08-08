@@ -63,6 +63,13 @@ export class ListComponent extends Component {
                 date: '2019.08.05',
                 where: '세종문화회관',
             },
+            {
+                key: 7,
+                title: '아이유',
+                category: '전시',
+                date: '2019.08.05',
+                where: '세종문화회관',
+            },
         ]
     }
 
@@ -76,12 +83,6 @@ export class ListComponent extends Component {
         />
     )
     render() {
-        // var listArr = [];
-        // for(let i = 0; i < 10; i ++) {
-        //     listArr.push(
-        //         <ListItem key={i}/>
-        //     )
-        // }
         return (
             <FlatList
                 data={this.state.data}
@@ -95,9 +96,7 @@ export class ListComponent extends Component {
 
 const styles = StyleSheet.create({
     list_container: {
-        // borderWidth: 1,
-        // borderColor: 'blue',
         flex: 1,
-        
+        marginTop: calc.getRegHeightDp(28),
     }
 })
