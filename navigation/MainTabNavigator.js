@@ -24,6 +24,7 @@ const config = Platform.select({
     default: {},
 });
 
+
 const HomeStack = createStackNavigator(
     {
         Home:ItemDetailScreen,

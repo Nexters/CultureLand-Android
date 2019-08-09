@@ -1,5 +1,6 @@
 import styles from "../screens/Sign/styles";
 
+
 export class RatioCalculator {
     constructor(screenWidth,screenHeight){
         this.width = 360;
@@ -10,6 +11,7 @@ export class RatioCalculator {
         this.HeightRegulationFactor =this.screenHeight/this.height;
 
         this.WidthRegulationFactor = this.screenWidth/this.width;
+
     }
 
     getHeightRatio(height){
@@ -19,17 +21,22 @@ export class RatioCalculator {
         if(height < 1 ){
             throw "height of component should be greater than zero";
         }
+
+        // console.log("얻어진 세로 비율 : "+(height/this.height)*100);
         let ratio = String((height/this.height)*100);
         return ratio+"%";
     }
 
     getWidthRatio(width){
         let ratio = String((width/this.width)*100);
+        // console.log("얻어진 가로 비율 : "+ratio+"%");
         return ratio+"%";
     }
 
 
     getRegHeightDp(height){
+        // console.log("HeightregulationFactor :"+this.HeightRegulationFactor
+        //     +", RegularizedMargin : "+height*this.HeightRegulationFactor);
         return height * this.HeightRegulationFactor;
     }
     getRegWidthDp(width){

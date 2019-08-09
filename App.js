@@ -11,29 +11,34 @@ import MyPageScreen from './screens/MyPage';
 import SearchModeScreen from './screens/SearchMode'
 import PlannedListScreen from './screens/PlannedList';
 import SearchBar from "./components/SearchBar";
-import SplashScreen from './screens/Splash'
-import SignScreen from './screens/Sign'
+import SplashScreen from './screens/Splash';
+import SignScreen from './screens/Sign';
+import MainScreen from './screens/Main';
+import NoteDetailScreen from './screens/NoteDetail';
+import NoteListScreen from './screens/NoteList';
+import MyPageListScreen from './screens/MyPageList';
+
 //<MyPageScreen  style={styles.container}/>
+
 export default function App(props) {
-    const [isLoadingComplete, setLoadingComplete] = useState(false);
+  const [isLoadingComplete, setLoadingComplete] = useState(false);
 
-    if (!isLoadingComplete && !props.skipLoadingScreen) {
-        return (
-            <AppLoading
-                startAsync={loadResourcesAsync}
-                onError={handleLoadingError}
-                onFinish={() => handleFinishLoading(setLoadingComplete)}
-            />
-        );
-    } else {
-        return (
-            <View style={styles.container}>
-
-                <SignScreen/>
-
-            </View>
-        );
-    }
+  if (!isLoadingComplete && !props.skipLoadingScreen) {
+    return (
+      <AppLoading
+        startAsync={loadResourcesAsync}
+        onError={handleLoadingError}
+        onFinish={() => handleFinishLoading(setLoadingComplete)}
+      />
+    );
+  } else {
+    return (
+      <View style={styles.container}>
+          {/* <AppNavigator/> */}
+          <NoteListScreen style={styles.container}/>
+      </View>
+    );
+  }
 }
 
 async function loadResourcesAsync() {
@@ -53,9 +58,10 @@ async function loadResourcesAsync() {
 }
 
 function handleLoadingError(error) {
-    // In this case, you might want to report the error to your error reporting
-    // service, for example Sentry
-    console.warn(error);
+
+  // In this case, you might want to report the error to your error reporting
+  // service, for example Sentry
+  console.warn(error);
 }
 
 function handleFinishLoading(setLoadingComplete) {

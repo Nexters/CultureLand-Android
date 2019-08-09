@@ -12,6 +12,8 @@ import {
 import { Ionicons} from '@expo/vector-icons'
 import {Pagination} from 'react-native-snap-carousel';
 import {ImageCarousel} from '../../screens/Sign/carousel/index'
+
+
 import Carousel from 'react-native-snap-carousel'
 const screenWidth= Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
