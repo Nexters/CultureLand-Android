@@ -1,5 +1,8 @@
-import entities from '/entities';
+import {combineReducers} from 'redux'
 
-export default {
-    entities
-}
+import account from './accountReducer'
+import productList from './productListReducer';
+export default combineReducers({
+    account,
+    productList
+})
