@@ -42,3 +42,7 @@ export default function NoteListScreen() {
         </View>
     )
 };
+
+NoteListScreen.navigationOptions = {
+    header: null,
+};

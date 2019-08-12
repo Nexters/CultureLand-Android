@@ -127,4 +127,6 @@ export default class ItemDetailScreen extends Component {
     }
 };
 
-
+ItemDetailScreen.navigationOptions = {
+    header: null,
+};

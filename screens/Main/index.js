@@ -92,3 +92,7 @@ export default function MainScreen() {
         </View>
     )
 }
+
+MainScreen.navigationOptions = {
+    header: null,
+};

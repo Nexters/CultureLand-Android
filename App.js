@@ -2,11 +2,11 @@ import {AppLoading} from 'expo';
 import {Asset} from 'expo-asset';
 import * as Font from 'expo-font';
 import React, {useState} from 'react';
-import {Provider} from 'react-redux';
-import {applyMiddleware, combineReducers, compose, createStore} from "redux";
+// import {Provider} from 'react-redux';
+// import {applyMiddleware, combineReducers, compose, createStore} from "redux";
 import {Dimensions, Platform, StatusBar, StyleSheet, View} from 'react-native';
-import rootSaga from './saga';
-import rootReducer from './reducers/index';
+// import rootSaga from './saga';
+// import rootReducer from './reducers/index';
 import {Ionicons} from '@expo/vector-icons';
 import AppNavigator from './navigation/AppNavigator';
 import LoginScreen from './screens/Sign/index';
@@ -21,14 +21,15 @@ import MainScreen from './screens/Main';
 import NoteDetailScreen from './screens/NoteDetail';
 import NoteListScreen from './screens/NoteList';
 import MyPageListScreen from './screens/MyPageList';
+// import SignScreen from './screens/Sign';
 
 //<MyPageScreen  style={styles.container}/>
-const middlewares = [];
-middlewares.push(sagaMiddleware);
+// const middlewares = [];
+// middlewares.push(sagaMiddleware);
 
-const sagaMiddleware = createSagaMiddleware(rootSaga);
-const store = createStore(
-    rootReducer,applyMiddleware(...middlewares));
+// const sagaMiddleware = createSagaMiddleware(rootSaga);
+// const store = createStore(
+//     rootReducer,applyMiddleware(...middlewares));
 
 
 export default function App(props) {
@@ -46,13 +47,13 @@ export default function App(props) {
         );
     } else {
         return (
-            <Provider store={store}>
+            // <Provider store={store}>
                 <View style={styles.container}>
                     {/* <AppNavigator/> */}
-                    <AppNavigator/>
-
+                    <ItemDetailScreen/>
+                    {/* <LoginScreen/> */}
                 </View>
-            </Provider>
+            // </Provider>
         );
     }
 }

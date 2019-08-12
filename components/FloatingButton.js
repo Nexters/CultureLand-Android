@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     floating_button: {
         position: 'absolute',
         right: 27,
-        bottom: 85,
+        bottom: calc.getRegHeightDp(25),
         alignItems: 'center',
         justifyContent: 'center',
         width: calc.getRegWidthDp(60),
