@@ -9,6 +9,17 @@ import {
 } from 'react-native';
 import {RatioCalculator} from "../util";
 
+import MenuImage from "../assets/images/icon/menu.svg";
+import LikeImage from "../assets/images/icon/like.svg";
+import ExhibitionImage from "../assets/images/icon/type/exhibition.svg";
+import MusicalImage from "../assets/images/icon/type/musical.svg";
+import PlayImage from "../assets/images/icon/type/play.svg";
+import EtcImage from "../assets/images/icon/type/etc.svg";
+import ConcertImage from "../assets/images/icon/type/concert.svg";
+import Dashline from "../assets/images/icon/dashline.svg";
+
+import CategoryType from '../domain/CategoryType';
+
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
 
@@ -18,6 +29,9 @@ const calc = new RatioCalculator(screenWidth, screenHeight);
 export class ListItem extends Component {
     constructor (props) {
         super(props);
+        // this.categories = [
+        //     new CategoryType("전시")
+        // ]
     }
 
     render() {
@@ -30,7 +44,11 @@ export class ListItem extends Component {
                     <View style={styles.list_item_left}>
                         <Text style={styles.item_tit}>{this.props.title}</Text>
                         <View style={styles.item_category_container}>
-                            <Image style={styles.item_category_icon}/>
+                            <ExhibitionImage  width={13} height={13} style={styles.item_category_icon}/>
+                            {/* <Image
+                                style={styles.item_category_icon}
+                                source={require('../assets/images/icon/type/concert.svg')}
+                            /> */}
                             <Text style={styles.item_category_text}>{this.props.category}</Text>
                         </View>
                         <View style={styles.item_info_container}>
@@ -39,21 +57,27 @@ export class ListItem extends Component {
                             <Text style={styles.item_info_text}>{this.props.where}</Text>
                         </View>
                         <TouchableOpacity style={styles.item_more}>
-                            <Image style={styles.item_more_icon}/>
+                            {/* <Image 
+                                style={styles.item_more_icon}
+                                source={require('../assets/images/icon/menu.svg')}
+                            /> */}
+                            <MenuImage width={28} height={28} style={styles.item_more_icon}/>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.list_item_rip}>
                         <View style={styles.item_rip_top}></View>
-                        <View style={styles.item_rip_line}></View>
+                        {/* <View style={styles.item_rip_line}></View> */}
+                        <Dashline width={1} height={75} style={styles.item_rip_line}/>
                         <View style={styles.item_rip_bottom}></View>
                     </View>
                     <View style={styles.list_item_right}>
                         <View style={styles.item_thumb_container}>
+                            <TouchableOpacity style={styles.item_like}>
+                                <LikeImage  width={27} height={27} style={styles.item_like_image}/>
+                                {/* <Image style={styles.item_like_image}/> */}
+                            </TouchableOpacity>
                             <Image style={styles.item_thumb}/>
                         </View>
-                        <TouchableOpacity style={styles.item_like}>
-                            <Image style={styles.item_like_image}/>
-                        </TouchableOpacity>
                     </View>
                 </View>
                 </TouchableOpacity>
@@ -120,7 +144,6 @@ const styles = StyleSheet.create({
     item_category_icon : {
         width: calc.getRegWidthDp(13),
         height: calc.getRegWidthDp(15),
-        backgroundColor: "#5e5e5e"
     },
     item_category_text : {
         marginLeft: calc.getRegWidthDp(3),
@@ -155,31 +178,26 @@ const styles = StyleSheet.create({
     item_more : {
         zIndex: 100,
         position: 'absolute',
-        top: calc.getRegHeightDp(7),
-        right: calc.getRegWidthDp(5),
-        width: calc.getRegWidthDp(6),
-        height: calc.getRegWidthDp(20),
+        top: calc.getRegHeightDp(0),
+        right: -calc.getRegWidthDp(10),
+        width: calc.getRegWidthDp(28),
+        height: calc.getRegWidthDp(28),
     },
     item_more_icon : {
-        width: calc.getRegWidthDp(5),
-        height: calc.getRegWidthDp(15),
-        backgroundColor: "#5e5e5e"
+        width: calc.getRegWidthDp(28),
+        height: calc.getRegWidthDp(28),
     },
     list_item_rip : {
+        justifyContent: 'center',
         zIndex: 1,
         width: calc.getRegWidthDp(20),
         marginVertical: calc.getRegWidthDp(10),
         backgroundColor: 'white',
     },
     item_rip_line : {
-        alignItems: 'stretch',
-        width: calc.getRegWidthDp(1),
+        alignSelf: 'center',
         height: '100%',
-        marginLeft: '50%',
-        borderWidth: 1,
-        borderStyle: 'dashed',
-        borderColor: '#e9e9e9',
-        borderRadius: 1,
+        opacity: 0.7,
     },
     item_rip_top : {
         position: 'absolute',
@@ -220,12 +238,14 @@ const styles = StyleSheet.create({
     },
     item_like : {
         position: 'absolute',
-        right: calc.getRegWidthDp(15),
-        bottom: calc.getRegHeightDp(15),
+        zIndex: 100,
+        right: calc.getRegWidthDp(0),
+        bottom: calc.getRegHeightDp(0),
+        width: calc.getRegWidthDp(27),
+        height: calc.getRegHeightDp(27),
     },
     item_like_image : {
-        width: calc.getRegWidthDp(14),
-        height: calc.getRegHeightDp(14),
-        backgroundColor: "#5e5e5e"
+        width: calc.getRegWidthDp(27),
+        height: calc.getRegHeightDp(27),
     }
 })

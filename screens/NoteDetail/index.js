@@ -14,6 +14,10 @@ import {
 
 } from 'react-native';
 import DatePicker from 'react-native-datepicker'
+import {Dropdown} from 'react-native-material-dropdown';
+
+import ThumbImage from "../../assets/images/icon/imageedit.svg"
+import CalendarImage from "../../assets/images/icon/cal.svg"
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
@@ -30,11 +34,15 @@ function illustrateCarousel(number, title, type) {
 }
 
 export default class ItemDetailScreen extends Component {
+    constructor(props){
+        super(props)
+        this.state = {date:"2019-08-12"}
+    }
+
     render() {
 
         return (
             <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
-            {/* <View style={styles.container}> */}
                 <View style={styles.header}>
                     <TouchableOpacity 
                         onPress={() => alert(props.centerText)}
@@ -48,14 +56,14 @@ export default class ItemDetailScreen extends Component {
                 <ScrollView>
                     <View style={styles.note_top_wrapper}>
                         <View style={styles.image_wrapper}>
-                            <Image style={styles.image}/>
+                            <ThumbImage width={92} height={92} />
+                            {/* <Image style={styles.image}/> */}
                         </View>
                     </View>
                     <View style={styles.note_bottom_wrapper}>
                         <View style={styles.note_title}>
                             <Text style={styles.note_required_icon}>*</Text>
                             <TextInput value="십센치 크리스마스 콘서트" style={styles.note_titleinput}/>
-                            {/* {'십센치 크리스마스 콘서트 \n 이게 두 줄이 되어도 잘 나오나'} */}
                         </View>
                         <View style={styles.note_line}></View>
                         <Text style={styles.note_required}>*필수항목</Text>
@@ -63,34 +71,64 @@ export default class ItemDetailScreen extends Component {
                             <View style={styles.note_info_item}>
                                 <Text style={styles.note_sub_title}>유형<Text style={styles.note_required_icon}>*</Text></Text>
                                 <View style={styles.note_picker_wrapper}>
-                                    <Picker 
-                                        style={styles.note_picker}
-                                    >
-                                        <Picker.Item label="뮤지컬" value="뮤지컬" />
-                                        <Picker.Item label="연극" value="연극" />
-                                        <Picker.Item label="기타" value="기타" />
-                                    </Picker>
+                                    <Dropdown
+                                        value={"유형"}
+                                        data={[
+                                            {
+                                                value: "유형"
+                                            },
+                                            {
+                                                value: "뮤지컬"
+                                            },
+                                            {
+                                                value: "연극"
+                                            },
+                                            {
+                                                value: "기타"
+                                            },
+                                        ]}
+                                        dropdownOffset={{top: 7}}
+                                        dropdownPosition={0}
+                                        inputContainerStyle={{
+                                            borderBottomColor: 'transparent',
+                                            // borderRadius: 2,
+                                            // borderStyle: "solid",
+                                            // borderWidth: 1,
+                                            // borderColor: "red",
+                                        }}
+                                        containerStyle={{
+                                            width: calc.getRegWidthDp(114),
+                                            height: calc.getRegHeightDp(40),
+                                            paddingHorizontal: calc.getRegWidthDp(9),
+                                            // borderRadius: 2,
+                                            // borderStyle: "solid",
+                                            // borderWidth: 1,
+                                            // borderColor: "#e9e9e9",
+                                            marginLeft: 'auto',
+                                        }}
+                                        pickerStyle={{
+                                            marginTop : calc.getRegHeightDp(42),
+
+                                        }}
+                                    />
                                 </View>
                             </View>
                             <View style={styles.note_info_item}>
                                 <Text style={styles.note_sub_title}>언제<Text style={styles.note_required_icon}>*</Text></Text>
                                 <DatePicker
                                     style={styles.note_datepicker}
-                                    date="2019-08-09"
+                                    date={this.state.date}
                                     mode="date"
                                     placeholder="select date"
                                     format="YYYY-MM-DD"
-                                    minDate="2016-05-01"
-                                    maxDate="2020-06-01"
+                                    // minDate="2016-05-01"
+                                    // maxDate="2020-06-01"
                                     confirmBtnText="Confirm"
                                     cancelBtnText="Cancel"
+                                    iconComponent={
+                                        <CalendarImage width={30} height={30} style={styles.note_datepicker_icon}/>
+                                    }
                                     customStyles={{
-                                        dateIcon: {
-                                            position: 'absolute',
-                                            right: 0,
-                                            top: 4,
-                                            marginLeft: 0
-                                        },
                                         dateInput: {
                                             position: 'absolute',
                                             left: 0,
@@ -98,6 +136,7 @@ export default class ItemDetailScreen extends Component {
                                             borderColor: "transparent",
                                         }
                                     }}
+                                    onDateChange={(date) => {this.setState({date: date})}}
                                 />
                             </View>
                             <View style={styles.note_info_item}>
@@ -121,10 +160,11 @@ export default class ItemDetailScreen extends Component {
                         </View>
                     </View>
                 </ScrollView>
-            {/* </View> */}
             </KeyboardAvoidingView>
         )
     }
 };
 
-
+ItemDetailScreen.navigationOptions = {
+    header: null,
+};

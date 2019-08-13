@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="27px" height="27px" viewBox="0 0 27 27" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.2 (78181) - https://sketchapp.com -->
+    <title>icon/like</title>
+    <desc>Created with Sketch.</desc>
+    <g id="icon/like" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="btn_like">
+            <rect id="Rectangle" x="0" y="0" width="27" height="27"></rect>
+            <path d="M17.6425814,7.84442307 C15.8115747,7.84442307 14.6066254,8.96640911 13.9999736,10.9516037 C13.3933746,8.96640911 12.1884253,7.84442307 10.3574186,7.84442307 C8.34562712,7.84442307 6.7148107,9.61208382 6.7148107,11.7925512 C6.7148107,13.7909121 8.65305097,15.783245 9.62888642,16.7590276 C10.6046161,17.7348101 13.9999736,20.8444231 13.9999736,20.8444231 C13.9999736,20.8444231 17.395331,17.7348101 18.3710607,16.7590276 C19.3468962,15.783245 21.2851893,13.7909121 21.2851893,11.7925512 C21.2851893,9.61208382 19.6543729,7.84442307 17.6425814,7.84442307 Z" id="Stroke-1" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round"></path>
+        </g>
+    </g>
+</svg>

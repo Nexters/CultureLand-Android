@@ -156,12 +156,14 @@ export default styles = function(screenWidth,screenHeight) {
             color: "#464646"
         },
         icon_container : {
-            width: calc.getRegWidthDp(24),
-            height: calc.getRegHeightDp(24),
+            width: calc.getRegWidthDp(44),
+            height: calc.getRegHeightDp(44),
+            // marginRight: calc.getRegWidthDp(10),
+            
         },
         icon : {
             flex: 1,
-            backgroundColor: '#ebebeb',
+            // backgroundColor: '#ebebeb',
         },
     });
 }

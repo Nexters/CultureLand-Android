@@ -1,5 +1,5 @@
 import * as WebBrowser from 'expo-web-browser';
-import React from 'react';
+import React, {Component} from 'react';
 import styleFn from "./styles"
 import {
     View,
@@ -7,7 +7,7 @@ import {
     Dimensions,
     Image,
     TouchableOpacity,
-    StatusBar
+    StatusBar,
 
 } from 'react-native';
 
@@ -23,22 +23,30 @@ import {ListComponent} from "../../components/ListComponent"
 const calc = new RatioCalculator(screenWidth, screenHeight);
 const styles = styleFn(screenWidth, screenHeight, calc);
 
-export default function NoteListScreen() {
-    return (
-        <View style={styles.container}>
-            <View style={styles.header}>
-                <TouchableOpacity 
-                    onPress={() => alert(props.centerText)}
-                    activeOpacity={0.7} 
-                    style={styles.header_left}
-                >
-                    <Ionicons name="ios-arrow-back" size={24} color="#292929" style={styles.header_button}/>
-                </TouchableOpacity>
-                <Text style={styles.header_center}>2019</Text>
-                <Text style={styles.header_right}></Text>
+export class NoteListScreen extends Component {
+    
+
+    render() {
+        return (
+            <View style={styles.container}>
+                <View style={styles.header}>
+                    <TouchableOpacity 
+                        onPress={() => alert(props.centerText)}
+                        activeOpacity={0.7} 
+                        style={styles.header_left}
+                    >
+                        <Ionicons name="ios-arrow-back" size={24} color="#292929" style={styles.header_button}/>
+                    </TouchableOpacity>
+                    <Text style={styles.header_center}>2019.7</Text>
+                    <Text style={styles.header_right}></Text>
+                </View>
+                <ListComponent/>
+                <FloatingButton/>
             </View>
-            <ListComponent/>
-            <FloatingButton/>
-        </View>
-    )
+        )
+    }
+};
+
+NoteListScreen.navigationOptions = {
+    header: null,
 };
