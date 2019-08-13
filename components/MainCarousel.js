@@ -11,6 +11,12 @@ import Carousel from 'react-native-snap-carousel';
 import {RatioCalculator} from "../util";
 import { Directions } from 'react-native-gesture-handler';
 
+import CardImageFirst from "../assets/images/illustration/Home_card01.svg";
+import CardImageSecond from "../assets/images/illustration/Home_card02.svg";
+import CardImageThird from "../assets/images/illustration/Home_card03.svg";
+import TicketImage from "../assets/images/icon/ticket.svg";
+import StarImage from "../assets/images/icon/star.svg";
+
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
 
@@ -29,6 +35,12 @@ export class MainCarousel extends Component {
                 style={styles.slide_inner_container}
                 onPress={()=> {alert(`You've clicked this!`)}}
             >
+                {/* <View style={styles.slide}>
+                    <View style={styles.intro_container}>
+                        {item.introImage}
+                        <Text style={styles.intro_title}>{ item.introTitle }</Text>
+                    </View>
+                </View> */}
                 <View style={styles.slide}>
                     <View style={styles.image_container}>
                         <Image style={styles.image}/>
@@ -36,7 +48,7 @@ export class MainCarousel extends Component {
                     <View style={styles.text_container}>
                         <Text style={styles.title}>{ item.title }</Text>
                         <View style={styles.count_container}>
-                            <Image style={styles.count_icon}/>
+                            <TicketImage style={styles.count_icon}/>
                             <Text style={styles.count}>{ item.count }</Text>
                         </View>
                     </View>
@@ -49,6 +61,20 @@ export class MainCarousel extends Component {
         return (
             <Carousel
                 ref={(c) => { this._carousel = c; }}
+                // data={[
+                //     {
+                //         introTitle: '아직 기록이 없으시군요!\n최근 경험한 문화생활이 있나요?',
+                //         introImage: <CardImageFirst/>
+                //     },
+                //     {
+                //         introTitle: '무엇을 보고, 느꼈나요?\n소감을 자유롭게 적어보세요.',
+                //         introImage: <CardImageSecond/>
+                //     },
+                //     {
+                //         introTitle: '문화를 즐기는 컬쳐러버로서,\n당신의 발자취를 남겨보세요!',
+                //         introImage: <CardImageThird/>
+                //     },
+                // ]}
                 data={[
                     {
                         title: 'JUNE',
@@ -107,6 +133,7 @@ const styles = StyleSheet.create({
         flex: 1,
         borderRadius: 7,
         padding: calc.getRegWidthDp(10),
+        backgroundColor: 'white',
         elevation: 3,
     },
     // shadow: {
@@ -166,6 +193,19 @@ const styles = StyleSheet.create({
         width: calc.getRegWidthDp(22),
         height: calc.getRegWidthDp(22),
         marginRight: calc.getRegWidthDp(4),
-        backgroundColor: "#ebebeb"
+        // backgroundColor: "#ebebeb"
+    },
+    intro_container : {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    intro_title : {
+        marginTop: calc.getRegWidthDp(30),
+        fontSize: 12,
+        fontWeight: "300",
+        fontStyle: "normal",
+        textAlign: "center",
+        color: "#424242"
     }
 })

@@ -21,6 +21,7 @@ import MainScreen from './screens/Main';
 import NoteDetailScreen from './screens/NoteDetail';
 import NoteListScreen from './screens/NoteList';
 import MyPageListScreen from './screens/MyPageList';
+import ModalBottom from './components/ModalBottom';
 // import SignScreen from './screens/Sign';
 
 //<MyPageScreen  style={styles.container}/>
@@ -49,8 +50,8 @@ export default function App(props) {
         return (
             // <Provider store={store}>
                 <View style={styles.container}>
-                    {/* <AppNavigator/> */}
-                    <ItemDetailScreen/>
+                    <AppNavigator/>
+                    {/* <NoteDetailScreen/> */}
                     {/* <LoginScreen/> */}
                 </View>
             // </Provider>

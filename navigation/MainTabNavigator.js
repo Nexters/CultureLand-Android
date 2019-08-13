@@ -31,7 +31,7 @@ const config = Platform.select({
 
 const HomeStack = createStackNavigator(
     {
-        Home:PlanedListScreen,
+        Home:MainScreen,
     },
     config
 );

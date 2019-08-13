@@ -7,6 +7,7 @@ import {
     TouchableOpacity
 } from 'react-native';
 import {RatioCalculator} from "../util";
+import WriteImage from "../assets/images/icon/write.svg";
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
@@ -21,7 +22,7 @@ export class FloatingButton extends Component {
                 activeOpacity={0.7} 
                 style={styles.floating_button}
             >
-                <Text style={styles.button_icon}>+</Text>
+                <WriteImage width={34} height={34} style={styles.button_icon}/>
             </TouchableOpacity>
         );
     }

@@ -13,7 +13,7 @@ export default styles = function(screenWidth,screenHeight,calc) {
             width : "100%",
             height : "100%",
             // marginTop: StatusBar.currentHeight,
-            paddingTop: calc.getRegHeightDp(56) + StatusBar.currentHeight,
+            paddingTop: calc.getRegHeightDp(70) + StatusBar.currentHeight,
             backgroundColor: '#f6f6f6',
         },
         header : {
@@ -26,7 +26,7 @@ export default styles = function(screenWidth,screenHeight,calc) {
             left: 0,
             right: 0,
             zIndex: 100,
-            height: calc.getRegHeightDp(56),
+            height: calc.getRegHeightDp(70),
             paddingHorizontal: calc.getRegWidthDp(23),
             fontSize: 16,
             fontWeight: "bold",

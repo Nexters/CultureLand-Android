@@ -13,7 +13,7 @@ export default styles = function(screenWidth,screenHeight,calc) {
             width : "100%",
             height : "100%",
             backgroundColor: '#f6f6f6',
-            paddingTop: calc.getRegHeightDp(56) + StatusBar.currentHeight,
+            paddingTop: calc.getRegHeightDp(70) + StatusBar.currentHeight,
             paddingBottom : calc.getRegHeightDp(44),
         },
         header : {
@@ -26,7 +26,7 @@ export default styles = function(screenWidth,screenHeight,calc) {
             left: 0,
             right: 0,
             zIndex: 100,
-            height: calc.getRegHeightDp(56),
+            height: calc.getRegHeightDp(70),
             paddingHorizontal: calc.getRegWidthDp(23),
             fontSize: 16,
             fontWeight: "bold",
@@ -68,15 +68,17 @@ export default styles = function(screenWidth,screenHeight,calc) {
         },
         image_wrapper : {
             flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
             height: calc.getRegHeightDp(212),
             borderRadius: 5,
             elevation: 5,
             overflow: 'hidden',
+            backgroundColor: '#fff',
         },
         image : {
             width: '100%',
             height: calc.getRegHeightDp(300),
-            backgroundColor: '#d8d8d8',
         },
         note_bottom_wrapper : {
             flex: 1,
@@ -160,6 +162,7 @@ export default styles = function(screenWidth,screenHeight,calc) {
             borderColor: "#e9e9e9"
         },
         note_picker_wrapper : {
+            alignItems: 'center',
             width: calc.getRegWidthDp(114),
             height: calc.getRegHeightDp(40),
             borderRadius: 2,
@@ -178,6 +181,7 @@ export default styles = function(screenWidth,screenHeight,calc) {
             color: "#393939",
         },
         note_datepicker : {
+            position: 'relative',
             width: calc.getRegWidthDp(160),
             height: calc.getRegHeightDp(40),
             paddingHorizontal: calc.getRegWidthDp(9),
@@ -191,6 +195,12 @@ export default styles = function(screenWidth,screenHeight,calc) {
             borderStyle: "solid",
             borderWidth: 1,
             borderColor: "#e9e9e9",
+        },
+        note_datepicker_icon : {
+            position: 'absolute',
+            // borderWidth: 1,
+            // borderColor: 'red',
+            right: 0,
         },
         // note_bottom_wrapper : {
         //     marginTop : calc.getRegHeightDp(45),
