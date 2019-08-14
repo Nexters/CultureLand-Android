@@ -1,28 +1,36 @@
 import {StyleSheet} from "react-native";
 import {ConvertZepSizeToRegularizedSize, RatioCalculator} from "../../util";
-import {screenWidth,screenHeight} from "../../App";
-import {StatusBar} from 'react-native';
+import {screenWidth, screenHeight} from "../../App";
+import {StatusBar, Platform} from 'react-native';
 
 
-export default styles = function(screenWidth,screenHeight,calc) {
+export default styles = function (screenWidth, screenHeight, calc) {
 
 
     return StyleSheet.create({
         container: {
             position: 'relative',
-            width : "100%",
-            height : "100%",
+            width: "100%",
+            height: "100%",
             backgroundColor: '#f6f6f6',
-            paddingTop: calc.getRegHeightDp(70) + StatusBar.currentHeight,
-            paddingBottom : calc.getRegHeightDp(44),
+
+
+            paddingTop: (Platform.OS === 'ios') ?
+                (calc.getRegHeightDp(70) + 24) :
+                (calc.getRegHeightDp(70) + StatusBar.currentHeight),
+
+
+            paddingBottom: calc.getRegHeightDp(44),
         },
-        header : {
+
+
+        header: {
             flex: 1,
             flexDirection: 'row',
             justifyContent: 'space-between',
             alignItems: 'center',
             position: 'absolute',
-            top: StatusBar.currentHeight,
+            top:  (Platform.OS === 'ios') ?(24) :(StatusBar.currentHeight),
             left: 0,
             right: 0,
             zIndex: 100,
@@ -36,13 +44,13 @@ export default styles = function(screenWidth,screenHeight,calc) {
             color: "#5c5c5c",
             backgroundColor: '#f6f6f6',
         },
-        header_left : {
+        header_left: {
             flex: 1,
         },
-        header_button : {
+        header_button: {
             // size: calc.getRegWidthDp(18),
         },
-        header_center : {
+        header_center: {
             fontSize: 20,
             fontWeight: "bold",
             fontStyle: "normal",
@@ -50,7 +58,7 @@ export default styles = function(screenWidth,screenHeight,calc) {
             textAlign: "center",
             color: "#464646"
         },
-        header_right : {
+        header_right: {
             flex: 1,
             textAlign: 'right',
             // backgroundColor: 'aqua',
@@ -60,13 +68,14 @@ export default styles = function(screenWidth,screenHeight,calc) {
             letterSpacing: 0.01,
             color: "#5c5c5c"
         },
-        note_top_wrapper : {
+        note_top_wrapper: {
             flex: 1,
             width: '100%',
-            marginTop : calc.getRegHeightDp(3),
-            paddingHorizontal : calc.getRegWidthDp(28),
+            marginTop: calc.getRegHeightDp(3),
+
+            paddingHorizontal: calc.getRegWidthDp(28),
         },
-        image_wrapper : {
+        image_wrapper: {
             flex: 1,
             justifyContent: 'center',
             alignItems: 'center',
@@ -76,27 +85,27 @@ export default styles = function(screenWidth,screenHeight,calc) {
             overflow: 'hidden',
             backgroundColor: '#fff',
         },
-        image : {
+        image: {
             width: '100%',
             height: calc.getRegHeightDp(300),
         },
-        note_bottom_wrapper : {
+        note_bottom_wrapper: {
             flex: 1,
-            marginTop : calc.getRegHeightDp(29),
-            paddingBottom : calc.getRegHeightDp(44),
-            paddingHorizontal : calc.getRegWidthDp(28),
+            marginTop: calc.getRegHeightDp(29),
+            paddingBottom: calc.getRegHeightDp(44),
+            paddingHorizontal: calc.getRegWidthDp(28),
             borderRadius: 22,
             backgroundColor: 'white',
             elevation: 5,
         },
-        note_title : {
+        note_title: {
             flexDirection: 'row',
             alignItems: 'center',
             width: "100%",
             height: calc.getRegHeightDp(30),
-            marginTop : calc.getRegHeightDp(21),
+            marginTop: calc.getRegHeightDp(21),
         },
-        note_titleinput : {
+        note_titleinput: {
             flex: 1,
             paddingLeft: calc.getRegWidthDp(4),
             fontSize: 18,
@@ -106,8 +115,8 @@ export default styles = function(screenWidth,screenHeight,calc) {
             color: "#393939",
             textAlignVertical: "top",
         },
-        note_line : {
-            marginTop : calc.getRegHeightDp(3),
+        note_line: {
+            marginTop: calc.getRegHeightDp(3),
             width: '100%',
             height: calc.getRegHeightDp(1),
             borderStyle: "solid",
@@ -115,8 +124,8 @@ export default styles = function(screenWidth,screenHeight,calc) {
             borderColor: "#e9e9e9",
             overflow: 'hidden'
         },
-        note_required : {
-            marginTop : calc.getRegHeightDp(3),
+        note_required: {
+            marginTop: calc.getRegHeightDp(3),
             textAlign: 'right',
             fontSize: 10,
             fontWeight: "normal",
@@ -124,16 +133,16 @@ export default styles = function(screenWidth,screenHeight,calc) {
             letterSpacing: 0.01,
             color: "#f15642"
         },
-        note_info_wrapper : {
-            marginTop : calc.getRegHeightDp(22),
+        note_info_wrapper: {
+            marginTop: calc.getRegHeightDp(22),
         },
-        note_info_item : {
+        note_info_item: {
             flexDirection: 'row',
             alignItems: 'center',
-            height : calc.getRegHeightDp(40),
-            marginBottom : calc.getRegHeightDp(8),
+            height: calc.getRegHeightDp(40),
+            marginBottom: calc.getRegHeightDp(8),
         },
-        note_sub_title : {
+        note_sub_title: {
             width: calc.getRegWidthDp(62),
             fontSize: 14,
             fontWeight: "normal",
@@ -141,14 +150,14 @@ export default styles = function(screenWidth,screenHeight,calc) {
             letterSpacing: -0.2,
             color: "#bbbbbb"
         },
-        note_required_icon : {
+        note_required_icon: {
             fontSize: 14,
             fontWeight: "300",
             fontStyle: "normal",
             letterSpacing: 0.01,
             color: "#f15642"
         },
-        note_textinput : {
+        note_textinput: {
             flex: 1,
             paddingHorizontal: calc.getRegWidthDp(9),
             fontSize: 16,
@@ -161,7 +170,7 @@ export default styles = function(screenWidth,screenHeight,calc) {
             borderBottomWidth: 1,
             borderColor: "#e9e9e9"
         },
-        note_picker_wrapper : {
+        note_picker_wrapper: {
             alignItems: 'center',
             width: calc.getRegWidthDp(114),
             height: calc.getRegHeightDp(40),
@@ -169,9 +178,9 @@ export default styles = function(screenWidth,screenHeight,calc) {
             borderStyle: "solid",
             borderWidth: 1,
             borderColor: "#e9e9e9",
-            
+
         },
-        note_picker : {
+        note_picker: {
             flex: 1,
             paddingHorizontal: calc.getRegWidthDp(9),
             fontSize: 16,
@@ -180,7 +189,7 @@ export default styles = function(screenWidth,screenHeight,calc) {
             letterSpacing: -0.2,
             color: "#393939",
         },
-        note_datepicker : {
+        note_datepicker: {
             position: 'relative',
             width: calc.getRegWidthDp(160),
             height: calc.getRegHeightDp(40),
@@ -196,7 +205,7 @@ export default styles = function(screenWidth,screenHeight,calc) {
             borderWidth: 1,
             borderColor: "#e9e9e9",
         },
-        note_datepicker_icon : {
+        note_datepicker_icon: {
             position: 'absolute',
             // borderWidth: 1,
             // borderColor: 'red',
@@ -205,10 +214,10 @@ export default styles = function(screenWidth,screenHeight,calc) {
         // note_bottom_wrapper : {
         //     marginTop : calc.getRegHeightDp(45),
         // },
-        note_textarea_wrapper : {
+        note_textarea_wrapper: {
             marginTop: calc.getRegHeightDp(43),
         },
-        note_textarea : {
+        note_textarea: {
             marginTop: calc.getRegHeightDp(7),
             fontSize: 14,
             fontWeight: "300",

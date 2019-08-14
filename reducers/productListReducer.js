@@ -8,9 +8,7 @@ const initialState = {
     category: CATEGORY.ALL_PRODUCT,
     filter: PRODUCT_LIST_FILTER.NEW,
     search_word: '',
-    search_result_count : 0,
     loading: false,
-
     getProductListError : '',
     searchProductListError : '',
 
@@ -22,7 +20,8 @@ export function getProductList(state = initialState, action) {
         case GET_PRODUCT_LIST.REQUEST:
             return {
                 ...state,
-                category: action.category,
+
+                category: action.payload.category,
                 loading: true
             };
         case GET_PRODUCT_LIST.SUCCESS:
@@ -43,13 +42,8 @@ export function getProductList(state = initialState, action) {
     }
 }
 
-export function searchProductList(state = initialState, action) {
-
-}
-
 
 export default combineReducers({
-    searchProductList,
     getProductList
 
 })

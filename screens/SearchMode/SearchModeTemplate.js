@@ -39,7 +39,7 @@ export default class SearchModeScreen extends Component {
     }
 
     componentDidMount(){
-        console.log("PROPS: "+JSON.stringify(this.props));
+
     }
     onSearchFocus = function () {
         this.props.onSearchFocus();

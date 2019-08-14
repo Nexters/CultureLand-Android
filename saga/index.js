@@ -1,4 +1,7 @@
 import {GET_PRODUCT_LIST} from "../actionTypes/productList";
+import {searchProductFlow} from "./searchProductSaga";
+import {fork} from "redux-saga/effects";
+import {getProductListFlow} from "./productListSaga";
 
 /*
     컨벤션
@@ -18,48 +21,8 @@ import {GET_PRODUCT_LIST} from "../actionTypes/productList";
 
 
  */
-function* getProductListAction(category) {
-    // 서버로 fetch 를 보낸다
-    return {
-        result : [
-        {title: "캣츠"},
-        {title: "안중근"}
-    ],
-    error : "대충 에러"
-    }
-
-}
-
-function* getProductListFlow() {
-    while(true) {
-
-        const request = yield take(GET_PRODUCT_LIST.REQUEST);
-
-
-        let response = yield call(getProductListAction, request.category); // 블로킹됨
-
-        if (response.error) {
-            // 실패
-            yield put({
-                type: GET_PRODUCT_LIST.FAILURE,
-                error: response.error,
-            })
-        } else {
-            // 성공
-            yield  put({
-                type: GET_PRODUCT_LIST.SUCCESS,
-                product_list: response.result,
-            })
-        }
-    }
-}
-
-function* getProductListFlow(){
-
-
-    }
-}
 
 export default function* root() {
-    yield fork
+    yield fork(getProductListFlow);
+    yield fork(searchProductFlow);
 }

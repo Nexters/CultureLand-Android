@@ -1,6 +1,7 @@
 import
     * as WebBrowser from 'expo-web-browser';
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import styleFn from "./styles"
 import {
     View,
@@ -21,7 +22,7 @@ import Highlighter from 'react-native-highlight-words';
 import ScrollableTabView, {DefaultTabBar, ScrollableTabBar} from 'react-native-scrollable-tab-view-forked'
 import DropDown from "../../components/DropDown";
 import TabBarIcon from "../../components/TabBarIcon";
-import SearchModeScreen from '../SearchMode'
+import SearchModeScreen from '../SearchMode/index'
 import PlannedListSearchManagerImpl from "../../util/PlannedListSearchImpl";
 import MyPageScreen from "../MyPage";
 
@@ -65,15 +66,9 @@ function make_bottom() {
         );
     }
     return items;
+
 }
 
-let data = [{
-    value: 'Banana',
-}, {
-    value: 'Mango',
-}, {
-    value: 'Pear',
-}];
 export default class PlanedListScreen extends Component {
 
     constructor(props) {
@@ -86,11 +81,12 @@ export default class PlanedListScreen extends Component {
         };
         this.searchManager = new PlannedListSearchManagerImpl(this);
 
-
+        console.log(JSON.stringify(this.props.productList));
+     //   this.props.getProductList(CATEGORY.ALL_PRODUCT);
     }
 
     componentDidMount() {
-        this.props.getProductList(CATEGORY.ALL_PRODUCT);
+
 
     }
 
@@ -101,17 +97,10 @@ export default class PlanedListScreen extends Component {
 
 
     render() {
+
         const {
-            product_list,
-            category,
-            search_word,
-            search_result_count,
-            loading,
-            getProductListError,
-            searchProductListError,
+            productList
         } = this.props;
-
-
         return (
             <View>
                 {!this.state.isSearchMode ? (
@@ -169,7 +158,7 @@ export default class PlanedListScreen extends Component {
 
                                 <View style={styles.item_information_labels_wrapper}>
                                     <Text style={styles.number_of_items}>총
-                                        {" "+numberWithCommas(product_list.length)} 건</Text>
+                                        {" "+numberWithCommas(productList.length)} 건</Text>
 
                                     <DropDown/>
 
@@ -205,5 +194,7 @@ PlanedListScreen.navigationOptions = {
     header: null,
 };
 
-
+PlanedListScreen.propTypes = {
+    productList : PropTypes.array,
+};
 

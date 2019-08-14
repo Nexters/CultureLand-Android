@@ -52,11 +52,10 @@ export function* getProductListAction(category) {
 export function* getProductListFlow() {
     while(true) {
 
-
         const request = yield take(GET_PRODUCT_LIST.REQUEST);
 
 
-        let response = yield call(getProductListAction, request.category); // 블로킹됨
+        let response = yield call(getProductListAction, request.payload.category); // 블로킹됨
 
         if (response.error) {
             // 실패

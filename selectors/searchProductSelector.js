@@ -6,6 +6,6 @@ export function getSearchedProductError(state){
     return state.searchProductReducer.searchProduct.searchedProductError;
 }
 
-export function getSearchProductKeyword(state){
+export function getSearchedProductKeyword(state){
     return state.searchProductReducer.searchProduct.keyword;
 }

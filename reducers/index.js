@@ -1,8 +1,9 @@
 import {combineReducers} from 'redux'
 
-import account from './accountReducer'
-import productList from './productListReducer';
+import productListReducer from './productListReducer';
+import searchProductReducer from './serachProductReducer';
 export default combineReducers({
-    account,
-    productList
+    productListReducer : productListReducer,
+    searchProductReducer : searchProductReducer
+
 })

@@ -23,7 +23,7 @@ import {ListComponent} from "../../components/ListComponent"
 const calc = new RatioCalculator(screenWidth, screenHeight);
 const styles = styleFn(screenWidth, screenHeight, calc);
 
-export class NoteListScreen extends Component {
+export default class NoteListScreen extends Component {
     
 
     render() {

@@ -2,18 +2,20 @@ import {AppLoading} from 'expo';
 import {Asset} from 'expo-asset';
 import * as Font from 'expo-font';
 import React, {useState} from 'react';
-// import {Provider} from 'react-redux';
-// import {applyMiddleware, combineReducers, compose, createStore} from "redux";
+import { createMuiTheme, MuiThemeProvider } from "@material-ui/core";
+import {Provider} from 'react-redux'
+import createSagaMiddleware from "redux-saga";
+import {applyMiddleware, combineReducers, compose, createStore} from "redux";
 import {Dimensions, Platform, StatusBar, StyleSheet, View} from 'react-native';
-// import rootSaga from './saga';
-// import rootReducer from './reducers/index';
+import rootSaga from './saga';
+import rootReducer from './reducers/index';
 import {Ionicons} from '@expo/vector-icons';
 import AppNavigator from './navigation/AppNavigator';
+
 import LoginScreen from './screens/Sign/index';
 import ItemDetailScreen from './screens/ItemDetail';
 import MyPageScreen from './screens/MyPage';
 import SearchModeScreen from './screens/SearchMode'
-import PlannedListScreen from './screens/PlannedList';
 import SearchBar from "./components/SearchBar";
 import SplashScreen from './screens/Splash';
 import SignScreen from './screens/Sign';
@@ -22,20 +24,20 @@ import NoteDetailScreen from './screens/NoteDetail';
 import NoteListScreen from './screens/NoteList';
 import MyPageListScreen from './screens/MyPageList';
 import ModalBottom from './components/ModalBottom';
-// import SignScreen from './screens/Sign';
 
 //<MyPageScreen  style={styles.container}/>
-// const middlewares = [];
-// middlewares.push(sagaMiddleware);
+const sagaMiddleware = createSagaMiddleware();
 
-// const sagaMiddleware = createSagaMiddleware(rootSaga);
-// const store = createStore(
-//     rootReducer,applyMiddleware(...middlewares));
+const middlewares = [];
+middlewares.push(sagaMiddleware);
 
+const store = createStore(
+    rootReducer, applyMiddleware(...middlewares));
+
+sagaMiddleware.run(rootSaga);
 
 export default function App(props) {
     const [isLoadingComplete, setLoadingComplete] = useState(false);
-
 
 
     if (!isLoadingComplete && !props.skipLoadingScreen) {
@@ -48,13 +50,13 @@ export default function App(props) {
         );
     } else {
         return (
-            // <Provider store={store}>
+            <Provider store={store}>
                 <View style={styles.container}>
                     <AppNavigator/>
                     {/* <NoteDetailScreen/> */}
                     {/* <LoginScreen/> */}
                 </View>
-            // </Provider>
+            </Provider>
         );
     }
 }
