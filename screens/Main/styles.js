@@ -22,23 +22,10 @@ export default styles = function(screenWidth,screenHeight) {
             paddingHorizontal : calc.getRegWidthDp(45),
         },
         main_picker : {
-            width: calc.getRegWidthDp(90),
-            height: calc.getRegHeightDp(36),
-            marginLeft : calc.getRegWidthDp(18),
-            fontSize: 60,
-            fontWeight: "bold",
-            fontStyle: "normal",
-            letterSpacing: -0.49,
-            color: "#464646",
-            textAlign: "left",
-            transform: [
-                { scaleX: 1.6 }, 
-                { scaleY: 1.6 },
-            ],
-            borderColor: 'red',
-            borderWidth: 1,
+            fontFamily: "noto-sans-bold",
         },
         main_top_description: {
+            fontFamily: "noto-sans",
             fontSize: 16,
             fontWeight: "normal",
             fontStyle: "normal",
@@ -56,8 +43,8 @@ export default styles = function(screenWidth,screenHeight) {
             textAlign: 'center',
         },
         main_starter_title : {
+            fontFamily: "noto-sans-bold",
             fontSize: 18,
-            fontWeight: "bold",
             fontStyle: "normal",
             lineHeight: 20,
             letterSpacing: -0.37,
@@ -66,8 +53,8 @@ export default styles = function(screenWidth,screenHeight) {
         },
         main_starter_subtitle : {
             marginTop: calc.getRegHeightDp(15),
+            fontFamily: "noto-sans",
             fontSize: 14,
-            fontWeight: "300",
             fontStyle: "normal",
             lineHeight: 15,
             letterSpacing: -0.29,
@@ -90,15 +77,15 @@ export default styles = function(screenWidth,screenHeight) {
             height: calc.getRegHeightDp(1),
             marginLeft : calc.getRegWidthDp(40),
             borderStyle: "solid",
-            borderWidth: 2,
+            borderTopWidth: 2,
             borderColor: "#eb5a48"
         },
         main_title : {
             // width: calc.getRegWidthDp(54),
-            height: calc.getRegHeightDp(20),
+            // height: calc.getRegHeightDp(20),
             marginLeft : calc.getRegWidthDp(40),
+            fontFamily: "noto-sans-bold",
             fontSize: 14,
-            fontWeight: "bold",
             fontStyle: "normal",
             letterSpacing: -0.29,
             color: "#464646",
@@ -113,7 +100,7 @@ export default styles = function(screenWidth,screenHeight) {
         },
         wishlist_list : {
             flex: 1,
-            paddingHorizontal : calc.getRegWidthDp(36),
+            
         },
         
     });

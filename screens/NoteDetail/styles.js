@@ -57,10 +57,9 @@ export default styles = function (screenWidth, screenHeight, calc) {
         },
         header_right: {
             flex: 1,
+            fontFamily: "noto-sans-bold",
             textAlign: 'right',
-            // backgroundColor: 'aqua',
             fontSize: 16,
-            fontWeight: "bold",
             fontStyle: "normal",
             letterSpacing: 0.01,
             color: "#5c5c5c"
@@ -109,8 +108,8 @@ export default styles = function (screenWidth, screenHeight, calc) {
         note_titleinput: {
             flex: 1,
             paddingLeft: calc.getRegWidthDp(4),
+            fontFamily: "noto-sans-bold",
             fontSize: 18,
-            fontWeight: "bold",
             fontStyle: "normal",
             letterSpacing: -0.37,
             color: "#393939",
@@ -127,6 +126,7 @@ export default styles = function (screenWidth, screenHeight, calc) {
         },
         note_required: {
             marginTop: calc.getRegHeightDp(3),
+            fontFamily: "noto-sans",
             textAlign: 'right',
             fontSize: 10,
             fontWeight: "normal",
@@ -145,6 +145,7 @@ export default styles = function (screenWidth, screenHeight, calc) {
         },
         note_sub_title: {
             width: calc.getRegWidthDp(62),
+            fontFamily: "noto-sans",
             fontSize: 14,
             fontWeight: "normal",
             fontStyle: "normal",
@@ -153,6 +154,7 @@ export default styles = function (screenWidth, screenHeight, calc) {
         },
         note_sub_text : {
             width: calc.getRegWidthDp(230),
+            fontFamily: "noto-sans",
             fontSize: 16,
             fontWeight: "normal",
             fontStyle: "normal",
@@ -161,8 +163,8 @@ export default styles = function (screenWidth, screenHeight, calc) {
 
         },
         note_required_icon: {
+            fontFamily: "noto-sans",
             fontSize: 14,
-            fontWeight: "300",
             fontStyle: "normal",
             letterSpacing: 0.01,
             color: "#f15642"
@@ -170,6 +172,7 @@ export default styles = function (screenWidth, screenHeight, calc) {
         note_textinput: {
             flex: 1,
             paddingHorizontal: calc.getRegWidthDp(9),
+            fontFamily: "noto-sans",
             fontSize: 16,
             fontWeight: "normal",
             fontStyle: "normal",
@@ -193,6 +196,7 @@ export default styles = function (screenWidth, screenHeight, calc) {
         note_picker: {
             flex: 1,
             paddingHorizontal: calc.getRegWidthDp(9),
+            fontFamily: "noto-sans",
             fontSize: 16,
             fontWeight: "normal",
             fontStyle: "normal",
@@ -204,6 +208,7 @@ export default styles = function (screenWidth, screenHeight, calc) {
             width: calc.getRegWidthDp(160),
             height: calc.getRegHeightDp(40),
             paddingHorizontal: calc.getRegWidthDp(9),
+            fontFamily: "noto-sans",
             fontSize: 16,
             fontWeight: "normal",
             fontStyle: "normal",
@@ -229,8 +234,8 @@ export default styles = function (screenWidth, screenHeight, calc) {
         },
         note_textarea: {
             marginTop: calc.getRegHeightDp(7),
+            fontFamily: "noto-sans",
             fontSize: 14,
-            fontWeight: "300",
             fontStyle: "normal",
             lineHeight: 24,
             letterSpacing: -0.1,

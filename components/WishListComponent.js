@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingHorizontal: calc.getRegWidthDp(21),
         paddingVertical: calc.getRegHeightDp(13),
-        elevation: 3,
+        // elevation: 3,
         borderRadius: 6,
         backgroundColor: "#ffffff"
     },
@@ -99,6 +99,7 @@ const styles = StyleSheet.create({
     },
     noitem_text : {
         marginLeft: calc.getRegWidthDp(13),
+        fontFamily: "noto-sans",
         fontSize: 12,
         fontWeight: "normal",
         fontStyle: "normal",

@@ -30,7 +30,7 @@ const config = Platform.select({
 
 const HomeStack = createStackNavigator(
     {
-        Home:PlanedListScreen,
+        Home:NoteDetailScreen,
     },
     config
 );
@@ -76,7 +76,7 @@ LinksStack.path = '';
 
 const SettingsStack = createStackNavigator(
     {
-        Settings: MyPageScreen,
+        Settings: MainScreen,
     },
     config
 );

@@ -175,8 +175,9 @@ const styles = StyleSheet.create({
         paddingHorizontal: calc.getRegWidthDp(6),
     },
     title : {
+        fontFamily: "noto-sans",
         fontSize: 22,
-        fontWeight: "300",
+        // fontWeight: "300",
         fontStyle: "normal",
         letterSpacing: -0.45,
         color: "#464646",
@@ -186,6 +187,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     count : {
+        fontFamily: "noto-sans",
         fontSize: 14,
         fontWeight: "normal",
         fontStyle: "normal",
@@ -205,8 +207,9 @@ const styles = StyleSheet.create({
     },
     intro_title : {
         marginTop: calc.getRegWidthDp(30),
+        fontFamily: "noto-sans",
         fontSize: 12,
-        fontWeight: "300",
+        // fontWeight: "300",
         fontStyle: "normal",
         textAlign: "center",
         color: "#424242"

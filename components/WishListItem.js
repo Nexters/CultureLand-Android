@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: calc.getRegHeightDp(13),
         padding: calc.getRegWidthDp(8),
-        elevation: 3,
+        // elevation: 3,
         borderRadius: 6,
         backgroundColor: "#ffffff"
     },
@@ -83,6 +83,7 @@ const styles = StyleSheet.create({
         paddingVertical: calc.getRegWidthDp(2),
     },
     wishlist_subtitle : {
+        fontFamily: "noto-sans",
         fontSize: 10,
         fontWeight: "normal",
         fontStyle: "normal",
@@ -92,6 +93,7 @@ const styles = StyleSheet.create({
     wishlist_title : {
         flex: 1,
         marginTop: calc.getRegHeightDp(3),
+        fontFamily: "noto-sans",
         fontSize: 12,
         fontWeight: "normal",
         fontStyle: "normal",
@@ -99,8 +101,9 @@ const styles = StyleSheet.create({
         color: "#464646"
     },
     wishlist_date : {
+        fontFamily: "noto-sans",
         fontSize: 12,
-        fontWeight: "300",
+        // fontWeight: "300",
         fontStyle: "normal",
         letterSpacing: -0.15,
         color: "#b0b0b0"

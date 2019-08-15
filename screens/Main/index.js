@@ -52,7 +52,6 @@ export default function MainScreen() {
                         dropdownPosition={0}
                         inputContainerStyle={{
                             borderBottomColor: 'transparent',
-
                         }}
                         containerStyle={{
                             width: calc.getRegWidthDp(114),
@@ -65,6 +64,7 @@ export default function MainScreen() {
                             marginTop : calc.getRegHeightDp(60),
 
                         }}
+                        style={styles.main_picker}
                     />
                     <Text style={styles.main_top_description}>
                         Today is
