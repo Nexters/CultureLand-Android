@@ -15,6 +15,8 @@ import {RatioCalculator} from "../../util";
 import {MainCarousel} from "../../components/MainCarousel"
 import {FloatingButton} from "../../components/FloatingButton"
 
+import StarImage from "../../assets/images/icon/star.svg";
+
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
 
@@ -68,7 +70,7 @@ export default function MainScreen() {
                                         <Text style={styles.title}>안녕 - 이것은 안녕</Text>
                                     </View>
                                     <View style={styles.icon_container}>
-                                        <Image style={styles.icon}/>
+                                        <StarImage style={styles.icon}/>
                                     </View>
                                 </View>
                                 <View style={styles.wating_item}>
@@ -80,7 +82,7 @@ export default function MainScreen() {
                                         <Text style={styles.title}>안녕 - 이것은 안녕</Text>
                                     </View>
                                     <View style={styles.icon_container}>
-                                        <Image style={styles.icon}/>
+                                        <StarImage style={styles.icon}/>
                                     </View>
                                 </View>
                             </View>
@@ -92,3 +94,7 @@ export default function MainScreen() {
         </View>
     )
 }
+
+MainScreen.navigationOptions = {
+    header: null,
+};

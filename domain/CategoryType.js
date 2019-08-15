@@ -1,32 +1,41 @@
-
-
 export default class CategoryType {
 
 
-    constructor(name,apiName,numberOfItem,textColor){
+    constructor(name, apiName, numberOfItem, textColor, image) {
         this.name = name;
         this.apiName = apiName;
         this.numberOfItem = numberOfItem;
         this.textColor = textColor;
+        this.image = image;
     }
 
-    setNumberOfItem(numberOfItem ){
-        this.numberOfItem = numberOfItem ;
+    setNumberOfItem(numberOfItem) {
+        this.numberOfItem = numberOfItem;
     }
-    getName(){
+
+    getName() {
         return this.name;
     }
-    getNumberOfItem(){
+
+    getNumberOfItem() {
         return this.numberOfItem;
     }
-    getApiName(){
+
+    getApiName() {
         return this.apiName;
     }
-    getTextColor(){
-        if(this.textColor == null){
+
+    getTextColor() {
+        if (this.textColor == null) {
             return "#000";
         }
         return this.textColor;
+    }
+
+    getSVGImage() {
+
+        return this.image;
+
     }
 
 

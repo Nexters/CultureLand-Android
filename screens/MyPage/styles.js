@@ -18,7 +18,7 @@ export default styles = function (screenWidth, screenHeight, calc) {
                 flexDirection: "column",
                 width: "100%",
                 height: calc.getRegHeightDp(167),
-                paddingTop: calc.getRegHeightDp(47.4),
+                paddingTop: calc.getRegHeightDp(55.4),
                 paddingLeft: calc.getRegWidthDp(39),
                 paddingRight: calc.getRegWidthDp(28),
                 backgroundColor: "#fff"
@@ -49,11 +49,13 @@ export default styles = function (screenWidth, screenHeight, calc) {
                 width: calc.getRegWidthDp(241),
                 height: calc.getRegHeightDp(20),
                 marginRight: 3,
-                fontWeight: "normal",
                 fontStyle: "normal",
+                fontWeight: "100",
                 lineHeight: 20,
-                letterSpacing: 0,
-                color: "#949494"
+                letterSpacing: -0.2,
+                color: "#5e5e5e",
+                opacity: 0.7,
+
             },
 
             user_logout: {
@@ -61,9 +63,11 @@ export default styles = function (screenWidth, screenHeight, calc) {
                 width: calc.getRegWidthDp(40),
                 height: calc.getRegHeightDp(15),
                 fontSize: 12,
-                fontWeight: "600",
+                opacity: 0.5,
+                fontWeight: "500",
                 fontStyle: "normal",
-                letterSpacing: -0.4,
+                letterSpacing: -0.3,
+                textDecorationLine : 'underline',
                 color: "#949494"
             },
 
@@ -75,16 +79,16 @@ export default styles = function (screenWidth, screenHeight, calc) {
             },
 
             data_symbol: {
-                width: calc.getRegWidthDp(22),
-                height: calc.getRegHeightDp(22),
-                marginRight: 5,
-                backgroundColor: "#000"
+                width: calc.getRegWidthDp(20),
+                height: calc.getRegHeightDp(20),
+                marginRight: 10,
             },
 
             number_of_data_title: {
                 width: calc.getRegWidthDp(70),
                 height: calc.getRegHeightDp(20),
-                marginRight: 5,
+                marginTop: calc.getRegHeightDp(5),
+                marginRight: 2,
                 fontSize: 14,
 
             },
@@ -92,6 +96,7 @@ export default styles = function (screenWidth, screenHeight, calc) {
             number_of_data_content: {
                 width: "100%",
                 height: calc.getRegHeightDp(20),
+                marginTop: calc.getRegHeightDp(3),
                 fontSize: 15,
                 fontWeight: "500",
             },
@@ -137,7 +142,7 @@ export default styles = function (screenWidth, screenHeight, calc) {
                 height: calc.getRegHeightDp(124),
                 marginRight: calc.getRegWidthDp(12),
                 marginBottom: calc.getRegHeightDp(13),
-                paddingTop: calc.getRegHeightDp(8),
+                paddingTop: calc.getRegHeightDp(15),
                 paddingLeft: calc.getRegWidthDp(12),
                 paddingRight: calc.getRegHeightDp(11.5),
                 borderRadius: 6,
@@ -151,10 +156,9 @@ export default styles = function (screenWidth, screenHeight, calc) {
 
 
             category_item_icon: {
-                width: calc.getRegWidthDp(36.6),
-                height: calc.getRegHeightDp(44),
+                width: calc.getRegWidthDp(50),
+                height: calc.getRegHeightDp(50),
                 marginBottom: calc.getRegHeightDp(1),
-                backgroundColor: "#ab0",
             },
 
 
