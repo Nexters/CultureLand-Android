@@ -80,13 +80,10 @@ export default class PlanedListScreen extends Component {
 
         };
         this.searchManager = new PlannedListSearchManagerImpl(this);
-
-        console.log(JSON.stringify(this.props.productList));
-     //   this.props.getProductList(CATEGORY.ALL_PRODUCT);
     }
 
     componentDidMount() {
-
+        this.props.getProductList(CATEGORY.ALL_PRODUCT);
 
     }
 
@@ -114,8 +111,7 @@ export default class PlanedListScreen extends Component {
                                 <Highlighter
 
                                     highlightStyle={{
-                                        color: "black",
-                                        fontWeight: "800"
+                                        fontFamily : 'noto-sans-bold',
                                     }}
                                     searchWords={
                                         ["새로운 컬러"]
@@ -138,16 +134,15 @@ export default class PlanedListScreen extends Component {
                                             tabStyle={styles.category_tabStyle}
                                         />
                                     )}
-                                    tabBarTextStyle={styles.tabBarTextStyle}
+                                    tabBarTextStyle={styles.category_tabBar_text_style}
+
                                     tabBarInactiveTextColor={"#797979"}
                                     tabBarActiveTextColor={'black'}
                                     tabBarUnderlineStyle={styles.category_underline}
                                     initialPage={0}
                                 >
-
                                     <View key={CATEGORY_KEY(CATEGORY.ALL_PRODUCT)} tabLabel={'전체'}
-                                    style={{marginRight:15,}}
-                                    />
+                                        style={styles.category_item}/>
                                     <View key={CATEGORY_KEY(CATEGORY.EXHIBITION)} tabLabel={'전시'}/>
                                     <View key={CATEGORY_KEY(CATEGORY.CONCERT)} tabLabel={'콘서트'}/>
                                     <View key={CATEGORY_KEY(CATEGORY.MUSICAL)} tabLabel={'뮤지컬'}/>
@@ -155,14 +150,19 @@ export default class PlanedListScreen extends Component {
                                     <View key={CATEGORY_KEY(CATEGORY.ETC)} tabLabel={'기타'}/>
 
                                 </ScrollableTabView>
-
                                 <View style={styles.item_information_labels_wrapper}>
-                                    <Text style={styles.number_of_items}>총
-                                        {" "+numberWithCommas(productList.length)} 건</Text>
+                                <Highlighter
 
-                                    <DropDown/>
+                                    highlightStyle={{
+                                        fontFamily : 'noto-sans-bold',
+                                    }}
+                                    searchWords={
+                                        [`${numberWithCommas(productList.length)}`]
+                                    }
+                                    style={styles.number_of_items}
+                                    textToHighlight={`총 ${numberWithCommas(productList.length)} 건`}>
 
-
+                                </Highlighter>
                                 </View>
 
 

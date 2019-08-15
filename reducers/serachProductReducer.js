@@ -19,13 +19,13 @@ export function searchProduct(state = initialState, action) {
         case SEARCH_PRODUCT.SUCCESS:
             return {
                 ...state,
-                search_product_list: action.result.serach_product_list
+                searched_product_list: action.result.searched_product_list
             };
         case SEARCH_PRODUCT.FAILURE:
             return {
                 ...state,
                 loading: false,
-                search_product_list: [],
+                searched_product_list: [],
                 getProductListError : action.error
             };
         default:
