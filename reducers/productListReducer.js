@@ -28,7 +28,7 @@ export function getProductList(state = initialState, action) {
             return {
                 ...state,
                 loading: false,
-                product_list: action.product_list
+                product_list: action.result.product_list
             };
         case GET_PRODUCT_LIST.FAILURE:
             return {

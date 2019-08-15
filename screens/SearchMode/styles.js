@@ -10,25 +10,25 @@ export default styles = function (screenWidth, screenHeight, calc) {
 
 
         container: {
-            width: calc.getRegWidthDp(320),
-            height: calc.getRegHeightDp(44),
-            marginTop : calc.getRegHeightDp(26),
-            marginLeft : calc.getRegWidthDp(22),
-            paddingLeft : calc.getRegWidthDp(13),
-            paddingRight : calc.getRegWidthDp(13),
+            width: 330,
+            height: 44,
+            marginTop : 26,
+            marginLeft : 22,
+            paddingLeft : 13,
+            paddingRight : 13,
             backgroundColor:"#fff",
             borderRadius: 25.5,
-            shadowColor: "#4ca0a0a0",
+            shadowColor: "#000",
             flexDirection: 'row',
             alignItems: 'flex-end',
             shadowOffset: {
-                width: 0,
-                height: 2,
+                width: -4,
+                height: 3,
             },
-            shadowOpacity: 0.23,
-            shadowRadius: 2.62,
+            shadowOpacity: 0.050,
+            shadowRadius: 30,
 
-            elevation: 4,
+            elevation: 200,
 
         },
 

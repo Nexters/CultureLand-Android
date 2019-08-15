@@ -15,6 +15,7 @@ export const getProductList = {
 
     success : () => ({
         type : GET_PRODUCT_LIST.SUCCESS,
+
     }),
 
     failure : () => ({
