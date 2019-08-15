@@ -1,6 +1,7 @@
 import {StyleSheet} from "react-native";
 import {ConvertZepSizeToRegularizedSize, RatioCalculator} from "../../util";
 import {screenWidth,screenHeight} from "../../App";
+import {StatusBar} from 'react-native';
 
 
 export default styles = function(screenWidth,screenHeight) {
@@ -9,8 +10,15 @@ export default styles = function(screenWidth,screenHeight) {
 
 
     return StyleSheet.create({
+        container: {
+            width: '100%',
+            height: '100%',
+            flex: 1,
+            paddingTop: (Platform.OS === 'ios') ?(24) :(StatusBar.currentHeight),
+            backgroundColor: '#f6f6f6',
+        },
         main_top_wrapper: {
-            marginTop  : calc.getRegHeightDp(75),
+            marginTop  : calc.getRegHeightDp(51),
             paddingHorizontal : calc.getRegWidthDp(45),
         },
         main_picker : {
@@ -41,13 +49,6 @@ export default styles = function(screenWidth,screenHeight) {
             // display: "flex",
             marginLeft : calc.getRegWidthDp(7),
             color: "#5c5c5c",
-        },
-        container: {
-            width: '100%',
-            height: '100%',
-            flex: 1,
-            // justifyContent: 'center',
-            backgroundColor: '#f6f6f6',
         },
         main_starter_wrapper : {
             flex: 1,
@@ -106,64 +107,14 @@ export default styles = function(screenWidth,screenHeight) {
             flex: 1,
             marginTop: calc.getRegHeightDp(12),
         },
-        wating_wrapper : {
+        wishlist_wrapper : {
             marginTop: calc.getRegHeightDp(60),
+            paddingBottom : calc.getRegWidthDp(67),
         },
-        wating_list : {
+        wishlist_list : {
             flex: 1,
             paddingHorizontal : calc.getRegWidthDp(36),
-            paddingBottom: calc.getRegHeightDp(18),
         },
-        wating_item : {
-            flex: 1,
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            marginTop: calc.getRegHeightDp(13),
-            padding: calc.getRegWidthDp(8),
-            elevation: 3,
-            borderRadius: 6,
-            backgroundColor: "#ffffff"
-        },
-        image_container : {
-            width: calc.getRegWidthDp(54),
-            height: calc.getRegWidthDp(80),
-        },
-        image : {
-            flex: 1,
-            backgroundColor: '#ebebeb',
-        },
-        text_container : {
-            flex: 1,
-            flexDirection: 'column',
-            alignSelf: 'flex-start',
-            textAlign: 'left',
-            paddingLeft: calc.getRegWidthDp(8),
-        },
-        subtitle : {
-            fontSize: 10,
-            fontWeight: "normal",
-            fontStyle: "normal",
-            letterSpacing: -0.2,
-            color: "#b0b0b0"
-        },
-        title : {
-            marginTop: calc.getRegHeightDp(3),
-            fontSize: 12,
-            fontWeight: "normal",
-            fontStyle: "normal",
-            letterSpacing: -0.25,
-            color: "#464646"
-        },
-        icon_container : {
-            width: calc.getRegWidthDp(44),
-            height: calc.getRegHeightDp(44),
-            // marginRight: calc.getRegWidthDp(10),
-            
-        },
-        icon : {
-            flex: 1,
-            // backgroundColor: '#ebebeb',
-        },
+        
     });
 }

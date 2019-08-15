@@ -50,5 +50,16 @@ export default styles = function(screenWidth,screenHeight,calc) {
         header_right : {
             flex: 1,
         },
+        actionSheet_wrapper : {
+            width: '100%',
+            height: calc.getRegHeightDp(152),
+            paddingHorizontal: calc.getRegWidthDp(28),
+            paddingVertical: calc.getRegHeightDp(26),
+            borderTopRightRadius: '50',
+            borderTopLefttRadius: '50',
+            borderWidth: 1,
+            borderColor: 'red',
+        },
+        
     });
 }

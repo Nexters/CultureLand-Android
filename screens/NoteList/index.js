@@ -8,6 +8,7 @@ import {
     Image,
     TouchableOpacity,
     StatusBar,
+    Button
 
 } from 'react-native';
 
@@ -23,9 +24,8 @@ import {ListComponent} from "../../components/ListComponent"
 const calc = new RatioCalculator(screenWidth, screenHeight);
 const styles = styleFn(screenWidth, screenHeight, calc);
 
-export default class NoteListScreen extends Component {
-    
 
+export default class NoteListScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
@@ -40,6 +40,7 @@ export default class NoteListScreen extends Component {
                     <Text style={styles.header_center}>2019.7</Text>
                     <Text style={styles.header_right}></Text>
                 </View>
+
                 <ListComponent/>
                 <FloatingButton/>
             </View>

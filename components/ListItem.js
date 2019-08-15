@@ -6,6 +6,7 @@ import {
     Image,
     StyleSheet,
     TouchableOpacity,
+    Button,
 } from 'react-native';
 import {RatioCalculator} from "../util";
 
@@ -17,7 +18,10 @@ import PlayImage from "../assets/images/icon/type/play.svg";
 import EtcImage from "../assets/images/icon/type/etc.svg";
 import ConcertImage from "../assets/images/icon/type/concert.svg";
 import Dashline from "../assets/images/icon/dashline.svg";
+import EditImage from "../assets/images/icon/edit.svg";
+import DeleteImage from "../assets/images/icon/delete.svg";
 
+import RBSheet from "react-native-raw-bottom-sheet";
 import CategoryType from '../domain/CategoryType';
 
 const screenWidth = Math.round(Dimensions.get('window').width);
@@ -36,52 +40,87 @@ export class ListItem extends Component {
 
     render() {
         return (
-            <View style={styles.list_item_wrapper}>
-                <TouchableOpacity>
+                <TouchableOpacity
+                    activeOpacity={0.7}
+                    onPress={() => alert('hello')}
+                    style={styles.list_item_wrapper}
+                >
                 {/* <View style={styles.list_shadow}></View> */}
 
-                <View style={styles.list_item}>
-                    <View style={styles.list_item_left}>
-                        <Text style={styles.item_tit}>{this.props.title}</Text>
-                        <View style={styles.item_category_container}>
-                            <ExhibitionImage  width={13} height={13} style={styles.item_category_icon}/>
-                            {/* <Image
-                                style={styles.item_category_icon}
-                                source={require('../assets/images/icon/type/concert.svg')}
-                            /> */}
-                            <Text style={styles.item_category_text}>{this.props.category}</Text>
-                        </View>
-                        <View style={styles.item_info_container}>
-                            <Text style={styles.item_info_text}>{this.props.date}</Text>
-                            <View style={styles.item_info_line}></View>
-                            <Text style={styles.item_info_text}>{this.props.where}</Text>
-                        </View>
-                        <TouchableOpacity style={styles.item_more}>
-                            {/* <Image 
-                                style={styles.item_more_icon}
-                                source={require('../assets/images/icon/menu.svg')}
-                            /> */}
-                            <MenuImage width={28} height={28} style={styles.item_more_icon}/>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={styles.list_item_rip}>
-                        <View style={styles.item_rip_top}></View>
-                        {/* <View style={styles.item_rip_line}></View> */}
-                        <Dashline width={1} height={75} style={styles.item_rip_line}/>
-                        <View style={styles.item_rip_bottom}></View>
-                    </View>
-                    <View style={styles.list_item_right}>
-                        <View style={styles.item_thumb_container}>
-                            <TouchableOpacity style={styles.item_like}>
-                                <LikeImage  width={27} height={27} style={styles.item_like_image}/>
-                                {/* <Image style={styles.item_like_image}/> */}
+                    <View style={styles.list_item}>
+                        <View style={styles.list_item_left}>
+                            <Text style={styles.item_tit}>{this.props.title}</Text>
+                            <View style={styles.item_category_container}>
+                                <ExhibitionImage  width={13} height={13} style={styles.item_category_icon}/>
+                                <Text style={styles.item_category_text}>{this.props.category}</Text>
+                            </View>
+                            <View style={styles.item_info_container}>
+                                <Text style={styles.item_info_text}>{this.props.date}</Text>
+                                <View style={styles.item_info_line}></View>
+                                <Text style={styles.item_info_text}>{this.props.where}</Text>
+                            </View>
+                            <TouchableOpacity
+                                style={styles.item_more}
+                                activeOpacity={0.7}
+                                onPress={() => {
+                                    this.RBSheet.open();
+                                }}
+                            >
+                                <MenuImage width={32} height={32} style={styles.item_more_icon}/>
                             </TouchableOpacity>
-                            <Image style={styles.item_thumb}/>
+                        </View>
+                        <View style={styles.list_item_rip}>
+                            <View style={styles.item_rip_top}></View>
+                            <Dashline width={1} height={75} style={styles.item_rip_line}/>
+                            <View style={styles.item_rip_bottom}></View>
+                        </View>
+                        <View style={styles.list_item_right}>
+                            <View style={styles.item_thumb_container}>
+                                <TouchableOpacity style={styles.item_like}>
+                                    <LikeImage  width={27} height={27} style={styles.item_like_image}/>
+                                </TouchableOpacity>
+                                <Image style={styles.item_thumb}/>
+                            </View>
                         </View>
                     </View>
-                </View>
+                    <RBSheet
+                            ref={ref => {
+                                this.RBSheet = ref;
+                            }}
+                            height={calc.getRegWidthDp(152)}
+                            duration={250}
+                            customStyles={{
+                                container: {
+                                    justifyContent: "flex-start",
+                                    alignItems: "stretch",
+                                    paddingHorizontal: calc.getRegWidthDp(26),
+                                    paddingTop: calc.getRegHeightDp(18),
+                                    borderTopRightRadius: 12,
+                                    borderTopLeftRadius: 12,
+                                }
+                            }}
+                        >
+                            
+                        <TouchableOpacity
+                            style={styles.actionSheet_item}
+                            onPress={() => {
+                                this.RBSheet.close();
+                            }}
+                        >
+                            <EditImage width={34} height={34}/>
+                            <Text style={styles.actionSheet_text}>수정하기</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={styles.actionSheet_item}
+                            onPress={() => {
+                                this.RBSheet.close();
+                            }}
+                        >
+                            <DeleteImage width={34} height={34}/>
+                            <Text style={styles.actionSheet_text}>삭제하기</Text>
+                        </TouchableOpacity>
+                    </RBSheet>
                 </TouchableOpacity>
-            </View>
         )
     }
 }
@@ -91,7 +130,7 @@ const styles = StyleSheet.create({
         position: 'relative',
         width: '100%',
         height: calc.getRegWidthDp(102),
-        paddingHorizontal: calc.getRegWidthDp(21),
+        // paddingHorizontal: calc.getRegWidthDp(21),
         paddingBottom: calc.getRegHeightDp(12),
     },
     list_shadow : {
@@ -120,6 +159,7 @@ const styles = StyleSheet.create({
         // elevation: 5,
     },
     list_item_left : {
+        justifyContent: 'space-between',
         zIndex: 1,
         flex: 1,
         paddingHorizontal: calc.getRegWidthDp(12),
@@ -129,6 +169,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
     },
     item_tit : {
+        flex: 1,
         fontSize: 12,
         fontWeight: "bold",
         fontStyle: "normal",
@@ -176,16 +217,16 @@ const styles = StyleSheet.create({
         overflow: 'hidden'
     },
     item_more : {
-        zIndex: 100,
+        zIndex: 1,
         position: 'absolute',
-        top: calc.getRegHeightDp(0),
+        top: calc.getRegHeightDp(5),
         right: -calc.getRegWidthDp(10),
-        width: calc.getRegWidthDp(28),
-        height: calc.getRegWidthDp(28),
+        width: calc.getRegWidthDp(32),
+        height: calc.getRegWidthDp(32),
     },
     item_more_icon : {
-        width: calc.getRegWidthDp(28),
-        height: calc.getRegWidthDp(28),
+        width: calc.getRegWidthDp(32),
+        height: calc.getRegWidthDp(32),
     },
     list_item_rip : {
         justifyContent: 'center',
@@ -247,5 +288,20 @@ const styles = StyleSheet.create({
     item_like_image : {
         width: calc.getRegWidthDp(27),
         height: calc.getRegHeightDp(27),
-    }
+    },
+    actionSheet_item : {
+        width: '100%',
+        flexDirection: "row",
+        justifyContent: "flex-start",
+        alignItems: "center",
+        height: calc.getRegHeightDp(57),
+        
+    },
+    actionSheet_text : {
+        marginLeft: calc.getRegWidthDp(8),
+        fontSize: 18,
+        fontWeight: "bold",
+        fontStyle: "normal",
+        color: "#424242"
+    },
 })

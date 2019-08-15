@@ -98,7 +98,7 @@ export class MainCarousel extends Component {
                 itemWidth={itemWidth}
                 firstItem={2}
                 containerCustomStyle={styles.slide_container}
-                // contentContainerCustomStyle={styles.slider_content_container}
+                contentContainerCustomStyle={styles.slider_content_container}
                 layout={'default'}
                 inactiveSlideOpacity={1}
                 inactiveSlideScale={1}
@@ -121,6 +121,9 @@ const styles = StyleSheet.create({
         width: sliderWidth,
         marginTop: calc.getRegHeightDp(12),
     },
+    slider_content_container : {
+        marginLeft: - (sliderWidth / 2) + (slideWidth / 2) + calc.getRegWidthDp(29),
+    },
     slide_inner_container : {
         flex: 1,
         width: itemWidth,
@@ -132,7 +135,7 @@ const styles = StyleSheet.create({
     slide : {
         flex: 1,
         borderRadius: 7,
-        padding: calc.getRegWidthDp(10),
+        padding: calc.getRegWidthDp(7),
         backgroundColor: 'white',
         elevation: 3,
     },
@@ -155,7 +158,7 @@ const styles = StyleSheet.create({
         height: calc.getRegHeightDp(150),
         // padding: calc.getRegWidthDp(8),
         borderRadius: 7,
-        elevation: 5,
+        elevation: 3,
     },
     image: {
         flex: 1,
