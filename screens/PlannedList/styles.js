@@ -13,58 +13,67 @@ export default styles = function (screenWidth, screenHeight, calc) {
             width: "100%",
             height: "100%",
             backgroundColor: "#f6f6f6",
-            paddingTop: calc.getRegHeightDp(24)
+            paddingTop: 21,
 
         },
         active_container: {
             width: "100%",
             height: "100%",
             backgroundColor: "#f6f6f6",
-            paddingTop: calc.getRegHeightDp(46),
+            paddingTop: 46,
 
 
         },
+        category_tabBar_text_style : {
+            fontFamily: "noto-sans",
+        },
+        category_tabStyle : {
+            marginRight : -15,
+        },
 
-        scrollable_tab_layout : {
+        category_scrollable_tab_layout : {
+            marginTop: 5,
             backgroundColor: "#f6f6f6"
 
         },
         // 카테고리 탭  레이아웃 관련 //
-        scrollStyle: { // 탭 레이아웃 스타일
-            marginTop: calc.getRegHeightDp(22),
-            backgroundColor: "#f6f6f6",
+        category_scrollStyle: { // 탭 레이아웃 스타일
+             backgroundColor: "#f6f6f6",
+             paddingLeft:15,
+             justifyContent: 'center',
+        },
 
-            // paddingRight: 65,
-            // justifyContent: 'center',
+        category_item : {
+            backgroundColor : "#000",
         },
 
         category_underline: {
-            width: calc.getRegWidthDp(50),
-            height: calc.getRegHeightDp(1.2),
+            width: 50,
+            height: 2,
+            marginLeft : 5,
             backgroundColor: "#f15642",
             borderRadius: 3,
         },
         // @@카테고리 탭  레이아웃 관련 끝//
 
         suggestion_text: {
-            width: calc.getRegWidthDp(191),
-            height: calc.getRegHeightDp(41),
-            marginTop: calc.getRegHeightDp(72),
-            marginLeft : calc.getRegWidthDp(85),
-            marginRight : calc.getRegWidthDp(84),
+            fontFamily : 'noto-sans',
+            width: 191,
+            height: 41,
+            paddingTop: 5,
+            marginTop: 76,
+            marginLeft : 85,
+            marginRight : 84,
             color : "#5c5c5c",
             fontSize: 18,
-            textAlign:'center'
-
+            fontWeight: "300",
+            fontStyle: "normal",
+            lineHeight: 18,
+            letterSpacing: -0.37,
+            textAlign: "center",
         },
 
 
-        category_wrapper: {
-            flexDirection: "row",
-            width: "100%",
-            height: calc.getRegHeightDp(59),
-            marginBottom: calc.getRegHeightDp(34)
-        },
 
         order_selector: {
             width: "100%",
@@ -76,6 +85,8 @@ export default styles = function (screenWidth, screenHeight, calc) {
 
 
         },
+
+
 
         category_selector_item_wrapper: {
             flexDirection: 'column',
@@ -163,6 +174,7 @@ export default styles = function (screenWidth, screenHeight, calc) {
         },
 
         number_of_items : {
+            fontFamily : 'noto-sans',
             width: calc.getRegWidthDp(74),
             height: calc.getRegHeightDp(21),
             fontSize: 16,

@@ -3,12 +3,11 @@ import {call, put, take} from "redux-saga/effects";
 
 function* searchProduct(keyword){
     // MOCK //
-
     return {
         error : null,
         result : {
             category: "all",
-            product_list : [
+            searched_product_list : [
                 {title: "캣츠"},
                 {title: "안중근"},
                 {title: "엠씨더맥스"},
@@ -24,7 +23,6 @@ export function* searchProductFlow(){
     while(true){
 
         const request = yield take(SEARCH_PRODUCT.REQUEST);
-
         let response = yield call(searchProduct,request.keyword);
 
         if(response.error){

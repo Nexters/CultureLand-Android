@@ -22,6 +22,7 @@ export default class SearchModeScreen extends Component {
             isFocused: false,
             isSearchMode: this.props.isSearchMode,
             errorMessage: "",
+            lastSearchRequest : 0,
         };
 
 
@@ -39,19 +40,35 @@ export default class SearchModeScreen extends Component {
     }
 
     componentDidMount(){
-
     }
     onSearchFocus = function () {
         this.props.onSearchFocus();
         this.setState({isFocused: true});
     };
 
+    searchByKeyword(keyword){
+        let now  = parseInt((new Date).getTime());
+        let diff = parseInt(now-this.state.lastSearchRequest);
+
+        if(diff < 500){
+            return;
+        }else{
+            console.log("now : "+now +" , "+this.state.lastSearchRequest+", "+
+                diff+", 입력 텍스트"+keyword);
+
+            this.setState({lastSearchRequest : now});
+
+            this.props.searchRequest(keyword);
+        }
+    }
+
 
     render() {
 
+
         const
         {
-            searched_product_list,
+            searchedProductList,
             keyword,
             searchedProductError
         } = this.props;
@@ -69,9 +86,8 @@ export default class SearchModeScreen extends Component {
                             </TouchableWithoutFeedback>
 
                             <View style={styles.active_wrapper}>
-
                                 <TextInput style={styles.active_input_text}
-                                           onChangeText={this.props.doSearch}
+                                           onChangeText={this.searchByKeyword.bind(this)}
                                            selectionColor={"#f15642"}
                                 >
                                 </TextInput>
@@ -89,15 +105,14 @@ export default class SearchModeScreen extends Component {
 
                         <ScrollView>
                             {
-                                this.item.map((item) => {
+                                searchedProductList.map((item) => {
                                     return (
                                         <TouchableOpacity
                                             onPress={this.props.onSelectSearchResult}>
                                             <View style={styles.active_search_result_wrapper}>
 
                                                 <Text style={styles.active_search_result_content}>
-                                                    {item}
-
+                                                    {item.title}
                                                 </Text>
                                             </View>
                                         </TouchableOpacity>)
@@ -111,13 +126,13 @@ export default class SearchModeScreen extends Component {
                         ref={(input) => {
                             this.textInput = input;
                         }}
-                        style={styles.input_text}
+                        style={styles.container}
                         onPress={this.props.onSearchFocus}
                     >
                         <View style={styles.container}>
 
                             <View style={styles.input_text}
-                                  onChangeText={this.props.doSearch}
+                                  onChangeText={this.searchByKeyword}
                                   selectionColor={"#f15642"}
                             >
                             </View>
@@ -147,7 +162,9 @@ SearchModeScreen.propTypes = {
     onSearchFocus: PropTypes.func,
     isSearchMode: PropTypes.bool,
     searchProduct : PropTypes.func,
-    searched_product_list : PropTypes.array,
+    searchedProductList : PropTypes.array,
     keyword : PropTypes.string,
     searchedProductError : PropTypes.string,
+    lastSearchRequest: PropTypes.number,
+    searchRequest : PropTypes.func,
 };
