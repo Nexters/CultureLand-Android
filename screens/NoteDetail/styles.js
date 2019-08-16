@@ -57,6 +57,8 @@ export default styles = function (screenWidth, screenHeight, calc) {
         },
         header_right: {
             flex: 1,
+        },
+        header_right_text : {
             fontFamily: "noto-sans-bold",
             textAlign: 'right',
             fontSize: 16,
