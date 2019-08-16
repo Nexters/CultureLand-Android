@@ -23,9 +23,18 @@ const screenHeight = Math.round(Dimensions.get('window').height);
 const calc = new RatioCalculator(screenWidth, screenHeight);
 
 export class MainCarousel extends Component {
+    /**
+     *
+     *  처음 불러올 떄, 노트 리스트 데이터 없으면 초기 안내 스크린 출력
+     *  
+     */
 
     constructor (props) {
         super(props);
+
+        this.state = {
+            isNoteNull : true,
+        }
     }
 
     _renderItem ({item, index}) {
@@ -35,12 +44,6 @@ export class MainCarousel extends Component {
                 style={styles.slide_inner_container}
                 onPress={()=> {alert(`You've clicked this!`)}}
             >
-                {/* <View style={styles.slide}>
-                    <View style={styles.intro_container}>
-                        {item.introImage}
-                        <Text style={styles.intro_title}>{ item.introTitle }</Text>
-                    </View>
-                </View> */}
                 <View style={styles.slide}>
                     <View style={styles.image_container}>
                         <Image style={styles.image}/>
@@ -53,56 +56,88 @@ export class MainCarousel extends Component {
                         </View>
                     </View>
                 </View>
-                <View style={styles.shadow}/>
+            </TouchableOpacity>
+        );
+    }
+    _renderItemNull ({item, index}) {
+        return (
+            <TouchableOpacity
+                activeOpacity={1}
+                style={styles.slide_inner_container}
+                onPress={()=> {alert(`You've clicked this!`)}}
+            >
+                <View style={styles.slide}>
+                    <View style={styles.intro_container}>
+                        {item.introImage}
+                        <Text style={styles.intro_title}>{ item.introTitle }</Text>
+                    </View>
+                </View>
             </TouchableOpacity>
         );
     }
     render () {
         return (
-            <Carousel
-                ref={(c) => { this._carousel = c; }}
-                // data={[
-                //     {
-                //         introTitle: '아직 기록이 없으시군요!\n최근 경험한 문화생활이 있나요?',
-                //         introImage: <CardImageFirst/>
-                //     },
-                //     {
-                //         introTitle: '무엇을 보고, 느꼈나요?\n소감을 자유롭게 적어보세요.',
-                //         introImage: <CardImageSecond/>
-                //     },
-                //     {
-                //         introTitle: '문화를 즐기는 컬쳐러버로서,\n당신의 발자취를 남겨보세요!',
-                //         introImage: <CardImageThird/>
-                //     },
-                // ]}
-                data={[
-                    {
-                        title: 'JUNE',
-                        count: 3,
-                    },
-                    {
-                        title: 'JULY',
-                        count: 4,
-                    },
-                    {
-                        title: 'AUGUST',
-                        count: 3,
-                    },
-                    {
-                        title: 'SEPTEMBER',
-                        count: 4,
-                    },
-                ]}
-                renderItem={this._renderItem}
-                sliderWidth={sliderWidth}
-                itemWidth={itemWidth}
-                firstItem={2}
-                containerCustomStyle={styles.slide_container}
-                contentContainerCustomStyle={styles.slider_content_container}
-                layout={'default'}
-                inactiveSlideOpacity={1}
-                inactiveSlideScale={1}
-            />
+            <View>
+                {this.state.isNoteNull ?
+                    <Carousel   
+                        ref={(c) => { this._carousel = c; }}
+                        data={[
+                            {
+                                introTitle: '아직 기록이 없으시군요!\n최근 경험한 문화생활이 있나요?',
+                                introImage: <CardImageFirst/>
+                            },
+                            {
+                                introTitle: '무엇을 보고, 느꼈나요?\n소감을 자유롭게 적어보세요.',
+                                introImage: <CardImageSecond/>
+                            },
+                            {
+                                introTitle: '문화를 즐기는 컬쳐러버로서,\n당신의 발자취를 남겨보세요!',
+                                introImage: <CardImageThird/>
+                            },
+                        ]}
+                        renderItem={this._renderItemNull}
+                        sliderWidth={sliderWidth}
+                        itemWidth={itemWidth}
+                        firstItem={0}
+                        containerCustomStyle={styles.slide_container}
+                        contentContainerCustomStyle={styles.slider_content_container}
+                        layout={'default'}
+                        inactiveSlideOpacity={1}
+                        inactiveSlideScale={1}
+                    />
+                :
+                    <Carousel
+                        ref={(c) => { this._carousel = c; }}
+                        data={[
+                            {
+                                title: 'JUNE',
+                                count: 3,
+                            },
+                            {
+                                title: 'JULY',
+                                count: 4,
+                            },
+                            {
+                                title: 'AUGUST',
+                                count: 3,
+                            },
+                            {
+                                title: 'SEPTEMBER',
+                                count: 4,
+                            },
+                        ]}
+                        renderItem={this._renderItem}
+                        sliderWidth={sliderWidth}
+                        itemWidth={itemWidth}
+                        firstItem={0}
+                        containerCustomStyle={styles.slide_container}
+                        contentContainerCustomStyle={styles.slider_content_container}
+                        layout={'default'}
+                        inactiveSlideOpacity={1}
+                        inactiveSlideScale={1}
+                    />
+                }
+            </View>
         );
     }
 }
