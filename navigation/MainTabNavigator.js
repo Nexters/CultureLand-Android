@@ -7,12 +7,11 @@ import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import ItemDetailScreen from '../screens/ItemDetail'
+import NoteListScreen from '../screens/NoteList'
+import NoteDetailScreen from '../screens/NoteDetail'
+import MainScreen from '../screens/Main'
 import MyPageScreen from "../screens/MyPage"
-import PlanedListScreen from '../screens/PlannedList/index'
-import MainScreen from '../screens/Main';
-import NoteDetailScreen from '../screens/NoteDetail';
-import NoteListScreen from '../screens/NoteList';
-import SignScreen from '../screens/Sign';
+import PlanedListScreen from '../screens/PlannedList'
 import styleFn from "../screens/PlannedList/styles";
 import {RatioCalculator} from "../util";
 const screenWidth = Math.round(Dimensions.get('window').width);
@@ -31,7 +30,7 @@ const config = Platform.select({
 
 const HomeStack = createStackNavigator(
     {
-        Home:PlanedListScreen,
+        Home:NoteDetailScreen,
     },
     config
 );
@@ -54,7 +53,7 @@ HomeStack.path = '';
 
 const LinksStack = createStackNavigator(
     {
-        Links: NoteDetailScreen ,
+        Links: NoteListScreen ,
     },
     config
 );
@@ -77,7 +76,7 @@ LinksStack.path = '';
 
 const SettingsStack = createStackNavigator(
     {
-        Settings: NoteListScreen,
+        Settings: MainScreen,
     },
     config
 );

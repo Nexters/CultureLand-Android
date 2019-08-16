@@ -60,6 +60,7 @@ export default styles = function (screenWidth, screenHeight, calc) {
             fontFamily: "noto-sans-bold",
             textAlign: 'right',
             fontSize: 16,
+            fontWeight: "bold",
             fontStyle: "normal",
             letterSpacing: 0.01,
             color: "#5c5c5c"
@@ -76,7 +77,7 @@ export default styles = function (screenWidth, screenHeight, calc) {
         },
         image_wrapper: {
             flex: 1,
-            justifyContent: 'center',
+            justifyContent: 'flex-start',
             alignItems: 'center',
             height: calc.getRegHeightDp(212),
             borderRadius: 5,
@@ -86,7 +87,19 @@ export default styles = function (screenWidth, screenHeight, calc) {
         },
         image: {
             width: '100%',
-            height: calc.getRegHeightDp(300),
+            height: calc.getRegHeightDp(212),
+        },
+        image_icon_wrapper : {
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: '100%',
+            height: calc.getRegHeightDp(212),
+            backgroundColor: '#fff',
+        },
+        image_icon : {
+            width: calc.getRegWidthDp(92),
+            height: calc.getRegHeightDp(92),
+            alignSelf: "center",
         },
         note_bottom_wrapper: {
             flex: 1,
@@ -102,7 +115,7 @@ export default styles = function (screenWidth, screenHeight, calc) {
             flexDirection: 'row',
             alignItems: 'center',
             width: "100%",
-            minHeight: calc.getRegHeightDp(30),
+            height: calc.getRegHeightDp(30),
             marginTop: calc.getRegHeightDp(21),
         },
         note_titleinput: {
@@ -151,16 +164,6 @@ export default styles = function (screenWidth, screenHeight, calc) {
             fontStyle: "normal",
             letterSpacing: -0.2,
             color: "#bbbbbb"
-        },
-        note_sub_text : {
-            width: calc.getRegWidthDp(230),
-            fontFamily: "noto-sans",
-            fontSize: 16,
-            fontWeight: "normal",
-            fontStyle: "normal",
-            letterSpacing: -0.2,
-            color: "#393939",
-
         },
         note_required_icon: {
             fontFamily: "noto-sans",

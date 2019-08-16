@@ -98,5 +98,6 @@ const styles = StyleSheet.create({
     list_container: {
         flex: 1,
         marginTop: calc.getRegHeightDp(28),
+        paddingHorizontal: calc.getRegWidthDp(21),
     }
 })

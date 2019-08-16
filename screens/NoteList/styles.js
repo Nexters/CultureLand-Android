@@ -28,8 +28,9 @@ export default styles = function(screenWidth,screenHeight,calc) {
             zIndex: 100,
             height: calc.getRegHeightDp(70),
             paddingHorizontal: calc.getRegWidthDp(23),
+            fontFamily: "noto-sans-bold",
             fontSize: 16,
-            fontWeight: "bold",
+            // fontWeight: "bold",
             fontStyle: "normal",
             letterSpacing: 0.01,
             textAlign: "center",
@@ -40,8 +41,9 @@ export default styles = function(screenWidth,screenHeight,calc) {
             flex: 1,
         },
         header_center : {
+            fontFamily: "noto-sans-bold",
             fontSize: 20,
-            fontWeight: "bold",
+            // fontWeight: "bold",
             fontStyle: "normal",
             letterSpacing: -0.41,
             textAlign: "center",
@@ -50,5 +52,16 @@ export default styles = function(screenWidth,screenHeight,calc) {
         header_right : {
             flex: 1,
         },
+        actionSheet_wrapper : {
+            width: '100%',
+            height: calc.getRegHeightDp(152),
+            paddingHorizontal: calc.getRegWidthDp(28),
+            paddingVertical: calc.getRegHeightDp(26),
+            borderTopRightRadius: '50',
+            borderTopLefttRadius: '50',
+            borderWidth: 1,
+            borderColor: 'red',
+        },
+        
     });
 }
