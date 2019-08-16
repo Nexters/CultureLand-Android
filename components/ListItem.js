@@ -12,6 +12,7 @@ import {RatioCalculator} from "../util";
 
 import MenuImage from "../assets/images/icon/menu.svg";
 import LikeImage from "../assets/images/icon/like.svg";
+import LikeChkImage from "../assets/images/icon/like_checked.svg";
 import ExhibitionImage from "../assets/images/icon/type/exhibition.svg";
 import MusicalImage from "../assets/images/icon/type/musical.svg";
 import PlayImage from "../assets/images/icon/type/play.svg";
@@ -31,11 +32,22 @@ const calc = new RatioCalculator(screenWidth, screenHeight);
 
 
 export class ListItem extends Component {
-    constructor (props) {
+    /**
+     *
+     *  처음 불러올 떄, 좋아요리스트에 있으면 하트 채워진 상태로 로딩!
+     *  채워진 상태에서 하트을 다시 누르면, 좋아요리스트에서 삭제 요청을 한다
+     *  하트 누르면 -> 서버에 좋아요리스트에 추가
+     */
+
+    constructor(props){
         super(props);
         // this.categories = [
         //     new CategoryType("전시")
         // ]
+
+        this.state = {
+            isLiked : true,
+        }
     }
 
     render() {
@@ -77,7 +89,12 @@ export class ListItem extends Component {
                         <View style={styles.list_item_right}>
                             <View style={styles.item_thumb_container}>
                                 <TouchableOpacity style={styles.item_like}>
-                                    <LikeImage  width={27} height={27} style={styles.item_like_image}/>
+                                    {this.state.isLiked ?
+                                        // 좋아요 리스트에 있으면 채워진 상태로 로딩
+                                        <LikeChkImage  width={27} height={27} style={styles.item_like_image}/>
+                                        :
+                                        <LikeImage  width={27} height={27} style={styles.item_like_image}/>
+                                    }
                                 </TouchableOpacity>
                                 <Image style={styles.item_thumb}/>
                             </View>

@@ -46,7 +46,7 @@ export default styles = function(screenWidth,screenHeight) {
             fontFamily: "noto-sans-bold",
             fontSize: 18,
             fontStyle: "normal",
-            lineHeight: 20,
+            lineHeight: 22,
             letterSpacing: -0.37,
             textAlign: "center",
             color: "#5c5c5c"
@@ -56,7 +56,7 @@ export default styles = function(screenWidth,screenHeight) {
             fontFamily: "noto-sans",
             fontSize: 14,
             fontStyle: "normal",
-            lineHeight: 15,
+            lineHeight: 18,
             letterSpacing: -0.29,
             textAlign: "center",
             color: "#5c5c5c"

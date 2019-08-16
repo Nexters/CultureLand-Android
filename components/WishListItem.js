@@ -11,6 +11,7 @@ import {
 import {RatioCalculator} from "../util";
 
 import StarImage from "../assets/images/icon/star.svg";
+import StarChkImage from "../assets/images/icon/star_checked.svg";
 
 
 import RBSheet from "react-native-raw-bottom-sheet";
@@ -23,11 +24,29 @@ const calc = new RatioCalculator(screenWidth, screenHeight);
 
 
 export class WishListItem extends Component {
-    constructor (props) {
+    /**
+     *
+     *  처음 불러올 떄, 위시리스트에 있으면 별 채워진 상태로 로딩!
+     *  채워진 상태에서 별을 다시 누르면, 위시리스트에서 삭제 요청을 한다
+     *  별 누르면 -> 서버에 위시리스트에 추가
+     */
+
+    constructor(props){
         super(props);
-        // this.categories = [
-        //     new CategoryType("전시")
-        // ]
+
+        this.state = {
+            isWished : true,
+        }
+    }
+
+    doWish(){
+
+    }
+    cancelWish(){
+
+    }
+    checkIsWished(){
+
     }
 
     render() {
@@ -46,7 +65,13 @@ export class WishListItem extends Component {
                     <Text style={styles.wishlist_date}>{this.props.date}</Text>
                 </View>
                 <View style={styles.wishlist_icon_container}>
-                    <StarImage style={styles.wishlist_icon}/>
+                    {this.state.isWished ?
+                        // 위시 리스트에 있으면 채워진 상태로 로딩
+                        <StarChkImage style={styles.wishlist_icon}/>
+                        :
+                        <StarImage style={styles.wishlist_icon}/>
+                    }
+                    
                 </View>
             </TouchableOpacity>
         )

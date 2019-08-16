@@ -19,6 +19,10 @@ const calc = new RatioCalculator(screenWidth, screenHeight);
 export class WishListComponent extends Component {
     constructor (props) {
         super(props);
+
+        this.state = {
+            isWishNull: true,
+        }
     }
     state = {
         data: [
@@ -58,19 +62,22 @@ export class WishListComponent extends Component {
     render() {
         return (
             <View style={styles.wishlist_container}>
-                <TouchableOpacity
-                    activeOpacity={0.7}
-                    onPress={() => alert('hello')}
-                    style={styles.wishlist_noitem}
-                >
-                    <InactiveImage style={styles.noitem_icon}/>
-                    <Text style={styles.noitem_text}>{'당신의 다이어리를 채울\n'}<Text style={styles.noitem_text_bold}>새로운 컬러</Text>를 찾아보세요!</Text>
-                </TouchableOpacity>
-                <FlatList
-                    data={this.state.data}
-                    renderItem={this._renderItem}
-                >
-                </FlatList>
+                {  this.state.isWishNull ? 
+                    <TouchableOpacity
+                        activeOpacity={0.7}
+                        onPress={() => alert('hello')}
+                        style={styles.wishlist_noitem}
+                    >
+                        <InactiveImage style={styles.noitem_icon}/>
+                        <Text style={styles.noitem_text}>{'당신의 다이어리를 채울\n'}<Text style={styles.noitem_text_bold}>새로운 컬러</Text>를 찾아보세요!</Text>
+                    </TouchableOpacity>
+                :
+                    <FlatList
+                        data={this.state.data}
+                        renderItem={this._renderItem}
+                    >
+                    </FlatList>
+                }
             </View>
         )
     }
