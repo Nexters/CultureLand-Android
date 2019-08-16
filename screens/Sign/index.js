@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import styleFn from "./styles"
-import {Dimensions, Image, Text, View} from 'react-native';
-
+import {Dimensions, TouchableWithoutFeedback, Text, View} from 'react-native';
+import * as SecureStore from 'expo-secure-store';
 
 import {Pagination} from 'react-native-snap-carousel';
 import {ImageCarousel} from './carousel/index'
 import {RatioCalculator} from "../../util";
+import FacebookLogo from './asset/facebook.svg';
+import KakaoLogo from './asset/kakaotalk.svg'
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
@@ -15,6 +17,26 @@ const styles = styleFn(screenWidth, screenHeight, calc);
 
 
 export default class SignScreen extends Component {
+
+    faceBookAuth() {
+        try {
+            SecureStore.setItemAsync("key","heyyyyyyyyyyy").then()
+        }catch(e){
+            console.log("저장되었습니;다");
+        }
+
+        SecureStore.getItemAsync("key").then((data) =>{
+            console.log("가져왔습니다 "+data);
+        })
+
+
+
+    }
+
+    kakaoAuth() {
+
+    }
+
     render() {
         return (
 
@@ -22,45 +44,44 @@ export default class SignScreen extends Component {
 
                 <View style={styles.sign_illustrate_wrapper}>
                     <ImageCarousel style={styles.sign_illustrate_image}>
-
                     </ImageCarousel>
                 </View>
                 <Pagination dotsLength={3} activeDotIndex={0}>
 
                 </Pagination>
-                <Text style={styles.getting_start_text}>
-                    시작하기
-                </Text>
+
                 <View style={styles.sign_social_select_wrapper}>
 
                     <View style={styles.sign_social_service}>
-                        <Image style={styles.sign_social_item_image}>
 
-                        </Image>
+                        <TouchableWithoutFeedback
+                            onPress={this.kakaoAuth}
+                        >
+                            <View style={styles.sign_social_item_image}>
+                                <KakaoLogo width={56} height={56}>
+
+                                </KakaoLogo>
+                            </View>
+                        </TouchableWithoutFeedback>
                         <Text style={styles.sign_social_item_text}>
-                            네이버 아이디로 로그인
+                            {`카카오톡으로\n시작하기`}
                         </Text>
                     </View>
                     <View style={styles.sign_social_service}>
-                        <Image style={styles.sign_social_item_image}>
+                        <TouchableWithoutFeedback
+                            onPress={this.faceBookAuth}
+                        >
+                            <View style={styles.sign_social_item_image}>
+                                <FacebookLogo width={56} height={56}>
 
-                        </Image>
+                                </FacebookLogo>
+                            </View>
+                        </TouchableWithoutFeedback>
                         <Text style={styles.sign_social_item_text}>
-                            페이스북 아이디로 로그인
+                            {`페이스북으로\n시작하기`}
                         </Text>
-
                     </View>
                 </View>
-                <View style={styles.sign_guide_wrapper}>
-
-                    <Text style={styles.sign_guide_message}>
-                        혹시, 컬쳐랜드가 처음이신가요?
-                    </Text>
-                    <Text style={styles.sign_guide_message_btn}>
-                        회원가입
-                    </Text>
-                </View>
-
             </View>
         )
     }

@@ -52,7 +52,7 @@ export default function App(props) {
         return (
             <Provider store={store}>
                 <View style={styles.container}>
-                    <AppNavigator/>
+                    <SignScreen/>
                     {/* <NoteDetailScreen/> */}
                     {/* <LoginScreen/> */}
                 </View>

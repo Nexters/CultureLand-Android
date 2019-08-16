@@ -20,6 +20,7 @@
     "expo-asset": "^5.0.0",
     "expo-constants": "^5.0.0",
     "expo-font": "^5.0.0",
+    "expo-secure-store": "~5.0.1",
     "expo-web-browser": "^5.0.0",
     "key-mirror": "^1.0.1",
     "prop-types": "^15.7.2",
