@@ -16,6 +16,7 @@ import {RatioCalculator} from "../../util";
 import {MainCarousel} from "../../components/MainCarousel"
 import {FloatingButton} from "../../components/FloatingButton"
 import {WishListComponent} from "../../components/WishListComponent"
+import moment from "moment";
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
@@ -23,6 +24,7 @@ const screenHeight = Math.round(Dimensions.get('window').height);
 
 const calc = new RatioCalculator(screenWidth, screenHeight);
 const styles = styleFn(screenWidth, screenHeight, calc);
+
 
 export default class MainScreen extends Component {
     /**
@@ -38,7 +40,11 @@ export default class MainScreen extends Component {
             isDataNull : false,
         }
     }
+
+    
     render () {
+
+        const currentDate= moment(new Date()).format("YYYY-MM-DD")
 
         return (
             <View style={styles.container}>
@@ -80,8 +86,8 @@ export default class MainScreen extends Component {
                             style={styles.main_picker}
                         />
                         <Text style={styles.main_top_description}>
-                            Today is
-                            <Text style={styles.main_top_date}>  2019.08.03</Text>
+                        Today is 
+                            <Text style={styles.main_top_date}> {currentDate} </Text>
                         </Text>
                     </View>
                     {this.state.isDataNull ?

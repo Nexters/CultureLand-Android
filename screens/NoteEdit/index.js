@@ -17,6 +17,7 @@ import {
 import DatePicker from 'react-native-datepicker'
 import {Dropdown} from 'react-native-material-dropdown';
 import { ImagePicker, Permissions } from 'expo';
+import moment from "moment";
 
 import AddPhotoImage from "../../assets/images/icon/addPhoto.svg"
 import CalendarImage from "../../assets/images/icon/cal.svg"
@@ -37,30 +38,68 @@ export default class NoteEditScreen extends Component {
     constructor(props){
         super(props)
         this.state = {
-            date: "2019-08-12",
+            title: "",
+            category: "",
+            sometime: "",
+            place: "",
+            withWho: "",
+            content: "",
+            image: null,
+            isRequired: false,
         }
     }
-    state = {
-        image: null,
-    };
     async componentDidMount(){
         const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+        // let { sometime }= moment(new Date()).format("YYYY-MM-DD")
+    }
+    
+    onSelectedChange(value, index){
+        this.setState({category: value});
+        console.log(this.state.category)
+    }
+
+    _showWarningAlert = () => {
+        Alert.alert(
+            '이 화면을 벗어나면\n작성하던 내용이 사라집니다.',
+            '계속하시겠습니까?',
+            [
+                {text: '취소', onPress: () => console.log('잘생각했어여'), style: 'cancel'},
+                {text: '확인', onPress: () => console.log('왜죠..!!!')},
+            ],
+            { cancelable: true }
+        )
+    }
+    
+    _showConfirmAlert = () => {
+        Alert.alert(
+            '컬러가 저장되었습니다!','',
+            [
+                {text: '확인', onPress: () => console.log('성공')},
+            ],
+            { cancelable: false }
+        )
     }
 
     render() {
         let { image } = this.state;
-        
+        console.log(this.state)
         return (
             <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
                 <View style={styles.header}>
                     <TouchableOpacity 
-                        onPress={() => alert(props.centerText)}
+                        onPress={this._showWarningAlert}
                         activeOpacity={0.7} 
                         style={styles.header_left}
                     >
                         <Ionicons name="ios-arrow-back" size={24} color="#292929" style={styles.header_button}/>
                     </TouchableOpacity>
-                    <Text style={styles.header_right}>저장</Text>
+                    <TouchableOpacity
+                        onPress={this._showConfirmAlert}
+                        activeOpacity={0.7} 
+                        style={styles.header_right}
+                    >
+                        <Text style={styles.header_right_text}>저장</Text>
+                    </TouchableOpacity>
                 </View>
                 <ScrollView>
                     <View style={styles.note_top_wrapper}>
@@ -75,15 +114,17 @@ export default class NoteEditScreen extends Component {
                             <View style={styles.image_icon_wrapper}>
                                 <AddPhotoImage width={92} height={92} style={styles.image_icon}/>
                             </View>
-                            {/* <Image style={styles.image}/> */}
                         </TouchableOpacity>
-                        {/* <View style={styles.image_wrapper}>
-                        </View> */}
                     </View>
                     <View style={styles.note_bottom_wrapper}>
                         <View style={styles.note_title}>
                             <Text style={styles.note_required_icon}>*</Text>
-                            <TextInput value="십센치 크리스마스 콘서트" style={styles.note_titleinput}/>
+                            <TextInput
+                                style={styles.note_titleinput}
+                                onChangeText={(title) => this.setState({title})}
+                                value={this.state.title}
+                                // placeholder={"제목을 입력해주세요"}
+                            />
                         </View>
                         <View style={styles.note_line}></View>
                         <Text style={styles.note_required}>*필수항목</Text>
@@ -92,7 +133,8 @@ export default class NoteEditScreen extends Component {
                                 <Text style={styles.note_sub_title}>유형<Text style={styles.note_required_icon}>*</Text></Text>
                                 <View style={styles.note_picker_wrapper}>
                                     <Dropdown
-                                        value={"유형"}
+                                        value={this.state.category}
+                                        // value={}
                                         data={[
                                             {
                                                 value: "유형"
@@ -111,25 +153,19 @@ export default class NoteEditScreen extends Component {
                                         dropdownPosition={0}
                                         inputContainerStyle={{
                                             borderBottomColor: 'transparent',
-                                            // borderRadius: 2,
-                                            // borderStyle: "solid",
-                                            // borderWidth: 1,
-                                            // borderColor: "red",
                                         }}
                                         containerStyle={{
                                             width: calc.getRegWidthDp(114),
                                             height: calc.getRegHeightDp(40),
                                             paddingHorizontal: calc.getRegWidthDp(9),
-                                            // borderRadius: 2,
-                                            // borderStyle: "solid",
-                                            // borderWidth: 1,
-                                            // borderColor: "#e9e9e9",
                                             marginLeft: 'auto',
                                         }}
                                         pickerStyle={{
+                                            // width: calc.getRegWidthDp(114),
                                             marginTop : calc.getRegHeightDp(42),
 
                                         }}
+                                        onChangeText={(value, index) => this.onSelectedChange(value, index)}
                                     />
                                 </View>
                             </View>
@@ -137,7 +173,7 @@ export default class NoteEditScreen extends Component {
                                 <Text style={styles.note_sub_title}>언제<Text style={styles.note_required_icon}>*</Text></Text>
                                 <DatePicker
                                     style={styles.note_datepicker}
-                                    date={this.state.date}
+                                    date={this.state.sometime}
                                     mode="date"
                                     placeholder="select date"
                                     format="YYYY-MM-DD"
@@ -156,25 +192,33 @@ export default class NoteEditScreen extends Component {
                                             borderColor: "transparent",
                                         }
                                     }}
-                                    onDateChange={(date) => {this.setState({date: date})}}
+                                    onDateChange={(sometime) => {this.setState({sometime: sometime})}}
                                 />
                             </View>
                             <View style={styles.note_info_item}>
                                 <Text style={styles.note_sub_title}>어디서<Text style={styles.note_required_icon}>*</Text></Text>
-                                <TextInput value="한강공원에서" style={styles.note_textinput}/>
+                                <TextInput 
+                                    style={styles.note_textinput}
+                                    onChangeText={(place) => this.setState({place})}
+                                    value={this.state.place}
+                                />
                             </View>
                             <View style={styles.note_info_item}>
                                 <Text style={styles.note_sub_title}>누구와</Text>
-                                <TextInput value="혜데이랑" style={styles.note_textinput}/>
+                                <TextInput 
+                                    style={styles.note_textinput}
+                                    onChangeText={(withWho) => this.setState({withWho})}
+                                    value={this.state.withWho}
+                                />
                             </View>
                         </View>
                         <View style={styles.note_textarea_wrapper}>
                             <Text style={styles.note_sub_title}>느낀것</Text>
                             <TextInput
                                 multiline={true} 
+                                onChangeText={(content) => this.setState({content})}
+                                value={this.state.content}
                                 // numberOfLines={11}
-                                value="새로운 말을 한 번 적어보고 싶어서 멍때리면 한 번 적어보는 글… 날씨가 미쳤다 혼자 지읒리을 났다. 현재 상태는 어제 헬스에서 뒷판 근육 운동을 제대로 했음을 알 수 있는 상태이다. 
-                                푸딩 맛있는데 하나가 최대치다. 더 이상 먹으면 느끼해서 푸딩을 싫어하게 될지도 모른다. 난 지금 물 속에서 숨을 쉬고 있는  것인가 뇌가 정지해서 지금 무슨 말을 더 쓸까 1도 생각 안 나지만, 노래 가사나 쓸까 아 노래방가고 싶은데 그 다음날이 두렵다 친구들이랑 피씨방도 가고 싶다. 우리집 선풍기 열일한다 화이팅 맥북도 열일한다 화이팅..! 아직 사놓고 못 맞춘 퍼즐이 다섯개..벌써 8월이라니 아마 9월에도 벌써 9월이라니 그러고 있겠지 하핫 끝"
                                 style={styles.note_textarea}
                             />
                         </View>
@@ -182,6 +226,15 @@ export default class NoteEditScreen extends Component {
                 </ScrollView>
             </KeyboardAvoidingView>
         )
+    }
+
+    getPermissionAsync = async () => {
+        if (Constants.platform.ios) {
+            const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+            if (status !== 'granted') {
+                alert('Sorry, we need camera roll permissions to make this work!');
+            }
+        }
     }
 
     _pickImage = async () => {
@@ -193,7 +246,7 @@ export default class NoteEditScreen extends Component {
         console.log(result);
 
         if (!result.cancelled) {
-        this.setState({ image: result.uri });
+            this.setState({ image: result.uri });
         }
     };
 };

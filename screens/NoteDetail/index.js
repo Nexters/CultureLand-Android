@@ -39,7 +39,6 @@ function illustrateCarousel(number, title, type) {
 export default class NoteDetailScreen extends Component {
     constructor(props){
         super(props)
-        // this.state = {date:"2019-08-12"}
     }
 
     _showWarningAlert = () => {

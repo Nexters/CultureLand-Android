@@ -6,7 +6,6 @@ import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
-
 import ItemDetailScreen from '../screens/ItemDetail/ItemDetailTemplate'
 import MyPageScreen from "../screens/MyPage"
 import PlanedListScreen from '../screens/PlannedList/index'
@@ -33,7 +32,7 @@ const config = Platform.select({
 
 const HomeStack = createStackNavigator(
     {
-        Home:NoteDetailScreen,
+        Home:NoteEditScreen,
     },
     config
 );
