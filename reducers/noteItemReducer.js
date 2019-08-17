@@ -31,7 +31,7 @@ export function getNoteItem(state = initialState, action) {
             return {
                 items: [],
                 loading: false,
-                getProductListError : action.error
+                noteItemError : action.error
             };
             
         // ------------- CREATE NOTE ITEM --------------
@@ -49,7 +49,7 @@ export function getNoteItem(state = initialState, action) {
             return {
                 ...state,
                 loading: false,
-                getProductListError : action.error
+                noteItemError : action.error
             };
 
         // ------------- UPDATE NOTE ITEM --------------
@@ -74,7 +74,7 @@ export function getNoteItem(state = initialState, action) {
             return {
                 ...state,
                 loading: false,
-                getProductListError : action.error
+                noteItemError : action.error
             };
 
         // ------------- DELETE NOTE ITEM --------------
@@ -93,7 +93,7 @@ export function getNoteItem(state = initialState, action) {
             return {
                 ...state,
                 loading: false,
-                getProductListError : action.error
+                noteItemError : action.error
             };
         default:
             return state
@@ -102,6 +102,6 @@ export function getNoteItem(state = initialState, action) {
 
 
 export default combineReducers({
-    getProductList
+    getNoteItem
 
 })
