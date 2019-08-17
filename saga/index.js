@@ -1,6 +1,11 @@
 import {GET_PRODUCT_LIST} from "../actionTypes/productList";
 import {searchProductFlow} from "./searchProductSaga";
 import {fork} from "redux-saga/effects";
+
+import {getProductListFlow} from "./productListSaga"
+import {isWishedFlow,cancelWishedFlow,setWishedFlow} from "./itemDetailSaga";
+import {myPageAccountFlow, myPageCountFlow} from "./myPageSaga";
+
 import {getProductListFlow} from "./productListSaga";
 import {
     getNoteItemFlow, 
@@ -8,6 +13,7 @@ import {
     updateNoteItemFlow,
     removeNoteItemFlow,
 } from "./noteItemSaga";
+
 
 /*
     컨벤션
@@ -31,8 +37,15 @@ import {
 export default function* root() {
     yield fork(getProductListFlow);
     yield fork(searchProductFlow);
+
+    yield fork(isWishedFlow);
+    yield fork(setWishedFlow);
+    yield fork(cancelWishedFlow);
+    yield fork(myPageCountFlow);
+    yield fork(myPageAccountFlow);
     yield fork(getNoteItemFlow);
     yield fork(createNoteItemFlow);
     yield fork(updateNoteItemFlow);
     yield fork(removeNoteItemFlow);
+
 }

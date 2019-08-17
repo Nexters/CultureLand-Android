@@ -6,14 +6,14 @@ export const GET_PRODUCT_LIST = {
     FAILURE : "GET_PRODUCT_LIST_FAILURE",
 };
 
-export const CATEGORY = key_mirror({
-    ALL_PRODUCT : null,
-    EXHIBITION : null,
-    CONCERT : null,
-    MUSICAL : null,
-    PLAY : null,
-    ETC : null,
-});
+export const CATEGORY = {
+    ALL_PRODUCT : "all",
+    EXHIBITION : "exhibition", // "EXHIBITION"
+    CONCERT : "concert", // "concert"
+    MUSICAL : "musical",
+    PLAY : "play",
+    ETC : "etc",
+};
 
 
 export const PRODUCT_LIST_FILTER = key_mirror({
@@ -28,7 +28,7 @@ export function CATEGORY_KEY(category){
     switch(category){
         case CATEGORY.ALL_PRODUCT:
             return 0;
-        case CATEGORY.EXHIBITON:
+        case CATEGORY.EXHIBITION:
             return 1;
         case CATEGORY.CONCERT:
             return 2;
