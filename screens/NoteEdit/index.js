@@ -31,9 +31,7 @@ import TabBarIcon from "../../components/TabBarIcon";
 const calc = new RatioCalculator(screenWidth, screenHeight);
 const styles = styleFn(screenWidth, screenHeight, calc);
 
-function illustrateCarousel(number, title, type) {
 
-}
 
 export default class NoteEditScreen extends Component {
     constructor(props){
