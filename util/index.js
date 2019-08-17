@@ -1,4 +1,5 @@
 import styles from "../screens/Sign/styles";
+import key_mirror from 'key-mirror';
 
 
 export class RatioCalculator {
@@ -102,3 +103,33 @@ export function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
+
+
+export const CATEGORY = {
+    ALL_PRODUCT : "all_product",
+    EXHIBITION : "exhibition",
+    CONCERT : "concert",
+    MUSICAL : "musical",
+    PLAY : "play",
+    ETC : "etc",
+};
+
+/**
+ * @return {number}
+ */
+export function CATEGORY_KEY(category){
+    switch(category){
+        case CATEGORY.ALL_PRODUCT:
+            return 0;
+        case CATEGORY.EXHIBITION:
+            return 1;
+        case CATEGORY.CONCERT:
+            return 2;
+        case CATEGORY.MUSICAL:
+            return 3;
+        case CATEGORY.PLAY:
+            return 4;
+        case CATEGORY.ETC:
+            return 5;
+    }
+}

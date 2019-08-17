@@ -15,8 +15,8 @@ import {
 
 } from 'react-native';
 
-import {CATEGORY, CATEGORY_KEY} from "../../actionTypes/productList";
-import {numberWithCommas, RatioCalculator} from "../../util";
+// import {CATEGORY, CATEGORY_KEY} from "../../actionTypes/productList";
+import {numberWithCommas, RatioCalculator, CATEGORY, CATEGORY_KEY} from "../../util";
 import SearchBar from '../../components/SearchBar';
 import Highlighter from 'react-native-highlight-words';
 import ScrollableTabView, {DefaultTabBar, ScrollableTabBar} from 'react-native-scrollable-tab-view-forked'
@@ -37,38 +37,6 @@ const category_types = ["영화", "뮤지컬", "콘서트", "연극", "기타"];
 const sorting_types = ["신규순", "인기순"];
 
 
-function make_items(index) {
-    let items = [];
-    for (let i = 0; i < 3; i++) {
-        items.push(
-            <View
-                key={i + index}
-                style={styles.item_wrapper}>
-
-                <Text>{i + index}</Text>
-
-            </View>
-        )
-    }
-    return items;
-}
-
-function make_bottom() {
-    let items = [];
-
-    for (let i = 0; i < 5; i++) {
-
-        items.push(<View
-                key={i}
-                style={styles.item_group_wrapper}>
-                {make_items(i * 3)}
-            </View>
-        );
-    }
-    return items;
-
-}
-
 export default class PlanedListScreen extends Component {
 
     constructor(props) {
@@ -80,6 +48,8 @@ export default class PlanedListScreen extends Component {
 
         };
         this.searchManager = new PlannedListSearchManagerImpl(this);
+        this.navigate = this.props.navigation;
+
     }
 
     componentDidMount() {
@@ -92,12 +62,49 @@ export default class PlanedListScreen extends Component {
         this.setState({isSearchMode: true});
     }
 
+    make_items(index) {
+        let items = [];
+        const {navigate} = this.props.navigation;
+        for (let i = 0; i < 3; i++) {
+            items.push(
+                <View
+                    key={i + index}
+                    style={styles.item_wrapper}>
+                    <TouchableWithoutFeedback onPress={() => navigate('Settings')}>
+                        <View>
+                            <Text stye={{fontcolor : "#fff"}}>Hello world</Text>
+                        </View>
+                    </TouchableWithoutFeedback>
+                </View>
+            )
+        }
+        return items;
+    }
+
+    make_bottom() {
+        let items = [];
+
+        for (let i = 0; i < 5; i++) {
+
+            items.push(<View
+                    key={i}
+                    style={styles.item_group_wrapper}>
+                    {this.make_items(i * 3)}
+                </View>
+            );
+        }
+        return items;
+
+    }
+
 
     render() {
+
 
         const {
             productList
         } = this.props;
+
         return (
             <View>
                 {!this.state.isSearchMode ? (
@@ -111,7 +118,7 @@ export default class PlanedListScreen extends Component {
                                 <Highlighter
 
                                     highlightStyle={{
-                                        fontFamily : 'noto-sans-bold',
+                                        fontFamily: 'noto-sans-bold',
                                     }}
                                     searchWords={
                                         ["새로운 컬러"]
@@ -142,7 +149,7 @@ export default class PlanedListScreen extends Component {
                                     initialPage={0}
                                 >
                                     <View key={CATEGORY_KEY(CATEGORY.ALL_PRODUCT)} tabLabel={'전체'}
-                                        style={styles.category_item}/>
+                                          style={styles.category_item}/>
                                     <View key={CATEGORY_KEY(CATEGORY.EXHIBITION)} tabLabel={'전시'}/>
                                     <View key={CATEGORY_KEY(CATEGORY.CONCERT)} tabLabel={'콘서트'}/>
                                     <View key={CATEGORY_KEY(CATEGORY.MUSICAL)} tabLabel={'뮤지컬'}/>
@@ -151,24 +158,24 @@ export default class PlanedListScreen extends Component {
 
                                 </ScrollableTabView>
                                 <View style={styles.item_information_labels_wrapper}>
-                                <Highlighter
+                                    <Highlighter
 
-                                    highlightStyle={{
-                                        fontFamily : 'noto-sans-bold',
-                                    }}
-                                    searchWords={
-                                        [`${numberWithCommas(productList.length)}`]
-                                    }
-                                    style={styles.number_of_items}
-                                    textToHighlight={`총 ${numberWithCommas(productList.length)} 건`}>
+                                        highlightStyle={{
+                                            fontFamily: 'noto-sans-bold',
+                                        }}
+                                        searchWords={
+                                            [`${numberWithCommas(productList.length)}`]
+                                        }
+                                        style={styles.number_of_items}
+                                        textToHighlight={`총 ${numberWithCommas(productList.length)} 건`}>
 
-                                </Highlighter>
+                                    </Highlighter>
                                 </View>
 
 
                                 <View style={styles.bottom_wrapper}>
                                     {
-                                        make_bottom()
+                                        this.make_bottom()
                                     }
                                 </View>
                             </View>
@@ -195,6 +202,6 @@ PlanedListScreen.navigationOptions = {
 };
 
 PlanedListScreen.propTypes = {
-    productList : PropTypes.array,
+    productList: PropTypes.array,
 };
 
