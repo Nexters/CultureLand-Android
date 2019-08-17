@@ -11,11 +11,11 @@ import {
     StatusBar,
 
 } from 'react-native';
+import {Dropdown} from 'react-native-material-dropdown';
 import {RatioCalculator} from "../../util";
 import {MainCarousel} from "../../components/MainCarousel"
 import {FloatingButton} from "../../components/FloatingButton"
-
-import StarImage from "../../assets/images/icon/star.svg";
+import {WishListComponent} from "../../components/WishListComponent"
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
@@ -24,75 +24,90 @@ const screenHeight = Math.round(Dimensions.get('window').height);
 const calc = new RatioCalculator(screenWidth, screenHeight);
 const styles = styleFn(screenWidth, screenHeight, calc);
 
-const isStarter = false;
+export default class MainScreen extends Component {
+    /**
+     *
+     *  처음 불러올 떄, 노트 리스트 && 찜 리스트 동시 없으면 초기 안내 스크린 출력
+     *  
+     */
 
-export default function MainScreen() {
-    return (
-        <View style={styles.container}>
-            <ScrollView>
-                <View style={styles.main_top_wrapper}>
-                    <Picker 
-                        style={styles.main_picker}
-                        itemStyle={styles.main_picker_item}
-                    >
-                        <Picker.Item label="2019" value="2019" />
-                        <Picker.Item label="2018" value="2018" />
-                        <Picker.Item label="2017" value="2017" />
-                    </Picker>
-                    <Text style={styles.main_top_description}>
-                        Today is
-                        <Text style={styles.main_top_date}>  2019.08.03</Text>
-                    </Text>
-                    
-                </View>
-                {isStarter ? (
-                    <View style={styles.main_starter_wrapper}>
-                        <Text style={styles.main_starter_title}>{'아직 기록하신\n문화생활이 없으시군요!'}</Text>
-                        <Text style={styles.main_starter_subtitle}>{'어서 밖으로 나가서 문화생활을 즐기고\n컬러에 기록을 남겨주세요!'}</Text>
+    constructor(props){
+        super(props);
+
+        this.state = {
+            isDataNull : false,
+        }
+    }
+    render () {
+
+        return (
+            <View style={styles.container}>
+                <ScrollView>
+                    <View style={styles.main_top_wrapper}>
+                        <Dropdown
+                            value={"2019"}
+                            data={[
+                                {
+                                    value: "2019"
+                                },
+                                {
+                                    value: "2018"
+                                },
+                                {
+                                    value: "2017"
+                                },
+                                {
+                                    value: "2016"
+                                },
+                            ]}
+                            fontSize={24}
+                            // dropdownOffset={{top: 0, left: 0}}
+                            dropdownPosition={0}
+                            inputContainerStyle={{
+                                borderBottomColor: 'transparent',
+                            }}
+                            containerStyle={{
+                                width: calc.getRegWidthDp(114),
+                                height: calc.getRegHeightDp(70),
+                            }}
+                            overlayStyle={{
+    
+                            }}
+                            pickerStyle={{
+                                marginTop : calc.getRegHeightDp(60),
+    
+                            }}
+                            style={styles.main_picker}
+                        />
+                        <Text style={styles.main_top_description}>
+                            Today is
+                            <Text style={styles.main_top_date}>  2019.08.03</Text>
+                        </Text>
                     </View>
-                ) : (
-                    <View style={styles.main_wrapper}>
-                        <View style={styles.carousel_wrapper}>
-                            <View style = {styles.main_title_line} />
-                            <Text style={styles.main_title}>월별 기록</Text>
-                            <MainCarousel style={styles.main_carousel_container} />
-                        </View>
-                        <View style={styles.wating_wrapper}>
-                            <View style = {styles.main_title_line} />
-                            <Text style={styles.main_title}>고민 중인 기록들</Text>
-                            <View style={styles.wating_list}>
-                                <View style={styles.wating_item}>
-                                    <View style={styles.image_container}>
-                                        <Image style={styles.image}/>
-                                    </View>
-                                    <View style={styles.text_container}>
-                                        <Text style={styles.subtitle}>콘서트</Text>
-                                        <Text style={styles.title}>안녕 - 이것은 안녕</Text>
-                                    </View>
-                                    <View style={styles.icon_container}>
-                                        <StarImage style={styles.icon}/>
-                                    </View>
-                                </View>
-                                <View style={styles.wating_item}>
-                                    <View style={styles.image_container}>
-                                        <Image style={styles.image}/>
-                                    </View>
-                                    <View style={styles.text_container}>
-                                        <Text style={styles.subtitle}>콘서트</Text>
-                                        <Text style={styles.title}>안녕 - 이것은 안녕</Text>
-                                    </View>
-                                    <View style={styles.icon_container}>
-                                        <StarImage style={styles.icon}/>
-                                    </View>
-                                </View>
+                    {this.state.isDataNull ?
+                        (<View style={styles.main_starter_wrapper}>
+                            <Text style={styles.main_starter_title}>{'아직 기록하신\n문화생활이 없으시군요!'}</Text>
+                            <Text style={styles.main_starter_subtitle}>{'어서 밖으로 나가서 문화생활을 즐기고\n컬러에 기록을 남겨주세요!'}</Text>
+                        </View>)
+                        :
+                        (<View style={styles.main_wrapper}>
+                            <View style={styles.carousel_wrapper}>
+                                <View style = {styles.main_title_line} />
+                                <Text style={styles.main_title}>월별 기록</Text>
+                                <MainCarousel style={styles.main_carousel_container} />
                             </View>
-                        </View>
-                    </View>
-                )}
-            </ScrollView>
-            <FloatingButton/>
-        </View>
-    )
+                            <View style={styles.wishlist_wrapper}>
+                                <View style = {styles.main_title_line} />
+                                <Text style={styles.main_title}>찜 목록</Text>
+                                <WishListComponent style={styles.wishlist_list}/>
+                            </View>
+                        </View>)
+                    }
+                </ScrollView>
+                <FloatingButton/>
+            </View>
+        )
+    }
 }
 
 MainScreen.navigationOptions = {

@@ -1,3 +1,4 @@
+
 import { connect } from 'react-redux';
 import template from "./noteListTemplate";
 
@@ -8,6 +9,7 @@ function mapStateToProps(state) {
 
 
     return {
+
     }
 }
 
