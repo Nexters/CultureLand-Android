@@ -32,7 +32,7 @@ const config = Platform.select({
 
 const HomeStack = createStackNavigator(
     {
-        Home:NoteEditScreen,
+        Home:NoteDetailScreen,
     },
     config
 );
