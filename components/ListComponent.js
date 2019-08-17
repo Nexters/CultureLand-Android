@@ -70,8 +70,8 @@ export class ListComponent extends Component {
                 date: '2019.08.05',
                 where: '세종문화회관',
             },
-        ]
-    }
+]
+    };
 
     _renderItem = ({item}) => (
         <ListItem 
@@ -81,7 +81,8 @@ export class ListComponent extends Component {
             date={item.date}
             where={item.where}
         />
-    )
+    );
+
     render() {
         return (
             <FlatList

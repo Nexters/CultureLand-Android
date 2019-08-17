@@ -20,9 +20,8 @@ export function getProductList(state = initialState, action) {
         case GET_PRODUCT_LIST.REQUEST:
             return {
                 ...state,
-
                 category: action.payload.category,
-                loading: true
+                loading: true,
             };
         case GET_PRODUCT_LIST.SUCCESS:
             return {

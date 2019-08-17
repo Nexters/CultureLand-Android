@@ -18,7 +18,7 @@ export const getProductList = {
 
     }),
 
-    failure : () => ({
+        failure : () => ({
         type : GET_PRODUCT_LIST.FAILURE,
     })
 

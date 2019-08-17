@@ -29,7 +29,8 @@ export default function MyPageListScreen() {
             <View style={styles.header}>
                 <TouchableOpacity 
                     onPress={() => alert(props.centerText)}
-                    activeOpacity={0.7} 
+
+                    activeOpacity={0.7}
                     style={styles.header_left}
                 >
                     <Ionicons name="ios-arrow-back" size={24} color="#292929" style={styles.header_button}/>

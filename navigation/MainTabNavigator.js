@@ -6,7 +6,7 @@ import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
-import ItemDetailScreen from '../screens/ItemDetail'
+import ItemDetailScreen from '../screens/ItemDetail/ItemDetailTemplate'
 import MyPageScreen from "../screens/MyPage"
 import PlanedListScreen from '../screens/PlannedList/index'
 import MainScreen from '../screens/Main';
@@ -54,7 +54,7 @@ HomeStack.path = '';
 
 const LinksStack = createStackNavigator(
     {
-        Links: NoteDetailScreen ,
+        Links: MyPageScreen ,
     },
     config
 );
@@ -105,5 +105,25 @@ const tabNavigator = createBottomTabNavigator({
 );
 
 tabNavigator.path = '';
+
+
+
+const ItemDetailStack = createStackNavigator(
+    {
+        ItemDetail: ItemDetailScreen,
+    },
+    config
+);
+
+ItemDetailStack.navigationOptions = {
+    tabBarLabel: ' ',
+    tabBarIcon: ({focused}) => (
+        <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}/>
+    ),
+};
+
+ItemDetailStack.path = '';
+
+
 
 export default tabNavigator;
