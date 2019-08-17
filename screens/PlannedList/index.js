@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import template from "./plannedListTemplate";
-import {getSearchedProductList, getSearchedProductError, getSearchedProductKeyword} from "../../selectors/searchProductSelector";
-import {getProductList}  from '../../actions/productList'
+import {getMyPageAccount, getMyPageCount} from "../../actions/myPage";
 
 
 
@@ -21,7 +20,8 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = {
-    getProductList : getProductList.request,
+    getMyPageAccount : getMyPageAccount.request,
+    getMypageCount : getMyPageCount.request,
 };
 
 export default connect(mapStateToProps,mapDispatchToProps)(template);
