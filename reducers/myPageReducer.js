@@ -2,20 +2,20 @@ import {MY_PAGE_ACCOUNT_ACTION, MY_PAGE_GET_COUNT, MY_PAGE_GET_COUNT_ACTION} fro
 import {combineReducers} from 'redux';
 
 const initialState = {
-    userId : 'userId',
-    userEmail : 'abc@culor.com',
-    totalNumberOfDiaryCount : 0,
-    likedDiaryCount : 0,
-    exhibitionCount : 0,
-    concertCount : 0,
-    musicalCount : 0,
-    playCount : 0,
-    etcCount : 0,
-    error : undefined,
+    userId: 'userId',
+    userEmail: 'abc@culor.com',
+    totalNumberOfDiaryCount: 0,
+    likedDiaryCount: 0,
+    exhibitionCount: 0,
+    concertCount: 0,
+    musicalCount: 0,
+    playCount: 0,
+    etcCount: 0,
+    error: undefined,
 };
 
-export function getMyPageCountActions(state = initialState, action){
-    switch(action.type){
+export function getMyPageCountActions(state = initialState, action) {
+    switch (action.type) {
         case MY_PAGE_GET_COUNT_ACTION.REQUEST:
             return {
                 ...state,
@@ -25,23 +25,23 @@ export function getMyPageCountActions(state = initialState, action){
             return {
                 ...state,
                 totalNumberOfDiaryCount: action.result.totalNumberOfDiaryCount,
-                likedDiaryCount : action.result.likedDiaryCount,
-                exhibitionCount : action.result.exhibitionCount,
-                concertCount : action.result.concertCount,
-                musicalCount : action.result.musicalCount,
-                playCount : action.result.playCount,
-                etcCount : action.result.etcCount,
+                likedDiaryCount: action.result.likedDiaryCount,
+                exhibitionCount: action.result.exhibitionCount,
+                concertCount: action.result.concertCount,
+                musicalCount: action.result.musicalCount,
+                playCount: action.result.playCount,
+                etcCount: action.result.etcCount,
             };
         case MY_PAGE_GET_COUNT_ACTION.FAILURE:
             return {
                 ...state,
-                error : action.error,
+                error: action.error,
             }
     }
 }
 
 export function getMyPageAccountActions(state = initialState, action) {
-    switch(action.type){
+    switch (action.type) {
         case MY_PAGE_ACCOUNT_ACTION.REQUEST :
             return {
                 ...state,
@@ -51,26 +51,28 @@ export function getMyPageAccountActions(state = initialState, action) {
         case MY_PAGE_ACCOUNT_ACTION.SUCCESS :
             return {
                 ...state,
-                userId : action.result.userId,
-                userEmail : action.result.userEmail,
+                userId: action.result.userId,
+                userEmail: action.result.userEmail,
             };
 
         case MY_PAGE_ACCOUNT_ACTION.FAILURE :
             return {
                 ...state,
-                error : action.error,
+                error: action.error,
             }
     }
 }
 
-export function myPageRootActions(state = initialState, action){
-    let prefix = action.type.replace(/_((REQUEST)|(SUCCESS)|(FAILURE))/,'');
+export function myPageRootActions(state = initialState, action) {
+    let prefix = action.type.replace(/_((REQUEST)|(SUCCESS)|(FAILURE))/, '');
 
-    switch(prefix){
+    switch (prefix) {
         case MY_PAGE_GET_COUNT :
-            return getMyPageCountActions(state,action);
+            return getMyPageCountActions(state, action);
         case MY_PAGE_ACCOUNT_ACTION:
-            return getMyPageAccountActions(state,action);
+            return getMyPageAccountActions(state, action);
+        default:
+            return state;
     }
 }
 

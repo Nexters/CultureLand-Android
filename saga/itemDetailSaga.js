@@ -12,8 +12,10 @@ export function getItemDetailFlow(){
 function setWished(){
     // MOCK
 }
-export function setWishedFlow(){
+export function* setWishedFlow(){
+
     while(true){
+
         const request = yield take(SET_WISHED_ACTION.REQUEST);
         let response = yield call(setWished,request.payload.id);
 
@@ -34,7 +36,7 @@ export function setWishedFlow(){
 function cancelWished(id){
     //MOCK
 }
-export function cancelWishedFlow(){
+export function* cancelWishedFlow(){
     while(true){
         const request = yield take(CANCEL_WISHED_ACTION.REQUEST);
         let response = yield call(isWished,request.payload.id);
@@ -56,7 +58,7 @@ export function cancelWishedFlow(){
 export function isWished(id){
     //MOCK
 }
-export function isWishedFlow(){
+export function* isWishedFlow(){
     while(true){
         const request = yield take(IS_WISHED_ACTION.REQUEST);
         let response = yield call(isWished,request.payload.id);

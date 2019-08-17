@@ -132,10 +132,12 @@ export function itemDetailActions(state = initialState, action){
             return setWishedActions(state,action);
         case CANCEL_WISHED:
             return cancelWishedActions(state,action);
+        default:
+            return state;
     }
 }
 
 
 export default combineReducers({
-    itemDetailActions
+    itemDetailActions,
 })

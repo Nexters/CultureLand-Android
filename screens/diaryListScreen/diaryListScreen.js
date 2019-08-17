@@ -8,7 +8,7 @@ import {
     FlatList,
 } from 'react-native';
 import {RatioCalculator} from "../util";
-import {ListItem} from './ListItem'
+import {ListItem} from '../../components/ListItem';
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
@@ -18,7 +18,7 @@ const calc = new RatioCalculator(screenWidth, screenHeight);
 export class ListComponent extends Component {
     constructor (props) {
         super(props);
-}
+    }
     state = {
         data: [
             {
@@ -70,12 +70,12 @@ export class ListComponent extends Component {
                 date: '2019.08.05',
                 where: '세종문화회관',
             },
-]
+        ]
     };
 
     _renderItem = ({item}) => (
-        <ListItem 
-            key={item.key} 
+        <ListItem
+            key={item.key}
             title={item.title}
             category={item.category}
             date={item.date}
@@ -85,7 +85,7 @@ export class ListComponent extends Component {
     render() {
         return (
             <FlatList
-                data={this.state.data}
+                data={this.sta1te.data}
                 renderItem={this._renderItem}
                 style={styles.list_container}
             >

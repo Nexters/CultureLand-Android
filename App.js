@@ -22,7 +22,7 @@ import SignScreen from './screens/Sign';
 import MainScreen from './screens/Main';
 import NoteDetailScreen from './screens/NoteDetail';
 import NoteListScreen from './screens/NoteList';
-import MyPageListScreen from './screens/MyPageList';
+
 import ModalBottom from './components/ModalBottom';
 
 //<MyPageScreen  style={styles.container}/>
