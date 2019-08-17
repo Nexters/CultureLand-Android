@@ -6,7 +6,6 @@ import {getProductListFlow} from "./productListSaga"
 import {isWishedFlow,cancelWishedFlow,setWishedFlow} from "./itemDetailSaga";
 import {myPageAccountFlow, myPageCountFlow} from "./myPageSaga";
 
-import {getProductListFlow} from "./productListSaga";
 import {
     getNoteItemFlow, 
     createNoteItemFlow,

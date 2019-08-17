@@ -23,16 +23,6 @@ import MainScreen from './screens/Main';
 import NoteDetailScreen from './screens/NoteDetail';
 import NoteEditScreen from './screens/NoteEdit';
 import NoteListScreen from './screens/NoteList';
-<<<<<<< HEAD
-
-
-=======
-
-import MyPageListScreen from './screens/MyPageList';
-
-
-//<MyPageScreen  style={styles.container}/>
->>>>>>> fcfaa56849d057e311afdf54d6099927a4c872df
 const sagaMiddleware = createSagaMiddleware();
 
 const middlewares = [];
