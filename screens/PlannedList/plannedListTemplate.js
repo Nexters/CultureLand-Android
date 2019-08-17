@@ -15,8 +15,8 @@ import {
 
 } from 'react-native';
 
-import {CATEGORY, CATEGORY_KEY} from "../../actionTypes/productList";
-import {numberWithCommas, RatioCalculator} from "../../util";
+// import {CATEGORY, CATEGORY_KEY} from "../../actionTypes/productList";
+import {numberWithCommas, RatioCalculator, CATEGORY, CATEGORY_KEY} from "../../util";
 import SearchBar from '../../components/SearchBar';
 import Highlighter from 'react-native-highlight-words';
 import ScrollableTabView, {DefaultTabBar, ScrollableTabBar} from 'react-native-scrollable-tab-view-forked'
