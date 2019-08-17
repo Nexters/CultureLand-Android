@@ -1,11 +1,15 @@
-import {combineReducers} from 'redux'
+import
+{combineReducers} from 'redux'
 
 import productListReducer from './productListReducer';
 import searchProductReducer from './serachProductReducer';
-import noteItemReducer from './noteItemReducer';
+
+import itemDetailReducer from './itemDetailReducer';
+import myPageReducer from './myPageReducer';
 export default combineReducers({
     productListReducer : productListReducer,
     searchProductReducer : searchProductReducer,
-    noteItemReducer : noteItemReducer,
+    itemDetailReducer : itemDetailReducer,
+    myPageReducer : myPageReducer,
 
 })

@@ -25,7 +25,6 @@ export default class SearchModeScreen extends Component {
             lastSearchRequest : 0,
         };
 
-
         this.item = [
             "친구랑 친척이랑", "친구랑 손절", "친구와의 우정",
             "친구랑 친척이랑", "친구랑 손절", "친구와의 우정",

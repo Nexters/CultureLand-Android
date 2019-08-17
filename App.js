@@ -13,7 +13,7 @@ import {Ionicons} from '@expo/vector-icons';
 import AppNavigator from './navigation/AppNavigator';
 
 import LoginScreen from './screens/Sign/index';
-import ItemDetailScreen from './screens/ItemDetail';
+import ItemDetailScreen from './screens/ItemDetail/ItemDetailTemplate';
 import MyPageScreen from './screens/MyPage';
 import SearchModeScreen from './screens/SearchMode'
 import SearchBar from "./components/SearchBar";
@@ -23,9 +23,6 @@ import MainScreen from './screens/Main';
 import NoteDetailScreen from './screens/NoteDetail';
 import NoteEditScreen from './screens/NoteEdit';
 import NoteListScreen from './screens/NoteList';
-import MyPageListScreen from './screens/MyPageList';
-
-//<MyPageScreen  style={styles.container}/>
 const sagaMiddleware = createSagaMiddleware();
 
 const middlewares = [];
