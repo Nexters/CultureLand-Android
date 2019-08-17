@@ -57,10 +57,11 @@ export default styles = function (screenWidth, screenHeight, calc) {
         },
         header_right: {
             flex: 1,
+        },
+        header_right_text : {
             fontFamily: "noto-sans-bold",
             textAlign: 'right',
             fontSize: 16,
-            fontWeight: "bold",
             fontStyle: "normal",
             letterSpacing: 0.01,
             color: "#5c5c5c"
@@ -120,10 +121,12 @@ export default styles = function (screenWidth, screenHeight, calc) {
         },
         note_titleinput: {
             flex: 1,
+            height: calc.getRegHeightDp(30),
             paddingLeft: calc.getRegWidthDp(4),
             fontFamily: "noto-sans-bold",
             fontSize: 18,
             fontStyle: "normal",
+            lineHeight: calc.getRegHeightDp(30),
             letterSpacing: -0.37,
             color: "#393939",
             textAlignVertical: "top",
@@ -174,11 +177,13 @@ export default styles = function (screenWidth, screenHeight, calc) {
         },
         note_textinput: {
             flex: 1,
+            height: calc.getRegHeightDp(24),
             paddingHorizontal: calc.getRegWidthDp(9),
             fontFamily: "noto-sans",
             fontSize: 16,
             fontWeight: "normal",
             fontStyle: "normal",
+            lineHeight: calc.getRegHeightDp(24),
             letterSpacing: -0.2,
             color: "#393939",
             textAlignVertical: "top",
