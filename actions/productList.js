@@ -21,5 +21,4 @@ export const getProductList = {
         failure : () => ({
         type : GET_PRODUCT_LIST.FAILURE,
     })
-
 };

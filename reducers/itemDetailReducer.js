@@ -80,7 +80,7 @@ export function cancelWishedActions(state = initialState, action){
         case CANCEL_WISHED.SUCCESS:
             return {
                 ...state,
-                isWished : true,
+                isWished : false,
             };
         case CANCEL_WISHED.FAILURE:
             return {
@@ -122,7 +122,7 @@ export function getItemDetailAction(state = initialState, action) {
 
 export function itemDetailActions(state = initialState, action){
 
-    let prefix = action.type.replace(/_((REQUEST)|(SUCCESS))/,'');
+    let prefix = action.type.replace(/_((REQUEST)|(SUCCESS)|(FAILURE))/,'');
     switch(prefix){
         case GET_ITEM :
             return getItemDetailAction(state,action);

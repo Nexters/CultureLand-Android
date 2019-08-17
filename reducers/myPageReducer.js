@@ -1,7 +1,9 @@
-import {MY_PAGE_GET_COUNT} from "../actionTypes/myPage";
-
+import {MY_PAGE_ACCOUNT_ACTION, MY_PAGE_GET_COUNT, MY_PAGE_GET_COUNT_ACTION} from "../actionTypes/myPage";
+import {combineReducers} from 'redux';
 
 const initialState = {
+    userId : 'userId',
+    userEmail : 'abc@culor.com',
     totalNumberOfDiaryCount : 0,
     likedDiaryCount : 0,
     exhibitionCount : 0,
@@ -12,14 +14,14 @@ const initialState = {
     error : undefined,
 };
 
-export function getMyPageCount(state = initialState, action){
+export function getMyPageCountActions(state = initialState, action){
     switch(action.type){
-        case MY_PAGE_GET_COUNT.REQUEST:
+        case MY_PAGE_GET_COUNT_ACTION.REQUEST:
             return {
                 ...state,
             };
 
-        case MY_PAGE_GET_COUNT.SUCCESS:
+        case MY_PAGE_GET_COUNT_ACTION.SUCCESS:
             return {
                 ...state,
                 totalNumberOfDiaryCount: action.result.totalNumberOfDiaryCount,
@@ -30,10 +32,48 @@ export function getMyPageCount(state = initialState, action){
                 playCount : action.result.playCount,
                 etcCount : action.result.etcCount,
             };
-        case MY_PAGE_GET_COUNT.FAILURE:
+        case MY_PAGE_GET_COUNT_ACTION.FAILURE:
             return {
                 ...state,
                 error : action.error,
             }
     }
 }
+
+export function getMyPageAccountActions(state = initialState, action) {
+    switch(action.type){
+        case MY_PAGE_ACCOUNT_ACTION.REQUEST :
+            return {
+                ...state,
+
+            };
+
+        case MY_PAGE_ACCOUNT_ACTION.SUCCESS :
+            return {
+                ...state,
+                userId : action.result.userId,
+                userEmail : action.result.userEmail,
+            };
+
+        case MY_PAGE_ACCOUNT_ACTION.FAILURE :
+            return {
+                ...state,
+                error : action.error,
+            }
+    }
+}
+
+export function myPageRootActions(state = initialState, action){
+    let prefix = action.type.replace(/_((REQUEST)|(SUCCESS)|(FAILURE))/,'');
+
+    switch(prefix){
+        case MY_PAGE_GET_COUNT :
+            return getMyPageCountActions(state,action);
+        case MY_PAGE_ACCOUNT_ACTION:
+            return getMyPageAccountActions(state,action);
+    }
+}
+
+export default combineReducers({
+    myPageRootActions,
+})

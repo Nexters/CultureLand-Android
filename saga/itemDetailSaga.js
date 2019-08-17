@@ -54,7 +54,7 @@ export function cancelWishedFlow(){
 }
 
 export function isWished(id){
-
+    //MOCK
 }
 export function isWishedFlow(){
     while(true){
