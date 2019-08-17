@@ -1,11 +1,5 @@
 import key_mirror from 'key-mirror';
 
-export const GET_NOTE_LIST = {
-    REQUEST : "GET_NOTE_LIST_REQUEST",
-    SUCCESS : "GET_NOTE_LIST_SUCCESS",
-    FAILURE : "GET_NOTE_LIST_FAILURE",
-};
-
 export const GET_NOTE_ITEM = {
     REQUEST : "GET_NOTE_ITEM_REQUEST",
     SUCCESS : "GET_NOTE_ITEM_SUCCESS",
