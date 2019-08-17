@@ -1,5 +1,13 @@
 import key_mirror from 'key-mirror';
 
+export const GET_NOTE = "GET_NOTE";
+export const CREATE_NOTE = "CREATE_NOTE";
+export const UPDATE_NOTE = "UPDATE_NOTE";
+export const REMOVE_NOTE = "REMOVE_NOTE";
+export const IS_LIKED = "IS_LIKED";
+export const SET_LIKED = "SET_LIKED";
+export const CANCEL_LIKED = "CANCEL_LIKED";
+
 export const GET_NOTE_ITEM = {
     REQUEST : "GET_NOTE_ITEM_REQUEST",
     SUCCESS : "GET_NOTE_ITEM_SUCCESS",
@@ -23,3 +31,24 @@ export const REMOVE_NOTE_ITEM = {
     SUCCESS : "REMOVE_NOTE_ITEM_SUCCESS",
     FAILURE : "REMOVE_NOTE_ITEM_FAILURE",
 };
+
+export const IS_LIKED_ACTION = {
+    REQUEST : "IS_LIKED_REQUEST",
+    SUCCESS : "IS_LIKED_SUCCESS",
+    FAILURE : "IS_LIKED_FAILURE",
+
+};
+
+export const SET_LIKED_ACTION = {
+    REQUEST : "SET_LIKED_REQUEST",
+    SUCCESS : "SET_LIKED_SUCCESS",
+    FAILURE : "SET_LIKED_FAILURE",
+
+};
+
+export const CANCEL_LIKED_ACTION  = {
+    REQUEST : "CANCEL_LIKED_REQUEST",
+    SUCCESS : "CANCEL_LIKED_SUCCESS",
+    FAILURE : "CANCEL_LIKED_FAILURE",
+};
+

@@ -10,7 +10,7 @@ import ItemDetailScreen from '../screens/ItemDetail/ItemDetailTemplate'
 import MyPageScreen from "../screens/MyPage"
 import PlanedListScreen from '../screens/PlannedList/index'
 import MainScreen from '../screens/Main';
-import NoteDetailScreen from '../screens/NoteDetail';
+import NoteDetailScreen from '../screens/NoteDetail/index';
 import NoteListScreen from '../screens/NoteList/index';
 import SignScreen from '../screens/Sign';
 
