@@ -12,13 +12,31 @@ import {call, put, take} from "redux-saga/effects";
 
 function getNote(id){
     // MOCK
+    return {
+        error : null,
+        result : {
+            id : null,
+            note: {
+                title: '야근이라네',
+                category: '콘서트',
+                sometime: '2019-08-18',
+                place: '마루180',
+                withWho: '컬쳐랜드',
+                content: '야아그으은 행복하다 하하',
+                image: 'https://t1.daumcdn.net/movie/af91402ca4d84418b7becf6624043eb61563411826019',
+                isLiked: false,
+            },
+            error : false,
+
+        }
+    };
 }
 export function* getNoteFlow(){
 
     while(true){
 
         const request = yield take(GET_NOTE_ACTION.REQUEST);
-        let response = yield call(getNote,request.payload.id);
+        let response = yield call(getNote, request.payload.id);
 
         if(response.error){
 
@@ -58,7 +76,7 @@ export function* createNoteFlow(){
     }
 }
 
-function updateNote(id){
+function updateNote(id, payload){
     // MOCK
 }
 export function* updateNoteFlow(){
@@ -66,7 +84,7 @@ export function* updateNoteFlow(){
     while(true){
 
         const request = yield take(UPDATE_NOTE_ACTION.REQUEST);
-        let response = yield call(updateNote,request.payload.id);
+        let response = yield call(updateNote, request.payload.id);
 
         if(response.error){
 

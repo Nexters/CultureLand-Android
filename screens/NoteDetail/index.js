@@ -1,18 +1,11 @@
 import {connect} from 'react-redux';
-import template from './NoteDetailTemplate';
+import template from './noteDetailTemplate';
 import {getNoteItem} from "../../actions/noteItem";
-import {getTitle, getCategory, getSometime, getPlace, getWithWho, getContent, getImage, getIsLiked} from "../../selectors/noteItemSelector";
+import {getNote} from "../../selectors/noteItemSelector";
 
 function mapStateToProps(state) {
     return {
-        title: getTitle(state),
-        category: getCategory(state),
-        sometime: getSometime(state),
-        place: getPlace(state),
-        withWho: getWithWho(state),
-        content: getContent(state),
-        image: getImage(state),
-        isLiked: getIsLiked(state),
+        note: getNote(state),
     }
 }
 

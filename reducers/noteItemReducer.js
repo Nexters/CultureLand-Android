@@ -19,18 +19,19 @@ import {combineReducers} from 'redux';
 
 
 const initialState = {
-
     id : '',
-    title: '',
-    category: '',
-    sometime: '',
-    place: '',
-    withWho: '',
-    content: '',
-    image: '',
-    isLiked: false,
+    note: {
+        title: '',
+        category: '',
+        sometime: '',
+        place: '',
+        withWho: '',
+        content: '',
+        image: '',
+        isLiked: false,
+    },
+    notes: [],
     error : false,
-
 };
 
 export function getNoteItemActions(state = initialState, action){
@@ -39,14 +40,7 @@ export function getNoteItemActions(state = initialState, action){
             return {
                 ...state,
                 id : action.result.id,
-                title : action.result.title,
-                category : action.result.category,
-                sometime : action.result.sometime,
-                place : action.result.place,
-                withWho : action.result.withWho,
-                content : action.result.content,
-                image : action.result.image,
-                isLiked : action.result.isLiked,
+                note: action.result.note,
             };
         case GET_NOTE_ACTION.SUCCESS:
             return {
@@ -71,7 +65,7 @@ export function createNoteItemActions(state = initialState, action){
         case CREATE_NOTE_ACTION.SUCCESS:
             return {
                 ...state,
-                // items: [action.payload].concat(state.items),
+                notes: [action.payload].concat(state.notes),
             };
         case CREATE_NOTE_ACTION.FAILURE:
             return {
@@ -88,16 +82,18 @@ export function updateNoteItemActions(state = initialState, action){
         case UPDATE_NOTE_ACTION.REQUEST:
             return {
                 ...state,
-            }
+                id : action.result.id,
+                note: action.result.note,
+            };
         case UPDATE_NOTE_ACTION.SUCCESS:
             return {
                 ...state,
-                // items: state.items.map(note => {
-                //     if (note.id === id) {
-                //         return { ...note }
-                //     }
-                //     return note
-                // }),
+                notes: state.notes.map(note => {
+                    if (note.id === id) {
+                        return { ...note }
+                    }
+                    return note
+                }),
             };
         case UPDATE_NOTE_ACTION.FAILURE:
             return {
@@ -118,7 +114,7 @@ export function removeNoteItemActions(state = initialState, action){
         case REMOVE_NOTE_ACTION.SUCCESS:
             return {
                 ...state,
-                // items: state.items.filter(note => note.id !== note_id),
+                notes: state.notes.filter(note => note.id !== note_id),
             };
         case REMOVE_NOTE_ACTION.FAILURE:
             return {

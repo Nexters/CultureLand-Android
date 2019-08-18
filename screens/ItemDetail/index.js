@@ -2,11 +2,12 @@
 import {connect} from 'react-redux';
 import template from './ItemDetailTemplate';
 import itemDetail from '../../actions/itemDetail';
-import {getTitle, getCategory, getError, getIsWished, getPeriod, getLocation} from "../../selectors/itemDetailSelector";
+import {getNote, getTitle, getCategory, getError, getIsWished, getPeriod, getLocation} from "../../selectors/itemDetailSelector";
 
 function mapStateToProps(state) {
 
     return {
+        note : getNote(state),
         title : getTitle(state),
         category : getCategory(state),
         period : getPeriod(state),
