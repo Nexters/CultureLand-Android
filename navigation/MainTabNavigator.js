@@ -11,7 +11,6 @@ import MyPageScreen from "../screens/MyPage"
 import PlanedListScreen from '../screens/PlannedList/index'
 import MainScreen from '../screens/Main';
 import NoteDetailScreen from '../screens/NoteDetail';
-import NoteListScreen from '../screens/NoteList/index';
 import SignScreen from '../screens/Sign';
 
 import styleFn from "../screens/PlannedList/styles";
@@ -56,7 +55,7 @@ HomeStack.path = '';
 const LinksStack = createStackNavigator(
     {
 
-        Links: NoteListScreen ,
+        Links: PlanedListScreen,
     },
     config
 );
