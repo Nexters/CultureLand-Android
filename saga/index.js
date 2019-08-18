@@ -7,10 +7,13 @@ import {isWishedFlow, cancelWishedFlow, setWishedFlow, getItemDetailFlow} from "
 import {myPageAccountFlow, myPageCountFlow} from "./myPageSaga";
 
 import {
-    getNoteItemFlow, 
-    createNoteItemFlow,
-    updateNoteItemFlow,
-    removeNoteItemFlow,
+    getNoteFlow, 
+    createNoteFlow,
+    updateNoteFlow,
+    removeNoteFlow,
+    isLikedFlow,
+    setLikedFlow,
+    cancelLikedFlow,
 } from "./noteItemSaga";
 
 
@@ -41,10 +44,12 @@ export default function* root() {
     yield fork(cancelWishedFlow);
     yield fork(myPageCountFlow);
     yield fork(myPageAccountFlow);
-    yield fork(getNoteItemFlow);
-    yield fork(createNoteItemFlow);
-    yield fork(updateNoteItemFlow);
-    yield fork(removeNoteItemFlow);
-    yield fork(getItemDetailFlow);
+    yield fork(getNoteFlow);
+    yield fork(createNoteFlow);
+    yield fork(updateNoteFlow);
+    yield fork(removeNoteFlow);
+    yield fork(isLikedFlow);
+    yield fork(setLikedFlow);
+    yield fork(cancelLikedFlow);
 
 }

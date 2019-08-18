@@ -10,9 +10,11 @@ import ItemDetailScreen from '../screens/ItemDetail/index'
 import MyPageScreen from "../screens/MyPage/index"
 import PlanedListScreen from '../screens/PlannedList/index'
 import MainScreen from '../screens/Main';
-import NoteDetailScreen from '../screens/NoteDetail';
-import SignScreen from '../screens/Sign/signTemplate';
-import DiaryListScreen from '../screens/diaryListScreen/index';
+import NoteDetailScreen from '../screens/NoteDetail/index';
+import NoteEditScreen from '../screens/NoteEdit/index';
+import NoteListScreen from '../screens/NoteList/index';
+import SignScreen from '../screens/Sign';
+
 import styleFn from "../screens/PlannedList/styles";
 import {RatioCalculator} from "../util";
 const screenWidth = Math.round(Dimensions.get('window').width);
@@ -54,8 +56,7 @@ HomeStack.path = '';
 
 const LinksStack = createStackNavigator(
     {
-
-        Links:DiaryListScreen,
+        Links: NoteEditScreen ,
     },
     config
 );

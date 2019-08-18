@@ -76,6 +76,7 @@ async function loadResourcesAsync() {
             'noto-sans-demi' : require('./assets/fonts/NotoSansCJKkr-DemiLight.otf'),
             'noto-sans-light' : require('./assets/fonts/NotoSansCJKkr-Light.otf'),
             'noto-sans-thin' : require('./assets/fonts/NotoSansCJKkr-Thin.otf'),
+
         }),
     ]);
 }
