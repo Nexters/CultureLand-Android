@@ -28,29 +28,3 @@ export function getImage(state){
 export function getIsLiked(state){
     return baseSelector(state).isLiked;
 }
-
-export function updateTitle(state){
-    return baseSelector(state).title;
-}
-export function updateCategory(state){
-    return baseSelector(state).category;
-}
-export function updateSometime(state){
-    return baseSelector(state).sometime;
-}
-export function updatePlace(state) {
-    return baseSelector(state).place;
-}
-export function updateWithWho(state){
-    return baseSelector(state).withWho;
-}
-export function updateContent(state){
-    return baseSelector(state).content;
-}
-export function updateImage(state){
-    return baseSelector(state).image;
-}
-export function updateIsLiked(state){
-    return baseSelector(state).isLiked;
-}
-
