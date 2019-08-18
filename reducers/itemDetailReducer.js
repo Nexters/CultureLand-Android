@@ -1,43 +1,42 @@
 import {
-    GET_ITEM,
-    IS_WISHED,
-    SET_WISHED,
-    CANCEL_WISHED,
     GET_ITEM_DETAIL,
+    GET_ITEM_DETAIL_ACTION,
     IS_WISHED_ACTION,
     CANCEL_WISHED_ACTION,
-    SET_WISHED_ACTION} from "../actionTypes/itemDetail";
+    SET_WISHED_ACTION, CANCEL_WISHED, SET_WISHED, IS_WISHED
+} from "../actionTypes/itemDetail";
 
 import {combineReducers} from 'redux';
 
 
 const initialState = {
 
-    id : '',
+    id : '컬러유저',
     imageUrl : '',
-    title : '',
-    category : '',
-    period : '',
-    place : '',
-    isWished: false,
+    title : '문화정보',
+    category : '뮤지컬',
+    period : '2019.08.18 ~ 2019.08.18',
+    place : '충무로',
+    isWished: true,
     error : false,
 
 };
 
-export function isWishedActions(state = initialState, action) {
+function isWishedActions(state = initialState, action) {
     switch (action.type) {
 
-        case IS_WISHED.REQUEST:
+        case IS_WISHED_ACTION.REQUEST:
             return {
                 ...state,
+                error : null,
             };
 
-        case IS_WISHED.SUCCESS:
+        case IS_WISHED_ACTION.SUCCESS:
             return {
                 ...state,
                 isWished : action.result.isWished,
             };
-        case IS_WISHED.FAILURE:
+        case IS_WISHED_ACTION.FAILURE:
             return {
                 ...state,
                 error: action.error,
@@ -47,19 +46,20 @@ export function isWishedActions(state = initialState, action) {
     }
 }
 
-export function setWishedActions(state = initialState, action){
+function setWishedActions(state = initialState, action){
     switch (action.type) {
 
-        case SET_WISHED.REQUEST:
+        case SET_WISHED_ACTION.REQUEST:
             return {
                 ...state,
+                error : null,
             };
-        case SET_WISHED.SUCCESS:
+        case SET_WISHED_ACTION.SUCCESS:
             return {
                 ...state,
                 isWished : true,
             };
-        case SET_WISHED.FAILURE:
+        case SET_WISHED_ACTION.FAILURE:
             return {
                 ...state,
                 error: action.error,
@@ -69,20 +69,21 @@ export function setWishedActions(state = initialState, action){
     }
 }
 
-export function cancelWishedActions(state = initialState, action){
+function cancelWishedActions(state = initialState, action){
     switch (action.type) {
 
-        case CANCEL_WISHED.REQUEST:
+        case CANCEL_WISHED_ACTION.REQUEST:
             return {
                 ...state,
+                error : null,
             };
 
-        case CANCEL_WISHED.SUCCESS:
+        case CANCEL_WISHED_ACTION.SUCCESS:
             return {
                 ...state,
                 isWished : false,
             };
-        case CANCEL_WISHED.FAILURE:
+        case CANCEL_WISHED_ACTION.FAILURE:
             return {
                 ...state,
                 error: action.error,
@@ -93,44 +94,46 @@ export function cancelWishedActions(state = initialState, action){
 }
 
 
-export function getItemDetailAction(state = initialState, action) {
+function getItemDetailAction(state = initialState, action) {
+
+
     switch (action.type) {
-        case GET_ITEM_DETAIL.REQUEST:
+        case GET_ITEM_DETAIL_ACTION.REQUEST:
+            return {
+                ...state,
+            };
+        case GET_ITEM_DETAIL_ACTION.SUCCESS:
             return {
                 ...state,
                 id : action.result.id,
                 imageUrl : action.result.imageUrl,
                 title : action.result.title,
                 category : action.result.category,
-                startDate : action.result.startDate,
-                endDate : action.result.endDate,
+                period : action.result.period,
+                place :action.result.place,
+                error : null,
             };
-        case GET_ITEM_DETAIL.SUCCESS:
-            return {
-                ...state,
-            };
-        case GET_ITEM_DETAIL.FAILURE:
+        case GET_ITEM_DETAIL_ACTION.FAILURE:
             return {
                 ...state,
                 error: action.error,
             };
         default:
-            return state
+            return state;
     }
 }
 
 
-export function itemDetailActions(state = initialState, action){
-
+export function itemDetailRootAction(state = initialState, action){
     let prefix = action.type.replace(/_((REQUEST)|(SUCCESS)|(FAILURE))/,'');
     switch(prefix){
-        case GET_ITEM :
+        case GET_ITEM_DETAIL :
             return getItemDetailAction(state,action);
         case IS_WISHED :
             return isWishedActions(state,action);
         case SET_WISHED :
             return setWishedActions(state,action);
-        case CANCEL_WISHED:
+        case CANCEL_WISHED :
             return cancelWishedActions(state,action);
         default:
             return state;
@@ -139,5 +142,5 @@ export function itemDetailActions(state = initialState, action){
 
 
 export default combineReducers({
-    itemDetailActions,
+    itemDetailRootAction,
 })

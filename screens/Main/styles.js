@@ -1,7 +1,7 @@
 import {StyleSheet} from "react-native";
 import {ConvertZepSizeToRegularizedSize, RatioCalculator} from "../../util";
 import {screenWidth,screenHeight} from "../../App";
-import {StatusBar} from 'react-native';
+import {StatusBar,Platform} from 'react-native';
 
 
 export default styles = function(screenWidth,screenHeight) {

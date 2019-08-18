@@ -5,13 +5,16 @@ import {
     View,
     Text,
     Dimensions,
-    Image
-
+    TouchableWithoutFeedback,
+    Image,
+    ImageBackground
 } from 'react-native';
 import {RatioCalculator} from "../../util";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import PropTypes from 'prop-types';
+import Toast, {DURATION} from 'react-native-easy-toast';
+
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
 
@@ -38,36 +41,79 @@ export default class ItemDetailScreen extends Component {
 
 
 
-    constructor(props){
+    constructor(props) {
         super(props);
 
         this.state = {
-            isWished : false,
+            isWished: false,
+            error : this.props.error,
+        };
+
+        this.props.getItemInfo(1);
+    }
+
+    componentDidMount(){
+    }
+
+    wishButtonClickListener() {
+
+
+        if (this.props.isWished) {
+            console.log("Cancel wish triggered");
+            return this.props.cancelWishedRequest(this.props.id);
+        } else {
+            console.log("set wish triggered");
+            return this.props.setWishedRequest(this.props.id);
         }
     }
 
-    doWish(){
+    renderWishedIcon() {
 
+
+        let starColor = this.props.isWished ? "#FFCE0F" : "#c4c4c4";
+        let iconType = this.props.isWished ? "ios-star" : "ios-star-outline";
+        return (
+            <TouchableWithoutFeedback
+                onPress={this.wishButtonClickListener.bind(this)}
+            >
+                <Ionicons
+                    name={iconType} size={30} color={starColor}
+                />
+            </TouchableWithoutFeedback>
+        )
     }
-    cancelWish(){
 
-    }
-    checkIsWished(){
-
+    errorRenderer() {
+        if(this.props.error){
+            this.refs.toast.show(this.props.error, 1000, () => {
+                // something you want to do at close
+            });
+        }
     }
 
     render() {
 
         return (
 
-            <View style={styles.container}>
+            <ImageBackground
+                style={styles.container}
+                source={{uri : this.props.imageUrl}}
+                opacity={0.3}
+                blurRadius={2}
+
+
+            >
+                <Toast ref="toast"/>
+                {this.errorRenderer()}
                 <View style={styles.back_button}>
                     <AntDesign
-                        name="left" size={calc.getRegHeightDp(33)} color="#f4f4f4"/>
+                        name="left" size={25} color="#f4f4f4"/>
                 </View>
-                <View style={styles.center_image}>
+                <Image style={styles.center_image}
+                    source={{uri : this.props.imageUrl}}
+                >
 
-                </View>
+                </Image>
                 <View style={styles.bottom_info_wrapper}>
 
                     <View style={styles.title_row}>
@@ -75,18 +121,7 @@ export default class ItemDetailScreen extends Component {
                             {this.props.title}
                         </Text>
                         <View style={styles.star_button}>
-
-                            {this.state.isWished ?
-                                // 위시 리스트에 있으면 채워진 상태로 로딩
-                                <Ionicons
-                                    name="ios-star" size={30} color="#8f8f8"
-                                />
-                                :
-                                <Ionicons
-                                    name="ios-star-outline" size={30} color="#8f8f8"
-                                />
-                            }
-
+                            {this.renderWishedIcon()}
                         </View>
                     </View>
                     <View style={styles.info_row}>
@@ -94,7 +129,7 @@ export default class ItemDetailScreen extends Component {
                             유형
                         </Text>
                         <Text style={styles.row_content}>
-                            뮤지컬
+                            {this.props.category}
                         </Text>
                     </View>
                     <View style={styles.info_row}>
@@ -102,7 +137,7 @@ export default class ItemDetailScreen extends Component {
                             기간
                         </Text>
                         <Text style={styles.row_content}>
-                            2019.07.13~2019.09.08
+                            {this.props.period}
                         </Text>
                     </View>
                     <View style={styles.info_row}>
@@ -110,21 +145,34 @@ export default class ItemDetailScreen extends Component {
                             장소
                         </Text>
                         <Text style={styles.row_content}>
-                            대학로 TOM 시어터 2 관
+                            {this.props.place}
                         </Text>
                     </View>
                 </View>
 
 
-            </View>
+            </ImageBackground>
         )
     }
 
 };
 
-ItemDetailScreen.PropTypes ={
-    imageURL : PropTypes.string,
-    title : PropTypes.string,
-    category : PropTypes.string,
-    location : PropTypes.string,
+
+ItemDetailScreen.PropTypes = {
+    imageUrl: PropTypes.string,
+    title: PropTypes.string,
+    category: PropTypes.string,
+    period: PropTypes.string,
+    place: PropTypes.string,
+    isWished: PropTypes.bool,
+
+    getItemInfo: PropTypes.func,
+    isWishedRequest: PropTypes.func,
+    setWishedRequest: PropTypes.func,
+    cancelWishedRequest: PropTypes.func,
+};
+
+
+ItemDetailScreen.navigationOptions = {
+    header: null,
 };

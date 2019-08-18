@@ -2,7 +2,7 @@ import {AppLoading} from 'expo';
 import {Asset} from 'expo-asset';
 import * as Font from 'expo-font';
 import React, {useState} from 'react';
-import { createMuiTheme, MuiThemeProvider } from "@material-ui/core";
+import {createMuiTheme, MuiThemeProvider} from "@material-ui/core";
 import {Provider} from 'react-redux'
 import createSagaMiddleware from "redux-saga";
 import {applyMiddleware, combineReducers, compose, createStore} from "redux";
@@ -12,17 +12,18 @@ import rootReducer from './reducers/index';
 import {Ionicons} from '@expo/vector-icons';
 import AppNavigator from './navigation/AppNavigator';
 
-import LoginScreen from './screens/Sign/index';
-import ItemDetailScreen from './screens/ItemDetail/ItemDetailTemplate';
+import LoginScreen from './screens/Sign/signTemplate';
+import ItemDetailScreen from './screens/ItemDetail/index';
 import MyPageScreen from './screens/MyPage';
 import SearchModeScreen from './screens/SearchMode'
 import SearchBar from "./components/SearchBar";
 import SplashScreen from './screens/Splash';
-import SignScreen from './screens/Sign';
+import SignScreen from './screens/Sign/signTemplate';
 import MainScreen from './screens/Main';
 import NoteDetailScreen from './screens/NoteDetail';
 import NoteEditScreen from './screens/NoteEdit';
 import NoteListScreen from './screens/NoteList';
+
 const sagaMiddleware = createSagaMiddleware();
 
 const middlewares = [];
@@ -50,7 +51,7 @@ export default function App(props) {
             <Provider store={store}>
                 <View style={styles.container}>
                     <AppNavigator/>
-                    {/* <NoteDetailScreen/> */}
+                    {/* <AppNavigator/>*/}
                 </View>
             </Provider>
         );
@@ -69,8 +70,12 @@ async function loadResourcesAsync() {
             // We include SpaceMono because we use it in HomeScreen.js. Feel free to
             // remove this if you are not using it in your app
             'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
-            'noto-sans' : require('./assets/fonts/NotoSansCJKkr-Regular.otf'),
-            'noto-sans-bold' : require('./assets/fonts/NotoSansCJKkr-Bold.otf'),
+            'noto-sans': require('./assets/fonts/NotoSansCJKkr-Regular.otf'),
+            'noto-sans-bold': require('./assets/fonts/NotoSansCJKkr-Bold.otf'),
+            'noto-sans-mid' : require('./assets/fonts/NotoSansCJKkr-Medium.otf'),
+            'noto-sans-demi' : require('./assets/fonts/NotoSansCJKkr-DemiLight.otf'),
+            'noto-sans-light' : require('./assets/fonts/NotoSansCJKkr-Light.otf'),
+            'noto-sans-thin' : require('./assets/fonts/NotoSansCJKkr-Thin.otf'),
         }),
     ]);
 }

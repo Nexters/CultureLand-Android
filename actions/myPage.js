@@ -1,32 +1,35 @@
 
-import { MY_PAGE_ACCOUNT, MY_PAGE_GET_COUNT} from "../actionTypes/myPage";
+import { MY_PAGE_ACCOUNT_ACTION, MY_PAGE_COUNT_ACTION} from "../actionTypes/myPage";
 
 export const getMyPageAccount = {
 
     request : () => ({
-        type : MY_PAGE_ACCOUNT.REQUEST,
+        type : MY_PAGE_ACCOUNT_ACTION.REQUEST,
+        payload : {
+            credentials : '',
+        }
     }),
 
     success : () => ({
-        type : MY_PAGE_ACCOUNT.SUCCESS,
+        type : MY_PAGE_ACCOUNT_ACTION.SUCCESS,
     }),
 
     failure : () => ({
-        type : MY_PAGE_ACCOUNT.FAILURE,
+        type : MY_PAGE_ACCOUNT_ACTION.FAILURE,
     }),
 };
 
 export const getMyPageCount = {
 
     request : () => ({
-        type : MY_PAGE_GET_COUNT.REQUEST,
+        type : MY_PAGE_COUNT_ACTION.REQUEST,
     }),
 
     success : () => ({
-        type : MY_PAGE_GET_COUNT.SUCCESS,
+        type : MY_PAGE_COUNT_ACTION.SUCCESS,
     }),
 
     failure : () => ({
-        type : MY_PAGE_GET_COUNT.FAILURE,
+        type : MY_PAGE_COUNT_ACTION.FAILURE,
     }),
 };

@@ -1,57 +1,14 @@
 import { MY_PAGE_ACCOUNT_ACTION,MY_PAGE_COUNT_ACTION} from "../actionTypes/myPage";
 import {call, put, take} from "redux-saga/effects";
 
-export function* getProductListAction(category) {
-    // MOCK //
-    switch(category) {
-        case CATEGORY.ALL_PRODUCT :
-            return {
-                error : null,
-                result : {
-                    category: "all",
-                    product_list : [
-                        {title: "캣츠"},
-                        {title: "안중근"},
-                        {title: "엠씨더맥스"},
-                        {title: "샤갈 색채의 마술사"}
-                    ]
+// 서버로 부터 온 데이터를 자체 디자인 가이드와 타입설계에 맞는 오브젝트로 바꾸어줌
+function getMyPageCountActionRefiner(response){
 
-                }
-            };
-        case CATEGORY.EXHIBITION :
-            return {
-                error : null,
-                result: {
-                    category: "all",
-                    product_list: [
-                        {title: "캣츠"},
-                        {title: "안중근"},
-                        {title: "엠씨더맥스"},
-                        {title: "샤갈 색채의 마술사"}
-                    ]
-                }
-            };
-        default:
-            return {
-                error : category,
-                result: {
-                    category: "all",
-                    product_list: [
-                        {title: "캣츠"},
-                        {title: "안중근"},
-                        {title: "엠씨더맥스"},
-                        {title: "샤갈 색채의 마술사"}
-                    ]
-                }
-            };
-
-
-    }
 }
 
 function getMyPageCountAction(){
     return {
-        error : 'null',
+        error : null,
         result : {
             totalNumberOfDiaryCount : 13,
             likedDiaryCount : 4,
@@ -71,17 +28,16 @@ export function* myPageCountFlow () {
         const request = yield take(MY_PAGE_COUNT_ACTION.REQUEST);
 
 
-        let response = yield call(getMyPageCountAction, request.payload.category); // 블로킹됨
-
+        let response = yield call(getMyPageCountAction); // 블로킹됨
         if (response.error) {
             // 실패
             yield put({
                 type: MY_PAGE_COUNT_ACTION.FAILURE,
-                error: response.erro,r
+                error: response.error
             })
         } else {
             // 성공
-
+            console.log("리서트 : "+ JSON.stringify(response.result));
             yield  put({
                 type: MY_PAGE_COUNT_ACTION.SUCCESS,
                 result : response.result,
@@ -90,11 +46,15 @@ export function* myPageCountFlow () {
     }
 }
 
+// 서버로 부터 온 데이터를 자체 디자인 가이드와 타입설계에 맞는 오브젝트로 바꾸어줌
+function getMyPageAccountActionRefiner(response){
+
+}
 function getMyPageAccountAction(){
     return {
-        error : 'null',
+        error : null,
         result : {
-            userId : "김컬쳐",
+            userId : "이컬쳐",
             userEmail : "helloworld@gmail.com",
         }
     }
@@ -115,7 +75,6 @@ export function* myPageAccountFlow(){
             })
         } else {
             // 성공
-
             yield  put({
                 type: MY_PAGE_ACCOUNT_ACTION.SUCCESS,
                 result : response.result,
@@ -123,3 +82,4 @@ export function* myPageAccountFlow(){
         }
     }
 }
+

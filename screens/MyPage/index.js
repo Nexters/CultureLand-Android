@@ -8,23 +8,26 @@ import {
     getError,
 } from "../../selectors/myPageSelector";
 
+import {getMyPageAccount,getMyPageCount} from '../../actions/myPage'
+
 function mapStateToProps(state) {
 
     return {
         userId : getUserId(state),
         userEmail : getUserEmail(state),
-        totalNumber : getTotalNumberOfDiaryCount(state),
+        totalCount : getTotalNumberOfDiaryCount(state),
         likedCount : getLikedDiaryCount(state),
         exhibitionCount : getExhibitionCount(state),
+        musicalCount : getMusicalCount(state),
         concertCount : getConcertCount(state),
         playCount : getPlayCount(state),
         etcCount : getEtcCount(state),
         error : getError(state),
     }
 }
-
 const mapDispatchToProps = {
-    getItemInfo: itemDetail.getItemInfo,
+    getMyPageAccount : getMyPageAccount.request,
+    getMyPageCount : getMyPageCount.request,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(template);

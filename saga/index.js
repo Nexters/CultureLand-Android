@@ -3,7 +3,7 @@ import {searchProductFlow} from "./searchProductSaga";
 import {fork} from "redux-saga/effects";
 
 import {getProductListFlow} from "./productListSaga"
-import {isWishedFlow,cancelWishedFlow,setWishedFlow} from "./itemDetailSaga";
+import {isWishedFlow, cancelWishedFlow, setWishedFlow, getItemDetailFlow} from "./itemDetailSaga";
 import {myPageAccountFlow, myPageCountFlow} from "./myPageSaga";
 
 import {
@@ -36,7 +36,6 @@ import {
 export default function* root() {
     yield fork(getProductListFlow);
     yield fork(searchProductFlow);
-
     yield fork(isWishedFlow);
     yield fork(setWishedFlow);
     yield fork(cancelWishedFlow);
@@ -46,5 +45,6 @@ export default function* root() {
     yield fork(createNoteItemFlow);
     yield fork(updateNoteItemFlow);
     yield fork(removeNoteItemFlow);
+    yield fork(getItemDetailFlow);
 
 }

@@ -1,6 +1,6 @@
 
 export function baseSelector(state){
-    return state.myPageReducer.myPageRootActions;
+    return state.myPageReducer.myPageRootAction;
 }
 export function getUserId(state){
     return baseSelector(state).userId;

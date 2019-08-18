@@ -1,72 +1,75 @@
-import {CANCEL_WISHED, GET_ITEM_DETAIL, IS_WISHED, SET_WISHED} from "../actionTypes/itemDetail";
+import {
+    CANCEL_WISHED_ACTION, GET_ITEM_DETAIL, GET_ITEM_DETAIL_ACTION, IS_WISHED_ACTION,
+    SET_WISHED_ACTION
+} from "../actionTypes/itemDetail";
 
-export const getItemDetail = {
+export const getItemDetailAction = {
     request : (id) => ({
-       type : GET_ITEM_DETAIL.REQUEST,
+       type : GET_ITEM_DETAIL_ACTION.REQUEST,
        payload : {
            id,
        }
     }),
 
     success : () => ({
-        type : GET_ITEM_DETAIL.SUCCESS,
+        type : GET_ITEM_DETAIL_ACTION.SUCCESS,
     }),
 
     failure : () => ({
-        type : GET_ITEM_DETAIL.FAILURE,
+        type : GET_ITEM_DETAIL_ACTION.FAILURE,
     })
 };
 
-export const isWished = {
+export const isWishedAction = {
     request : (id) => ({
-        type : IS_WISHED.REQUEST,
+        type : IS_WISHED_ACTION.REQUEST,
         payload : {
             id,
         }
     }),
 
     success : () => ({
-        type : IS_WISHED.SUCCESS,
+        type : IS_WISHED_ACTION.SUCCESS,
     }),
 
     failure : () => ({
-        type : IS_WISHED.FAILURE,
+        type : IS_WISHED_ACTION.FAILURE,
     })
 };
 
-export const setWished = {
+export const setWishedAction = {
 
     request : (id) => ({
-        type : SET_WISHED.REQUEST,
+        type : SET_WISHED_ACTION.REQUEST,
         payload : {
             id,
         }
     }),
 
     success : () => ({
-        type : SET_WISHED.SUCCESS,
+        type : SET_WISHED_ACTION.SUCCESS,
     }),
 
     failure : () => ({
-        type : SET_WISHED.FAILURE,
+        type : SET_WISHED_ACTION.FAILURE,
     })
 };
 
-export const cancelWished = {
+export const cancelWishedAction = {
 
     request : (id) => ({
-        type : CANCEL_WISHED.REQUEST,
+        type : CANCEL_WISHED_ACTION.REQUEST,
         payload : {
             id,
         }
     }),
 
     success : () => ({
-        type : CANCEL_WISHED.SUCCESS,
+        type : CANCEL_WISHED_ACTION.SUCCESS,
     }),
 
     failure : () => ({
-        type : CANCEL_WISHED.FAILURE,
+        type : CANCEL_WISHED_ACTION.FAILURE,
     })
 
 };

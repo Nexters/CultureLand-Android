@@ -11,56 +11,53 @@ export default styles = function (screenWidth, screenHeight, calc) {
         container: {
             width: "100%",
             height : "100%",
-            paddingLeft: calc.getRegWidthDp(18),
-            paddingRight: calc.getRegWidthDp(18),
-            backgroundColor: '#333',
+            backgroundColor : "rgba(0, 0, 0, 0.5)",
 
         },
 
         back_button: {
-            width: calc.getRegWidthDp(33),
-            height: calc.getRegHeightDp(33),
-            marginTop: calc.getRegHeightDp(38),
+            width: 25,
+            height: 25,
+            marginTop: 45,
+            marginLeft : 22,
         },
 
         center_image: {
-            //width: calc.getRegWidthDp(183),
-            //height: calc.getRegHeightDp(260),
-
             width: calc.getRegWidthDp(195),
             height: calc.getRegHeightDp(293),
             marginLeft : 'auto',
             marginRight : 'auto',
-            marginTop: calc.getRegHeightDp(39),
+            marginTop: 40,
             backgroundColor : "#fff",
         },
 
         bottom_info_wrapper: {
             flexDirection : 'column',
             width : calc.getRegWidthDp(324),
-            height: calc.getRegHeightDp(207),
+            height: 215,
             paddingTop : calc.getRegHeightDp(26),
-            marginTop : 74,
-            marginBottom : calc.getRegHeightDp(22),
+            marginLeft : 18,
+            marginTop : 50,
+            marginBottom : 22,
             borderRadius: 8,
             backgroundColor : "#fff",
-
         },
 
         title_row : {
             flexDirection : 'row',
             width : "100%",
-            height : calc.getRegHeightDp(25),
+            height : 57,
             paddingLeft : calc.getRegWidthDp(25),
             paddingRight : calc.getRegWidthDp(11),
-            marginBottom: 33
+            marginBottom: 26
         },
 
         title : {
+            fontFamily : 'noto-sans-bold',
             width : calc.getRegWidthDp(173+65),
-            height : 25,
+            height : 57,
             fontSize: 22,
-
+            lineHeight: 28,
         },
 
             star_button : {
@@ -78,6 +75,7 @@ export default styles = function (screenWidth, screenHeight, calc) {
         },
 
         row_title: {
+            fontFamily : 'noto-sans-mid',
             width : 30,
             height : 24,
             marginRight : 13,
@@ -87,6 +85,7 @@ export default styles = function (screenWidth, screenHeight, calc) {
         },
 
         row_content: {
+            fontFamily : 'noto-sans-demi',
             width : calc.getRegWidthDp(324-30-13-69-10),
             height : 24,
             fontSize: 16,

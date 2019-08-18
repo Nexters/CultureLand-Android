@@ -21,7 +21,7 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = {
     getMyPageAccount : getMyPageAccount.request,
-    getMypageCount : getMyPageCount.request,
+    getMyPageCount : getMyPageCount.request,
 };
 
 export default connect(mapStateToProps,mapDispatchToProps)(template);

@@ -6,13 +6,13 @@ import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
-import ItemDetailScreen from '../screens/ItemDetail/ItemDetailTemplate'
-import MyPageScreen from "../screens/MyPage"
+import ItemDetailScreen from '../screens/ItemDetail/index'
+import MyPageScreen from "../screens/MyPage/index"
 import PlanedListScreen from '../screens/PlannedList/index'
 import MainScreen from '../screens/Main';
 import NoteDetailScreen from '../screens/NoteDetail';
 import NoteListScreen from '../screens/NoteList/index';
-import SignScreen from '../screens/Sign';
+import SignScreen from '../screens/Sign/signTemplate';
 
 import styleFn from "../screens/PlannedList/styles";
 import {RatioCalculator} from "../util";
@@ -32,7 +32,7 @@ const config = Platform.select({
 
 const HomeStack = createStackNavigator(
     {
-        Home:NoteDetailScreen,
+        Home:ItemDetailScreen,
     },
     config
 );
@@ -56,7 +56,7 @@ HomeStack.path = '';
 const LinksStack = createStackNavigator(
     {
 
-        Links: NoteListScreen ,
+        Links: NoteListScreen,
     },
     config
 );
@@ -79,8 +79,9 @@ LinksStack.path = '';
 
 const SettingsStack = createStackNavigator(
     {
-        Settings: MainScreen,
+        Settings: MyPageScreen,
     },
+
     config
 );
 
@@ -108,7 +109,7 @@ const tabNavigator = createBottomTabNavigator({
 
 tabNavigator.path = '';
 
-
+//////// CUSTOM //////
 
 const ItemDetailStack = createStackNavigator(
     {
