@@ -1,102 +1,60 @@
-import React, { Component } from 'react';
+import * as WebBrowser from 'expo-web-browser';
+import React, {Component} from 'react';
+import styleFn from "./styles"
 import {
     View,
     Text,
-    StyleSheet,
     Dimensions,
+    Image,
     TouchableOpacity,
-    FlatList,
+    StatusBar,
+
 } from 'react-native';
-import {RatioCalculator} from "../util";
-import {ListItem} from '../../components/ListItem';
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
+import {Ionicons} from '@expo/vector-icons'
+import {RatioCalculator} from "../../util";
+import {FloatingButton} from "../../components/FloatingButton"
+import ListComponent from "../../components/ListComponent";
+import PropTypes from 'prop-types';
+import {LIST_TYPE} from "../../util";
 
 const calc = new RatioCalculator(screenWidth, screenHeight);
+const styles = styleFn(screenWidth, screenHeight, calc);
 
-export class ListComponent extends Component {
-    constructor (props) {
-        super(props);
-    }
-    state = {
-        data: [
-            {
-                key: 0,
-                title: '소란',
-                category: '콘서트',
-                date: '2019.08.05',
-                where: '난지한강공원',
-            },
-            {
-                key: 1,
-                title: '아이유',
-                category: '전시',
-                date: '2019.08.05',
-                where: '세종문화회관',
-            },
-            {
-                key: 3,
-                title: '소란',
-                category: '콘서트',
-                date: '2019.08.05',
-                where: '난지한강공원',
-            },
-            {
-                key: 4,
-                title: '아이유',
-                category: '전시',
-                date: '2019.08.05',
-                where: '세종문화회관',
-            },
-            {
-                key: 5,
-                title: '아이유',
-                category: '전시',
-                date: '2019.08.05',
-                where: '세종문화회관',
-            },
-            {
-                key: 6,
-                title: '아이유',
-                category: '전시',
-                date: '2019.08.05',
-                where: '세종문화회관',
-            },
-            {
-                key: 7,
-                title: '아이유',
-                category: '전시',
-                date: '2019.08.05',
-                where: '세종문화회관',
-            },
-        ]
-    };
+export default class DiaryListScreen extends Component {
 
-    _renderItem = ({item}) => (
-        <ListItem
-            key={item.key}
-            title={item.title}
-            category={item.category}
-            date={item.date}
-            where={item.where}
-        />
-    );
+
     render() {
+
+        this.props.getDiaryList(LIST_TYPE.FOR_DATE);
+
         return (
-            <FlatList
-                data={this.sta1te.data}
-                renderItem={this._renderItem}
-                style={styles.list_container}
-            >
-            </FlatList>
+            <View style={styles.container}>
+                <View style={styles.header}>
+                    <TouchableOpacity
+                        onPress={() => alert(props.centerText)}
+                        activeOpacity={0.7}
+                        style={styles.header_left}
+                    >
+                        <Ionicons name="ios-arrow-back" size={24} color="#292929" style={styles.header_button}/>
+                    </TouchableOpacity>
+                    <Text style={styles.header_center}>2019.7</Text>
+                    <Text style={styles.header_right}></Text>
+                </View>
+                <ListComponent />
+
+                <FloatingButton/>
+            </View>
         )
     }
-}
+};
 
-const styles = StyleSheet.create({
-    list_container: {
-        flex: 1,
-        marginTop: calc.getRegHeightDp(28),
-    }
-})
+DiaryListScreen.navigationOptions = {
+    header: null,
+};
+
+DiaryListScreen.PropTypes={
+    listType : PropTypes.string,
+};

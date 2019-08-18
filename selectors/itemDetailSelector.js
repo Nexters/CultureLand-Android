@@ -1,6 +1,10 @@
 
-export function baseSelector(state){
-    return state.itemDetailReducer.itemDetail;
+ function baseSelector(state){
+    return state.itemDetailReducer.itemDetailRootAction;
+}
+
+export function getImageUrl(state){
+    return baseSelector(state).imageUrl;
 }
 export function getTitle(state){
     return baseSelector(state).title;
@@ -11,7 +15,7 @@ export function getCategory(state){
 export function getPeriod(state){
     return baseSelector(state).period;
 }
-export function getLocation(state) {
+export function getPlace(state) {
     return baseSelector(state).place;
 }
 export function getIsWished(state){

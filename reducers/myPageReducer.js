@@ -1,27 +1,32 @@
-import {MY_PAGE_ACCOUNT_ACTION, MY_PAGE_GET_COUNT, MY_PAGE_GET_COUNT_ACTION} from "../actionTypes/myPage";
+import {
+    MY_PAGE_ACCOUNT,
+    MY_PAGE_COUNT,
+    MY_PAGE_ACCOUNT_ACTION,
+    MY_PAGE_COUNT_ACTION} from "../actionTypes/myPage";
 import {combineReducers} from 'redux';
 
 const initialState = {
-    userId: 'userId',
-    userEmail: 'abc@culor.com',
-    totalNumberOfDiaryCount: 0,
-    likedDiaryCount: 0,
-    exhibitionCount: 0,
-    concertCount: 0,
-    musicalCount: 0,
-    playCount: 0,
-    etcCount: 0,
+    userId: '김컬쳐',
+    userEmail: 'culture_kim@culor.com',
+    totalNumberOfDiaryCount: 1,
+    likedDiaryCount: 2,
+    exhibitionCount: 3,
+    concertCount: 4,
+    musicalCount: 5,
+    playCount: 6,
+    etcCount: 7,
     error: undefined,
 };
 
 export function getMyPageCountActions(state = initialState, action) {
     switch (action.type) {
-        case MY_PAGE_GET_COUNT_ACTION.REQUEST:
+
+        case MY_PAGE_COUNT_ACTION.REQUEST:
             return {
                 ...state,
             };
 
-        case MY_PAGE_GET_COUNT_ACTION.SUCCESS:
+        case MY_PAGE_COUNT_ACTION.SUCCESS:
             return {
                 ...state,
                 totalNumberOfDiaryCount: action.result.totalNumberOfDiaryCount,
@@ -32,7 +37,7 @@ export function getMyPageCountActions(state = initialState, action) {
                 playCount: action.result.playCount,
                 etcCount: action.result.etcCount,
             };
-        case MY_PAGE_GET_COUNT_ACTION.FAILURE:
+        case MY_PAGE_COUNT_ACTION.FAILURE:
             return {
                 ...state,
                 error: action.error,
@@ -45,10 +50,10 @@ export function getMyPageAccountActions(state = initialState, action) {
         case MY_PAGE_ACCOUNT_ACTION.REQUEST :
             return {
                 ...state,
-
             };
 
         case MY_PAGE_ACCOUNT_ACTION.SUCCESS :
+            console.log("어카운트성공");
             return {
                 ...state,
                 userId: action.result.userId,
@@ -63,13 +68,13 @@ export function getMyPageAccountActions(state = initialState, action) {
     }
 }
 
-export function myPageRootActions(state = initialState, action) {
+export function myPageRootAction(state = initialState, action) {
     let prefix = action.type.replace(/_((REQUEST)|(SUCCESS)|(FAILURE))/, '');
 
     switch (prefix) {
-        case MY_PAGE_GET_COUNT :
+        case MY_PAGE_COUNT :
             return getMyPageCountActions(state, action);
-        case MY_PAGE_ACCOUNT_ACTION:
+        case MY_PAGE_ACCOUNT:
             return getMyPageAccountActions(state, action);
         default:
             return state;
@@ -77,5 +82,5 @@ export function myPageRootActions(state = initialState, action) {
 }
 
 export default combineReducers({
-    myPageRootActions,
+    myPageRootAction,
 })

@@ -1,6 +1,6 @@
 
 export function baseSelector(state){
-    return state.diaryListReducer.getDiaryList;
+    return state.diaryListReducer.getDiaryListAction;
 }
 export function getCultureList(state){
     return baseSelector(state).culture_list;

@@ -104,6 +104,19 @@ export function numberWithCommas(x) {
 }
 
 
+export const LIST_TYPE = key_mirror({
+    FOR_CATEGORY : null,
+    FOR_DATE : null,
+});
+
+export const MY_PAGE_CATEGORY = {
+    LIKED : "liked",
+    EXHIBITION : "exhibition",
+    CONCERT : "concert",
+    MUSICAL : "musical",
+    PLAY : "play",
+    ETC : "etc",
+};
 
 export const CATEGORY = {
     ALL_PRODUCT : "all_product",

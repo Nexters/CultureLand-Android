@@ -9,7 +9,7 @@ const initialState = {
 };
 
 
-export function getDiaryList(state = initialState, action) {
+export function getDiaryListAction(state = initialState, action) {
     switch (action.type) {
         case GET_DIARY_LIST_ACTION.REQUEST:
             return {
@@ -35,8 +35,7 @@ export function getDiaryList(state = initialState, action) {
     }
 }
 
-
 export default combineReducers({
-    getDiaryList,
+    getDiaryListAction,
 
 })
