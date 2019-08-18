@@ -7,15 +7,14 @@ import {
     Dimensions,
     TouchableOpacity
 } from 'react-native';
+import PropTypes from 'prop-types';
 import Carousel from 'react-native-snap-carousel';
 import {RatioCalculator} from "../util";
-import { Directions } from 'react-native-gesture-handler';
 
 import CardImageFirst from "../assets/images/illustration/Home_card01.svg";
 import CardImageSecond from "../assets/images/illustration/Home_card02.svg";
 import CardImageThird from "../assets/images/illustration/Home_card03.svg";
 import TicketImage from "../assets/images/icon/ticket.svg";
-import StarImage from "../assets/images/icon/star.svg";
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
@@ -38,6 +37,7 @@ export class MainCarousel extends Component {
     }
 
     _renderItem ({item, index}) {
+        console.log(this.props.noteList)
         return (
             <TouchableOpacity
                 activeOpacity={1}
@@ -250,3 +250,10 @@ const styles = StyleSheet.create({
         color: "#424242"
     }
 })
+
+MainCarousel.PropTypes ={
+    noteList : PropTypes.string,
+    wishList : PropTypes.string,
+    getLoading : PropTypes.string,
+    getError : PropTypes.string,
+};

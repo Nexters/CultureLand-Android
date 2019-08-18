@@ -9,7 +9,7 @@ import SettingsScreen from '../screens/SettingsScreen';
 import ItemDetailScreen from '../screens/ItemDetail/index'
 import MyPageScreen from "../screens/MyPage/index"
 import PlanedListScreen from '../screens/PlannedList/index'
-import MainScreen from '../screens/Main';
+import MainScreen from '../screens/Main/index';
 import NoteDetailScreen from '../screens/NoteDetail/index';
 import NoteEditScreen from '../screens/NoteEdit/index';
 import SignScreen from '../screens/Sign';
@@ -32,7 +32,7 @@ const config = Platform.select({
 
 const HomeStack = createStackNavigator(
     {
-        Home:ItemDetailScreen,
+        Home:MainScreen,
     },
     config
 );

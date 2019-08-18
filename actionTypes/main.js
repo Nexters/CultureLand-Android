@@ -1,0 +1,21 @@
+import key_mirror from 'key-mirror';
+/*
+    DateType
+
+ */
+
+export const GET_MAIN_NOTELIST = "GET_MAIN_NOTELIST";
+export const GET_MAIN_WISHLIST = "GET_MAIN_WISHLIST";
+
+export const GET_MAIN_NOTELIST_ACTION = {
+    REQUEST: `${GET_MAIN_NOTELIST}_REQUEST`,
+    SUCCESS: `${GET_MAIN_NOTELIST}_SUCCESS`,
+    FAILURE: `${GET_MAIN_NOTELIST}_FAILURE`
+};
+
+export const GET_MAIN_WISHLIST_ACTION = {
+    REQUEST: `${GET_MAIN_WISHLIST}_REQUEST`,
+    SUCCESS: `${GET_MAIN_WISHLIST}_SUCCESS`,
+    FAILURE: `${GET_MAIN_WISHLIST}_FAILURE`
+};
+

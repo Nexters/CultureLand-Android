@@ -9,6 +9,7 @@ import itemDetailReducer from './itemDetailReducer';
 import myPageReducer from './myPageReducer';
 import diaryListReducer from './diaryListReducer';
 import noteItemReducer from "./noteItemReducer";
+import mainReducer from "./mainReducer";
 
 export default combineReducers({
     diaryListReducer : diaryListReducer,
@@ -17,4 +18,5 @@ export default combineReducers({
     noteItemReducer : noteItemReducer,
     productListReducer : productListReducer,
     searchProductReducer : searchProductReducer,
+    mainReducer : mainReducer,
 })
