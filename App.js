@@ -70,6 +70,10 @@ async function loadResourcesAsync() {
             'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
             'noto-sans' : require('./assets/fonts/NotoSansCJKkr-Regular.otf'),
             'noto-sans-bold' : require('./assets/fonts/NotoSansCJKkr-Bold.otf'),
+            'noto-sans-mid' : require('./assets/fonts/NotoSansCJKkr-Medium.otf'),
+            'noto-sans-demi' : require('./assets/fonts/NotoSansCJKkr-DemiLight.otf'),
+            'noto-sans-light' : require('./assets/fonts/NotoSansCJKkr-Light.otf'),
+            'noto-sans-thin' : require('./assets/fonts/NotoSansCJKkr-Thin.otf')
         }),
     ]);
 }

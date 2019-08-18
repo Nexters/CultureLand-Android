@@ -1,99 +1,193 @@
 import {
-    GET_NOTE_ITEM,
-    CREATE_NOTE_ITEM,
-    UPDATE_NOTE_ITEM,
-    REMOVE_NOTE_ITEM,
+    GET_NOTE,
+    CREATE_NOTE,
+    UPDATE_NOTE,
+    REMOVE_NOTE,
+    IS_LIKED, 
+    SET_LIKED,
+    CANCEL_LIKED,
+    GET_NOTE_ACTION,
+    CREATE_NOTE_ACTION,
+    UPDATE_NOTE_ACTION,
+    REMOVE_NOTE_ACTION,
+    IS_LIKED_ACTION, 
+    SET_LIKED_ACTION,
+    CANCEL_LIKED_ACTION,
 } from "../actionTypes/noteItem";
+
 import {combineReducers} from 'redux';
 
 
 const initialState = {
-    loading: false,
-    items: [],
-    noteItemError : '',
+    id : '',
+    note: {
+        title: '',
+        category: '',
+        sometime: '',
+        place: '',
+        withWho: '',
+        content: '',
+        image: '',
+        isLiked: false,
+    },
+    notes: [],
+    error : false,
 };
 
-
-export function getNoteItem(state = initialState, action) {
+export function getNoteItemActions(state = initialState, action){
     switch (action.type) {
-        // ------------- GET NOTE ITEM --------------
-        case GET_NOTE_ITEM.REQUEST:
+        case GET_NOTE_ACTION.REQUEST:
             return {
                 ...state,
-                loading: true,
+                id : action.result.id,
+                note: action.result.note,
             };
-        case GET_NOTE_ITEM.SUCCESS:
-            return {
-                items: action.payload.reverse(),
-                loading: false,
-            };
-        case GET_NOTE_ITEM.FAILURE:
-            return {
-                items: [],
-                loading: false,
-                noteItemError : action.error
-            };
-            
-        // ------------- CREATE NOTE ITEM --------------
-        case CREATE_NOTE_ITEM.REQUEST:
+        case GET_NOTE_ACTION.SUCCESS:
             return {
                 ...state,
-                loading: true,
-            }
-        case CREATE_NOTE_ITEM.SUCCESS:
-            return {
-                items: [action.payload].concat(state.items),
-                loading: false,
             };
-        case CREATE_NOTE_ITEM.FAILURE:
+        case GET_NOTE_ACTION.FAILURE:
             return {
                 ...state,
-                loading: false,
-                noteItemError : action.error
+                error: action.error,
             };
+        default:
+            return state
+    }
+}
 
-        // ------------- UPDATE NOTE ITEM --------------
-        case UPDATE_NOTE_ITEM.REQUEST:
+export function createNoteItemActions(state = initialState, action){
+    switch (action.type) {
+        case CREATE_NOTE_ACTION.REQUEST:
             return {
                 ...state,
-                loading: true,
             }
-        case UPDATE_NOTE_ITEM.SUCCESS:
-            const { id } = action.payload
-
+        case CREATE_NOTE_ACTION.SUCCESS:
             return {
-                items: state.items.map(note => {
+                ...state,
+                notes: [action.payload].concat(state.notes),
+            };
+        case CREATE_NOTE_ACTION.FAILURE:
+            return {
+                ...state,
+                error: action.error,
+            };
+        default:
+            return state
+    }
+}
+
+export function updateNoteItemActions(state = initialState, action){
+    switch (action.type) {
+        case UPDATE_NOTE_ACTION.REQUEST:
+            return {
+                ...state,
+                id : action.result.id,
+                note: action.result.note,
+            };
+        case UPDATE_NOTE_ACTION.SUCCESS:
+            return {
+                ...state,
+                notes: state.notes.map(note => {
                     if (note.id === id) {
                         return { ...note }
                     }
                     return note
                 }),
-                loading: false
             };
-        case UPDATE_NOTE_ITEM.FAILURE:
+        case UPDATE_NOTE_ACTION.FAILURE:
             return {
                 ...state,
-                loading: false,
-                noteItemError : action.error
+                error: action.error,
+            };
+        default:
+            return state
+    }
+}
+
+export function removeNoteItemActions(state = initialState, action){
+    switch (action.type) {
+        case REMOVE_NOTE_ACTION.REQUEST:
+            return {
+                ...state,
+            }
+        case REMOVE_NOTE_ACTION.SUCCESS:
+            return {
+                ...state,
+                notes: state.notes.filter(note => note.id !== note_id),
+            };
+        case REMOVE_NOTE_ACTION.FAILURE:
+            return {
+                ...state,
+                error: action.error,
+            };
+        default:
+            return state
+    }
+}
+
+export function isLikedActions(state = initialState, action) {
+    switch (action.type) {
+
+        case IS_LIKED_ACTION.REQUEST:
+            return {
+                ...state,
             };
 
-        // ------------- DELETE NOTE ITEM --------------
-        case REMOVE_NOTE_ITEM.REQUEST:
+        case IS_LIKED_ACTION.SUCCESS:
             return {
                 ...state,
-                loading: true,
-            }
-        case REMOVE_NOTE_ITEM.SUCCESS:
-            return {
-                ...state,
-                items: state.items.filter(note => note.id !== note_id),
-                loading: false,
+                isLiked : action.result.isLiked,
             };
-        case REMOVE_NOTE_ITEM.FAILURE:
+        case IS_LIKED_ACTION.FAILURE:
             return {
                 ...state,
-                loading: false,
-                noteItemError : action.error
+                error: action.error,
+            };
+        default:
+            return state
+    }
+}
+
+export function setLikedActions(state = initialState, action){
+    switch (action.type) {
+
+        case SET_LIKED_ACTION.REQUEST:
+            return {
+                ...state,
+            };
+        case SET_LIKED_ACTION.SUCCESS:
+            return {
+                ...state,
+                isLiked : true,
+            };
+        case SET_LIKED_ACTION.FAILURE:
+            return {
+                ...state,
+                error: action.error,
+            };
+        default:
+            return state
+    }
+}
+
+export function cancelLikedActions(state = initialState, action){
+    switch (action.type) {
+
+        case CANCEL_LIKED_ACTION.REQUEST:
+            return {
+                ...state,
+            };
+
+        case CANCEL_LIKED_ACTION.SUCCESS:
+            return {
+                ...state,
+                isLiked : false,
+            };
+        case CANCEL_LIKED_ACTION.FAILURE:
+            return {
+                ...state,
+                error: action.error,
             };
         default:
             return state
@@ -101,7 +195,30 @@ export function getNoteItem(state = initialState, action) {
 }
 
 
-export default combineReducers({
-    getNoteItem
+export function noteItemActions(state = initialState, action){
 
+    let prefix = action.type.replace(/_((REQUEST)|(SUCCESS)|(FAILURE))/,'');
+    switch(prefix){
+        case GET_NOTE :
+            return getNoteItemActions(state,action);
+        case CREATE_NOTE :
+            return createNoteItemActions(state,action);
+        case UPDATE_NOTE :
+            return updateNoteItemActions(state,action);
+        case REMOVE_NOTE :
+            return removeNoteItemActions(state,action);
+        case IS_LIKED :
+            return isLikedActions(state,action);
+        case SET_LIKED :
+            return setLikedActions(state,action);
+        case CANCEL_LIKED:
+            return cancelLikedActions(state,action);
+        default:
+            return state;
+    }
+}
+
+
+export default combineReducers({
+    noteItemActions,
 })
