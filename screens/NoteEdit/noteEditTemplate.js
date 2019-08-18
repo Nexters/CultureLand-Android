@@ -96,14 +96,14 @@ export default class NoteEditScreen extends Component {
                 </View>
                 <ScrollView>
                     <View style={styles.note_top_wrapper}>
-                        <TouchableOpacity 
+                        <TouchableOpacity
                             onPress={this._pickImage}
-                            activeOpacity={0.7} 
+                            activeOpacity={0.7}
                             style={styles.image_wrapper}
                         >
-                            {image &&
-                                <Image source={{ uri: image }} style={styles.image} 
-                            />}
+                            {
+                                <Image source={{ uri: image }} style={styles.image}/>
+                            }
                             <View style={styles.image_icon_wrapper}>
                                 <AddPhotoImage width={92} height={92} style={styles.image_icon}/>
                             </View>
@@ -123,7 +123,7 @@ export default class NoteEditScreen extends Component {
                         <Text style={styles.note_required}>*필수항목</Text>
                         <View style={styles.note_info_wrapper}>
                             <View style={styles.note_info_item}>
-                                <Text style={styles.note_sub_title}>유형<Text style={styles.note_required_icon}>*</Text></Text>
+                                <Text style={styles.note_sub_title}>유형</Text><Text style={styles.note_required_icon}>*</Text>
                                 <View style={styles.note_picker_wrapper}>
                                     <Dropdown
                                         value={CATEGORY_KOR(this.props.note.category)}
@@ -168,7 +168,7 @@ export default class NoteEditScreen extends Component {
                                 </View>
                             </View>
                             <View style={styles.note_info_item}>
-                                <Text style={styles.note_sub_title}>언제<Text style={styles.note_required_icon}>*</Text></Text>
+                                <Text style={styles.note_sub_title}>언제</Text><Text style={styles.note_required_icon}>*</Text>
                                 <DatePicker
                                     style={styles.note_datepicker}
                                     date={this.state.sometime}
@@ -194,7 +194,7 @@ export default class NoteEditScreen extends Component {
                                 />
                             </View>
                             <View style={styles.note_info_item}>
-                                <Text style={styles.note_sub_title}>어디서<Text style={styles.note_required_icon}>*</Text></Text>
+                                <Text style={styles.note_sub_title}>어디서</Text><Text style={styles.note_required_icon}>*</Text>
                                 <TextInput 
                                     style={styles.note_textinput}
                                     onChangeText={(place) => this.setState({place})}

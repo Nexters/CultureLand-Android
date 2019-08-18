@@ -12,4 +12,4 @@ const mapDispatchToProps = {
 
 };
 
-return connect(mapStateToProps,mapDispatchToProps)(template);
+export default connect(mapStateToProps,mapDispatchToProps)(template);

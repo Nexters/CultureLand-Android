@@ -12,7 +12,6 @@ import PlanedListScreen from '../screens/PlannedList/index'
 import MainScreen from '../screens/Main';
 import NoteDetailScreen from '../screens/NoteDetail/index';
 import NoteEditScreen from '../screens/NoteEdit/index';
-import NoteListScreen from '../screens/NoteList/index';
 import SignScreen from '../screens/Sign';
 
 import styleFn from "../screens/PlannedList/styles";

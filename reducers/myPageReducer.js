@@ -53,7 +53,6 @@ export function getMyPageAccountActions(state = initialState, action) {
             };
 
         case MY_PAGE_ACCOUNT_ACTION.SUCCESS :
-            console.log("어카운트성공");
             return {
                 ...state,
                 userId: action.result.userId,

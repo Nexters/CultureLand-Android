@@ -37,7 +37,6 @@ export function* myPageCountFlow () {
             })
         } else {
             // 성공
-            console.log("리서트 : "+ JSON.stringify(response.result));
             yield  put({
                 type: MY_PAGE_COUNT_ACTION.SUCCESS,
                 result : response.result,
