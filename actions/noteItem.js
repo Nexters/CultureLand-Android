@@ -1,133 +1,80 @@
 import {
-    GET_NOTE_ACTION,
-    CREATE_NOTE_ACTION,
-    UPDATE_NOTE_ACTION,
-    REMOVE_NOTE_ACTION,
-    IS_LIKED_ACTION, 
-    SET_LIKED_ACTION,
-    CANCEL_LIKED_ACTION,
+    GET_NOTE_ITEM,
+    CREATE_NOTE_ITEM,
+    UPDATE_NOTE_ITEM,
+    REMOVE_NOTE_ITEM
 } from "../actionTypes/noteItem";
 
 // GET
 export const getNoteItem = {
     request : (id) => ({
-        type : GET_NOTE_ACTION.REQUEST,
+        type : GET_NOTE_ITEM.REQUEST,
         payload: {
-            id,
+            id
         }
     }),
-    success : () => ({
-        type : GET_NOTE_ACTION.SUCCESS,
+    success : (id) => ({
+        type : GET_NOTE_ITEM.SUCCESS,
+        payload: {
+            id
+        }
     }),
     failure : () => ({
-        type : GET_NOTE_ACTION.FAILURE,
+        type : GET_NOTE_ITEM.FAILURE,
     })
 };
 
 // CREATE
 export const createNoteItem = {
-    request : () => ({
-        type : CREATE_NOTE_ACTION.REQUEST,
+    request : (note) => ({
+        type : CREATE_NOTE_ITEM.REQUEST,
+        payload: note
     }),
 
-    success : () => ({
-        type : CREATE_NOTE_ACTION.SUCCESS,
+    success : (note) => ({
+        type : CREATE_NOTE_ITEM.SUCCESS,
+        payload: note
     }),
 
     failure : () => ({
-        type : CREATE_NOTE_ACTION.FAILURE,
+        type : CREATE_NOTE_ITEM.FAILURE,
     })
 };
 
 // UPDATE
 export const updateNoteItem = {
-    request : (id) => ({
-        type : UPDATE_NOTE_ACTION.REQUEST,
-        payload: {
-            id,
-        }
+    request : (note) => ({
+        type : UPDATE_NOTE_ITEM.REQUEST,
+        payload: note
     }),
 
-    success : () => ({
-        type : UPDATE_NOTE_ACTION.SUCCESS,
+    success : (note) => ({
+        type : UPDATE_NOTE_ITEM.SUCCESS,
+        payload: note
     }),
 
     failure : () => ({
-        type : UPDATE_NOTE_ACTION.FAILURE,
+        type : UPDATE_NOTE_ITEM.FAILURE,
     })
 };
 
 // REMOVE
 export const removeNoteItem = {
-    request : (id) => ({
-        type : REMOVE_NOTE_ACTION.REQUEST,
+    request : (noteId) => ({
+        type : REMOVE_NOTE_ITEM.REQUEST,
         payload: {
-            id,
+            noteId,
         }
     }),
 
-    success : () => ({
-        type : REMOVE_NOTE_ACTION.SUCCESS,
-    }),
-
-    failure : () => ({
-        type : REMOVE_NOTE_ACTION.FAILURE,
-    })
-};
-
-// ISLIKED
-export const isLiked = {
-    request : (id) => ({
-        type : IS_LIKED_ACTION.REQUEST,
-        payload : {
-            id,
+    success : (noteId) => ({
+        type : REMOVE_NOTE_ITEM.SUCCESS,
+        payload: {
+            noteId
         }
     }),
 
-    success : () => ({
-        type : IS_LIKED_ACTION.SUCCESS,
-    }),
-
     failure : () => ({
-        type : IS_LIKED_ACTION.FAILURE,
+        type : REMOVE_NOTE_ITEM.FAILURE,
     })
-};
-
-// SETLIKED
-export const setLiked = {
-
-    request : (id) => ({
-        type : SET_LIKED_ACTION.REQUEST,
-        payload : {
-            id,
-        }
-    }),
-
-    success : () => ({
-        type : SET_LIKED_ACTION.SUCCESS,
-    }),
-
-    failure : () => ({
-        type : SET_LIKED_ACTION.FAILURE,
-    })
-};
-
-// CANCELLIKED
-export const cancelLiked = {
-
-    request : (id) => ({
-        type : CANCEL_LIKED_ACTION.REQUEST,
-        payload : {
-            id,
-        }
-    }),
-
-    success : () => ({
-        type : CANCEL_LIKED_ACTION.SUCCESS,
-    }),
-
-    failure : () => ({
-        type : CANCEL_LIKED_ACTION.FAILURE,
-    })
-
 };

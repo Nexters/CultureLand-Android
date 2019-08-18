@@ -133,20 +133,3 @@ export function CATEGORY_KEY(category){
             return 5;
     }
 }
-
-export function CATEGORY_KOR(category){
-    switch(category){
-        case CATEGORY.ALL_PRODUCT:
-            return "전체";
-        case CATEGORY.EXHIBITION:
-            return "전시";
-        case CATEGORY.CONCERT:
-            return "콘서트";
-        case CATEGORY.MUSICAL:
-            return "뮤지컬";
-        case CATEGORY.PLAY:
-            return "연극";
-        case CATEGORY.ETC:
-            return "기타";
-    }
-}

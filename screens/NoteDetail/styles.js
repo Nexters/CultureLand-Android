@@ -73,13 +73,13 @@ export default styles = function (screenWidth, screenHeight, calc) {
             flex: 1,
             width: '100%',
             marginTop: calc.getRegHeightDp(3),
+
             paddingHorizontal: calc.getRegWidthDp(28),
         },
         image_wrapper: {
             flex: 1,
             justifyContent: 'center',
             alignItems: 'center',
-            width: '100%',
             height: calc.getRegHeightDp(212),
             borderRadius: 5,
             elevation: 5,
@@ -87,9 +87,8 @@ export default styles = function (screenWidth, screenHeight, calc) {
             backgroundColor: '#fff',
         },
         image: {
-            flex: 1,
             width: '100%',
-            height: 'auto',
+            height: calc.getRegHeightDp(300),
         },
         note_bottom_wrapper: {
             flex: 1,

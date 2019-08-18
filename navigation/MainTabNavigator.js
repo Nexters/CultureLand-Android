@@ -10,8 +10,7 @@ import ItemDetailScreen from '../screens/ItemDetail/ItemDetailTemplate'
 import MyPageScreen from "../screens/MyPage"
 import PlanedListScreen from '../screens/PlannedList/index'
 import MainScreen from '../screens/Main';
-import NoteDetailScreen from '../screens/NoteDetail/index';
-import NoteEditScreen from '../screens/NoteEdit/index';
+import NoteDetailScreen from '../screens/NoteDetail';
 import NoteListScreen from '../screens/NoteList/index';
 import SignScreen from '../screens/Sign';
 
@@ -57,7 +56,7 @@ HomeStack.path = '';
 const LinksStack = createStackNavigator(
     {
 
-        Links: NoteEditScreen ,
+        Links: NoteListScreen ,
     },
     config
 );

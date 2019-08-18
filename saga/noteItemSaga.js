@@ -1,195 +1,117 @@
 import {
-    GET_NOTE_ACTION,
-    CREATE_NOTE_ACTION,
-    UPDATE_NOTE_ACTION,
-    REMOVE_NOTE_ACTION,
-    IS_LIKED_ACTION, 
-    SET_LIKED_ACTION,
-    CANCEL_LIKED_ACTION,
+    GET_NOTE_ITEM,
+    CREATE_NOTE_ITEM,
+    UPDATE_NOTE_ITEM,
+    REMOVE_NOTE_ITEM
 } from "../actionTypes/noteItem";
 import {call, put, take} from "redux-saga/effects";
 
+export function* getNoteItemAction() {
 
-function getNote(id){
-    // MOCK
-    return {
-        error : null,
-        result : {
-            id : null,
-            note: {
-                title: '야근이라네',
-                category: '콘서트',
-                sometime: '2019-08-18',
-                place: '마루180',
-                withWho: '컬쳐랜드',
-                content: '야아그으은 행복하다 하하',
-                image: 'https://t1.daumcdn.net/movie/af91402ca4d84418b7becf6624043eb61563411826019',
-                isLiked: false,
-            },
-            error : false,
-
-        }
-    };
-}
-export function* getNoteFlow(){
-
-    while(true){
-
-        const request = yield take(GET_NOTE_ACTION.REQUEST);
-        let response = yield call(getNote, request.payload.id);
-
-        if(response.error){
-
-            yield put({
-                type : GET_NOTE_ACTION.FAILURE,
-                error : response.error,
-            })
-        }else {
-            yield put({
-                type : GET_NOTE_ACTION.SUCCESS,
-            })
-        }
-    }
 }
 
-function createNote(){
-    // MOCK
-}
-export function* createNoteFlow(){
+export function* getNoteItemFlow() {
+    while(true) {
 
-    while(true){
+        const request = yield take(GET_NOTE_ITEM.REQUEST);
 
-        const request = yield take(CREATE_NOTE_ACTION.REQUEST);
-        let response = yield call(createNote);
+        let response = yield call(getNoteItemAction, request.payload.id);
 
-        if(response.error){
-
+        if (response.error) {
+            // 실패
             yield put({
-                type : CREATE_NOTE_ACTION.FAILURE,
-                error : response.error,
+                type: GET_NOTE_ITEM.FAILURE,
+                error: response.error,
             })
-        }else {
-            yield put({
-                type : CREATE_NOTE_ACTION.SUCCESS,
-            })
-        }
-    }
-}
-
-function updateNote(id, payload){
-    // MOCK
-}
-export function* updateNoteFlow(){
-
-    while(true){
-
-        const request = yield take(UPDATE_NOTE_ACTION.REQUEST);
-        let response = yield call(updateNote, request.payload.id);
-
-        if(response.error){
-
-            yield put({
-                type : UPDATE_NOTE_ACTION.FAILURE,
-                error : response.error,
-            })
-        }else {
-            yield put({
-                type : UPDATE_NOTE_ACTION.SUCCESS,
-            })
-        }
-    }
-}
-
-
-function removeNote(id){
-    // MOCK
-}
-export function* removeNoteFlow(){
-
-    while(true){
-
-        const request = yield take(REMOVE_NOTE_ACTION.REQUEST);
-        let response = yield call(removeNote,request.payload.id);
-
-        if(response.error){
-
-            yield put({
-                type : REMOVE_NOTE_ACTION.FAILURE,
-                error : response.error,
-            })
-        }else {
-            yield put({
-                type : REMOVE_NOTE_ACTION.SUCCESS,
-            })
-        }
-    }
-}
-
-
-export function isLiked(id){
-    //MOCK
-}
-export function* isLikedFlow(){
-    while(true){
-        const request = yield take(IS_LIKED_ACTION.REQUEST);
-        let response = yield call(isLiked,request.payload.id);
-
-        if(response.error){
-
-            yield put({
-                type : IS_LIKED_ACTION.FAILURE,
-                error : response.error,
-            })
-        }else {
-            yield put({
-                type : IS_LIKED_ACTION.SUCCESS,
+        } else {
+            // 성공
+            yield  put({
+                type: GET_NOTE_ITEM.SUCCESS,
                 result : response.result,
             })
         }
     }
 }
 
-function setLiked(){
-    // MOCK
+export function* createNoteItemAction() {
+
 }
-export function* setLikedFlow(){
 
-    while(true){
+export function* createNoteItemFlow() {
+    while(true) {
 
-        const request = yield take(SET_LIKED_ACTION.REQUEST);
-        let response = yield call(setLiked,request.payload.id);
+        const request = yield take(CREATE_NOTE_ITEM.REQUEST);
 
-        if(response.error){
 
+        let response = yield call(createNoteItemAction, request.payload);
+
+        if (response.error) {
+            // 실패
             yield put({
-                type : CANCEL_LIKED_ACTION.FAILURE,
-                error : response.error,
+                type: CREATE_NOTE_ITEM.FAILURE,
+                error: response.error,
             })
-        }else {
-            yield put({
-                type : CANCEL_LIKED_ACTION.SUCCESS,
+        } else {
+            // 성공
+            yield  put({
+                type: CREATE_NOTE_ITEM.SUCCESS,
+                result : response.result,
             })
         }
     }
 }
 
-function cancelLiked(id){
-    //MOCK
+export function* updateNoteItemAction() {
+
 }
-export function* cancelLikedFlow(){
-    while(true){
-        const request = yield take(CANCEL_LIKED_ACTION.REQUEST);
-        let response = yield call(cancelLiked,request.payload.id);
 
-        if(response.error){
+export function* updateNoteItemFlow() {
+    while(true) {
 
+        const request = yield take(UPDATE_NOTE_ITEM.REQUEST);
+
+
+        let response = yield call(updateNoteItemAction, request.payload);
+
+        if (response.error) {
+            // 실패
             yield put({
-                type : CANCEL_LIKED_ACTION.FAILURE,
-                error : response.error,
+                type: UPDATE_NOTE_ITEM.FAILURE,
+                error: response.error,
             })
-        }else {
+        } else {
+            // 성공
+            yield  put({
+                type: UPDATE_NOTE_ITEM.SUCCESS,
+                result : response.result,
+            })
+        }
+    }
+}
+
+export function* removeNoteItemAction() {
+
+}
+
+export function* removeNoteItemFlow() {
+    while(true) {
+
+        const request = yield take(REMOVE_NOTE_ITEM.REQUEST);
+
+
+        let response = yield call(removeNoteItemAction, request.payload.id);
+
+        if (response.error) {
+            // 실패
             yield put({
-                type : CANCEL_LIKED_ACTION.SUCCESS,
+                type: REMOVE_NOTE_ITEM.FAILURE,
+                error: response.error,
+            })
+        } else {
+            // 성공
+            yield  put({
+                type: REMOVE_NOTE_ITEM.SUCCESS,
+                result : response.result,
             })
         }
     }

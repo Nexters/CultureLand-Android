@@ -1,4 +1,5 @@
 import {GET_DIARY_LIST_ACTION,LIST_TYPE} from "../actionTypes/diaryList";
+import {GET_DIARY_LIST_ACTION} from "../actionTypes/diaryList";
 import {combineReducers} from 'redux';
 
 
