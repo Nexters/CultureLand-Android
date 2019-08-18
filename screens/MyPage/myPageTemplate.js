@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 
 import PropTypes from 'prop-types';
-import {RatioCalculator} from "../../util";
+import {CATEGORY, RatioCalculator} from "../../util";
 import CategoryType from "../../domain/CategoryType";
 import Entypo from '@expo/vector-icons/Entypo'
 import ConcertImage from './asset/concert.svg';
@@ -121,12 +121,12 @@ export default class MyPageScreen extends Component {
         this.props.getMyPageCount();
 
         this.categories = [
-            new CategoryType("좋아하는\n기록", "",this.props.likedCount,"#e44343",<LikeImage width={38} height={38}/>),
-            new CategoryType("전시", "", this.props.exhibitionCount,"",<ExhibitionImage width={38} height={38}/>),
-            new CategoryType("콘서트", "", this.props.concertCount,"",<ConcertImage width={38} height={38}/>),
-            new CategoryType("뮤지컬", "", this.props.musicalCount,"",<MusicalImage width={38} height={38}/>),
-            new CategoryType("연극", "", this.props.playCount,"",<PlayImage width={38} height={38}/>),
-            new CategoryType("기타", "", this.props.etcCount,"",<EtcImage width={38} height={38}/>)
+            new CategoryType("좋아하는\n기록", this.props.likedCount,"#e44343",<LikeImage width={38} height={38}/>),
+            new CategoryType("전시", this.props.exhibitionCount,"",<ExhibitionImage width={38} height={38}/>),
+            new CategoryType("콘서트", this.props.concertCount,"",<ConcertImage width={38} height={38}/>),
+            new CategoryType("뮤지컬", this.props.musicalCount,"",<MusicalImage width={38} height={38}/>),
+            new CategoryType("연극", this.props.playCount,"",<PlayImage width={38} height={38}/>),
+            new CategoryType("기타", this.props.etcCount,"",<EtcImage width={38} height={38}/>)
         ];
         this.contentJSX = new Array(6);
 

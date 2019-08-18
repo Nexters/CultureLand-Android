@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import template from './diaryListScreen';
 import {getAdditionalList, getDiaryList} from "../../actions/diaryList";
 import {getCultureList,getLoading,getError} from "../../selectors/diaryListSelector";
-import {getCultureList} from "../../selectors/diaryListSelector";
+
 
 function mapStateToProps(state) {
 

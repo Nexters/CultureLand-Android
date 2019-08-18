@@ -22,7 +22,7 @@ import SignScreen from './screens/Sign/signTemplate';
 import MainScreen from './screens/Main';
 import NoteDetailScreen from './screens/NoteDetail';
 import NoteEditScreen from './screens/NoteEdit';
-import NoteListScreen from './screens/NoteList';
+
 
 const sagaMiddleware = createSagaMiddleware();
 

@@ -4,10 +4,10 @@ import { GET_DIARY_LIST_ACTION , GET_ADDITIONAL_DIARY_LIST_ACTION} from "../acti
 
 
 export const getDiaryList = {
-    request : (id) => ({
+    request : (listType) => ({
         type : GET_DIARY_LIST_ACTION.REQUEST,
         payload : {
-            itemType , // 카테고리 or 날짜
+            listType , // 카테고리 or 날짜
         }
     }),
 

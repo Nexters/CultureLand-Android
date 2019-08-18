@@ -31,7 +31,7 @@ const screenHeight = Math.round(Dimensions.get('window').height);
 const calc = new RatioCalculator(screenWidth, screenHeight);
 
 
-export class ListItem extends Component {
+export default class ListItem extends Component {
     /**
      *
      *  처음 불러올 떄, 좋아요리스트에 있으면 하트 채워진 상태로 로딩!
@@ -101,6 +101,7 @@ export class ListItem extends Component {
                         </View>
                     </View>
                     <RBSheet
+
                             ref={ref => {
                                 this.RBSheet = ref;
                             }}
