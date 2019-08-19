@@ -7,47 +7,19 @@ import {
     TouchableOpacity,
     FlatList,
 } from 'react-native';
-import {RatioCalculator} from "../util";
-import {WishListItem} from './WishListItem'
-import InactiveImage from "../assets/images/icon/search/inactive.svg";
+import PropTypes from 'prop-types';
+import {RatioCalculator, MAIN_MONTH, ISNULL} from "../../util";
+import {WishListItem} from '../WishListItem'
+import InactiveImage from "../../assets/images/icon/search/inactive.svg";
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
 
 const calc = new RatioCalculator(screenWidth, screenHeight);
 
-export class WishListComponent extends Component {
+export default class WishListComponent extends Component {
     constructor (props) {
         super(props);
-
-        this.state = {
-            isWishNull: true,
-        }
-    }
-    state = {
-        data: [
-            {
-                key: 0,
-                category: '콘서트',
-                title: '2019 렛츠락 페스티벌',
-                date: '2019.09.21 ~ 2019.09.22',
-                // like: true
-            },
-            {
-                key: 0,
-                category: '콘서트',
-                title: '2019 렛츠락 페스티벌',
-                date: '2019.09.21 ~ 2019.09.22',
-                // like: true
-            },
-            {
-                key: 0,
-                category: '콘서트',
-                title: '2019 렛츠락 페스티벌',
-                date: '2019.09.21 ~ 2019.09.22',
-                // like: true
-            },
-        ]
     }
 
     _renderItem = ({item}) => (
@@ -56,13 +28,26 @@ export class WishListComponent extends Component {
             category={item.category}
             title={item.title}
             date={item.date}
-            // like={item.like}
+            isLiked={item.isLiked}
+            imageUrl={item.imageUrl}
         />
     )
     render() {
+        const wishList = this.props.wishList;
+        const wishListPropsArray = []
+        wishList.map((wishList, index) => {
+            wishListPropsArray.push({
+                key: index,
+                category: wishList.category,
+                title: wishList.title,
+                date: wishList.date,
+                isLiked: wishList.isLiked,
+                imageUrl: wishList.imageUrl,
+            })
+        })
         return (
             <View style={styles.wishlist_container}>
-                {  this.state.isWishNull ? 
+                {  ISNULL(wishList) ? 
                     <TouchableOpacity
                         activeOpacity={0.7}
                         onPress={() => alert('hello')}
@@ -73,7 +58,7 @@ export class WishListComponent extends Component {
                     </TouchableOpacity>
                 :
                     <FlatList
-                        data={this.state.data}
+                        data={wishListPropsArray}
                         renderItem={this._renderItem}
                     >
                     </FlatList>
@@ -117,3 +102,9 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
     },
 })
+
+WishListComponent.PropTypes ={
+    wishList : PropTypes.string,
+    getLoading : PropTypes.string,
+    getError : PropTypes.string,
+};

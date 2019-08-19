@@ -57,7 +57,7 @@ export class WishListItem extends Component {
                 style={styles.wishlist_item}
             >
                 <View style={styles.wishlist_image_container}>
-                    <Image style={styles.wishlist_image}/>
+                    <Image source={{uri : this.props.imageUrl}}/>
                 </View>
                 <View style={styles.wishlist_text_container}>
                     <Text style={styles.wishlist_subtitle}>{this.props.category}</Text>

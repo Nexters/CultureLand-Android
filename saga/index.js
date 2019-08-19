@@ -5,6 +5,7 @@ import {fork} from "redux-saga/effects";
 import {getProductListFlow} from "./productListSaga"
 import {isWishedFlow, cancelWishedFlow, setWishedFlow, getItemDetailFlow} from "./itemDetailSaga";
 import {myPageAccountFlow, myPageCountFlow} from "./myPageSaga";
+import {mainNotelistFlow, mainWishlistFlow} from "./mainSaga";
 
 import {
     getNoteFlow, 
@@ -51,5 +52,7 @@ export default function* root() {
     yield fork(isLikedFlow);
     yield fork(setLikedFlow);
     yield fork(cancelLikedFlow);
+    yield fork(mainNotelistFlow);
+    yield fork(mainWishlistFlow);
 
 }

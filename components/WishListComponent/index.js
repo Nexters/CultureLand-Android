@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import template from './mainTemplate';
+import template from './wishListTemplate';
 import {getMainCount, getMainWishlist} from "../../actions/main";
 import {getNoteList, getWishList, getLoading, getError} from "../../selectors/mainSelector";
 
