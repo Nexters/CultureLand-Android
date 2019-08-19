@@ -1,3 +1,4 @@
+
 import {AppLoading} from 'expo';
 import {Asset} from 'expo-asset';
 import * as Font from 'expo-font';
@@ -22,6 +23,7 @@ import SignScreen from './screens/Sign/signTemplate';
 import MainScreen from './screens/Main';
 import NoteDetailScreen from './screens/NoteDetail';
 import NoteEditScreen from './screens/NoteEdit';
+import PlanedListScreen from "./screens/PlannedList/index";
 
 
 const sagaMiddleware = createSagaMiddleware();
@@ -50,7 +52,7 @@ export default function App(props) {
         return (
             <Provider store={store}>
                 <View style={styles.container}>
-                    <AppNavigator/>
+                    <SignScreen/>
                     {/* <AppNavigator/>*/}
                 </View>
             </Provider>

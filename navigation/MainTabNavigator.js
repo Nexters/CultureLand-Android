@@ -55,7 +55,7 @@ HomeStack.path = '';
 
 const LinksStack = createStackNavigator(
     {
-        Links: NoteEditScreen ,
+        Links: PlanedListScreen ,
     },
     config
 );
@@ -125,6 +125,10 @@ ItemDetailStack.navigationOptions = {
 };
 
 ItemDetailStack.path = '';
+
+
+
+
 
 
 

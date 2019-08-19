@@ -48,7 +48,6 @@ export default class PlanedListScreen extends Component {
 
         };
         this.searchManager = new PlannedListSearchManagerImpl(this);
-        this.navigate = this.props.navigation;
 
     }
 
@@ -70,7 +69,7 @@ export default class PlanedListScreen extends Component {
                 <View
                     key={i + index}
                     style={styles.item_wrapper}>
-                    <TouchableWithoutFeedback onPress={() => navigate('Settings')}>
+                    <TouchableWithoutFeedback onPress={() => navigate('ItemDetail')}>
                         <View>
                             <Text stye={{fontcolor : "#fff"}}>Hello world</Text>
                         </View>
