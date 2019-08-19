@@ -24,7 +24,7 @@ import MainScreen from './screens/Main';
 import NoteDetailScreen from './screens/NoteDetail';
 import NoteEditScreen from './screens/NoteEdit';
 import PlanedListScreen from "./screens/PlannedList/index";
-
+import * as SecureStore from "expo-secure-store/build/SecureStore";
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -36,8 +36,12 @@ const store = createStore(
 
 sagaMiddleware.run(rootSaga);
 
+
+
 export default function App(props) {
     const [isLoadingComplete, setLoadingComplete] = useState(false);
+
+
 
 
     if (!isLoadingComplete && !props.skipLoadingScreen) {
@@ -49,6 +53,8 @@ export default function App(props) {
             />
         );
     } else {
+
+
         return (
             <Provider store={store}>
                 <View style={styles.container}>
@@ -61,6 +67,8 @@ export default function App(props) {
 }
 
 async function loadResourcesAsync() {
+
+
     await Promise.all([
         Asset.loadAsync([
             require('./assets/images/robot-dev.png'),
@@ -80,6 +88,7 @@ async function loadResourcesAsync() {
             'noto-sans-thin' : require('./assets/fonts/NotoSansCJKkr-Thin.otf'),
 
         }),
+
     ]);
 }
 
@@ -91,6 +100,7 @@ function handleLoadingError(error) {
 }
 
 function handleFinishLoading(setLoadingComplete) {
+
     setLoadingComplete(true);
 }
 
