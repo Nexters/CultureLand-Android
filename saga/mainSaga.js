@@ -18,7 +18,7 @@ export function* mainNotelistFlow () {
         const request = yield take(GET_MAIN_NOTELIST_ACTION.REQUEST);
 
 
-        let response = yield call(getMainNotelistAction, request.payload.dateType);
+        let response = yield call(getMainNotelistAction, request.payload.yearType);
 
         if (response.error) {
             // 실패

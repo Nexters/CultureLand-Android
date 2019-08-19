@@ -15,9 +15,9 @@ import {
 import PropTypes from 'prop-types';
 import {Dropdown} from 'react-native-material-dropdown';
 import {RatioCalculator} from "../../util";
-import {MainCarousel} from "../../components/MainCarousel"
+import MainCarousel from "../../components/MainCarousel/index"
 import {FloatingButton} from "../../components/FloatingButton"
-import {WishListComponent} from "../../components/WishListComponent"
+import WishListComponent from "../../components/WishListComponent/index"
 import moment from "moment";
 
 const screenWidth = Math.round(Dimensions.get('window').width);
@@ -39,14 +39,16 @@ export default class MainScreen extends Component {
         super(props);
 
         this.state = {
-            isDataNull : false,
+            isData : true,
         }
     }
 
-    
+    componentDidMount(){
+        
+    }
+
     render () {
         const currentDate= moment(new Date()).format("YYYY-MM-DD")
-
         return (
             <View style={styles.container}>
                 <ScrollView>
@@ -68,7 +70,6 @@ export default class MainScreen extends Component {
                                 },
                             ]}
                             fontSize={24}
-                            // dropdownOffset={{top: 0, left: 0}}
                             dropdownPosition={0}
                             inputContainerStyle={{
                                 borderBottomColor: 'transparent',
@@ -91,23 +92,23 @@ export default class MainScreen extends Component {
                             <Text style={styles.main_top_date}> {currentDate} </Text>
                         </Text>
                     </View>
-                    {this.state.isDataNull ?
-                        (<View style={styles.main_starter_wrapper}>
-                            <Text style={styles.main_starter_title}>{'아직 기록하신\n문화생활이 없으시군요!'}</Text>
-                            <Text style={styles.main_starter_subtitle}>{'어서 밖으로 나가서 문화생활을 즐기고\n컬러에 기록을 남겨주세요!'}</Text>
-                        </View>)
-                        :
+                    {this.state.isData ?
                         (<View style={styles.main_wrapper}>
                             <View style={styles.carousel_wrapper}>
                                 <View style = {styles.main_title_line} />
                                 <Text style={styles.main_title}>월별 기록</Text>
-                                <MainCarousel style={styles.main_carousel_container} />
+                                <MainCarousel style={styles.main_carousel_container}/>
                             </View>
                             <View style={styles.wishlist_wrapper}>
                                 <View style = {styles.main_title_line} />
                                 <Text style={styles.main_title}>찜 목록</Text>
                                 <WishListComponent style={styles.wishlist_list}/>
                             </View>
+                        </View>)
+                        :
+                        (<View style={styles.main_starter_wrapper}>
+                            <Text style={styles.main_starter_title}>{'아직 기록하신\n문화생활이 없으시군요!'}</Text>
+                            <Text style={styles.main_starter_subtitle}>{'어서 밖으로 나가서 문화생활을 즐기고\n컬러에 기록을 남겨주세요!'}</Text>
                         </View>)
                     }
                 </ScrollView>
@@ -117,7 +118,7 @@ export default class MainScreen extends Component {
     }
 }
 
-MainScreen.propTypes = {
+MainScreen.PropTypes = {
     noteList : PropTypes.string,
     wishList : PropTypes.string,
     getLoading : PropTypes.string,

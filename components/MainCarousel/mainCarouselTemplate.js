@@ -9,19 +9,18 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import Carousel from 'react-native-snap-carousel';
-import {RatioCalculator} from "../util";
-
-import CardImageFirst from "../assets/images/illustration/Home_card01.svg";
-import CardImageSecond from "../assets/images/illustration/Home_card02.svg";
-import CardImageThird from "../assets/images/illustration/Home_card03.svg";
-import TicketImage from "../assets/images/icon/ticket.svg";
+import {RatioCalculator, MAIN_MONTH, ISNULL} from "../../util";
+import CardImageFirst from "../../assets/images/illustration/Home_card01.svg";
+import CardImageSecond from "../../assets/images/illustration/Home_card02.svg";
+import CardImageThird from "../../assets/images/illustration/Home_card03.svg";
+import TicketImage from "../../assets/images/icon/ticket.svg";
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
 
 const calc = new RatioCalculator(screenWidth, screenHeight);
 
-export class MainCarousel extends Component {
+export default class MainCarousel extends Component {
     /**
      *
      *  처음 불러올 떄, 노트 리스트 데이터 없으면 초기 안내 스크린 출력
@@ -30,14 +29,9 @@ export class MainCarousel extends Component {
 
     constructor (props) {
         super(props);
-
-        this.state = {
-            isNoteNull : true,
-        }
     }
 
-    _renderItem ({item, index}) {
-        console.log(this.props.noteList)
+    _renderNoteItem ({item, index}) {
         return (
             <TouchableOpacity
                 activeOpacity={1}
@@ -59,7 +53,7 @@ export class MainCarousel extends Component {
             </TouchableOpacity>
         );
     }
-    _renderItemNull ({item, index}) {
+    _renderInfoItem ({item, index}) {
         return (
             <TouchableOpacity
                 activeOpacity={1}
@@ -76,67 +70,48 @@ export class MainCarousel extends Component {
         );
     }
     render () {
+        const noteList = this.props.noteList;
+        const notePropsArray = []
+        noteList.map((note, index) => {
+            notePropsArray.push({
+                monthType: note.monthType,
+                title: MAIN_MONTH(note.monthType),
+                count: note.count,
+                imageUrl: note.imageUrl,
+            })
+        })
+        
+        const noteData = notePropsArray;
+        const infoData = [
+            {
+                introTitle: '아직 기록이 없으시군요!\n최근 경험한 문화생활이 있나요?',
+                introImage: <CardImageFirst/>
+            },
+            {
+                introTitle: '무엇을 보고, 느꼈나요?\n소감을 자유롭게 적어보세요.',
+                introImage: <CardImageSecond/>
+            },
+            {
+                introTitle: '문화를 즐기는 컬쳐러버로서,\n당신의 발자취를 남겨보세요!',
+                introImage: <CardImageThird/>
+            },
+        ]
+
         return (
             <View>
-                {this.state.isNoteNull ?
-                    <Carousel   
-                        ref={(c) => { this._carousel = c; }}
-                        data={[
-                            {
-                                introTitle: '아직 기록이 없으시군요!\n최근 경험한 문화생활이 있나요?',
-                                introImage: <CardImageFirst/>
-                            },
-                            {
-                                introTitle: '무엇을 보고, 느꼈나요?\n소감을 자유롭게 적어보세요.',
-                                introImage: <CardImageSecond/>
-                            },
-                            {
-                                introTitle: '문화를 즐기는 컬쳐러버로서,\n당신의 발자취를 남겨보세요!',
-                                introImage: <CardImageThird/>
-                            },
-                        ]}
-                        renderItem={this._renderItemNull}
-                        sliderWidth={sliderWidth}
-                        itemWidth={itemWidth}
-                        firstItem={0}
-                        containerCustomStyle={styles.slide_container}
-                        contentContainerCustomStyle={styles.slider_content_container}
-                        layout={'default'}
-                        inactiveSlideOpacity={1}
-                        inactiveSlideScale={1}
-                    />
-                :
-                    <Carousel
-                        ref={(c) => { this._carousel = c; }}
-                        data={[
-                            {
-                                title: 'JUNE',
-                                count: 3,
-                            },
-                            {
-                                title: 'JULY',
-                                count: 4,
-                            },
-                            {
-                                title: 'AUGUST',
-                                count: 3,
-                            },
-                            {
-                                title: 'SEPTEMBER',
-                                count: 4,
-                            },
-                        ]}
-                        renderItem={this._renderItem}
-                        sliderWidth={sliderWidth}
-                        itemWidth={itemWidth}
-                        firstItem={0}
-                        containerCustomStyle={styles.slide_container}
-                        contentContainerCustomStyle={styles.slider_content_container}
-                        layout={'default'}
-                        inactiveSlideOpacity={1}
-                        inactiveSlideScale={1}
-                    />
-                }
+                <Carousel
+                    ref={(c) => { this._carousel = c; }}
+                    data={ ISNULL(noteList) ? infoData : noteData}
+                    renderItem={ ISNULL(noteList) ? this._renderInfoItem : this._renderNoteItem}
+                    sliderWidth={sliderWidth}
+                    itemWidth={itemWidth}
+                    firstItem={0}
+                    containerCustomStyle={styles.slide_container}
+                    contentContainerCustomStyle={styles.slider_content_container}
+                    layout={'default'}
+                    inactiveSlideOpacity={1}
+                    inactiveSlideScale={1}
+                />
             </View>
         );
     }
@@ -253,7 +228,6 @@ const styles = StyleSheet.create({
 
 MainCarousel.PropTypes ={
     noteList : PropTypes.string,
-    wishList : PropTypes.string,
     getLoading : PropTypes.string,
     getError : PropTypes.string,
 };

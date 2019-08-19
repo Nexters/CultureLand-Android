@@ -2,10 +2,10 @@ import { GET_MAIN_NOTELIST_ACTION, GET_MAIN_WISHLIST_ACTION } from "../actionTyp
 
 export const getMainCount = {
 
-    request : (dateType) => ({
+    request : (yearType) => ({
         type : GET_MAIN_NOTELIST_ACTION.REQUEST,
         payload : {
-            dateType , // 201908
+            yearType , // 2019
         }
     }),
 
