@@ -12,7 +12,7 @@ import PlanedListScreen from '../screens/PlannedList/index'
 import MainScreen from '../screens/Main/index';
 import NoteDetailScreen from '../screens/NoteDetail/index';
 import NoteEditScreen from '../screens/NoteEdit/index';
-import SignScreen from '../screens/Sign';
+import SignScreen from '../screens/Sign/index';
 
 import styleFn from "../screens/PlannedList/styles";
 import {RatioCalculator} from "../util";
