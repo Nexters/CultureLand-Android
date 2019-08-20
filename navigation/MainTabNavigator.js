@@ -38,6 +38,7 @@ const CultureStack = createStackNavigator(
 );
 
 CultureStack.navigationOptions = {
+    header : null,
     tabBarLabel: ' ',
     tabBarIcon: ({focused}) => (
         <TabBarIcon
@@ -61,6 +62,8 @@ const HomeStack = createStackNavigator(
 );
 
 HomeStack.navigationOptions = {
+    header : null,
+
     tabBarLabel: ' ',
     tabBarIcon: ({focused}) => (
         <TabBarIcon
@@ -85,6 +88,8 @@ const MypageStack = createStackNavigator(
 );
 
 MypageStack.navigationOptions = {
+    header : null,
+
     tabBarLabel: ' ',
     tabBarIcon: ({focused}) => (
         <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}/>
@@ -118,6 +123,7 @@ const ItemDetailStack = createStackNavigator(
 );
 
 ItemDetailStack.navigationOptions = {
+    header : null,
     tabBarLabel: ' ',
     tabBarIcon: ({focused}) => (
         <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}/>
