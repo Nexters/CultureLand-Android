@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import styleFn from "./styles"
 import {Dimensions, ScrollView, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View} from 'react-native';
-import {RatioCalculator} from "../../util";
+import {omitAutoCompleteText, RatioCalculator} from "../../util";
 import Entypo from '@expo/vector-icons/Entypo'
 import AntDesign from '@expo/vector-icons/AntDesign'
 import PropTypes from 'prop-types';
-
+import Highlighter from 'react-native-highlight-words';
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
 
@@ -23,6 +23,7 @@ export default class SearchModeScreen extends Component {
             isSearchMode: this.props.isSearchMode,
             errorMessage: "",
             lastSearchRequest : 0,
+            keyword : '',
         };
 
         this.item = [
@@ -56,6 +57,7 @@ export default class SearchModeScreen extends Component {
                 diff+", 입력 텍스트"+keyword);
 
             this.setState({lastSearchRequest : now});
+            this.setState({keyword : keyword});
 
             this.props.searchRequest(keyword);
         }
@@ -109,10 +111,19 @@ export default class SearchModeScreen extends Component {
                                         <TouchableOpacity
                                             onPress={this.props.onSelectSearchResult}>
                                             <View style={styles.active_search_result_wrapper}>
-
-                                                <Text style={styles.active_search_result_content}>
-                                                    {item.title}
-                                                </Text>
+                                                <Highlighter
+                                                    onLayout={(e)=>{
+                                                        console.log(`${JSON.stringify(e.nativeEvent.layout.width)} 온 레이아웃`)
+                                                    }}
+                                                    highlightStyle={{
+                                                        color: '#f15642',
+                                                    }}
+                                                    searchWords={
+                                                        [this.state.keyword]
+                                                    }
+                                                    style={styles.active_search_result_content}
+                                                    textToHighlight={omitAutoCompleteText(item.title)}>
+                                                </Highlighter>
                                             </View>
                                         </TouchableOpacity>)
                                 })

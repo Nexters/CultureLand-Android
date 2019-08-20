@@ -50,6 +50,7 @@ export default class ItemDetailScreen extends Component {
         };
 
         this.props.getItemInfo(1);
+        console.log("시작");
     }
 
     componentDidMount(){

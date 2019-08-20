@@ -8,7 +8,7 @@ const initialState = {
     category: CATEGORY.ALL_PRODUCT,
     filter: PRODUCT_LIST_FILTER.NEW,
     search_word: '',
-    loading: false,
+    loading: true,
     getProductListError : '',
     searchProductListError : '',
 

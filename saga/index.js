@@ -54,5 +54,6 @@ export default function* root() {
     yield fork(cancelLikedFlow);
     yield fork(mainNotelistFlow);
     yield fork(mainWishlistFlow);
+    yield fork(getItemDetailFlow);
 
 }

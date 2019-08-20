@@ -1,4 +1,4 @@
-
+import {Client} from './api/Client';
 import {AppLoading} from 'expo';
 import {Asset} from 'expo-asset';
 import * as Font from 'expo-font';
@@ -36,6 +36,7 @@ const store = createStore(
 
 sagaMiddleware.run(rootSaga);
 
+Client.init();
 
 
 export default function App(props) {
@@ -58,13 +59,14 @@ export default function App(props) {
         return (
             <Provider store={store}>
                 <View style={styles.container}>
-                    <SignScreen/>
+                    <ItemDetailScreen/>
                     {/* <AppNavigator/>*/}
                 </View>
             </Provider>
         );
     }
 }
+
 
 async function loadResourcesAsync() {
 

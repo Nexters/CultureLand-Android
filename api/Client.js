@@ -1,4 +1,7 @@
-import {ACCESS_TOKEN, EXPIRED_DATE} from "../util";
+import {
+    ACCESS_TOKEN, EXPIRED_AT, OAUH_SOCIAL_SERVICE, SERVICE_ACCESS_TOKEN, SOCIAL_ACCESS_TOKEN,
+    trimCurrentMillisTo10Fig
+} from "../util";
 
 const jwtDecode = require('jwt-decode');
 const FACE_BOOK = "facebook";
@@ -10,7 +13,38 @@ class ClientClass {
     constructor() {
         this.baseURL = "http://54.180.86.141:8080";
         this.token = null;
+        this.socialService = null;
+        this.socialAccessToken = null;
+        this.serverAccessToken = null;
+        this.expiredAt = null;
+    }
 
+    setSocialService(socialService){
+        this.socialService = socialService;
+    }
+    setServerAccessToken(token){
+        this.serverAccessToken = token;
+    }
+    setSocialAccessToken(token){
+        this.socialAccessToken = token;
+    }
+    getServerToken(){
+        return this.serverAccessToken;
+    }
+    getSocialToken(){
+        return this.socialAccessToken;
+    }
+    setExpiredAt(expiredAt){
+        this.expiredAt =  expiredAt;
+    }
+
+    async init(){
+        let serverToken = await SecureStore.getItemAsync(SERVICE_ACCESS_TOKEN);
+        let socialToken = await SecureStore.getItemAsync(SOCIAL_ACCESS_TOKEN);
+        let socialService = await SecureStore.getItemAsync(OAUH_SOCIAL_SERVICE);
+        this.setSocialService(socialService);
+        this.setServerAccessToken(serverToken)
+        this.setSocialAccessToken(socialToken);
     }
 
     getBaseURL() {
@@ -45,9 +79,15 @@ class ClientClass {
         return `${this.getBaseURL()}/cultureInfos`;
     }
 
+    /*
     getCultureInfoByQueriesURL(category, sort, page) {
         return `${this.getCultureInfoBaseURL()}?category=${category}\
         &sort=${sort}&page=${page}`;
+    }
+    */
+    getCultureInfoByQueriesURL(category, page) {
+        return `${this.getCultureInfoBaseURL()}?category=${category}\
+        &page=${page}`;
     }
 
     getCultureSearchURL(keyword) {
@@ -59,12 +99,7 @@ class ClientClass {
     }
 
 
-    setToken(token) {
-        console.log("토큰저장");
-        this.token = token;
-    }
-
-    signInOrUpFacebook(token) {
+    signInOrUpFacebook() {
 
         return fetch(this.getSignInOrUpURL(FACE_BOOK), {
 
@@ -73,33 +108,70 @@ class ClientClass {
                 "Content-Type": "application/json; charset=utf-8"
             },
             body: JSON.stringify({
-                accessToken: token
+                accessToken: this.getSocialToken(),
             })
 
         })
+    }
 
+    signInOrUp(socialService){
+        return fetch(this.getSignInOrUpURL(socialService), {
 
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json; charset=utf-8"
+            },
+            body: JSON.stringify({
+                accessToken: this.getSocialToken(),
+            })
+
+        }).then((res) => {
+            return res.json();
+        }).catch(err => {
+            return { err }
+        })
     }
 
     async credentialCall(url, options) {
 
 
-        await SecureStore.getItemAsync(EXPIRED_DATE, (expiredDate => {
+        await SecureStore.getItemAsync(EXPIRED_AT).then(async expiredDate => {
 
-            if (expiredDate < Date.now()) {
-                // 갱신요청
+            let currentTime = trimCurrentMillisTo10Fig();
+            if (expiredDate < currentTime) {
+
                 console.log(`Token 갱신요청 expired_at [${expiredDate}] 
-                current is [${Date.now()}] `);
-                // setToken(새로운토큰)
+                current is [${currentTime}] `);
+
+                let response = await this.signInOrUp(this.socialService);
+
+                const decodedToken = jwtDecode(response.message);
+                this.setServerAccessToken(response.message);
+
+                await SecureStore.setItemAsync(SERVICE_ACCESS_TOKEN, response.message);
+                await SecureStore.setItemAsync(EXPIRED_AT, decodedToken.exp.toString());
+                await SecureStore.getItemAsync(EXPIRED_AT).then((expiredDate) => {
+                    CLient.setExpiredAt(expiredDate);
+                });
+                await SecureStore.getItemAsync(SERVICE_ACCESS_TOKEN).then((token) => {
+                    Client.setServerAccessToken(token);
+                });
+
+                this.setExpiredAt(decodedToken.exp.toString());
+
+
+
+            }else{
+                console.log(`Token이 유효함  [${expiredDate}]`);
             }
-        })).catch(e => {
+        }).catch(e => {
             console.log(`credentialCall 예외발생 [ ${e} ]`);
         });
 
         const credentialOptions = {
             headers: {
                 "Content-Type": "application/json; charset=utf-8",
-                "Authorization": `Bearer ${this.token}`
+                "Authorization": `Bearer ${this.serverAccessToken}`
             },
             ...options
         };
@@ -147,8 +219,8 @@ class ClientClass {
 
     // CULTUREINFO API GROUP //
 
-    getCultureByQueries(category, sort, page) { // VERIFIED
-        return this.credentialCall(this.getCultureInfoByQueriesURL(category, sort, page), {
+    getCultureByQueries(category, page) { // VERIFIED
+        return this.credentialCall(this.getCultureInfoByQueriesURL(category, page), {
             method: "GET",
         })
     }

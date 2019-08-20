@@ -22,6 +22,7 @@ import MusicalImage from './asset/musical.svg';
 import PlayImage from './asset/play.svg';
 import TicketImage from './asset/ticket.svg';
 
+
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
 
