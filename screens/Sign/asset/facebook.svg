@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="56px" height="56px" viewBox="0 0 56 56" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.2 (78181) - https://sketchapp.com -->
+    <title>icon/login/facebook</title>
+    <desc>Created with Sketch.</desc>
+    <g id="icon/login/facebook" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group">
+            <circle id="Oval-Copy-3" stroke="#C4C4C4" opacity="0.4" cx="28" cy="28" r="28"></circle>
+            <path d="M31.9603545,20.1142857 C30.1469216,20.1142857 29.9454291,20.6285714 29.9454291,21.8285714 L29.9454291,24.0571429 L34.1767724,24.0571429 L33.9752799,28 L30.1469216,28 L30.1469216,40 L23.6991604,40 L23.6991604,28 L21.28125,28 L21.28125,23.8857143 L23.6991604,23.8857143 L23.6991604,21.3142857 C23.6991604,17.8857143 25.3111007,16 29.9454291,16 L34.78125,16 L34.78125,20.1142857 L31.9603545,20.1142857 Z" id="Path" fill="#4267B2" fill-rule="nonzero"></path>
+        </g>
+    </g>
+</svg>

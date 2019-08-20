@@ -9,6 +9,7 @@
       "android",
       "web"
     ],
+   
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -16,6 +17,11 @@
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
+    },
+    "packagerOpts": {
+      "config": "metro.config.js",
+      "sourceExts": ["js", "jsx", "svgx","svg"],
+      "transformer": "node_modules/react-native-svg-transformer/index.js"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -28,3 +34,11 @@
     }
   }
 }
+
+/*
+
+ "facebookScheme": "test",
+    "FacebookAppID":"test",
+    "facebookDisplayName": "YOUR NAME OF APP",
+
+*/
