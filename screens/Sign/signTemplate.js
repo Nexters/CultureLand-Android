@@ -1,6 +1,6 @@
 const jwtDecode = require('jwt-decode');
 
-import {FACE_BOOK_APP_ID} from '../../Constant';
+import {FACE_BOOK_APP_ID, GOOGLE_ANDROID_ID, GOOGLE_IOS_ID} from '../../Constant';
 import React, {Component} from 'react';
 import styleFn from "./styles"
 import {Dimensions, TouchableWithoutFeedback, Text, View} from 'react-native';
@@ -8,9 +8,15 @@ import * as SecureStore from 'expo-secure-store';
 
 import {Pagination} from 'react-native-snap-carousel';
 import {ImageCarousel} from './carousel/index'
-import {ACCESS_TOKEN, RatioCalculator,CATEGORY,SORT_BY_NEW,SORT_BY_POPULAR} from "../../util";
+import * as Google from 'expo-google-app-auth';
+
+import {
+    ACCESS_TOKEN, RatioCalculator, CATEGORY, SORT_BY_NEW, SORT_BY_POPULAR, EXPIRED_AT,
+    OAUH_SOCIAL_SERVICE, FACEBOOK, SOCIAL_ACCESS_TOKEN, SERVICE_ACCESS_TOKEN, GOOGLE
+} from "../../util";
 import FacebookLogo from './asset/facebook.svg';
 import KakaoLogo from './asset/kakaotalk.svg'
+import GoogleLogo from './asset/google.svg';
 import * as Facebook from 'expo-facebook';
 import {Client} from '../../api/Client';
 
@@ -22,6 +28,29 @@ const styles = styleFn(screenWidth, screenHeight, calc);
 
 export default class SignScreen extends Component {
 
+    async registerSocialCredentials(socialService, socialToken){
+        await SecureStore.setItemAsync(SOCIAL_ACCESS_TOKEN, socialToken);
+        await SecureStore.setItemAsync(OAUH_SOCIAL_SERVICE,socialService);
+        Client.setSocialService(socialService);
+        Client.setSocialAccessToken(socialToken);
+    }
+
+    async registerServerCredentials(token){
+
+        const decodedToken = jwtDecode(token);
+        await SecureStore.setItemAsync(SERVICE_ACCESS_TOKEN, token);
+
+        await SecureStore.setItemAsync(EXPIRED_AT, decodedToken.exp.toString());
+
+        await SecureStore.getItemAsync(EXPIRED_AT).then((expiredDate) => {
+            console.log("만료예정시간 " + expiredDate);
+        });
+
+        await SecureStore.getItemAsync(SERVICE_ACCESS_TOKEN).then((token) => {
+            console.log("토큰 " + token);
+            Client.setServerAccessToken(token);
+        });
+    }
     async faceBookAuth() {
 
 
@@ -41,69 +70,69 @@ export default class SignScreen extends Component {
                 const responseJSON = await response.json();
                 console.log(`접속 ${JSON.stringify(responseJSON)}! token with ${token}`);
                 try {
-                    await SecureStore.setItemAsync('access_token', token);
-                    await SecureStore.setItemAsync('userName', responseJSON.name);
-                    //SecureStore.setItemAsync('userEmail',userE);
+
+                    await this.registerSocialCredentials(FACEBOOK,token);
+
                 } catch (e) {
                     console.log("SecureStore exception " + e);
                 }
+
             } else {
-                // type === 'cancel'
                 console.log("cancel!");
             }
         } catch ({message}) {
             alert(`Facebook Login Error: ${message}`);
         }
 
-        SecureStore.getItemAsync("access_token").then((token) => {
-            const {navigate} = this.props.navigation;
-            if (token) {
-                navigate('Home');
-            }
-        });
-        SecureStore.getItemAsync("userEmail").then((email) => {
-            console.log("현재 유저의 이메일 " + email);
-        });
-        SecureStore.getItemAsync("userName").then((name) => {
-            console.log("현재 유저의 이름  " + name);
-        });
-
-        const response = await Client.signInOrUpFacebook("EAAFdyUdC4hsBAPWzY3ky1hDujAYrLdfiK4unoil8ZBbYDmuqoU85mqhwqApSTmU4JJfmoqIfzjRE5yl9rew8hUIwr6Bni2h20ZAdwG2k48aZCrIbuiZBeZC8YplgBD0uf5ODkaAeV9cysk2DHcGPnKzG8uMcGyL2mJ7P17bZA0ckxUD236yZB2Gx45D60jFIsesbKH0FGH1mXMVq3sdDbQZAuXodfSxrTH9astbA0ZBlnFAZDZD");
-        const resJson = await response.json();
 
         try {
+            const response = await Client.signInOrUp(FACEBOOK);
 
-            const decodedToken = jwtDecode(resJson.message);
-            await SecureStore.setItemAsync("access_token", resJson.message);
+            await this.registerServerCredentials(response.message);
 
-            await SecureStore.setItemAsync("expired_date", decodedToken.exp.toString());
-
-            await SecureStore.getItemAsync("expired_date").then((expiredDate) => {
-                console.log("만료예정시간 " + expiredDate);
-            });
-
-            await SecureStore.getItemAsync("access_token").then((token) => {
-                console.log("토큰 " + token);
-                Client.setToken(token);
-            })
         } catch (e) {
             // TODO 토스트메세지 오류알림
             console.log("익셉션발생 : " + e);
         }
 
-
-        let getcultures = await Client.deleteWishItem(5);
+/*
+        let getcultures = await Client.searchCultureByQuery('[');
         console.log(`받은 정보 ${JSON.stringify(getcultures)}`);
+        */
 
 
-        getcultures = await Client.getAllWishList();
-        console.log(`받은 정보 ${JSON.stringify(getcultures)}`);
 
     }
 
 
-    kakaoAuth() {
+    async googleAuth() {
+        try {
+            const result = await Google.logInAsync({
+                androidClientId: GOOGLE_ANDROID_ID,
+                iosClientId: GOOGLE_IOS_ID,
+                scopes: ['profile', 'email'],
+            });
 
+            if (result.type === 'success') {
+                console.log("구글로그인 : "+result.accessToken);
+
+                await this.registerSocialCredentials(GOOGLE,result.accessToken);
+
+                const response = await Client.signInOrUp(GOOGLE);
+
+                console.log("리스폰스 : "+JSON.stringify(response));
+                /*
+                await this.registerServerCredentials(response.message);
+                */
+
+            } else {
+                return { cancelled: true };
+            }
+        } catch (e) {
+            console.log("구글로그인 예외 : "+e);
+
+            return { error: true };
+        }
     }
 
 
@@ -127,21 +156,21 @@ export default class SignScreen extends Component {
                     <View style={styles.sign_social_service}>
 
                         <TouchableWithoutFeedback
-                            onPress={this.kakaoAuth}
+                            onPress={this.googleAuth.bind(this)}
                         >
                             <View style={styles.sign_social_item_image}>
-                                <KakaoLogo width={56} height={56}>
+                                <GoogleLogo width={56} height={56}>
 
-                                </KakaoLogo>
+                                </GoogleLogo>
                             </View>
                         </TouchableWithoutFeedback>
                         <Text style={styles.sign_social_item_text}>
-                            {`카카오톡으로\n시작하기`}
+                            {`구글로\n시작하기`}
                         </Text>
                     </View>
                     <View style={styles.sign_social_service}>
                         <TouchableWithoutFeedback
-                            onPress={this.faceBookAuth}
+                            onPress={this.faceBookAuth.bind(this)}
                         >
                             <View style={styles.sign_social_item_image}>
                                 <FacebookLogo width={56} height={56}>

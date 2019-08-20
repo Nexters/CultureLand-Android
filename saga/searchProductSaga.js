@@ -1,42 +1,51 @@
-import { SEARCH_PRODUCT } from "../actionTypes/searchProduct";
+import {SEARCH_PRODUCT} from "../actionTypes/searchProduct";
 import {call, put, take} from "redux-saga/effects";
+import {Client} from '../api/Client';
 
-function* searchProduct(keyword){
-    // MOCK //
-    return {
-        error : null,
-        result : {
-            category: "all",
-            searched_product_list : [
-                {title: "캣츠"},
-                {title: "안중근"},
-                {title: "엠씨더맥스"},
-                {title: "샤갈 색채의 마술사"}
-            ]
+async function searchProduct(keyword) {
 
+    let result = await Client.searchCultureByQuery(keyword);
+
+    if (result.error) {
+        console.log("오류발생 : "+result.error);
+        return {error: result.error}
+
+    } else {
+        console.log("검색결과 : "+JSON.stringify(result.message));
+
+        if(result.message === undefined){
+            result.message = [];
         }
-    };
+
+        return {
+            error: null,
+            result: {
+                category: "all",
+                searched_product_list: result.message
+            },
+        }
+    }
 }
 
-export function* searchProductFlow(){
+export function* searchProductFlow() {
 
-    while(true){
+    while (true) {
 
         const request = yield take(SEARCH_PRODUCT.REQUEST);
-        let response = yield call(searchProduct,request.keyword);
+        let response = yield call(searchProduct, request.payload.keyword);
 
-        if(response.error){
+        if (response.error) {
 
             yield put({
-                type : SEARCH_PRODUCT.FAILURE,
-                error : response.error,
+                type: SEARCH_PRODUCT.FAILURE,
+                error: response.error,
             })
 
-        }else{
+        } else {
 
             yield put({
-                type : SEARCH_PRODUCT.SUCCESS,
-                result : response.result,
+                type: SEARCH_PRODUCT.SUCCESS,
+                result: response.result,
             })
         }
     }

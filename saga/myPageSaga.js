@@ -1,5 +1,6 @@
 import { MY_PAGE_ACCOUNT_ACTION,MY_PAGE_COUNT_ACTION} from "../actionTypes/myPage";
 import {call, put, take} from "redux-saga/effects";
+import {Client} from "../api/Client";
 
 // 서버로 부터 온 데이터를 자체 디자인 가이드와 타입설계에 맞는 오브젝트로 바꾸어줌
 function getMyPageCountActionRefiner(response){
@@ -48,13 +49,22 @@ export function* myPageCountFlow () {
 // 서버로 부터 온 데이터를 자체 디자인 가이드와 타입설계에 맞는 오브젝트로 바꾸어줌
 function getMyPageAccountActionRefiner(response){
 
+
 }
-function getMyPageAccountAction(){
-    return {
-        error : null,
-        result : {
-            userId : "이컬쳐",
-            userEmail : "helloworld@gmail.com",
+async function getMyPageAccountAction(){
+
+    let user = await Client.getUser();
+
+    console.log("마이페이지유저 : "+JSON.stringify(user));
+    if(user.error){
+        return { error : user.error };
+    }else{
+        return {
+            error : null,
+            result : {
+                userId : user.message.userId,
+                userName : user.message.userName,
+            }
         }
     }
 }

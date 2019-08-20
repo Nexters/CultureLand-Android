@@ -5,11 +5,12 @@ import {
 
 export const getProductList = {
 
-    request : (category) => ({
+    request : (category,page) => ({
 
         type : GET_PRODUCT_LIST.REQUEST,
         payload : {
-            category
+            category,
+            page
         }
     }),
 
