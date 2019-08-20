@@ -12,6 +12,7 @@ import rootSaga from './saga';
 import rootReducer from './reducers/index';
 import {Ionicons} from '@expo/vector-icons';
 import AppNavigator from './navigation/AppNavigator';
+import NavigatorService from './util/NavigatorService';
 
 import LoginScreen from './screens/Sign/signTemplate';
 import ItemDetailScreen from './screens/ItemDetail/index';
@@ -58,8 +59,13 @@ export default function App(props) {
         return (
             <Provider store={store}>
                 <View style={styles.container}>
-                    <SignScreen/>
-                    {/* <AppNavigator/>*/}
+                    {/* <SignScreen/> */}
+                    <AppNavigator
+                        ref={navigatorRef => {
+                            NavigatorService.setContainer(navigatorRef);
+                        }}
+                    />
+                    {/* <AppNavigator/> */}
                 </View>
             </Provider>
         );

@@ -9,12 +9,14 @@ import {
     Picker,
     ScrollView,
     StatusBar,
-
+    Button,
+    TouchableOpacity,
 } from 'react-native';
 
 import PropTypes from 'prop-types';
 import {Dropdown} from 'react-native-material-dropdown';
 import {RatioCalculator} from "../../util";
+import NavigatorService from "../../util/NavigatorService";
 import MainCarousel from "../../components/MainCarousel/index"
 import {FloatingButton} from "../../components/FloatingButton"
 import WishListComponent from "../../components/WishListComponent/index"
