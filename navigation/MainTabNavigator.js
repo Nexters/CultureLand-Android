@@ -12,7 +12,7 @@ import PlanedListScreen from '../screens/PlannedList/index'
 import MainScreen from '../screens/Main/index';
 import NoteDetailScreen from '../screens/NoteDetail/index';
 import NoteEditScreen from '../screens/NoteEdit/index';
-import SignScreen from '../screens/Sign';
+import SignScreen from '../screens/Sign/index';
 
 import styleFn from "../screens/PlannedList/styles";
 import {RatioCalculator} from "../util";
@@ -30,9 +30,32 @@ const config = Platform.select({
 });
 
 
+const CultureStack = createStackNavigator(
+    {
+        Culture:PlanedListScreen,
+    },
+    config
+);
+
+CultureStack.navigationOptions = {
+    tabBarLabel: ' ',
+    tabBarIcon: ({focused}) => (
+        <TabBarIcon
+            focused={focused}
+            name={
+                Platform.OS === 'ios'
+                    ? `ios-information-circle${focused ? '' : '-outline'}`
+                    : 'md-information-circle'
+            }
+        />
+    ),
+};
+
+CultureStack.path = '';
+
 const HomeStack = createStackNavigator(
     {
-        Home:MainScreen,
+        Home: MainScreen ,
     },
     config
 );
@@ -53,50 +76,27 @@ HomeStack.navigationOptions = {
 
 HomeStack.path = '';
 
-const LinksStack = createStackNavigator(
+const MypageStack = createStackNavigator(
     {
-        Links: PlanedListScreen ,
-    },
-    config
-);
-
-LinksStack.navigationOptions = {
-    tabBarLabel: ' ',
-    tabBarIcon: ({focused}) => (
-        <TabBarIcon
-            focused={focused}
-            name={
-                Platform.OS === 'ios'
-                    ? `ios-information-circle${focused ? '' : '-outline'}`
-                    : 'md-information-circle'
-            }
-        />
-    ),
-};
-
-LinksStack.path = '';
-
-const SettingsStack = createStackNavigator(
-    {
-        Settings: MyPageScreen,
+        Mypage: MyPageScreen,
     },
 
     config
 );
 
-SettingsStack.navigationOptions = {
+MypageStack.navigationOptions = {
     tabBarLabel: ' ',
     tabBarIcon: ({focused}) => (
         <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}/>
     ),
 };
 
-SettingsStack.path = '';
+MypageStack.path = '';
 
 const tabNavigator = createBottomTabNavigator({
-        LinksStack,
+        CultureStack,
         HomeStack,
-        SettingsStack,
+        MypageStack,
     }, {
         tabBarOptions: {
             style : {
