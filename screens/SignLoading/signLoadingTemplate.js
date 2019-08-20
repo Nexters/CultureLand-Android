@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {
   ActivityIndicator,
   AsyncStorage,
@@ -18,10 +18,10 @@ export default class SignLoadingScreen extends Component {
   }
 
   _bootstrapAsync = async () => {
+    // 로그인 상태 확인 후 로그인 페이지 / 메인 페이지 출력 
     // const userToken = await SecureStore.getItemAsync("access_token");
-    const userToken = true;
-    // NavigatorService.navigate(userToken ? 'App' : 'Auth')
-    NavigatorService.navigate('App')
+    const userToken = false;
+    this.props.navigation.navigate(userToken ? 'App' : 'Auth')
   };
 
   render() {
@@ -34,5 +34,5 @@ export default class SignLoadingScreen extends Component {
   }
 }
 
-SignLoadingScreen.propTypes = {
+SignLoadingScreen.PropTypes = {
 };

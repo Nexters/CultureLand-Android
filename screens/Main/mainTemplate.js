@@ -54,9 +54,6 @@ export default class MainScreen extends Component {
         return (
             <View style={styles.container}>
                 <ScrollView>
-                    <TouchableOpacity onPress={() => NavigatorService.navigate('Links')}>
-                        <Text>Post</Text>
-                    </TouchableOpacity>
                     <View style={styles.main_top_wrapper}>
                         <Dropdown
                             value={"2019"}
