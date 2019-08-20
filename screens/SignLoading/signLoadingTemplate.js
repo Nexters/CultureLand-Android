@@ -20,7 +20,7 @@ export default class SignLoadingScreen extends Component {
   _bootstrapAsync = async () => {
     // 로그인 상태 확인 후 로그인 페이지 / 메인 페이지 출력 
     // const userToken = await SecureStore.getItemAsync("access_token");
-    const userToken = false;
+    const userToken = true;
     this.props.navigation.navigate(userToken ? 'App' : 'Auth')
   };
 
