@@ -9,6 +9,7 @@ import {
     Button,
 } from 'react-native';
 import {RatioCalculator} from "../util";
+import NavigatorService from "../util/NavigatorService";
 
 import MenuImage from "../assets/images/icon/menu.svg";
 import LikeImage from "../assets/images/icon/like.svg";
@@ -54,7 +55,7 @@ export default class ListItem extends Component {
         return (
                 <TouchableOpacity
                     activeOpacity={0.7}
-                    onPress={() => alert('hello')}
+                    onPress={() => NavigatorService.navigate('NoteDetail')}
                     style={styles.list_item_wrapper}
                 >
                 {/* <View style={styles.list_shadow}></View> */}
@@ -122,6 +123,7 @@ export default class ListItem extends Component {
                         <TouchableOpacity
                             style={styles.actionSheet_item}
                             onPress={() => {
+                                NavigatorService.navigate('NoteEdit')
                                 this.RBSheet.close();
                             }}
                         >

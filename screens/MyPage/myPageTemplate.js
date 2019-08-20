@@ -6,12 +6,14 @@ import {
     Text,
     Dimensions,
     Image,
-    FlatList
+    FlatList,
+    TouchableOpacity,
 
 } from 'react-native';
 
 import PropTypes from 'prop-types';
 import {CATEGORY, RatioCalculator} from "../../util";
+import NavigatorService from "../../util/NavigatorService";
 import CategoryType from "../../domain/CategoryType";
 import Entypo from '@expo/vector-icons/Entypo'
 import ConcertImage from './asset/concert.svg';
@@ -63,42 +65,46 @@ export default class MyPageScreen extends Component {
                 <View style={styles.item_pair_wrapper}>
                     <View style={styles.category_left_wrapper}>
                         <View style={styles.category_item_wrapper}>
-                            <View style={styles.category_item_icon}>
-                                {this.categories[i*2].getSVGImage()}
-                            </View>
-                            <View style={styles.category_item_content_wrapper}>
-                                <View style={styles.category_item_title_wrapper}>
-                                    <Text style={{
-                                        ...styles.category_item_title,
-                                        color: this.categories[i * 2].getTextColor()
-                                    }}>
-                                        {this.categories[i * 2].getName()}
-                                    </Text>
+                            <TouchableOpacity onPress={() => NavigatorService.navigate('DiaryList')}>
+                                <View style={styles.category_item_icon}>
+                                    {this.categories[i*2].getSVGImage()}
                                 </View>
-                                <Text style={styles.category_item_number}>
-                                    {this.categories[i * 2].getNumberOfItem()}
-                                </Text>
-                                {this.returnArrowButton()}
-                            </View>
+                                <View style={styles.category_item_content_wrapper}>
+                                    <View style={styles.category_item_title_wrapper}>
+                                        <Text style={{
+                                            ...styles.category_item_title,
+                                            color: this.categories[i * 2].getTextColor()
+                                        }}>
+                                            {this.categories[i * 2].getName()}
+                                        </Text>
+                                    </View>
+                                    <Text style={styles.category_item_number}>
+                                        {this.categories[i * 2].getNumberOfItem()}
+                                    </Text>
+                                    {this.returnArrowButton()}
+                                </View>
+                            </TouchableOpacity>
                         </View>
                     </View>
                     {this.categories.length > (i * 2 + 1) ?
                         <View style={styles.category_right_wrapper}>
                             <View style={styles.category_item_wrapper}>
-                                <View style={styles.category_item_icon}>
-                                    {this.categories[i*2+1].getSVGImage()}
-                                </View>
-                                <View style={styles.category_item_content_wrapper}>
-                                    <View style={styles.category_item_title_wrapper}>
-                                        <Text style={styles.category_item_title}>
-                                            {this.categories[i * 2 + 1].getName()}
-                                        </Text>
+                                <TouchableOpacity onPress={() => NavigatorService.navigate('DiaryList')}>
+                                    <View style={styles.category_item_icon}>
+                                        {this.categories[i*2+1].getSVGImage()}
                                     </View>
-                                    <Text style={styles.category_item_number}>
-                                        {this.categories[i * 2 + 1].getNumberOfItem()}
-                                    </Text>
-                                    {this.returnArrowButton()}
-                                </View>
+                                    <View style={styles.category_item_content_wrapper}>
+                                        <View style={styles.category_item_title_wrapper}>
+                                            <Text style={styles.category_item_title}>
+                                                {this.categories[i * 2 + 1].getName()}
+                                            </Text>
+                                        </View>
+                                        <Text style={styles.category_item_number}>
+                                            {this.categories[i * 2 + 1].getNumberOfItem()}
+                                        </Text>
+                                        {this.returnArrowButton()}
+                                    </View>
+                                </TouchableOpacity>
                             </View>
                         </View>
                         : <View/>

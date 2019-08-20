@@ -10,6 +10,8 @@ import {
 import PropTypes from 'prop-types';
 import Carousel from 'react-native-snap-carousel';
 import {RatioCalculator, MAIN_MONTH, ISNULL} from "../../util";
+import NavigatorService from "../../util/NavigatorService";
+
 import CardImageFirst from "../../assets/images/illustration/Home_card01.svg";
 import CardImageSecond from "../../assets/images/illustration/Home_card02.svg";
 import CardImageThird from "../../assets/images/illustration/Home_card03.svg";
@@ -34,9 +36,9 @@ export default class MainCarousel extends Component {
     _renderNoteItem ({item, index}) {
         return (
             <TouchableOpacity
-                activeOpacity={1}
+                activeOpacity={0.7}
                 style={styles.slide_inner_container}
-                onPress={()=> {alert(`You've clicked this!`)}}
+                onPress={() => NavigatorService.navigate('DiaryList')}
             >
                 <View style={styles.slide}>
                     <View style={styles.image_container}>
@@ -58,7 +60,6 @@ export default class MainCarousel extends Component {
             <TouchableOpacity
                 activeOpacity={1}
                 style={styles.slide_inner_container}
-                onPress={()=> {alert(`You've clicked this!`)}}
             >
                 <View style={styles.slide}>
                     <View style={styles.intro_container}>

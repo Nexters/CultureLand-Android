@@ -24,6 +24,7 @@ import DropDown from "../../components/DropDown";
 import TabBarIcon from "../../components/TabBarIcon";
 import SearchModeScreen from '../SearchMode/index'
 import PlannedListSearchManagerImpl from "../../util/PlannedListSearchImpl";
+import NavigatorService from "../../util/NavigatorService";
 import MyPageScreen from "../MyPage";
 
 const screenWidth = Math.round(Dimensions.get('window').width);
@@ -63,15 +64,17 @@ export default class PlanedListScreen extends Component {
 
     make_items(index) {
         let items = [];
-        const {navigate} = this.props.navigation;
         for (let i = 0; i < 3; i++) {
             items.push(
                 <View
                     key={i + index}
                     style={styles.item_wrapper}>
-                    <TouchableWithoutFeedback onPress={() => navigate('ItemDetail')}>
+                    <TouchableWithoutFeedback
+                        onPress={() => NavigatorService.navigate('CultureDetail')}
+                        style={styles.item_inner}
+                    >
                         <View>
-                            <Text stye={{fontcolor : "#fff"}}>Hello world</Text>
+                            <Text style={{fontcolor : "#fff"}}>Hello world</Text>
                         </View>
                     </TouchableWithoutFeedback>
                 </View>

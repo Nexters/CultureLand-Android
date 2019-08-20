@@ -19,6 +19,7 @@ import {FloatingButton} from "../../components/FloatingButton"
 import ListComponent from "../../components/ListComponent";
 import PropTypes from 'prop-types';
 import {LIST_TYPE} from "../../util";
+import NavigatorService from "../../util/NavigatorService";
 
 const calc = new RatioCalculator(screenWidth, screenHeight);
 const styles = styleFn(screenWidth, screenHeight, calc);
@@ -34,7 +35,8 @@ export default class DiaryListScreen extends Component {
             <View style={styles.container}>
                 <View style={styles.header}>
                     <TouchableOpacity
-                        onPress={() => alert(props.centerText)}
+                        // onPress={() => NavigatorService.navigate('Home')}
+                        onPress={() => this.props.navigation.dismiss()}
                         activeOpacity={0.7}
                         style={styles.header_left}
                     >

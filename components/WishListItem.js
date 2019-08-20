@@ -9,11 +9,9 @@ import {
     Button,
 } from 'react-native';
 import {RatioCalculator} from "../util";
-
+import NavigatorService from "../util/NavigatorService";
 import StarImage from "../assets/images/icon/star.svg";
 import StarChkImage from "../assets/images/icon/star_checked.svg";
-
-
 import RBSheet from "react-native-raw-bottom-sheet";
 import CategoryType from '../domain/CategoryType';
 
@@ -53,7 +51,7 @@ export class WishListItem extends Component {
         return (
             <TouchableOpacity
                 activeOpacity={0.7}
-                onPress={() => alert('hello')}
+                onPress={() => NavigatorService.navigate('CultureDetail')}
                 style={styles.wishlist_item}
             >
                 <View style={styles.wishlist_image_container}>

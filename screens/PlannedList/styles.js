@@ -162,6 +162,11 @@ export default styles = function (screenWidth, screenHeight, calc) {
             backgroundColor : "#000"
         },
 
+        item_inner: {
+            flex: 1,
+            backgroundColor : "yellow"
+        },
+
         item_information_labels_wrapper : {
             width: calc.getRegWidthDp(360-27-30),
             height: calc.getRegHeightDp(21),

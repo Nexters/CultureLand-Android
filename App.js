@@ -53,7 +53,7 @@ export default function App(props) {
         return (
             <Provider store={store}>
                 <View style={styles.container}>
-                    {/* <SignScreen/> */}
+                    {/* <MainScreen/> */}
                     <AppNavigator
                         ref={navigatorRef => {
                             NavigatorService.setContainer(navigatorRef);
