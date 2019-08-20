@@ -1,6 +1,10 @@
 import styles from "../screens/Sign/styles";
 import key_mirror from 'key-mirror';
 
+export const ACCESS_TOKEN = "access_token";
+export const EXPIRED_AT = "expired_at";
+export const SORT_BY_NEW = "new";
+export const SORT_BY_POPULAR = "popular";
 
 export class RatioCalculator {
     constructor(screenWidth,screenHeight){
@@ -164,7 +168,6 @@ export function CATEGORY_KOR(category){
     }
 }
 
-
 export function MAIN_MONTH(date) {
     const dateSlice = date.substr( 4, 2 );
     switch(dateSlice){
@@ -198,3 +201,4 @@ export function MAIN_MONTH(date) {
 export function ISNULL(value){
     return (value === undefined || value === null || value.length <= 0) ? true : false;
 }
+
