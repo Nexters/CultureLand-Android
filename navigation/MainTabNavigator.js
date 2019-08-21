@@ -98,10 +98,32 @@ MypageStack.navigationOptions = {
 
 MypageStack.path = '';
 
+
+//////// CUSTOM //////
+
+
+
+const ItemDetailStack = createStackNavigator(
+    {
+        ItemDetailStack : ItemDetailScreen,
+    },
+    config
+);
+ItemDetailStack.path = '';
+
+ItemDetailStack.navigationOptions = {
+    header : null,
+    tabBarLabel: ' ',
+    tabBarIcon: ({focused}) => (
+        <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}/>
+    ),
+};
+
 const tabNavigator = createBottomTabNavigator({
         CultureStack,
         HomeStack,
         MypageStack,
+    //    ItemDetailStack,
     }, {
         tabBarOptions: {
             style : {
@@ -113,24 +135,6 @@ const tabNavigator = createBottomTabNavigator({
 
 tabNavigator.path = '';
 
-//////// CUSTOM //////
-
-const ItemDetailStack = createStackNavigator(
-    {
-        ItemDetail: ItemDetailScreen,
-    },
-    config
-);
-
-ItemDetailStack.navigationOptions = {
-    header : null,
-    tabBarLabel: ' ',
-    tabBarIcon: ({focused}) => (
-        <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}/>
-    ),
-};
-
-ItemDetailStack.path = '';
 
 
 

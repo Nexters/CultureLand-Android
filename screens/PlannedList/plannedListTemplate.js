@@ -62,20 +62,29 @@ export default class PlanedListScreen extends Component {
         this.setState({isSearchMode: true});
     }
 
-    make_items(index) {
-        let items = [];
+    navigateToDetailView(itemId){
+        this.props.getItemInfo(itemId);
+        this.props.isWishedRequest(itemId);
+        this.props.navigation.navigate('ItemDetail',{ id : itemId });
 
+    }
+
+    make_items(index) {
+        let items=[];
         for (let i = 0; i < 3; i++) {
+            let item = this.props.productList[index+i];
 
             if(index+i < this.props.productList.length){
                 items.push(
                     <View
-                        key={i + index}
+                        key={item.id}
                         style={styles.item_wrapper}
                     >
-                        <TouchableWithoutFeedback>
+                        <TouchableWithoutFeedback
+                            onPress={()=>this.navigateToDetailView(item.id)}
+                        >
 
-                            <Image source={{uri: 'http:'+this.props.productList[index+i].imageUrl}}
+                            <Image source={{uri: 'http:'+item.imageUrl}}
                                    style={styles.thumbnail}
                             />
                         </TouchableWithoutFeedback>

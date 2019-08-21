@@ -14,6 +14,7 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import PropTypes from 'prop-types';
 import Toast, {DURATION} from 'react-native-easy-toast';
+import {Client} from "../../api/Client";
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
@@ -46,25 +47,35 @@ export default class ItemDetailScreen extends Component {
 
         this.state = {
             isWished: false,
-            error : this.props.error,
+            error: this.props.error,
         };
-
-        this.props.getItemInfo(1);
-        console.log("시작");
     }
 
-    componentDidMount(){
+    componentDidMount() {
+
     }
 
     wishButtonClickListener() {
 
 
+        const {
+            imageUrl, title, category,
+            startDate, endDate, place,
+            isWished, error, id
+        } = this.props;
+
         if (this.props.isWished) {
             console.log("Cancel wish triggered");
-            return this.props.cancelWishedRequest(this.props.id);
+            return this.props.cancelWishedRequest();
         } else {
             console.log("set wish triggered");
-            return this.props.setWishedRequest(this.props.id);
+            return this.props.setWishedRequest({
+                imageUrl: imageUrl,
+                title: title,
+                place: place,
+                startDate: startDate,
+                endDate: endDate
+            });
         }
     }
 
@@ -85,77 +96,80 @@ export default class ItemDetailScreen extends Component {
     }
 
     errorRenderer() {
-        if(this.props.error){
+        if (this.props.error) {
             this.refs.toast.show(this.props.error, 1000, () => {
                 // something you want to do at close
+                this.props.error = null;
             });
         }
     }
 
     render() {
 
-        return (
+        {//this.errorRenderer()}
+            return (
 
-            <ImageBackground
-                style={styles.container}
-                source={{uri : this.props.imageUrl}}
-                opacity={0.3}
-                blurRadius={2}
+                <ImageBackground
+                    style={styles.container}
+                    source={{uri: this.props.imageUrl}}
+                    opacity={0.3}
+                    blurRadius={2}
 
 
-            >
-                <Toast ref="toast"/>
-                {this.errorRenderer()}
-                <View style={styles.back_button}>
-                    <AntDesign
-                        name="left" size={25} color="#f4f4f4"/>
-                </View>
-                <Image style={styles.center_image}
-                    source={{uri : this.props.imageUrl}}
                 >
+                    <Toast ref="toast"/>
 
-                </Image>
-                <View style={styles.bottom_info_wrapper}>
+                    <View style={styles.back_button}>
+                        <AntDesign
+                            name="left" size={25} color="#f4f4f4"/>
+                    </View>
+                    <Image style={styles.center_image}
+                           source={{uri: this.props.imageUrl}}
+                    >
 
-                    <View style={styles.title_row}>
-                        <Text style={styles.title}>
-                            {this.props.title}
-                        </Text>
-                        <View style={styles.star_button}>
-                            {this.renderWishedIcon()}
+                    </Image>
+                    <View style={styles.bottom_info_wrapper}>
+
+                        <View style={styles.title_row}>
+                            <Text style={styles.title}>
+                                {this.props.title}
+                            </Text>
+                            <View style={styles.star_button}>
+                                {this.renderWishedIcon()}
+                            </View>
+                        </View>
+                        <View style={styles.info_row}>
+                            <Text style={styles.row_title}>
+                                유형
+                            </Text>
+                            <Text style={styles.row_content}>
+                                {this.props.category}
+                            </Text>
+                        </View>
+                        <View style={styles.info_row}>
+                            <Text style={styles.row_title}>
+                                기간
+                            </Text>
+                            <Text style={styles.row_content}>
+                                {`${this.props.startDate} ~ ${this.props.endDate}`}
+                            </Text>
+                        </View>
+                        <View style={styles.info_row}>
+                            <Text style={styles.row_title}>
+                                장소
+                            </Text>
+                            <Text style={styles.row_content}>
+                                {this.props.place}
+                            </Text>
                         </View>
                     </View>
-                    <View style={styles.info_row}>
-                        <Text style={styles.row_title}>
-                            유형
-                        </Text>
-                        <Text style={styles.row_content}>
-                            {this.props.category}
-                        </Text>
-                    </View>
-                    <View style={styles.info_row}>
-                        <Text style={styles.row_title}>
-                            기간
-                        </Text>
-                        <Text style={styles.row_content}>
-                            {this.props.period}
-                        </Text>
-                    </View>
-                    <View style={styles.info_row}>
-                        <Text style={styles.row_title}>
-                            장소
-                        </Text>
-                        <Text style={styles.row_content}>
-                            {this.props.place}
-                        </Text>
-                    </View>
-                </View>
 
 
-            </ImageBackground>
-        )
+                </ImageBackground>
+            )
+        }
+
     }
-
 };
 
 

@@ -11,8 +11,8 @@ import {CATEGORY_KOR} from "../util";
 function getItemDetailRefiner(response) {
     return {
         error: response.error,
-        id: response.id,
         result: {
+            id: response.id,
             imageUrl: response.imageUrl,
             title: function () {
                 if (response.title.length > 14) {
@@ -21,26 +21,34 @@ function getItemDetailRefiner(response) {
                     return response.title;
                 }
             }(),
-            period: response.period,
+            startDate: response.startDate,
+            endDate: response.endDate,
             place: response.place,
             category: response.category,
         },
     }
 }
 
-async function getItemDetail() {
+async function getItemDetail(id) {
+    let response = await Client.getCultureDetailById(id);
 
-    let response = await Client.getCultureDetailById(1);
-    console.log("리폿ㅌ : "+JSON.stringify(response));
+
+
+
+    let res = await Client.getAllWishList();
+    console.log("우웅 : "+ JSON.stringify(res));
+    console.log("받으려는 아이템 : "+id);
     if (response.error) {
         return {error: response.error}
     }
+
     return getItemDetailRefiner({
         error: null,
         id: response.message.id,
         imageUrl: `http:${response.message.imageUrl}`,
         title: response.message.title,
-        period: `${response.message.startDate} ~ ${response.message.endDate}`,
+        startDate: `${response.message.startDate}`,
+        endDate: `${response.message.endDate}}`,
         place: response.message.place,
         category: CATEGORY_KOR(response.message.cultureName)
     })
@@ -49,7 +57,7 @@ async function getItemDetail() {
 export function* getItemDetailFlow() {
 
     while (true) {
-        console.log("사가");
+
         const request = yield take(GET_ITEM_DETAIL_ACTION.REQUEST);
         let response = yield call(getItemDetail, request.payload.id);
 
@@ -70,7 +78,21 @@ export function* getItemDetailFlow() {
 
 }
 
-function setWished() {
+async function setWished(itemObj) {
+
+
+    const response = await Client.addNewWishItem(
+        itemObj.imageUrl, itemObj.title,
+        itemObj.place, itemObj.startDate,
+        itemObj.endDate
+    );
+
+    console.log("위시리스폰 : "+ JSON.stringify(response));
+
+
+    if (response.error) {
+        return {error: response.error};
+    }
     return {
         error: null,
         result: {}
@@ -82,7 +104,7 @@ export function* setWishedFlow() {
     while (true) {
 
         const request = yield take(SET_WISHED_ACTION.REQUEST);
-        let response = yield call(setWished, request.payload.id);
+        let response = yield call(setWished, request.payload.itemObj);
 
         if (response.error) {
 
@@ -126,12 +148,21 @@ export function* cancelWishedFlow() {
     }
 }
 
-export function isWished(id) {
+async function isWished(id) {
+
+    console.log("이즈위시드! :"+id);
+    const response = await Client.getWishItemById(2);
+    console.log("우훙ㅎ : "+JSON.stringify(response));
+
+    if(response.error){
+        return { error : response.error }
+    }
     return {
         error: null,
         result: {}
     }
 }
+
 
 export function* isWishedFlow() {
     while (true) {

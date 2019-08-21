@@ -19,6 +19,9 @@ class ClientClass {
         this.expiredAt = null;
     }
 
+    getSocialService(){
+        return this.socialService;
+    }
     setSocialService(socialService){
         this.socialService = socialService;
     }
@@ -99,20 +102,6 @@ class ClientClass {
     }
 
 
-    signInOrUpFacebook() {
-
-        return fetch(this.getSignInOrUpURL(FACE_BOOK), {
-
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json; charset=utf-8"
-            },
-            body: JSON.stringify({
-                accessToken: this.getSocialToken(),
-            })
-
-        })
-    }
 
     signInOrUp(socialService){
         return fetch(this.getSignInOrUpURL(socialService), {
@@ -258,11 +247,11 @@ class ClientClass {
         return this.credentialCall(this.getWishListBaseURL(), {
             method: "POST",
             body: JSON.stringify({
-                "imgUrl": "//t.011st.com/Down/Perf/201907/11m_148.jpg",
-                "title": "알게되었ㄴㄴ데 너를 울리지 않고 ㄲ아껴주는법",
-                "place": "세월ㅇㄴ왜 널 잊는법을 알려주지않고",
-                "startDate": "20190808",
-                "endDate": "20190808"
+                "imgUrl": imgUrl,
+                "title": title,
+                "place": place,
+                "startDate": startDate,
+                "endDate": endDate
             })
         })
     }

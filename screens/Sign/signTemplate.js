@@ -24,9 +24,16 @@ const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
 const calc = new RatioCalculator(screenWidth, screenHeight);
 const styles = styleFn(screenWidth, screenHeight, calc);
-
+import Toast, {DURATION} from 'react-native-easy-toast';
 
 export default class SignScreen extends Component {
+
+    constructor(props){
+        super(props);
+        this.state = {
+            error : null,
+        }
+    }
 
     async registerSocialCredentials(socialService, socialToken){
         await SecureStore.setItemAsync(SOCIAL_ACCESS_TOKEN, socialToken);
@@ -88,22 +95,29 @@ export default class SignScreen extends Component {
         try {
             const response = await Client.signInOrUp(FACEBOOK);
 
+
+            if(response.error){
+                this.setState({error : response.error});
+                return;
+            }
             await this.registerServerCredentials(response.message);
+            this.props.navigation.navigate('App');
 
         } catch (e) {
             // TODO 토스트메세지 오류알림
             console.log("익셉션발생 : " + e);
         }
 
-/*
-        let getcultures = await Client.searchCultureByQuery('[');
-        console.log(`받은 정보 ${JSON.stringify(getcultures)}`);
-        */
-
-
-
     }
 
+    errorRenderer(){
+        if(this.state.error){
+            this.refs.toast.show(this.state.error, 1000, () => {
+                // something you want to do at close
+                this.setState({error : null});
+            });
+        }
+    }
 
     async googleAuth() {
         try {
@@ -142,7 +156,8 @@ export default class SignScreen extends Component {
         return (
 
             <View style={styles.container}>
-
+                <Toast ref="toast"/>
+                {this.errorRenderer()}
                 <View style={styles.sign_illustrate_wrapper}>
                     <ImageCarousel style={styles.sign_illustrate_image}>
                     </ImageCarousel>

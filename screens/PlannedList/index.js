@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import template from "./plannedListTemplate";
 import {getProductList} from "../../actions/productList";
+import {getItemDetailAction, isWishedAction} from "../../actions/itemDetail";
 
 
 
@@ -20,6 +21,8 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = {
+    getItemInfo : getItemDetailAction.request,
+    isWishedRequest : isWishedAction.request,
     getProductList : getProductList.request,
 };
 
