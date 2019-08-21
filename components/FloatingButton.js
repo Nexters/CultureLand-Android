@@ -7,7 +7,9 @@ import {
     TouchableOpacity
 } from 'react-native';
 import {RatioCalculator} from "../util";
+import NavigatorService from "../util/NavigatorService";
 import WriteImage from "../assets/images/icon/write.svg";
+
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
@@ -18,7 +20,7 @@ export class FloatingButton extends Component {
     render () {
         return (
             <TouchableOpacity 
-                onPress={() => alert('FAB clicked')}
+                onPress={() => NavigatorService.push('NoteEdit')}
                 activeOpacity={0.7} 
                 style={styles.floating_button}
             >

@@ -10,6 +10,7 @@ import {
     ScrollView,
     TouchableOpacity,
     KeyboardAvoidingView,
+    Alert,
 
 } from 'react-native';
 import DatePicker from 'react-native-datepicker'
@@ -25,6 +26,7 @@ const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
 import {Ionicons} from '@expo/vector-icons'
 import {numberWithCommas, RatioCalculator, CATEGORY, CATEGORY_KOR} from "../../util";
+import NavigatorService from "../../util/NavigatorService";
 
 const calc = new RatioCalculator(screenWidth, screenHeight);
 const styles = styleFn(screenWidth, screenHeight, calc);
@@ -56,8 +58,8 @@ export default class NoteEditScreen extends Component {
             '이 화면을 벗어나면\n작성하던 내용이 사라집니다.',
             '계속하시겠습니까?',
             [
-                {text: '취소', onPress: () => console.log('잘생각했어여'), style: 'cancel'},
-                {text: '확인', onPress: () => console.log('왜죠..!!!')},
+                {text: '취소', style: 'cancel'},
+                {text: '확인', onPress: () => NavigatorService.pop()},
             ],
             { cancelable: true }
         )
@@ -67,7 +69,7 @@ export default class NoteEditScreen extends Component {
         Alert.alert(
             '컬러가 저장되었습니다!','',
             [
-                {text: '확인', onPress: () => console.log('성공')},
+                {text: '확인', onPress: () => NavigatorService.pop()},
             ],
             { cancelable: false }
         )

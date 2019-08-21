@@ -1,64 +1,51 @@
-import { NavigationActions } from 'react-navigation';
-import type { NavigationParams, NavigationRoute } from 'react-navigation';
+import { NavigationActions, StackActions } from 'react-navigation';
 
-let _container; // eslint-disable-line
+let _navigator;
 
-function setContainer(container: Object) {
-  _container = container;
+function setTopLevelNavigator(navigatorRef) {
+  _navigator = navigatorRef;
 }
 
-function reset(routeName: string, params?: NavigationParams) {
-  _container.dispatch(
-    NavigationActions.reset({
-      index: 0,
-      actions: [
-        NavigationActions.navigate({
-          type: 'Navigation/NAVIGATE',
-          routeName,
-          params,
-        }),
-      ],
-    }),
-  );
-}
-
-function navigate(routeName: string, params?: NavigationParams) {
-  _container.dispatch(
+function navigate(routeName, params) {
+  _navigator.dispatch(
     NavigationActions.navigate({
-      type: 'Navigation/NAVIGATE',
       routeName,
       params,
-    }),
+    })
   );
 }
 
-function navigateDeep(actions: { routeName: string, params?: NavigationParams }[]) {
-  _container.dispatch(
-    actions.reduceRight(
-      (prevAction, action): any =>
-        NavigationActions.navigate({
-          type: 'Navigation/NAVIGATE',
-          routeName: action.routeName,
-          params: action.params,
-          action: prevAction,
-        }),
-      undefined,
-    ),
+function back(options) {
+  _navigator.dispatch(NavigationActions.back(options));
+}
+
+function push(routeName, params) {
+  _navigator.dispatch(
+    StackActions.push({
+      routeName,
+      params
+    })
   );
 }
 
-function getCurrentRoute(): NavigationRoute | null {
-  if (!_container || !_container.state.nav) {
-    return null;
-  }
+function pop(options) {
+  _navigator.dispatch(StackActions.pop(options));
+}
 
-  return _container.state.nav.routes[_container.state.nav.index] || null;
+function popToTop(options) {
+  _navigator.dispatch(StackActions.popToTop(options));
+}
+
+function reset(options) {
+  _navigator.dispatch(StackActions.reset(options));
 }
 
 export default {
-  setContainer,
-  navigateDeep,
   navigate,
+  back,
+  push,
+  pop,
+  popToTop,
   reset,
-  getCurrentRoute,
+  setTopLevelNavigator,
 };

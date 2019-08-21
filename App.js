@@ -63,7 +63,7 @@ export default function App(props) {
                     {/* <SignScreen/> */}
                     <AppNavigator
                         ref={navigatorRef => {
-                            NavigatorService.setContainer(navigatorRef);
+                            NavigatorService.setTopLevelNavigator(navigatorRef);
                         }}
                     />
                     {/* <AppNavigator/> */}

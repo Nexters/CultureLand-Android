@@ -24,6 +24,7 @@ import DropDown from "../../components/DropDown";
 import TabBarIcon from "../../components/TabBarIcon";
 import SearchModeScreen from '../SearchMode/index'
 import PlannedListSearchManagerImpl from "../../util/PlannedListSearchImpl";
+import NavigatorService from "../../util/NavigatorService";
 import MyPageScreen from "../MyPage";
 
 const screenWidth = Math.round(Dimensions.get('window').width);
@@ -81,10 +82,16 @@ export default class PlanedListScreen extends Component {
                         style={styles.item_wrapper}
                     >
                         <TouchableWithoutFeedback
+<<<<<<< HEAD
                             onPress={()=>this.navigateToDetailView(item.id)}
                         >
 
                             <Image source={{uri: 'http:'+item.imageUrl}}
+=======
+                            onPress={() => NavigatorService.navigate('CultureDetail')}
+                        >
+                            <Image source={{uri: 'http:'+this.props.productList[index+i].imageUrl}}
+>>>>>>> 5f71b2af4a7cd09b4cc514ec480bd3f4128e4a63
                                    style={styles.thumbnail}
                             />
                         </TouchableWithoutFeedback>

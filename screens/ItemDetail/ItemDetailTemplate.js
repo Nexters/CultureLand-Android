@@ -7,14 +7,18 @@ import {
     Dimensions,
     TouchableWithoutFeedback,
     Image,
-    ImageBackground
+    ImageBackground,
 } from 'react-native';
 import {RatioCalculator} from "../../util";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import PropTypes from 'prop-types';
 import Toast, {DURATION} from 'react-native-easy-toast';
+<<<<<<< HEAD
 import {Client} from "../../api/Client";
+=======
+import NavigatorService from "../../util/NavigatorService";
+>>>>>>> 5f71b2af4a7cd09b4cc514ec480bd3f4128e4a63
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
@@ -116,6 +120,22 @@ export default class ItemDetailScreen extends Component {
                     blurRadius={2}
 
 
+<<<<<<< HEAD
+=======
+            >
+                <Toast ref="toast"/>
+                {this.errorRenderer()}
+                <View style={styles.back_button}>
+                    <TouchableWithoutFeedback
+                        onPress={() => NavigatorService.pop()}
+                    >
+                        <AntDesign
+                            name="left" size={25} color="#f4f4f4"/>
+                    </TouchableWithoutFeedback>
+                </View>
+                <Image style={styles.center_image}
+                    source={{uri : this.props.imageUrl}}
+>>>>>>> 5f71b2af4a7cd09b4cc514ec480bd3f4128e4a63
                 >
                     <Toast ref="toast"/>
 

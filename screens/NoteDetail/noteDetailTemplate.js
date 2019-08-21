@@ -16,6 +16,7 @@ const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
 import {Ionicons} from '@expo/vector-icons'
 import {RatioCalculator} from "../../util";
+import NavigatorService from "../../util/NavigatorService";
 import PropTypes from 'prop-types';
 
 const calc = new RatioCalculator(screenWidth, screenHeight);
@@ -33,14 +34,16 @@ export default class NoteDetailScreen extends Component {
                     <TouchableOpacity 
                         activeOpacity={0.7} 
                         style={styles.header_left}
+                        onPress={() => NavigatorService.pop()}
                     >
                         <Ionicons name="ios-arrow-back" size={24} color="#292929" style={styles.header_button}/>
                     </TouchableOpacity>
                     <TouchableOpacity
                         activeOpacity={0.7} 
                         style={styles.header_right}
+                        onPress={() => NavigatorService.push('NoteEdit')}
                     >
-                        <Text style={styles.header_right_text}>확인</Text>
+                        <Text style={styles.header_right_text}>수정</Text>
                     </TouchableOpacity>
                 </View>
                 <ScrollView>
