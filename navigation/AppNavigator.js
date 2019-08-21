@@ -1,9 +1,7 @@
 import React from 'react';
-<<<<<<< HEAD
-import {createSwitchNavigator, createStackNavigator, createAppContainer} from 'react-navigation';
-=======
-import { createSwitchNavigator, createAppContainer } from 'react-navigation';
->>>>>>> 5f71b2af4a7cd09b4cc514ec480bd3f4128e4a63
+
+import { createSwitchNavigator, createAppContainer,createStackNavigator } from 'react-navigation';
+
 
 import MainTabNavigator from './MainTabNavigator';
 import SignScreen from '../screens/Sign/index';
@@ -26,7 +24,6 @@ const AuthStack = createStackNavigator({
     },
 });
 
-<<<<<<< HEAD
 const ItemDetailStack = createStackNavigator({
     ItemDetail : {
         screen : ItemDetailScreen,
@@ -49,21 +46,4 @@ export default createAppContainer(
 
         }
     )
-=======
-export default createAppContainer(
-  createSwitchNavigator(
-    {
-      AuthLoading: SignLoadingScreen,
-      App: MainTabNavigator,
-      Auth: SignScreen
-    },
-    {
-      initialRouteName : 'AuthLoading',
-      header: null,
-      navigationOptions : {
-        headerMode: 'none',
-      }
-    },
-  )
->>>>>>> 5f71b2af4a7cd09b4cc514ec480bd3f4128e4a63
 );
