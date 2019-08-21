@@ -14,11 +14,9 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import PropTypes from 'prop-types';
 import Toast, {DURATION} from 'react-native-easy-toast';
-<<<<<<< HEAD
-import {Client} from "../../api/Client";
-=======
+
 import NavigatorService from "../../util/NavigatorService";
->>>>>>> 5f71b2af4a7cd09b4cc514ec480bd3f4128e4a63
+
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
@@ -110,19 +108,13 @@ export default class ItemDetailScreen extends Component {
 
     render() {
 
-        {//this.errorRenderer()}
-            return (
+        return (
 
-                <ImageBackground
-                    style={styles.container}
-                    source={{uri: this.props.imageUrl}}
-                    opacity={0.3}
-                    blurRadius={2}
-
-
-<<<<<<< HEAD
-=======
-            >
+            <ImageBackground
+                style={styles.container}
+                source={{uri: this.props.imageUrl}}
+                opacity={0.3}
+                blurRadius={2}>
                 <Toast ref="toast"/>
                 {this.errorRenderer()}
                 <View style={styles.back_button}>
@@ -134,61 +126,58 @@ export default class ItemDetailScreen extends Component {
                     </TouchableWithoutFeedback>
                 </View>
                 <Image style={styles.center_image}
-                    source={{uri : this.props.imageUrl}}
->>>>>>> 5f71b2af4a7cd09b4cc514ec480bd3f4128e4a63
+                       source={{uri: this.props.imageUrl}}
+                />
+                <Toast ref="toast"/>
+
+                <View style={styles.back_button}>
+                    <AntDesign
+                        name="left" size={25} color="#f4f4f4"/>
+                </View>
+                <Image style={styles.center_image}
+                       source={{uri: this.props.imageUrl}}
                 >
-                    <Toast ref="toast"/>
 
-                    <View style={styles.back_button}>
-                        <AntDesign
-                            name="left" size={25} color="#f4f4f4"/>
-                    </View>
-                    <Image style={styles.center_image}
-                           source={{uri: this.props.imageUrl}}
-                    >
+                </Image>
+                <View style={styles.bottom_info_wrapper}>
 
-                    </Image>
-                    <View style={styles.bottom_info_wrapper}>
-
-                        <View style={styles.title_row}>
-                            <Text style={styles.title}>
-                                {this.props.title}
-                            </Text>
-                            <View style={styles.star_button}>
-                                {this.renderWishedIcon()}
-                            </View>
-                        </View>
-                        <View style={styles.info_row}>
-                            <Text style={styles.row_title}>
-                                유형
-                            </Text>
-                            <Text style={styles.row_content}>
-                                {this.props.category}
-                            </Text>
-                        </View>
-                        <View style={styles.info_row}>
-                            <Text style={styles.row_title}>
-                                기간
-                            </Text>
-                            <Text style={styles.row_content}>
-                                {`${this.props.startDate} ~ ${this.props.endDate}`}
-                            </Text>
-                        </View>
-                        <View style={styles.info_row}>
-                            <Text style={styles.row_title}>
-                                장소
-                            </Text>
-                            <Text style={styles.row_content}>
-                                {this.props.place}
-                            </Text>
+                    <View style={styles.title_row}>
+                        <Text style={styles.title}>
+                            {this.props.title}
+                        </Text>
+                        <View style={styles.star_button}>
+                            {this.renderWishedIcon()}
                         </View>
                     </View>
+                    <View style={styles.info_row}>
+                        <Text style={styles.row_title}>
+                            유형
+                        </Text>
+                        <Text style={styles.row_content}>
+                            {this.props.category}
+                        </Text>
+                    </View>
+                    <View style={styles.info_row}>
+                        <Text style={styles.row_title}>
+                            기간
+                        </Text>
+                        <Text style={styles.row_content}>
+                            {`${this.props.startDate} ~ ${this.props.endDate}`}
+                        </Text>
+                    </View>
+                    <View style={styles.info_row}>
+                        <Text style={styles.row_title}>
+                            장소
+                        </Text>
+                        <Text style={styles.row_content}>
+                            {this.props.place}
+                        </Text>
+                    </View>
+                </View>
 
 
-                </ImageBackground>
-            )
-        }
-
+            </ImageBackground>
+        )
     }
 };
 

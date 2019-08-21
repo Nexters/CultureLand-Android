@@ -24,6 +24,7 @@ import MypageSelectedIcon from '../assets/images/icon/navigationBar/mypage/selec
 
 import styleFn from "../screens/PlannedList/styles";
 import {RatioCalculator} from "../util";
+
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
 
@@ -34,19 +35,17 @@ const styles = styleFn(screenWidth, screenHeight, calc);
 
 const config = Platform.select({
     web: {headerMode: 'none'},
-    default: {
-        
-    },
+    default: {},
 });
 
 
 const CultureStack = createStackNavigator(
     {
-        Culture:PlanedListScreen,
-        CultureDetail:ItemDetailScreen,
+        Culture: PlanedListScreen,
+        CultureDetail: ItemDetailScreen,
     },
     {
-        initialRouteName : 'Culture',
+        initialRouteName: 'Culture',
         header: null,
         headerMode: 'none',
     },
@@ -54,23 +53,20 @@ const CultureStack = createStackNavigator(
 );
 
 CultureStack.navigationOptions = {
-<<<<<<< HEAD
-    header : null,
-    tabBarLabel: ' ',
-=======
+
     tabBarLabel: '문화 리스트',
->>>>>>> 5f71b2af4a7cd09b4cc514ec480bd3f4128e4a63
+
     tabBarIcon: ({focused}) => (
         focused ?
-        <ListSelectedIcon
-            width={34} height={34}
-        />
-        :
-        <ListIcon
-            width={34} height={34}
-        />
+            <ListSelectedIcon
+                width={34} height={34}
+            />
+            :
+            <ListIcon
+                width={34} height={34}
+            />
     ),
-    tabBarOnPress: ({ navigation, defaultHandler }) => {
+    tabBarOnPress: ({navigation, defaultHandler}) => {
         navigation.navigate('Culture')
         defaultHandler();
     }
@@ -84,34 +80,28 @@ const HomeStack = createStackNavigator(
         DiaryList: DiaryListScreen,
         NoteDetail: NoteDetailScreen,
         NoteEdit: NoteEditScreen,
-        CultureDetail:ItemDetailScreen,
+        CultureDetail: ItemDetailScreen,
     },
     {
-        initialRouteName : 'Home',
+        initialRouteName: 'Home',
         headerMode: 'none',
     },
     // config
 );
 
 HomeStack.navigationOptions = {
-<<<<<<< HEAD
-    header : null,
 
-    tabBarLabel: ' ',
-=======
-    tabBarLabel: '홈',
->>>>>>> 5f71b2af4a7cd09b4cc514ec480bd3f4128e4a63
     tabBarIcon: ({focused}) => (
         focused ?
-        <HomeSelectedIcon
-            width={34} height={34}
-        />
-        :
-        <HomeIcon
-            width={34} height={34}
-        />
+            <HomeSelectedIcon
+                width={34} height={34}
+            />
+            :
+            <HomeIcon
+                width={34} height={34}
+            />
     ),
-    tabBarOnPress: ({ navigation, defaultHandler }) => {
+    tabBarOnPress: ({navigation, defaultHandler}) => {
         navigation.navigate('Home')
         defaultHandler();
     }
@@ -125,32 +115,28 @@ const MypageStack = createStackNavigator(
         DiaryList: DiaryListScreen,
     },
     {
-        initialRouteName : 'Mypage',
+        initialRouteName: 'Mypage',
         header: null,
         headerMode: 'screen',
     },
-    // config
+// config
 );
 
 MypageStack.navigationOptions = {
-<<<<<<< HEAD
-    header : null,
 
-    tabBarLabel: ' ',
-=======
     tabBarLabel: '마이페이지',
->>>>>>> 5f71b2af4a7cd09b4cc514ec480bd3f4128e4a63
+
     tabBarIcon: ({focused}) => (
         focused ?
-        <MypageSelectedIcon
-            width={34} height={34}
-        />
-        :
-        <MypageIcon
-            width={34} height={34}
-        />
+            <MypageSelectedIcon
+                width={34} height={34}
+            />
+            :
+            <MypageIcon
+                width={34} height={34}
+            />
     ),
-    tabBarOnPress: ({ navigation, defaultHandler }) => {
+    tabBarOnPress: ({navigation, defaultHandler}) => {
         navigation.navigate('Mypage')
         defaultHandler();
     }
@@ -158,21 +144,12 @@ MypageStack.navigationOptions = {
 
 MypageStack.path = '';
 
-<<<<<<< HEAD
 
-//////// CUSTOM //////
-
-
-
-const ItemDetailStack = createStackNavigator(
-    {
-        ItemDetailStack : ItemDetailScreen,
-=======
 const tabNavigator = createBottomTabNavigator({
         CultureStack,
         HomeStack,
         MypageStack,
-    }, 
+    },
     {
         initialRouteName: 'HomeStack',
         header: null,
@@ -184,48 +161,14 @@ const tabNavigator = createBottomTabNavigator({
                 height: 1,
                 overflow: 'hidden',
             },
-            style : {
-                height : calc.getRegHeightDp(60),
+            style: {
+                height: calc.getRegHeightDp(60),
                 backgroundColor: "#292929"
             }
         },
->>>>>>> 5f71b2af4a7cd09b4cc514ec480bd3f4128e4a63
+
     },
 );
-ItemDetailStack.path = '';
-
-<<<<<<< HEAD
-ItemDetailStack.navigationOptions = {
-    header : null,
-    tabBarLabel: ' ',
-    tabBarIcon: ({focused}) => (
-        <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}/>
-    ),
-};
-
-const tabNavigator = createBottomTabNavigator({
-        CultureStack,
-        HomeStack,
-        MypageStack,
-    //    ItemDetailStack,
-    }, {
-        tabBarOptions: {
-            style : {
-                height : calc.getRegHeightDp(60)
-            }
-        }
-    }
-);
-
-tabNavigator.path = '';
-
-
-
-
-=======
-tabNavigator.path = '';
->>>>>>> 5f71b2af4a7cd09b4cc514ec480bd3f4128e4a63
-
 
 
 
