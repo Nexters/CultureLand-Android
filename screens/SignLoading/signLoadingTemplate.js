@@ -27,24 +27,34 @@ export default class SignLoadingScreen extends Component {
         const socialService = await SecureStore.getItemAsync(OAUH_SOCIAL_SERVICE);
         const serviceToken = await SecureStore.getItemAsync(SERVICE_ACCESS_TOKEN);
         const socialToken = await SecureStore.getItemAsync(SOCIAL_ACCESS_TOKEN);
+        
+        console.log(`SocialService [${socialService}])
+        ServiceToken [${serviceToken}]
+        SocialToken [${socialToken}]`);
+
+        if(!serviceToken){
+            this.props.navigation.navigate('Auth');
+            return;
+        }
+        Client.setSocialService(socialService);
+        Client.setSocialAccessToken(socialToken);
+        
         const response = await Client.signInOrUp(socialService);
         const token = response.message.token;
 
         let isLoginValid = false;
 
         if(!response.error) {
-                const decodedToken = jwtDecode(token);
-                Client.setSocialAccessToken(socialToken);
-                Client.setServerAccessToken(token);
-                Client.setExpiredAt(decodedToken.exp);
-                await SecureStore.setItemAsync(EXPIRED_AT, decodedToken.exp.toString());
-                await SecureStore.setItemAsync(SERVICE_ACCESS_TOKEN,token)
-                isLoginValid = true;
-
+            const decodedToken = jwtDecode(token);
+            Client.setSocialAccessToken(socialToken);
+            Client.setServerAccessToken(token);
+            Client.setExpiredAt(decodedToken.exp);
+            await SecureStore.setItemAsync(EXPIRED_AT, decodedToken.exp.toString());
+            await SecureStore.setItemAsync(SERVICE_ACCESS_TOKEN,token)
+            isLoginValid = true;
         }else{
             console.log("에러"+JSON.stringify(response));
         }
-
         this.props.navigation.navigate(isLoginValid? 'App' : 'Auth');
     };
 

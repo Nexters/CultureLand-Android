@@ -5,11 +5,11 @@ import {
     Dimensions,
 
 } from 'react-native';
-import Carousel from 'react-native-snap-carousel';
+import Carousel, { Pagination } from 'react-native-snap-carousel';
 import First from '../asset/img1.svg';
 import Second from '../asset/img2.svg';
 import Third from '../asset/img3.svg';
-import styleFn from "../styles";
+import styleFn from "./styles";
 import {RatioCalculator} from "../../../util";
 import SearchBar from "../../../components/SearchBar";
 
@@ -22,128 +22,100 @@ const styles = styleFn(screenWidth, screenHeight, calc);
 export class ImageCarousel extends Component {
 
     constructor(props) {
-        super(props);
+        super(props)
+        this.state = {
+            activeSlide : 0
+        }
     }
 
     _renderItem({item, index}) {
         return (
-            <View style={styles.image_wrapper}>
-                <View style={styles.image_wrapper}>{item.image()}
-
-                </View>
-            </View>
+            <View>{item.image()}</View>
         );
     }
 
     render() {
         return (
-            <Carousel
-                ref={(c) => {
-                    this._carousel = c;
-                }}
-                data={[
-                    {
-                        image: function () {
-                            return (
-                                <View style={{
-                                    paddingTop : calc.getRegHeightDp(130),
-                                    paddingLeft : calc.getRegWidthDp(129)
-                                }}>
-                                    <First width={calc.getRegWidthDp(120)}
-                                        height={calc.getRegHeightDp(120)}
-                                    >
+            <View>
+                <Carousel
+                    ref={(c) => {
+                        this._carousel = c;
+                    }}
+                    data={[
+                        {
+                            image: function () {
+                                return (
+                                    <View style={styles.slide_wrapper}>
+                                        <First style={styles.slide_image}>
 
-                                    </First>
+                                        </First>
 
-                                        <Text style={ {
-                                            width: calc.getRegWidthDp(73),
-                                            height : calc.getRegHeightDp(83),
-                                            marginLeft : calc.getRegWidthDp(20),
-                                            fontSize : 20,
-                                            lineHeight: 25,
-                                        }}>문화생활{"\n"}
-                                            검색하자{"\n"}
+                                            <Text style={styles.slide_text}>문화생활{"\n"}
+                                                검색하자{"\n"}
+                                                컬러에서</Text>
+
+                                    </View>
+
+                                )
+                            }
+                        },
+                        {
+
+                            image: () => {
+                                return (
+                                    <View style={styles.slide_wrapper}>
+                                        <Second style={styles.slide_image}>
+
+                                        </Second>
+
+                                        <Text style={styles.slide_text}>문화생활{"\n"}
+                                            기록하자{"\n"}
                                             컬러에서</Text>
 
-                                </View>
+                                    </View>
 
-                            )
-                        }
-                    },
-                    {
+                                )
 
-                        image: () => {
-                            return (
-                                <View style={{
-                                    paddingTop : calc.getRegHeightDp(130),
-                                    paddingLeft : calc.getRegWidthDp(129)
-                                }}>
-                                    <Second width={calc.getRegWidthDp(120)}
-                                           height={calc.getRegHeightDp(120)}
-                                    >
+                            }
+                        },
+                        {
 
-                                    </Second>
+                            image: () => {
+                                return (
+                                    <View style={styles.slide_wrapper}>
+                                        <Third style={styles.slide_image}>
 
-                                    <Text style={ {
-                                        width: calc.getRegWidthDp(73),
-                                        height : calc.getRegHeightDp(83),
-                                        marginLeft : calc.getRegWidthDp(20),
-                                        fontSize : 20,
-                                        lineHeight: 25,
-                                    }}>문화생활{"\n"}
-                                        기록하자{"\n"}
-                                        컬러에서</Text>
+                                        </Third>
 
-                                </View>
+                                        <Text style={styles.slide_text}>
+                                            문화생활{"\n"}
+                                            즐겨보자{"\n"}
+                                            직접가서</Text>
 
-                            )
+                                    </View>
 
-                        }
-                    },
-                    {
+                                )
 
-                        image: () => {
-                            return (
-                                <View style={{
-                                    paddingTop : calc.getRegHeightDp(130),
-                                    paddingLeft : calc.getRegWidthDp(129)
-                                }}>
-                                    <Third width={calc.getRegWidthDp(120)}
-                                           height={calc.getRegHeightDp(120)}
-                                    >
-
-                                    </Third>
-
-                                    <Text style={ {
-                                        width: calc.getRegWidthDp(73),
-                                        height : calc.getRegHeightDp(83),
-                                        marginLeft : calc.getRegWidthDp(20),
-                                        fontSize : 20,
-                                        lineHeight: 25,
-                                    }}>문화생활{"\n"}
-                                        즐겨보자{"\n"}
-                                        직접가서</Text>
-
-                                </View>
-
-                            )
-
-                        }
-                    },
+                            }
+                        },
 
 
-                ]}
-                renderItem={this._renderItem}
-                sliderWidth={calc.getRegHeightDp(400)}
-
-                slideStyle={{
-                    width: calc.getRegHeightDp(400),
-
-                }}
-                itemWidth={375}
-
-
-            />
+                    ]}
+                    renderItem={this._renderItem}
+                    onSnapToItem={(index) => this.setState({ activeSlide: index }) }
+                    sliderWidth={Dimensions.get('window').width}
+                    itemWidth={Dimensions.get('window').width}
+                    containerCustomStyle={styles.slide_container}
+                    inactiveSlideScale={1}
+                />
+                <Pagination 
+                    dotsLength={3} 
+                    activeDotIndex={this.state.activeSlide}
+                    carouselRef={this._carousel}
+                    tappableDots={!!this._carousel}
+                    inactiveDotScale={1}
+                />
+            </View>
         );
     }
 }

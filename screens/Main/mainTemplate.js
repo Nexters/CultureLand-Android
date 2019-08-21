@@ -89,10 +89,10 @@ export default class MainScreen extends Component {
                             }}
                             style={styles.main_picker}
                         />
-                        <Text style={styles.main_top_description}>
-                        Today is 
+                        <View style={styles.main_top_description}>
+                            <Text style={styles.main_top_text}>Today is </Text>
                             <Text style={styles.main_top_date}> {currentDate} </Text>
-                        </Text>
+                        </View>
                     </View>
                     {this.state.isData ?
                         (<View style={styles.main_wrapper}>

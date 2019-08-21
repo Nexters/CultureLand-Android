@@ -30,6 +30,7 @@ export default class WishListComponent extends Component {
             date={item.date}
             isLiked={item.isLiked}
             imageUrl={item.imageUrl}
+            style={styles.wishlist_item}
         />
     )
     render() {
@@ -48,14 +49,16 @@ export default class WishListComponent extends Component {
         return (
             <View style={styles.wishlist_container}>
                 {  ISNULL(wishList) ? 
-                    <TouchableOpacity
-                        activeOpacity={0.7}
-                        onPress={() => alert('hello')}
-                        style={styles.wishlist_noitem}
-                    >
-                        <InactiveImage style={styles.noitem_icon}/>
-                        <Text style={styles.noitem_text}>{'당신의 다이어리를 채울\n'}<Text style={styles.noitem_text_bold}>새로운 컬러</Text>를 찾아보세요!</Text>
-                    </TouchableOpacity>
+                    <View style={styles.wishlist_noitem_container}>
+                        <TouchableOpacity
+                            activeOpacity={0.7}
+                            onPress={() => alert('hello')}
+                            style={styles.wishlist_noitem}
+                        >
+                            <InactiveImage style={styles.noitem_icon}/>
+                            <Text style={styles.noitem_text}>{'당신의 다이어리를 채울\n'}<Text style={styles.noitem_text_bold}>새로운 컬러</Text>를 찾아보세요!</Text>
+                        </TouchableOpacity>
+                    </View>
                 :
                     <FlatList
                         data={wishListPropsArray}
@@ -71,8 +74,10 @@ export default class WishListComponent extends Component {
 const styles = StyleSheet.create({
     wishlist_container: {
         flex: 1,
-        marginTop: calc.getRegHeightDp(28),
-        paddingHorizontal: calc.getRegWidthDp(21),
+        marginTop: calc.getRegHeightDp(14),
+    },
+    wishlist_noitem_container : {
+        paddingHorizontal: calc.getRegWidthDp(29),
     },
     wishlist_noitem : {
         flex: 1,
@@ -81,9 +86,16 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingHorizontal: calc.getRegWidthDp(21),
         paddingVertical: calc.getRegHeightDp(13),
-        // elevation: 3,
         borderRadius: 6,
-        backgroundColor: "#ffffff"
+        backgroundColor: "#ffffff",
+        shadowColor: "#4ca0a0a0",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.23,
+        shadowRadius: 2.62,
+        elevation: 3,
     },
     noitem_icon : {
         width: calc.getRegWidthDp(26),

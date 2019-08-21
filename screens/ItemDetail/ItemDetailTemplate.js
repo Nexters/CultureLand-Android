@@ -125,20 +125,10 @@ export default class ItemDetailScreen extends Component {
                             name="left" size={25} color="#f4f4f4"/>
                     </TouchableWithoutFeedback>
                 </View>
+                
                 <Image style={styles.center_image}
                        source={{uri: this.props.imageUrl}}
                 />
-                <Toast ref="toast"/>
-
-                <View style={styles.back_button}>
-                    <AntDesign
-                        name="left" size={25} color="#f4f4f4"/>
-                </View>
-                <Image style={styles.center_image}
-                       source={{uri: this.props.imageUrl}}
-                >
-
-                </Image>
                 <View style={styles.bottom_info_wrapper}>
 
                     <View style={styles.title_row}>

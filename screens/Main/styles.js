@@ -19,12 +19,16 @@ export default styles = function(screenWidth,screenHeight) {
         },
         main_top_wrapper: {
             marginTop  : calc.getRegHeightDp(51),
-            paddingHorizontal : calc.getRegWidthDp(45),
+            paddingHorizontal : calc.getRegWidthDp(40),
         },
         main_picker : {
             fontFamily: "noto-sans-bold",
         },
         main_top_description: {
+            flexDirection: 'row',
+            justifyContent: 'flex-start',
+        },
+        main_top_text : {
             fontFamily: "noto-sans",
             fontSize: 16,
             fontWeight: "normal",
@@ -33,8 +37,12 @@ export default styles = function(screenWidth,screenHeight) {
             color: "#a9a9a9",
         },
         main_top_date: {
-            // display: "flex",
-            marginLeft : calc.getRegWidthDp(7),
+            paddingLeft : calc.getRegWidthDp(2),
+            fontFamily: "noto-sans",
+            fontSize: 16,
+            fontWeight: "normal",
+            fontStyle: "normal",
+            letterSpacing: -0.33,
             color: "#5c5c5c",
         },
         main_starter_wrapper : {
