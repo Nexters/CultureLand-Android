@@ -37,7 +37,7 @@ export default class DropDown extends Component {
 
                 }}
                 pickerStyle={{
-                    marginTop : calc.getRegHeightDp(42),
+                    marginTop : 42,
 
                 }}
 

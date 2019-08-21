@@ -92,19 +92,23 @@ export default styles = function (screenWidth, screenHeight, calc) {
 
         active_search_result_wrapper    : {
 
-            width: "100%",
-            height : calc.getRegHeightDp(15.5+16.5+21),
+            height : 15.5+16.5+21,
             paddingTop : calc.getRegHeightDp(16.5),
-            paddingLeft : calc.getRegWidthDp(45),
+            paddingLeft : 15,
             paddingBottom : calc.getRegHeightDp(15.5),
             borderBottomColor: '#e9e9e9',
             borderBottomWidth: 1,
         },
 
         active_search_result_content : {
-            width : "100%",
-            height : calc.getRegHeightDp(21),
+            fontFamily : 'noto-sans-mid',
+            height : 21,
+            fontWeight: "500",
+            fontStyle: "normal",
             fontSize : 16,
+            lineHeight: 21,
+            letterSpacing: -0.53,
+            color: "#424242"
 
         },
 
