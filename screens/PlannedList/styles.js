@@ -159,14 +159,14 @@ export default styles = function (screenWidth, screenHeight, calc) {
             height: calc.getRegHeightDp(136),
             marginRight : calc.getRegWidthDp(12),
             borderRadius : 10,
-            backgroundColor : "#000"
         },
-
-        item_inner: {
-            flex: 1,
-            backgroundColor : "yellow"
+        thumbnail : {
+            width : "100%",
+            height: "100%",
+            resizeMode : 'contain',
+            borderRadius : 10,
+            backgroundColor : "#fff"
         },
-
         item_information_labels_wrapper : {
             width: calc.getRegWidthDp(360-27-30),
             height: calc.getRegHeightDp(21),
