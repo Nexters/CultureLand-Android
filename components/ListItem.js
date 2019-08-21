@@ -55,7 +55,7 @@ export default class ListItem extends Component {
         return (
                 <TouchableOpacity
                     activeOpacity={0.7}
-                    onPress={() => NavigatorService.navigate('NoteDetail')}
+                    onPress={() => NavigatorService.push('NoteDetail')}
                     style={styles.list_item_wrapper}
                 >
                 {/* <View style={styles.list_shadow}></View> */}
@@ -123,7 +123,7 @@ export default class ListItem extends Component {
                         <TouchableOpacity
                             style={styles.actionSheet_item}
                             onPress={() => {
-                                NavigatorService.navigate('NoteEdit')
+                                NavigatorService.push('NoteEdit')
                                 this.RBSheet.close();
                             }}
                         >

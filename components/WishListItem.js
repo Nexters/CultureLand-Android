@@ -51,7 +51,7 @@ export class WishListItem extends Component {
         return (
             <TouchableOpacity
                 activeOpacity={0.7}
-                onPress={() => NavigatorService.navigate('CultureDetail')}
+                onPress={() => NavigatorService.push('CultureDetail')}
                 style={styles.wishlist_item}
             >
                 <View style={styles.wishlist_image_container}>

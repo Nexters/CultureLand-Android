@@ -35,8 +35,7 @@ export default class DiaryListScreen extends Component {
             <View style={styles.container}>
                 <View style={styles.header}>
                     <TouchableOpacity
-                        // onPress={() => NavigatorService.navigate('Home')}
-                        onPress={() => this.props.navigation.dismiss()}
+                        onPress={() => NavigatorService.pop()}
                         activeOpacity={0.7}
                         style={styles.header_left}
                     >

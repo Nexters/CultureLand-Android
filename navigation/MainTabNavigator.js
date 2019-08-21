@@ -79,6 +79,7 @@ const HomeStack = createStackNavigator(
         DiaryList: DiaryListScreen,
         NoteDetail: NoteDetailScreen,
         NoteEdit: NoteEditScreen,
+        CultureDetail:ItemDetailScreen,
     },
     {
         initialRouteName : 'Home',
@@ -110,6 +111,7 @@ HomeStack.path = '';
 const MypageStack = createStackNavigator(
     {
         Mypage: MyPageScreen,
+        DiaryList: DiaryListScreen,
     },
     {
         initialRouteName : 'Mypage',

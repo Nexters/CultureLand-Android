@@ -20,7 +20,7 @@ export class FloatingButton extends Component {
     render () {
         return (
             <TouchableOpacity 
-                onPress={() => NavigatorService.navigate('NoteEdit')}
+                onPress={() => NavigatorService.push('NoteEdit')}
                 activeOpacity={0.7} 
                 style={styles.floating_button}
             >

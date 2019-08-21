@@ -56,7 +56,7 @@ export default function App(props) {
                     {/* <MainScreen/> */}
                     <AppNavigator
                         ref={navigatorRef => {
-                            NavigatorService.setContainer(navigatorRef);
+                            NavigatorService.setTopLevelNavigator(navigatorRef);
                         }}
                     />
                     {/* <AppNavigator/> */}

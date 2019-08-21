@@ -38,7 +38,7 @@ export default class MainCarousel extends Component {
             <TouchableOpacity
                 activeOpacity={0.7}
                 style={styles.slide_inner_container}
-                onPress={() => NavigatorService.navigate('DiaryList')}
+                onPress={() => NavigatorService.push('DiaryList')}
             >
                 <View style={styles.slide}>
                     <View style={styles.image_container}>

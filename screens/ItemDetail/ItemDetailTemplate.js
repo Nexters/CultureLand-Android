@@ -108,7 +108,7 @@ export default class ItemDetailScreen extends Component {
                 {this.errorRenderer()}
                 <View style={styles.back_button}>
                     <TouchableWithoutFeedback
-                        onPress={() => this.props.navigation.dismiss()}
+                        onPress={() => NavigatorService.pop()}
                     >
                         <AntDesign
                             name="left" size={25} color="#f4f4f4"/>

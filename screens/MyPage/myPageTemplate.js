@@ -89,7 +89,7 @@ export default class MyPageScreen extends Component {
                     {this.categories.length > (i * 2 + 1) ?
                         <View style={styles.category_right_wrapper}>
                             <View style={styles.category_item_wrapper}>
-                                <TouchableOpacity onPress={() => NavigatorService.navigate('DiaryList')}>
+                                <TouchableOpacity onPress={() => NavigatorService.push('DiaryList')}>
                                     <View style={styles.category_item_icon}>
                                         {this.categories[i*2+1].getSVGImage()}
                                     </View>
