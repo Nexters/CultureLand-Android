@@ -160,7 +160,6 @@ export default styles = function (screenWidth, screenHeight, calc) {
             marginRight : calc.getRegWidthDp(12),
             borderRadius : 10,
         },
-
         thumbnail : {
             width : "100%",
             height: "100%",

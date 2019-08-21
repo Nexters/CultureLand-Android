@@ -36,3 +36,8 @@ export default class SignLoadingScreen extends Component {
 
 SignLoadingScreen.PropTypes = {
 };
+
+SignLoadingScreen.navigationOptions = {
+  header: null,
+  headerMode: 'none',
+};

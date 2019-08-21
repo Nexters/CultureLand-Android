@@ -129,4 +129,5 @@ MainScreen.PropTypes = {
 
 MainScreen.navigationOptions = {
     header: null,
+    headerMode: 'none',
 };

@@ -60,11 +60,10 @@ export default function App(props) {
         return (
             <Provider store={store}>
                 <View style={styles.container}>
-
                     {/* <SignScreen/> */}
                     <AppNavigator
                         ref={navigatorRef => {
-                            NavigatorService.setContainer(navigatorRef);
+                            NavigatorService.setTopLevelNavigator(navigatorRef);
                         }}
                     />
                     {/* <AppNavigator/> */}

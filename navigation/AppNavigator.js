@@ -1,22 +1,23 @@
 import React from 'react';
-import { createSwitchNavigator, createStackNavigator, createAppContainer } from 'react-navigation';
+import { createSwitchNavigator, createAppContainer } from 'react-navigation';
 
 import MainTabNavigator from './MainTabNavigator';
 import SignScreen from '../screens/Sign/index';
 import SignLoadingScreen from '../screens/SignLoading/index';
 
-const AppStack = createStackNavigator({ MainTabNavigator: MainTabNavigator });
-const AuthStack = createStackNavigator({ Signup: SignScreen  });
-
 export default createAppContainer(
   createSwitchNavigator(
     {
       AuthLoading: SignLoadingScreen,
-      App: AppStack,
-      Auth: AuthStack
+      App: MainTabNavigator,
+      Auth: SignScreen
     },
     {
-      initialRouteName: 'AuthLoading',
-    }
+      initialRouteName : 'AuthLoading',
+      header: null,
+      navigationOptions : {
+        headerMode: 'none',
+      }
+    },
   )
 );
