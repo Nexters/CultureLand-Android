@@ -11,7 +11,7 @@ import * as SecureStore from 'expo-secure-store';
 
 class ClientClass {
     constructor() {
-        this.baseURL = "http://54.180.86.141:8080";
+        this.baseURL = "http://54.180.34.154:8080";
         this.token = null;
         this.socialService = null;
         this.socialAccessToken = null;
@@ -117,7 +117,7 @@ class ClientClass {
         }).then((res) => {
             return res.json();
         }).catch(err => {
-            return { err }
+            return { error : err }
         })
     }
 
@@ -140,7 +140,7 @@ class ClientClass {
                 await SecureStore.setItemAsync(SERVICE_ACCESS_TOKEN, response.message);
                 await SecureStore.setItemAsync(EXPIRED_AT, decodedToken.exp.toString());
                 await SecureStore.getItemAsync(EXPIRED_AT).then((expiredDate) => {
-                    CLient.setExpiredAt(expiredDate);
+                    Client.setExpiredAt(expiredDate);
                 });
                 await SecureStore.getItemAsync(SERVICE_ACCESS_TOKEN).then((token) => {
                     Client.setServerAccessToken(token);

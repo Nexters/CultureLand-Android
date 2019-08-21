@@ -88,7 +88,8 @@ export default class SignScreen extends Component {
                 console.log("cancel!");
             }
         } catch ({message}) {
-            alert(`Facebook Login Error: ${message}`);
+            console.log("")
+            return;
         }
 
 
