@@ -42,14 +42,12 @@ const config = Platform.select({
 const CultureStack = createStackNavigator(
     {
         Culture: PlanedListScreen,
-        CultureDetail: ItemDetailScreen,
     },
     {
         initialRouteName: 'Culture',
         header: null,
         headerMode: 'none',
     },
-    // config
 );
 
 CultureStack.navigationOptions = {
@@ -78,15 +76,11 @@ const HomeStack = createStackNavigator(
     {
         Home: MainScreen,
         DiaryList: DiaryListScreen,
-        NoteDetail: NoteDetailScreen,
-        NoteEdit: NoteEditScreen,
-        CultureDetail: ItemDetailScreen,
     },
     {
         initialRouteName: 'Home',
         headerMode: 'none',
     },
-    // config
 );
 
 HomeStack.navigationOptions = {
@@ -119,7 +113,6 @@ const MypageStack = createStackNavigator(
         header: null,
         headerMode: 'screen',
     },
-// config
 );
 
 MypageStack.navigationOptions = {
