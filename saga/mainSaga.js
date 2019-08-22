@@ -25,7 +25,6 @@ export function* mainNoteCountFlow () {
 
         const request = yield take(GET_MAIN_NOTELIST_ACTION.REQUEST);
 
-        console.log("리퀘 : "+ JSON.stringify(request));
         let response = yield call(getMainNoteCountAction, request.payload.yearType);
 
         if (response.error) {
@@ -55,14 +54,12 @@ async function getMainWishListAction(){
         return { error : response.error }
     }
 
-
     return {
         error : null,
         result : {
             wishList : response.message,
         }
     }
-
 }
 
 export function* mainWishListFlow(){

@@ -2,19 +2,21 @@ import {GET_PRODUCT_LIST} from "../actionTypes/productList";
 import {searchProductFlow} from "./searchProductSaga";
 import {fork} from "redux-saga/effects";
 
-import {getProductListFlow} from "./productListSaga"
+import {getProductListFlow,changeProductListFlow,changeProductListSortFlow} from "./productListSaga"
 import {isWishedFlow, cancelWishedFlow, setWishedFlow, getItemDetailFlow} from "./itemDetailSaga";
 import {myPageAccountFlow, myPageCountFlow} from "./myPageSaga";
-import {mainNoteCountFlow, mainNoteListFlow, mainWishListFlow} from "./mainSaga";
+import {mainNoteCountFlow,  mainWishListFlow} from "./mainSaga";
 
 import {
-    getNoteFlow, 
+    getNoteFlow,
+    setLikedFlow,
     createNoteFlow,
     updateNoteFlow,
     removeNoteFlow,
     isLikedFlow,
 } from "./noteItemSaga";
 import {cancelLikeFlow, getDiariesFlow, setLikeFlow} from "./diaryListSaga";
+import {changeProductListSort} from "../actions/productList";
 
 
 /*
@@ -55,5 +57,7 @@ export default function* root() {
     yield fork(mainWishListFlow);
     yield fork(getItemDetailFlow);
     yield fork(getDiariesFlow);
-
+    yield fork(changeProductListFlow);
+    yield fork(changeProductListSortFlow);
+    yield fork(setLikedFlow)
 }

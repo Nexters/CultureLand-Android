@@ -180,8 +180,18 @@ export function* isLikedFlow() {
     }
 }
 
-function setLiked() {
+async function setLiked(diaryId) {
     // MOCK
+    const response = await Client.setDiaryLikeState(diaryId);
+    if(response.error){
+        return { error : response.error }
+    }
+    return {
+        error : null,
+        result : {
+
+        }
+    }
 }
 
 export function* setLikedFlow() {

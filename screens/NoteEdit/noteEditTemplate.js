@@ -45,14 +45,17 @@ export default class NoteEditScreen extends Component {
             image: this.props.image,
             cultureName : this.props.cultureName,
             isRequired: false,
+            hasCameraPermission : '',
         }
     }
-    async componentDidMount(){
-        const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+
+
+    async componentDidMount() {
+        const { status } = await Permissions.askAsync(Permissions.CAMERA);
+        this.setState({ hasCameraPermission: status === 'granted' });
     }
 
     onSelectedChange(value, index){
-        console.log("카테고리가 이걸로바뀜 : "+KOR_CATEGORY_TO_ENG(value));
         this.setState({cultureName: KOR_CATEGORY_TO_ENG(value)});
     }
 
@@ -105,7 +108,9 @@ export default class NoteEditScreen extends Component {
     };
 
     render() {
+
         let { image } = this.state;
+
         return (
             <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
                 <View style={styles.header}>

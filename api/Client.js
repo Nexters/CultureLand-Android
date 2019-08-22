@@ -104,9 +104,8 @@ class ClientClass {
         &sort=${sort}&page=${page}`;
     }
     */
-    getCultureInfoByQueriesURL(category, page) {
-        return `${this.getCultureInfoBaseURL()}?category=${category}\
-        &page=${page}`;
+    getCultureInfoByQueriesURL(category, sort,page) {
+        return `${this.getCultureInfoBaseURL()}?category=${category}&sort=${sort}&page=${page}`;
     }
 
     getAllCultureQueriesURL(sort,page){
@@ -158,7 +157,6 @@ class ClientClass {
                 console.log("인증후 서버 :" +JSON.stringify(response));
                 const decodedToken = jwtDecode(response.message.token);
                 this.setServerAccessToken(response.message.token);
-                console.log("디코디드코인 : " +JSON.stringify(decodedToken));
                 await SecureStore.setItemAsync(SERVICE_ACCESS_TOKEN, response.message.token);
                 await SecureStore.setItemAsync(EXPIRED_AT, decodedToken.exp.toString());
                 await SecureStore.getItemAsync(EXPIRED_AT).then((expiredDate) => {
@@ -276,8 +274,8 @@ class ClientClass {
         })
     }
 
-    getCultureByQueries(category, page) { // VERIFIED
-        return this.credentialCall(this.getCultureInfoByQueriesURL(category, page), {
+    getCultureByQueries(category,sort, page) { // VERIFIED
+        return this.credentialCall(this.getCultureInfoByQueriesURL(category, sort,page), {
             method: "GET",
         })
     }

@@ -37,8 +37,6 @@ export default class ListComponent extends Component {
         <ListItem
             key={item.key}
             getNoteItem={this.props.getNoteItem}
-            setLiked={this.props.setLiked}
-            cancelLiked={this.props.cancelLiked}
             id={item.id}
             title={item.title}
             culture={CATEGORY_KOR(item.culture)}

@@ -23,7 +23,6 @@ export default class SignLoadingScreen extends Component {
     }
 
     _bootstrapAsync = async () => {
-        console.log(1);
 
         // 로그인 상태 확인 후 로그인 페이지 / 메인 페이지 출력
         const socialService = await SecureStore.getItemAsync(OAUH_SOCIAL_SERVICE);
@@ -69,7 +68,7 @@ export default class SignLoadingScreen extends Component {
         }else{
             console.log("에러"+JSON.stringify(response));
         }
-        console.log("인증네비게이트");
+
         this.props.navigation.navigate(isLoginValid? 'App' : 'Auth');
     };
 
