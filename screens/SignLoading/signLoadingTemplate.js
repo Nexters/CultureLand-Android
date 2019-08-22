@@ -42,7 +42,6 @@ export default class SignLoadingScreen extends Component {
             return;
         }
 
-
         Client.setSocialService(socialService);
         Client.setSocialAccessToken(socialToken);
 
@@ -52,13 +51,13 @@ export default class SignLoadingScreen extends Component {
         try {
             token = response.message.token;
         }catch (e){
-            console.log("익셉 : "+e);
+            console.log("익셉션 : "+e);
         }
 
         let isLoginValid = false;
 
         if(!response.error) {
-
+                console.log("리스폰스 성공 : "+JSON.stringify(response));
                 const decodedToken = jwtDecode(token);
                 Client.setSocialAccessToken(socialToken);
                 Client.setServerAccessToken(token);
@@ -70,6 +69,7 @@ export default class SignLoadingScreen extends Component {
         }else{
             console.log("에러"+JSON.stringify(response));
         }
+        console.log("인증네비게이트");
         this.props.navigation.navigate(isLoginValid? 'App' : 'Auth');
     };
 
