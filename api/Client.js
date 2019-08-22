@@ -155,10 +155,11 @@ class ClientClass {
 
                 let response = await this.signInOrUp(this.socialService);
 
-                const decodedToken = jwtDecode(response.message);
-                this.setServerAccessToken(response.message);
-
-                await SecureStore.setItemAsync(SERVICE_ACCESS_TOKEN, response.message);
+                console.log("인증후 서버 :" +JSON.stringify(response));
+                const decodedToken = jwtDecode(response.message.token);
+                this.setServerAccessToken(response.message.token);
+                console.log("디코디드코인 : " +JSON.stringify(decodedToken));
+                await SecureStore.setItemAsync(SERVICE_ACCESS_TOKEN, response.message.token);
                 await SecureStore.setItemAsync(EXPIRED_AT, decodedToken.exp.toString());
                 await SecureStore.getItemAsync(EXPIRED_AT).then((expiredDate) => {
                     Client.setExpiredAt(expiredDate);

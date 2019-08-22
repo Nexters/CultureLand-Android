@@ -26,7 +26,7 @@ const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
 import {Ionicons} from '@expo/vector-icons'
 
-import {numberWithCommas, RatioCalculator, CATEGORY, CATEGORY_KOR, KOR_CATEGORY_TO_ENG} from "../../util";
+import {numberWithCommas, RatioCalculator, CATEGORY, CATEGORY_KOR, ISNULL, KOR_CATEGORY_TO_ENG} from "../../util";
 import NavigatorService from "../../util/NavigatorService";
 
 const calc = new RatioCalculator(screenWidth, screenHeight);
