@@ -176,7 +176,6 @@ export default class PlanedListScreen extends Component {
                                             />
                                         )}
                                         tabBarTextStyle={styles.category_tabBar_text_style}
-
                                         tabBarInactiveTextColor={"#797979"}
                                         tabBarActiveTextColor={'black'}
                                         tabBarUnderlineStyle={styles.category_underline}

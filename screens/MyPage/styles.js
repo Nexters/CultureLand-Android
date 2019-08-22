@@ -26,7 +26,7 @@ export default styles = function (screenWidth, screenHeight, calc) {
             },
 
             user_name_text: {
-                fontFamily: 'noto-sans-bold',
+                fontFamily: "noto-sans-bold",
                 width: "100%",
                 height: 33,
                 fontSize: 24,
@@ -94,7 +94,7 @@ export default styles = function (screenWidth, screenHeight, calc) {
                 marginTop: calc.getRegHeightDp(5),
                 marginRight: 2,
                 fontSize: 14,
-
+                lineHeight: 16,
             },
 
             number_of_data_content: {
@@ -104,6 +104,7 @@ export default styles = function (screenWidth, screenHeight, calc) {
                 marginTop: calc.getRegHeightDp(3),
                 fontSize: 15,
                 fontWeight: "500",
+                lineHeight: 18,
             },
 
             bottom_wrapper: {
@@ -183,26 +184,31 @@ export default styles = function (screenWidth, screenHeight, calc) {
             },
 
             category_item_title: {
+                fontFamily: "noto-sans-bold",
                 fontSize: 14,
                 fontWeight: "700",
                 letterSpacing: 0.01,
                 color: "#292929",
                 position: 'absolute',
                 bottom: 0,
+                lineHeight: 16,
             },
 
             category_item_number: {
+                fontFamily: 'noto-sans-light',
                 fontSize: 14,
                 height: calc.getRegHeightDp(20),
                 marginTop: calc.getRegHeightDp(31),
                 letterSpacing: 0.01,
-                color: "#292929"
+                color: "#292929",
+                lineHeight: 16,
             },
 
             category_item_arrow_button: {
                 width: calc.getRegWidthDp(15),
                 height: calc.getRegHeightDp(18),
-                marginTop: calc.getRegHeightDp(31),
+                marginTop: calc.getRegHeightDp(33),
+                marginLeft: 5,
             }
 
 

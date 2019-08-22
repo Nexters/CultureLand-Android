@@ -17,6 +17,7 @@ import HomeScreen from "../HomeScreen";
 import PlanedListScreen from "../PlannedList";
 import CategoryType from "../../domain/CategoryType";
 import Entypo from '@expo/vector-icons/Entypo'
+import SplashIcon from './asset/appIcon_splash.svg';
 
 const calc = new RatioCalculator(screenWidth, screenHeight);
 const styles = styleFn(screenWidth, screenHeight, calc);
@@ -47,7 +48,7 @@ export default class SplashScreen extends Component {
                 <View style={styles.container}>
 
                     <View style={styles.splash_image}>
-
+                        <SplashIcon  width={73} height={73}/>
                     </View>
 
                     <Text style={styles.splash_message}>

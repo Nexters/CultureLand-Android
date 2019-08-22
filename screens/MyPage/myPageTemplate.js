@@ -47,7 +47,7 @@ export default class MyPageScreen extends Component {
         return (
             <View style={styles.category_item_arrow_button}>
                 <Entypo
-                    name="chevron-thin-right" size={calc.getRegHeightDp(16)} color="#292929"/>
+                    name="chevron-thin-right" size={calc.getRegHeightDp(12)} color="#c4c4c4"/>
             </View>
         )
     }

@@ -49,6 +49,7 @@ export class WishListItem extends Component {
 
     render() {
         return (
+
             <TouchableOpacity
                 activeOpacity={0.7}
                 onPress={() => NavigatorService.push('ItemDetail')}
@@ -77,21 +78,34 @@ export class WishListItem extends Component {
 }
 
 const styles = StyleSheet.create({
-    
+    wishlist_item_container : {
+        flex: 1,
+        paddingHorizontal: calc.getRegWidthDp(29),
+        paddingBottom: calc.getRegWidthDp(9),
+    },
     wishlist_item : {
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        marginTop: calc.getRegHeightDp(13),
+        height: 96,
         padding: calc.getRegWidthDp(8),
-        // elevation: 3,
         borderRadius: 6,
-        backgroundColor: "#ffffff"
+        backgroundColor: "#ffffff",
+        shadowColor: "#4ca0a0a0",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.23,
+        shadowRadius: 2.62,
+        elevation: 3,
     },
     wishlist_image_container : {
+        overflow: 'hidden',
         width: calc.getRegWidthDp(54),
-        height: calc.getRegWidthDp(80),
+        height: '100%',
+        borderRadius: 6,
     },
     wishlist_image : {
         flex: 1,
@@ -101,6 +115,7 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         alignSelf: 'flex-start',
+        justifyContent: 'space-evenly',
         textAlign: 'left',
         paddingLeft: calc.getRegWidthDp(8),
         paddingVertical: calc.getRegWidthDp(2),
@@ -111,24 +126,26 @@ const styles = StyleSheet.create({
         fontWeight: "normal",
         fontStyle: "normal",
         letterSpacing: -0.2,
+        lineHeight: 14,
         color: "#b0b0b0"
     },
     wishlist_title : {
         flex: 1,
-        marginTop: calc.getRegHeightDp(3),
+        paddingTop: 3,
         fontFamily: "noto-sans",
         fontSize: 12,
         fontWeight: "normal",
         fontStyle: "normal",
         letterSpacing: -0.25,
+        lineHeight: 14,
         color: "#464646"
     },
     wishlist_date : {
         fontFamily: "noto-sans",
         fontSize: 12,
-        // fontWeight: "300",
         fontStyle: "normal",
         letterSpacing: -0.15,
+        lineHeight: 14,
         color: "#b0b0b0"
     },
     wishlist_icon_container : {

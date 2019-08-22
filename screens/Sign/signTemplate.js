@@ -138,9 +138,6 @@ export default class SignScreen extends Component {
                     <ImageCarousel style={styles.sign_illustrate_image}>
                     </ImageCarousel>
                 </View>
-                <Pagination dotsLength={3} activeDotIndex={0}>
-
-                </Pagination>
 
                 <View style={styles.sign_social_select_wrapper}>
 

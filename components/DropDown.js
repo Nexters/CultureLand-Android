@@ -40,12 +40,16 @@ export default class DropDown extends Component {
                     marginTop : 42,
 
                 }}
-
-
                 itemTextStyle={{
-
-                }
-                }
+                    fontFamily: "noto-sans",
+                    fontSize: 16,
+                    lineHeight: 19,
+                }}
+                style={{
+                    fontFamily: "noto-sans",
+                    fontSize: 16,
+                    lineHeight: 19,
+                }}
 
             />
         );

@@ -30,6 +30,7 @@ export default class SignLoadingScreen extends Component {
         const serviceToken = await SecureStore.getItemAsync(SERVICE_ACCESS_TOKEN);
         const socialToken = await SecureStore.getItemAsync(SOCIAL_ACCESS_TOKEN);
 
+
         console.log(`SocialService [${socialService}]
         ServiceToken [${serviceToken}]
         SocialToken [${socialToken}]
@@ -40,6 +41,7 @@ export default class SignLoadingScreen extends Component {
             this.props.navigation.navigate('Auth');
             return;
         }
+
 
         Client.setSocialService(socialService);
         Client.setSocialAccessToken(socialToken);
@@ -56,6 +58,7 @@ export default class SignLoadingScreen extends Component {
         let isLoginValid = false;
 
         if(!response.error) {
+
                 const decodedToken = jwtDecode(token);
                 Client.setSocialAccessToken(socialToken);
                 Client.setServerAccessToken(token);
@@ -67,7 +70,6 @@ export default class SignLoadingScreen extends Component {
         }else{
             console.log("에러"+JSON.stringify(response));
         }
-
         this.props.navigation.navigate(isLoginValid? 'App' : 'Auth');
     };
 

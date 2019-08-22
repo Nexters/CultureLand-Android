@@ -88,19 +88,26 @@ export default class MainScreen extends Component {
                                 width: calc.getRegWidthDp(114),
                                 height: calc.getRegHeightDp(70),
                             }}
-                            overlayStyle={{
-    
-                            }}
                             pickerStyle={{
                                 marginTop : calc.getRegHeightDp(60),
-    
                             }}
-                            style={styles.main_picker}
+                            itemTextStyle={{
+                                fontFamily: "noto-sans",
+                                fontWeight: '400',
+                                fontSize: 24,
+                                lineHeight: 28,
+                            }}
+                            style={{
+                                fontFamily: "noto-sans",
+                                fontWeight: '700',
+                                fontSize: 24,
+                                lineHeight: 28,
+                            }}
                         />
-                        <Text style={styles.main_top_description}>
-                        Today is 
+                        <View style={styles.main_top_description}>
+                            <Text style={styles.main_top_text}>Today is </Text>
                             <Text style={styles.main_top_date}> {currentDate} </Text>
-                        </Text>
+                        </View>
                     </View>
                     {this.state.isData ?
                         (<View style={styles.main_wrapper}>
