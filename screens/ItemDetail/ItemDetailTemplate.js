@@ -51,6 +51,9 @@ export default class ItemDetailScreen extends Component {
             isWished: false,
             error: this.props.error,
         };
+
+
+
     }
 
     componentDidMount() {
@@ -68,16 +71,10 @@ export default class ItemDetailScreen extends Component {
 
         if (this.props.isWished) {
             console.log("Cancel wish triggered");
-            return this.props.cancelWishedRequest();
+            return this.props.cancelWishedRequest(id);
         } else {
             console.log("set wish triggered");
-            return this.props.setWishedRequest({
-                imageUrl: imageUrl,
-                title: title,
-                place: place,
-                startDate: startDate,
-                endDate: endDate
-            });
+            return this.props.setWishedRequest(id);
         }
     }
 
@@ -129,6 +126,7 @@ export default class ItemDetailScreen extends Component {
                 <Image style={styles.center_image}
                        source={{uri: this.props.imageUrl}}
                 />
+
                 <View style={styles.bottom_info_wrapper}>
 
                     <View style={styles.title_row}>

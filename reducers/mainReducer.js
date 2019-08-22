@@ -3,34 +3,8 @@ import {combineReducers} from 'redux';
 
 const initialState = {
     yearType: '2019',
-    noteList : [
-        {
-            monthType: '201908',
-            count: 3,
-            imageUrl: ""
-        },
-        {
-            monthType: '201903',
-            count: 6,
-            imageUrl: ""
-        }
-    ],
-    wishList : [
-        {
-            category: '콘서트',
-            title: '2019 렛츠락 페스티벌',
-            date: '2019.09.21 ~ 2019.09.22',
-            isLiked: true,
-            imageUrl: '',
-        },
-        {
-            category: '콘서트',
-            title: '2019 렛츠락 페스티벌',
-            date: '2019.09.21 ~ 2019.09.22',
-            isLiked: true,
-            imageUrl: '',
-        },
-    ],
+    noteList : [],
+    wishList : [],
     loading :false,
     error : '',
 };

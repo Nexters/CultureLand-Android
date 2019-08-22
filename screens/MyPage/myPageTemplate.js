@@ -23,6 +23,7 @@ import LikeImage from './asset/like.svg';
 import MusicalImage from './asset/musical.svg';
 import PlayImage from './asset/play.svg';
 import TicketImage from './asset/ticket.svg';
+import {LIST_TYPE} from "../../util/index";
 
 
 const screenWidth = Math.round(Dimensions.get('window').width);
@@ -52,7 +53,16 @@ export default class MyPageScreen extends Component {
     }
 
     componentDidMount(){
+        this.props.navigation.addListener("didFocus",()=>{
+            console.log("디드포ㅓ스");
+            this.props.getMyPageCount();
+        });
 
+    }
+
+    navigateToCategoryList(category){
+        this.props.getDiaryList(LIST_TYPE.FOR_CATEGORY,category);
+        NavigatorService.navigate('DiaryList');
     }
 
     generateCategories() {
@@ -66,7 +76,7 @@ export default class MyPageScreen extends Component {
                 <View style={styles.item_pair_wrapper}>
                     <View style={styles.category_left_wrapper}>
                         <View style={styles.category_item_wrapper}>
-                            <TouchableOpacity onPress={() => NavigatorService.navigate('DiaryList')}>
+                            <TouchableOpacity onPress={() => this.navigateToCategoryList(this.categories[i*2].getCategory())}>
                                 <View style={styles.category_item_icon}>
                                     {this.categories[i*2].getSVGImage()}
                                 </View>
@@ -90,7 +100,7 @@ export default class MyPageScreen extends Component {
                     {this.categories.length > (i * 2 + 1) ?
                         <View style={styles.category_right_wrapper}>
                             <View style={styles.category_item_wrapper}>
-                                <TouchableOpacity onPress={() => NavigatorService.push('DiaryList')}>
+                                <TouchableOpacity onPress={() => this.navigateToCategoryList(this.categories[i*2+1].getCategory())}>
                                     <View style={styles.category_item_icon}>
                                         {this.categories[i*2+1].getSVGImage()}
                                     </View>
@@ -125,57 +135,60 @@ export default class MyPageScreen extends Component {
         } = this.props;
 
         this.props.getMyPageAccount();
-        this.props.getMyPageCount();
 
         this.categories = [
-            new CategoryType("좋아하는\n기록", this.props.likedCount,"#e44343",<LikeImage width={38} height={38}/>),
-            new CategoryType("전시", this.props.exhibitionCount,"",<ExhibitionImage width={38} height={38}/>),
-            new CategoryType("콘서트", this.props.concertCount,"",<ConcertImage width={38} height={38}/>),
-            new CategoryType("뮤지컬", this.props.musicalCount,"",<MusicalImage width={38} height={38}/>),
-            new CategoryType("연극", this.props.playCount,"",<PlayImage width={38} height={38}/>),
-            new CategoryType("기타", this.props.etcCount,"",<EtcImage width={38} height={38}/>)
+            new CategoryType("좋아하는\n기록", "liked",this.props.likedCount,"#e44343",<LikeImage width={38} height={38}/>),
+            new CategoryType("전시", CATEGORY.EXHIBITION,this.props.exhibitionCount,"",<ExhibitionImage width={38} height={38}/>),
+            new CategoryType("콘서트",CATEGORY.CONCERT, this.props.concertCount,"",<ConcertImage width={38} height={38}/>),
+            new CategoryType("뮤지컬",CATEGORY.MUSICAL,this.props.musicalCount,"",<MusicalImage width={38} height={38}/>),
+            new CategoryType("연극", CATEGORY.PLAY,this.props.playCount,"",<PlayImage width={38} height={38}/>),
+            new CategoryType("기타",CATEGORY.ETC, this.props.etcCount,"",<EtcImage width={38} height={38}/>)
         ];
         this.contentJSX = new Array(6);
 
-        return (
+        if(this.props.loading) {
+            return (<Text> 대충 로딩중 </Text>)
+        }else
+            {
+                return (
+                    <View>
+                        <View style={styles.top_wrapper}>
+                            <Text style={styles.user_name_text}>
+                                {userId}
+                            </Text>
+                            <View style={styles.user_wrapper}>
 
-            <View>
-                <View style={styles.top_wrapper}>
-                    <Text style={styles.user_name_text}>
-                        {userId}
-                    </Text>
-                    <View style={styles.user_wrapper}>
+                                <Text style={styles.user_email}>
+                                    {userEmail}
+                                </Text>
+                                <Text style={styles.user_logout}>
+                                    로그아웃
+                                </Text>
+                                <View/>
 
-                        <Text style={styles.user_email}>
-                            {userEmail}
-                        </Text>
-                        <Text style={styles.user_logout}>
-                            로그아웃
-                        </Text>
-                        <View/>
+                            </View>
+                            <View style={styles.number_of_data_wrapper}>
+                                <View style={styles.data_symbol}>
+                                    <TicketImage width={28} height={25}/>
+                                </View>
+                                <Text style={styles.number_of_data_title}>
+                                    총 기록 개수
+                                </Text>
+                                <Text style={styles.number_of_data_content}>
+                                    {totalCount}
+                                </Text>
 
-                    </View>
-                    <View style={styles.number_of_data_wrapper}>
-                        <View style={styles.data_symbol}>
-                            <TicketImage width={28} height={25}/>
+                            </View>
                         </View>
-                        <Text style={styles.number_of_data_title}>
-                            총 기록 개수
-                        </Text>
-                        <Text style={styles.number_of_data_content}>
-                            {totalCount}
-                        </Text>
-
-                    </View>
-                </View>
 
 
-                <View style={styles.bottom_wrapper}>
-                    {this.generateCategories()}
-                </View>
-            </View>
-        )
-    }
+                        <View style={styles.bottom_wrapper}>
+                            {this.generateCategories()}
+                        </View>
+                    </View>)
+            }
+
+        }
 }
 
 MyPageScreen.propTypes = {

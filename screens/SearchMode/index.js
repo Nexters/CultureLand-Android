@@ -1,8 +1,12 @@
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import template from "./SearchModeTemplate";
-import {getSearchedProductList, getSearchedProductError, getSearchedProductKeyword} from "../../selectors/searchProductSelector";
+import {
+    getSearchedProductList,
+    getSearchedProductError,
+    getSearchedProductKeyword
+} from "../../selectors/searchProductSelector";
 import {searchProduct} from '../../actions/searchProduct'
-
+import {getItemDetailAction, isWishedAction} from "../../actions/itemDetail";
 
 
 function mapStateToProps(state) {
@@ -19,8 +23,10 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = {
-      searchRequest : searchProduct.request,
+    getItemInfo: getItemDetailAction.request,
+    isWishedRequest: isWishedAction.request,
+    searchRequest: searchProduct.request,
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(template);
+export default connect(mapStateToProps, mapDispatchToProps)(template);
 

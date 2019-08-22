@@ -23,35 +23,50 @@ export default class SignLoadingScreen extends Component {
     }
 
     _bootstrapAsync = async () => {
+        console.log(1);
+
         // 로그인 상태 확인 후 로그인 페이지 / 메인 페이지 출력
         const socialService = await SecureStore.getItemAsync(OAUH_SOCIAL_SERVICE);
         const serviceToken = await SecureStore.getItemAsync(SERVICE_ACCESS_TOKEN);
         const socialToken = await SecureStore.getItemAsync(SOCIAL_ACCESS_TOKEN);
-        
-        console.log(`SocialService [${socialService}])
+
+
+        console.log(`SocialService [${socialService}]
         ServiceToken [${serviceToken}]
-        SocialToken [${socialToken}]`);
+        SocialToken [${socialToken}]
+        `);
+
 
         if(!serviceToken){
             this.props.navigation.navigate('Auth');
             return;
         }
+
+
         Client.setSocialService(socialService);
         Client.setSocialAccessToken(socialToken);
-        
+
         const response = await Client.signInOrUp(socialService);
-        const token = response.message.token;
+
+        let token;
+        try {
+            token = response.message.token;
+        }catch (e){
+            console.log("익셉 : "+e);
+        }
 
         let isLoginValid = false;
 
         if(!response.error) {
-            const decodedToken = jwtDecode(token);
-            Client.setSocialAccessToken(socialToken);
-            Client.setServerAccessToken(token);
-            Client.setExpiredAt(decodedToken.exp);
-            await SecureStore.setItemAsync(EXPIRED_AT, decodedToken.exp.toString());
-            await SecureStore.setItemAsync(SERVICE_ACCESS_TOKEN,token)
-            isLoginValid = true;
+
+                const decodedToken = jwtDecode(token);
+                Client.setSocialAccessToken(socialToken);
+                Client.setServerAccessToken(token);
+                Client.setExpiredAt(decodedToken.exp);
+                await SecureStore.setItemAsync(EXPIRED_AT, decodedToken.exp.toString());
+                await SecureStore.setItemAsync(SERVICE_ACCESS_TOKEN,token);
+                isLoginValid = true;
+
         }else{
             console.log("에러"+JSON.stringify(response));
         }

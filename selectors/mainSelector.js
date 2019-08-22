@@ -13,3 +13,6 @@ export function getLoading(state){
 export function getError(state){
     return baseSelector(state).error;
 }
+export function getYearType(state){
+    return baseSelector(state).yearType;
+}

@@ -25,6 +25,7 @@ const screenHeight = Math.round(Dimensions.get('window').height);
 const calc = new RatioCalculator(screenWidth, screenHeight);
 const styles = styleFn(screenWidth, screenHeight, calc);
 import Toast, {DURATION} from 'react-native-easy-toast';
+import {Auth} from '../../util/Auth';
 
 export default class SignScreen extends Component {
 
@@ -35,29 +36,6 @@ export default class SignScreen extends Component {
         }
     }
 
-    async registerSocialCredentials(socialService, socialToken){
-        await SecureStore.setItemAsync(SOCIAL_ACCESS_TOKEN, socialToken);
-        await SecureStore.setItemAsync(OAUH_SOCIAL_SERVICE,socialService);
-        Client.setSocialService(socialService);
-        Client.setSocialAccessToken(socialToken);
-    }
-
-    async registerServerCredentials(token){
-
-        const decodedToken = jwtDecode(token);
-        await SecureStore.setItemAsync(SERVICE_ACCESS_TOKEN, token);
-
-        await SecureStore.setItemAsync(EXPIRED_AT, decodedToken.exp.toString());
-
-        await SecureStore.getItemAsync(EXPIRED_AT).then((expiredDate) => {
-            console.log("만료예정시간 " + expiredDate);
-        });
-
-        await SecureStore.getItemAsync(SERVICE_ACCESS_TOKEN).then((token) => {
-            console.log("토큰 " + token);
-            Client.setServerAccessToken(token);
-        });
-    }
     async faceBookAuth() {
 
 
@@ -96,12 +74,11 @@ export default class SignScreen extends Component {
         try {
             const response = await Client.signInOrUp(FACEBOOK);
 
-
             if(response.error){
                 this.setState({error : response.error});
                 return;
             }
-            await this.registerServerCredentials(response.message);
+            await Auth.registerServerCredentials(response.message);
             this.props.navigation.navigate('App');
 
         } catch (e) {
@@ -152,8 +129,6 @@ export default class SignScreen extends Component {
 
 
     render() {
-
-
         return (
 
             <View style={styles.container}>
@@ -169,7 +144,7 @@ export default class SignScreen extends Component {
                     <View style={styles.sign_social_service}>
 
                         <TouchableWithoutFeedback
-                            onPress={this.googleAuth.bind(this)}
+                            onPress={Auth.googleAuth.bind(this)}
                         >
                             <View style={styles.sign_social_item_image}>
                                 <GoogleLogo width={56} height={56}>
@@ -183,7 +158,7 @@ export default class SignScreen extends Component {
                     </View>
                     <View style={styles.sign_social_service}>
                         <TouchableWithoutFeedback
-                            onPress={this.faceBookAuth.bind(this)}
+                            onPress={Auth.faceBookAuth.bind(this)}
                         >
                             <View style={styles.sign_social_item_image}>
                                 <FacebookLogo width={56} height={56}>

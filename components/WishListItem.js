@@ -49,31 +49,30 @@ export class WishListItem extends Component {
 
     render() {
         return (
-            <View style={styles.wishlist_item_container}>
-                <TouchableOpacity
-                    activeOpacity={0.7}
-                    onPress={() => NavigatorService.push('ItemDetail')}
-                    style={styles.wishlist_item}
-                >
-                    <View style={styles.wishlist_image_container}>
-                        <Image source={{uri : this.props.imageUrl}}/>
-                    </View>
-                    <View style={styles.wishlist_text_container}>
-                        <Text style={styles.wishlist_subtitle}>{this.props.category}</Text>
-                        <Text style={styles.wishlist_title} numberOfLines={1}>{this.props.title}</Text>
-                        <Text style={styles.wishlist_date}>{this.props.date}</Text>
-                    </View>
-                    <View style={styles.wishlist_icon_container}>
-                        {this.state.isWished ?
-                            // 위시 리스트에 있으면 채워진 상태로 로딩
-                            <StarChkImage style={styles.wishlist_icon}/>
-                            :
-                            <StarImage style={styles.wishlist_icon}/>
-                        }
-                        
-                    </View>
-                </TouchableOpacity>
-            </View>
+
+            <TouchableOpacity
+                activeOpacity={0.7}
+                onPress={() => NavigatorService.push('ItemDetail')}
+                style={styles.wishlist_item}
+            >
+                <View style={styles.wishlist_image_container}>
+                    <Image source={{uri : this.props.imageUrl}}/>
+                </View>
+                <View style={styles.wishlist_text_container}>
+                    <Text style={styles.wishlist_subtitle}>{this.props.category}</Text>
+                    <Text style={styles.wishlist_title}>{this.props.title}</Text>
+                    <Text style={styles.wishlist_date}>{this.props.date}</Text>
+                </View>
+                <View style={styles.wishlist_icon_container}>
+                    {this.state.isWished ?
+                        // 위시 리스트에 있으면 채워진 상태로 로딩
+                        <StarChkImage style={styles.wishlist_icon}/>
+                        :
+                        <StarImage style={styles.wishlist_icon}/>
+                    }
+                    
+                </View>
+            </TouchableOpacity>
         )
     }
 }

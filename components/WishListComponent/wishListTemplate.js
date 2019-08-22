@@ -8,7 +8,7 @@ import {
     FlatList,
 } from 'react-native';
 import PropTypes from 'prop-types';
-import {RatioCalculator, MAIN_MONTH, ISNULL} from "../../util";
+import {RatioCalculator, MAIN_MONTH, ISNULL, CATEGORY_KOR} from "../../util";
 import {WishListItem} from '../WishListItem'
 import InactiveImage from "../../assets/images/icon/search/inactive.svg";
 
@@ -32,24 +32,39 @@ export default class WishListComponent extends Component {
             imageUrl={item.imageUrl}
             style={styles.wishlist_item}
         />
-    )
+    );
+
+    componentDidMount(){
+    }
     render() {
+
+
         const wishList = this.props.wishList;
-        const wishListPropsArray = []
-        wishList.map((wishList, index) => {
-            wishListPropsArray.push({
-                key: index,
-                category: wishList.category,
-                title: wishList.title,
-                date: wishList.date,
-                isLiked: wishList.isLiked,
-                imageUrl: wishList.imageUrl,
-            })
-        })
-        return (
-            <View style={styles.wishlist_container}>
-                {  ISNULL(wishList) ? 
-                    <View style={styles.wishlist_noitem_container}>
+
+        const wishListPropsArray = [];
+
+        if(this.props.loading){
+            <Text>대충 로딩중이란 내용</Text>
+        }else{
+
+            if(wishList){
+                wishList.map((item, index) => {
+                    wishListPropsArray.push({
+                        key: index,
+                        category: CATEGORY_KOR(item.cultureInfo.cultureName),
+                        title: item.cultureInfo.title,
+                        date: `${item.cultureInfo.startDate} ~ ${item.cultureInfo.endDate}`,
+                        isLiked: item.cultureInfo.isLiked,
+                        imageUrl: item.cultureInfo.imageUrl,
+                    })
+                });
+            }
+
+            return (
+
+
+                <View style={styles.wishlist_container}>
+                    {  ISNULL(wishList) ?
                         <TouchableOpacity
                             activeOpacity={0.7}
                             onPress={() => alert('hello')}
@@ -58,16 +73,18 @@ export default class WishListComponent extends Component {
                             <InactiveImage style={styles.noitem_icon}/>
                             <Text style={styles.noitem_text}>{'당신의 다이어리를 채울\n'}<Text style={styles.noitem_text_bold}>새로운 컬러</Text>를 찾아보세요!</Text>
                         </TouchableOpacity>
-                    </View>
-                :
-                    <FlatList
-                        data={wishListPropsArray}
-                        renderItem={this._renderItem}
-                    >
-                    </FlatList>
-                }
-            </View>
-        )
+
+                        :
+                        <FlatList
+                            data={wishListPropsArray}
+                            renderItem={this._renderItem}
+                        >
+                        </FlatList>
+                    }
+                </View>
+            )
+        }
+
     }
 }
 

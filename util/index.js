@@ -137,8 +137,6 @@ export function omitAutoCompleteText(result) {
         count = regResult.length;
     }
 
-
-
     if (count > 20) {
         return result.slice(0, 24) + `...`;
     } else {
@@ -146,11 +144,10 @@ export function omitAutoCompleteText(result) {
     }
 }
 
-export const LIST_TYPE = key_mirror({
-    FOR_CATEGORY: null,
-    FOR_DATE: null,
-});
-
+export const LIST_TYPE = {
+    FOR_CATEGORY : "category",
+    FOR_DATE : "date",
+};
 export const MY_PAGE_CATEGORY = {
     LIKED: "liked",
     EXHIBITION: "exhibition",
@@ -193,7 +190,7 @@ export function CATEGORY_BY_INDEX(index) {
         case 0:
             return CATEGORY.ALL_PRODUCT;
         case 1:
-            CATEGORY.EXHIBITION;
+            return CATEGORY.EXHIBITION;
         case 2:
             return CATEGORY.CONCERT;
         case 3:
@@ -222,9 +219,23 @@ export function CATEGORY_KOR(category) {
     }
 }
 
+export function KOR_CATEGORY_TO_ENG(category) {
+    switch (category) {
+        case "전시":
+            return CATEGORY.EXHIBITION;
+        case "콘서트":
+            return CATEGORY.CONCERT;
+        case "뮤지컬":
+            return CATEGORY.MUSICAL;
+        case "연극":
+            return CATEGORY.PLAY;
+        case "기타":
+            return CATEGORY.ETC;
+    }
+}
 export function MAIN_MONTH(date) {
-    const dateSlice = date.substr(4, 2);
-    switch (dateSlice) {
+    ///const dateSlice = date.substr(4, 2);
+    switch (date) {
         case '01':
             return "JANUARY";
         case '02':

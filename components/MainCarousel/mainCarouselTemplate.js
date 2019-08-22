@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import Carousel from 'react-native-snap-carousel';
-import {RatioCalculator, MAIN_MONTH, ISNULL} from "../../util";
+import {RatioCalculator, MAIN_MONTH, ISNULL, LIST_TYPE} from "../../util";
 import NavigatorService from "../../util/NavigatorService";
 
 import CardImageFirst from "../../assets/images/illustration/Home_card01.svg";
@@ -33,12 +33,20 @@ export default class MainCarousel extends Component {
         super(props);
     }
 
+    _monthListHandler(item){
+        this.props.getDiaryList(LIST_TYPE.FOR_DATE,
+            this.props.yearType.toString() +item.title
+        );
+        NavigatorService.push('DiaryList')
+    }
+
     _renderNoteItem ({item, index}) {
+
         return (
             <TouchableOpacity
                 activeOpacity={0.7}
                 style={styles.slide_inner_container}
-                onPress={() => NavigatorService.push('DiaryList')}
+                onPress={()=>this._monthListHandler(item)}
             >
                 <View style={styles.slide}>
                     <View style={styles.image_container}>
@@ -48,7 +56,7 @@ export default class MainCarousel extends Component {
                         />
                     </View>
                     <View style={styles.text_container}>
-                        <Text style={styles.title}>{ item.title }</Text>
+                        <Text style={styles.title}>{ MAIN_MONTH(item.title) }</Text>
                         <View style={styles.count_container}>
                             <TicketImage style={styles.count_icon}/>
                             <Text style={styles.count}>{ item.count }</Text>
@@ -75,15 +83,16 @@ export default class MainCarousel extends Component {
     }
     render () {
         const noteList = this.props.noteList;
-        const notePropsArray = []
+        const notePropsArray = [];
+        console.log("놋 리스트 : " +JSON.stringify(noteList));
         noteList.map((note, index) => {
             notePropsArray.push({
                 monthType: note.monthType,
-                title: MAIN_MONTH(note.monthType),
+                title: note.monthTime,
                 count: note.count,
                 imageUrl: note.imageUrl,
             })
-        })
+        });
         
         const noteData = notePropsArray;
         const infoData = [
@@ -106,7 +115,7 @@ export default class MainCarousel extends Component {
                 <Carousel
                     ref={(c) => { this._carousel = c; }}
                     data={ ISNULL(noteList) ? infoData : noteData}
-                    renderItem={ ISNULL(noteList) ? this._renderInfoItem : this._renderNoteItem}
+                    renderItem={ ISNULL(noteList) ? this._renderInfoItem : this._renderNoteItem.bind(this)}
                     sliderWidth={sliderWidth}
                     itemWidth={itemWidth}
                     firstItem={0}
@@ -115,6 +124,7 @@ export default class MainCarousel extends Component {
                     layout={'default'}
                     inactiveSlideOpacity={1}
                     inactiveSlideScale={1}
+
                 />
             </View>
         );

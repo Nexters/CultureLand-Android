@@ -25,7 +25,8 @@ import CalendarImage from "../../assets/images/icon/cal.svg"
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
 import {Ionicons} from '@expo/vector-icons'
-import {numberWithCommas, RatioCalculator, CATEGORY, CATEGORY_KOR, ISNULL} from "../../util";
+
+import {numberWithCommas, RatioCalculator, CATEGORY, CATEGORY_KOR, KOR_CATEGORY_TO_ENG} from "../../util";
 import NavigatorService from "../../util/NavigatorService";
 
 const calc = new RatioCalculator(screenWidth, screenHeight);
@@ -35,13 +36,14 @@ export default class NoteEditScreen extends Component {
     constructor(props){
         super(props)
         this.state = {
-            title: this.props.note.title,
-            category: this.props.note.category,
-            sometime: this.props.note.sometime,
-            place: this.props.note.place,
-            withWho: this.props.note.withWho,
-            content: this.props.note.content,
-            image: this.props.note.image,
+            title: this.props.title,
+            category: this.props.category,
+            sometime: this.props.sometime,
+            place: this.props.place,
+            withWho: this.props.withWho,
+            content: this.props.content,
+            image: this.props.image,
+            cultureName : this.props.cultureName,
             isRequired: false,
         }
     }
@@ -50,7 +52,8 @@ export default class NoteEditScreen extends Component {
     }
 
     onSelectedChange(value, index){
-        this.setState({category: value});
+        console.log("카테고리가 이걸로바뀜 : "+KOR_CATEGORY_TO_ENG(value));
+        this.setState({cultureName: KOR_CATEGORY_TO_ENG(value)});
     }
 
     _showWarningAlert = () => {
@@ -66,14 +69,40 @@ export default class NoteEditScreen extends Component {
     }
     
     _showConfirmAlert = () => {
-        Alert.alert(
-            '컬러가 저장되었습니다!','',
-            [
-                {text: '확인', onPress: () => NavigatorService.pop()},
-            ],
-            { cancelable: false }
-        )
-    }
+
+        console.log("저장!");
+
+        this.props.createNoteItem(this.state.title,this.state.sometime,
+            this.state.place,this.state.withWho,
+            this.state.content, this.state.cultureName);
+
+        let start = Date.now();
+        while(1){
+
+            if(Date.now()-start > 1000){
+                Alert.alert(
+                    '서버에 장애가 발생했습니다 잠시 후, 다시 시도해주세요!','',
+                    [
+                        {text: '확인', onPress: () => NavigatorService.pop()},
+                    ],
+                    { cancelable: false }
+                );
+                return;
+            }
+            if(!this.props.loading){
+
+                Alert.alert(
+                    '컬러가 저장되었습니다!','',
+                    [
+                        {text: '확인', onPress: () => NavigatorService.pop()},
+                    ],
+                    { cancelable: false }
+                );
+
+                return;
+            }
+        }
+    };
 
     render() {
         let { image } = this.state;
@@ -130,7 +159,7 @@ export default class NoteEditScreen extends Component {
                                 <Text style={styles.note_sub_title}>유형<Text style={styles.note_required_icon}>*</Text></Text>
                                 <View style={styles.note_picker_wrapper}>
                                     <Dropdown
-                                        value={CATEGORY_KOR(this.props.note.category)}
+                                        value={CATEGORY_KOR(this.props.category)}
                                         data={[
                                             {
                                                 value: "유형"

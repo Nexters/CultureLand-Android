@@ -21,6 +21,7 @@ import ListIcon from '../assets/images/icon/navigationBar/list/unselected.svg';
 import ListSelectedIcon from '../assets/images/icon/navigationBar/list/selected.svg';
 import MypageIcon from '../assets/images/icon/navigationBar/mypage/unselected.svg';
 import MypageSelectedIcon from '../assets/images/icon/navigationBar/mypage/selected.svg';
+import SearchModeScreen from "../screens/SearchMode/index";
 
 import styleFn from "../screens/PlannedList/styles";
 import {RatioCalculator} from "../util";
@@ -41,15 +42,14 @@ const config = Platform.select({
 
 const CultureStack = createStackNavigator(
     {
+        Search : SearchModeScreen,
         Culture: PlanedListScreen,
-        CultureDetail: ItemDetailScreen,
     },
     {
         initialRouteName: 'Culture',
         header: null,
         headerMode: 'none',
     },
-    // config
 );
 
 CultureStack.navigationOptions = {
@@ -78,15 +78,11 @@ const HomeStack = createStackNavigator(
     {
         Home: MainScreen,
         DiaryList: DiaryListScreen,
-        NoteDetail: NoteDetailScreen,
-        NoteEdit: NoteEditScreen,
-        CultureDetail: ItemDetailScreen,
     },
     {
         initialRouteName: 'Home',
         headerMode: 'none',
     },
-    // config
 );
 
 HomeStack.navigationOptions = {
@@ -119,7 +115,6 @@ const MypageStack = createStackNavigator(
         header: null,
         headerMode: 'screen',
     },
-// config
 );
 
 MypageStack.navigationOptions = {

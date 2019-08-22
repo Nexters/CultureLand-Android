@@ -6,6 +6,7 @@ import Entypo from '@expo/vector-icons/Entypo'
 import AntDesign from '@expo/vector-icons/AntDesign'
 import PropTypes from 'prop-types';
 import Highlighter from 'react-native-highlight-words';
+import PlanedListScreen from "../PlannedList/plannedListTemplate";
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
 
@@ -26,16 +27,6 @@ export default class SearchModeScreen extends Component {
             keyword : '',
         };
 
-        this.item = [
-            "친구랑 친척이랑", "친구랑 손절", "친구와의 우정",
-            "친구랑 친척이랑", "친구랑 손절", "친구와의 우정",
-            "친구랑 친척이랑", "친구랑 손절", "친구와의 우정",
-            "친구랑 친척이랑", "친구랑 손절", "친구와의 우정",
-            "친구랑 친척이랑", "친구랑 손절", "친구와의 우정",
-            "친구랑 친척이랑", "친구랑 손절", "친구와의 우정",
-            "친구랑 친척이랑", "친구랑 손절", "친구와의 우정",
-            "친구랑 친척이랑", "친구랑 손절", "친구와의 우정",
-        ];
 
     }
 
@@ -61,6 +52,14 @@ export default class SearchModeScreen extends Component {
 
             this.props.searchRequest(keyword);
         }
+    }
+
+    navigateToDetailView(itemId){
+        console.log("프롭 : "+ JSON.stringify(this.props));
+        this.props.getItemInfo(itemId);
+        this.props.isWishedRequest(itemId);
+        this.props.navigation.navigate('ItemDetail');
+
     }
 
 
@@ -103,18 +102,17 @@ export default class SearchModeScreen extends Component {
                         <View
                             style={styles.active_hor_line}>
                         </View>
-
                         <ScrollView>
                             {
                                 searchedProductList.map((item) => {
                                     return (
                                         <TouchableOpacity
-                                            onPress={this.props.onSelectSearchResult}>
+                                            onPress={
+                                                ()=>this.props.onSelectSearchResult(item.id)
+                                            }>
                                             <View style={styles.active_search_result_wrapper}>
                                                 <Highlighter
-                                                    onLayout={(e)=>{
-                                                        console.log(`${JSON.stringify(e.nativeEvent.layout.width)} 온 레이아웃`)
-                                                    }}
+
                                                     highlightStyle={{
                                                         color: '#f15642',
                                                     }}
@@ -130,7 +128,6 @@ export default class SearchModeScreen extends Component {
                             }
                         </ScrollView>
                     </View>
-
                     :
                     <TouchableWithoutFeedback
                         ref={(input) => {
@@ -154,7 +151,6 @@ export default class SearchModeScreen extends Component {
                         </View>
 
                     </TouchableWithoutFeedback>
-
                 }
 
 
@@ -163,6 +159,10 @@ export default class SearchModeScreen extends Component {
         )
     }
 }
+
+SearchModeScreen.navigationOptions = {
+    header: null,
+};
 
 
 SearchModeScreen.propTypes = {
