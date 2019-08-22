@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 import ListItem from './ListItem';
 import PropTypes from 'prop-types';
+import {CATEGORY_KOR, KOR_CATEGORY_TO_ENG} from "../util";
 
 
 
@@ -18,70 +19,40 @@ export default class ListComponent extends Component {
     state = {
         data: [
             {
-                key: 0,
+                id: 0,
                 title: '소란',
-                category: '콘서트',
-                date: '2019.08.05',
-                where: '난지한강공원',
+                sometime : "2019-08-20",
+                place: '난지한강공원',
+                withWho : '',
+                content : "hello world",
+                imageUrl : "",
+                favorite: false,
+                culture : '콘서트',
             },
-            {
-                key: 1,
-                title: '아이유',
-                category: '전시',
-                date: '2019.08.05',
-                where: '세종문화회관',
-            },
-            {
-                key: 3,
-                title: '소란',
-                category: '콘서트',
-                date: '2019.08.05',
-                where: '난지한강공원',
-            },
-            {
-                key: 4,
-                title: '아이유',
-                category: '전시',
-                date: '2019.08.05',
-                where: '세종문화회관',
-            },
-            {
-                key: 5,
-                title: '아이유',
-                category: '전시',
-                date: '2019.08.05',
-                where: '세종문화회관',
-            },
-            {
-                key: 6,
-                title: '아이유',
-                category: '전시',
-                date: '2019.08.05',
-                where: '세종문화회관',
-            },
-            {
-                key: 7,
-                title: '아이유',
-                category: '전시',
-                date: '2019.08.05',
-                where: '세종문화회관',
-            },
+
         ]
     };
 
     _renderItem = ({item}) => (
         <ListItem
             key={item.key}
+            getNoteItem={this.props.getNoteItem}
+            setLiked={this.props.setLiked}
+            cancelLiked={this.props.cancelLiked}
+            id={item.id}
             title={item.title}
-            category={item.category}
-            date={item.date}
-            where={item.where}
+            culture={CATEGORY_KOR(item.culture)}
+            date={item.sometime}
+            place={item.place}
+            favorite={item.favorite}
+
         />
     );
     render() {
         return (
             <FlatList
-                data={this.state.data}
+
+                data={this.props.cultureList}
                 renderItem={this._renderItem}
                 style={styles.list_container}
             >
@@ -102,4 +73,5 @@ ListComponent.navigationOptions = {
 };
 ListComponent.PropTypes = {
     cultureList : PropTypes.array,
+    getNoteItem : PropTypes.func, // diaryList 의 action
 };

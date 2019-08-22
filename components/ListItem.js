@@ -25,6 +25,7 @@ import DeleteImage from "../assets/images/icon/delete.svg";
 
 import RBSheet from "react-native-raw-bottom-sheet";
 import CategoryType from '../domain/CategoryType';
+import {getNoteItem} from "../actions/noteItem";
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
@@ -47,15 +48,22 @@ export default class ListItem extends Component {
         // ]
 
         this.state = {
-            isLiked : true,
+            favorite : this.props.favorite
         }
     }
 
+    navigateToNoteDetail(){
+        console.log("네비게잇");
+        this.props.getNoteItem(this.props.id);
+        NavigatorService.push('NoteDetail')
+    }
     render() {
+
+
         return (
                 <TouchableOpacity
                     activeOpacity={0.7}
-                    onPress={() => NavigatorService.push('NoteDetail')}
+                    onPress={() => this.navigateToNoteDetail()}
                     style={styles.list_item_wrapper}
                 >
                 {/* <View style={styles.list_shadow}></View> */}
@@ -65,12 +73,12 @@ export default class ListItem extends Component {
                             <Text style={styles.item_tit}>{this.props.title}</Text>
                             <View style={styles.item_category_container}>
                                 <ExhibitionImage  width={13} height={13} style={styles.item_category_icon}/>
-                                <Text style={styles.item_category_text}>{this.props.category}</Text>
+                                <Text style={styles.item_category_text}>{this.props.culture}</Text>
                             </View>
                             <View style={styles.item_info_container}>
                                 <Text style={styles.item_info_text}>{this.props.date}</Text>
                                 <View style={styles.item_info_line}></View>
-                                <Text style={styles.item_info_text}>{this.props.where}</Text>
+                                <Text style={styles.item_info_text}>{this.props.place}</Text>
                             </View>
                             <TouchableOpacity
                                 style={styles.item_more}
@@ -89,8 +97,14 @@ export default class ListItem extends Component {
                         </View>
                         <View style={styles.list_item_right}>
                             <View style={styles.item_thumb_container}>
-                                <TouchableOpacity style={styles.item_like}>
-                                    {this.state.isLiked ?
+                                <TouchableOpacity style={styles.item_like}
+                                     onPress={()=>{
+                                         console.log("셋라잌");
+                                         this.props.setLiked(this.props.id);
+                                         this.setState({favorite : !this.state.favorite})
+                                     }}
+                                >
+                                    {this.state.favorite ?
                                         // 좋아요 리스트에 있으면 채워진 상태로 로딩
                                         <LikeChkImage  width={27} height={27} style={styles.item_like_image}/>
                                         :

@@ -1,7 +1,8 @@
 import {connect} from 'react-redux';
 import template from './mainTemplate';
-import {getMainCount, getMainWishlist} from "../../actions/main";
-import {getNoteList, getWishList, getLoading, getError} from "../../selectors/mainSelector";
+import {getMainCount, getMainWishList} from "../../actions/main";
+import {getNoteList, getWishList, getLoading, getError, getYearType} from "../../selectors/mainSelector";
+import {getDiaryList} from "../../actions/diaryList";
 
 function mapStateToProps(state) {
 
@@ -9,13 +10,15 @@ function mapStateToProps(state) {
         noteList : getNoteList(state),
         wishList : getWishList(state),
         getLoading : getLoading(state),
+        yearType : getYearType(state),
         getError : getError(state),
     }
 }
 
 const mapDispatchToProps = {
     getMainCount : getMainCount.request,
-    getMainWishlist : getMainWishlist.request,
+    getMainWishList : getMainWishList.request,
+    getDiaryList : getDiaryList.request,
 };
 
 export default connect(mapStateToProps,mapDispatchToProps)(template);

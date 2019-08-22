@@ -33,6 +33,8 @@ const ItemDetailStack = createStackNavigator({
     },
 });
 
+
+
 export default createAppContainer(
     createSwitchNavigator(
         {

@@ -25,6 +25,5 @@ const mapDispatchToProps = {
     isWishedRequest : isWishedAction.request,
     getProductList : getProductList.request,
 };
-
 export default connect(mapStateToProps,mapDispatchToProps)(template);
 

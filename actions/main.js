@@ -18,7 +18,7 @@ export const getMainCount = {
     }),
 };
 
-export const getMainWishlist = {
+export const getMainWishList = {
 
     request : (isWished) => ({
         type : GET_MAIN_WISHLIST_ACTION.REQUEST,
