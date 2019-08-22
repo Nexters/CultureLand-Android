@@ -7,6 +7,7 @@ import {Client} from '../api/Client';
 async function getMainNoteCountAction(year){
 
     const response = await Client.getMonthDiariesInfoByYear(year);
+
     console.log("릿폰스 : " + JSON.stringify(response));
     if(response.error){
         return { error : response.error }
@@ -25,6 +26,7 @@ export function* mainNoteCountFlow () {
 
         const request = yield take(GET_MAIN_NOTELIST_ACTION.REQUEST);
 
+        console.log("리퀘 : "+ JSON.stringify(request));
         let response = yield call(getMainNoteCountAction, request.payload.yearType);
 
         if (response.error) {

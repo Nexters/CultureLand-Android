@@ -21,6 +21,7 @@ import PropTypes from 'prop-types';
 import {LIST_TYPE} from "../../util";
 import NavigatorService from "../../util/NavigatorService";
 
+
 const calc = new RatioCalculator(screenWidth, screenHeight);
 const styles = styleFn(screenWidth, screenHeight, calc);
 
@@ -28,12 +29,26 @@ export default class DiaryListScreen extends Component {
     
     constructor(props){
         super(props);
+
+        this.state= {
+
+            title : '',
+        }
     }
     
     componentDidMount(){
         this.props.navigation.addListener("didFocus",()=>{
             console.log("새로 다이어리 리스를 받아옴");
             this.props.getDiaryList(this.props.listType,this.props.listTitle);
+
+            if(this.props.listType===LIST_TYPE.FOR_CATEGORY){
+                this.setState({title : CATEGORY_KOR(this.props.listTitle)})
+            }else{
+
+                let yearPart = this.props.listTitle.slice(0,4);
+                let monthPart = this.props.listTitle.slice(4,6);
+                this.setState({title : `${yearPart}.${parseInt(monthPart)}`})
+            }
         });
     }
 
@@ -44,29 +59,37 @@ export default class DiaryListScreen extends Component {
         } = this.props;
 
 
-        return (
-            <View style={styles.container}>
-                <View style={styles.header}>
-                    <TouchableOpacity
-                        onPress={() => NavigatorService.pop()}
-                        activeOpacity={0.7}
-                        style={styles.header_left}
-                    >
-                        <Ionicons name="ios-arrow-back" size={24} color="#292929" style={styles.header_button}/>
-                    </TouchableOpacity>
-                    <Text style={styles.header_center}>{CATEGORY_KOR(this.props.listTitle)}</Text>
-                    <Text style={styles.header_right}></Text>
-                </View>
-                <ListComponent
-                    cultureList={this.props.cultureList}
-                    getNoteItem={this.props.getNoteItem}
-                    setLiked={this.props.setLiked}
-                    cancelLiked={this.props.cancelLiked}
-                />
+        if(this.props.loading){
+            console.log("로딩!");
+            return (<Text>텍스트</Text>)
+        }else{
 
-                <FloatingButton/>
-            </View>
-        )
+            return (
+                <View style={styles.container}>
+                    <View style={styles.header}>
+                        <TouchableOpacity
+                            onPress={() => NavigatorService.pop()}
+                            activeOpacity={0.7}
+                            style={styles.header_left}
+                        >
+                            <Ionicons name="ios-arrow-back" size={24} color="#292929" style={styles.header_button}/>
+                        </TouchableOpacity>
+                        <Text style={styles.header_center}>{
+                            this.state.title
+                        }</Text>
+                        <Text style={styles.header_right}></Text>
+                    </View>
+                    <ListComponent
+                        cultureList={this.props.cultureList}
+                        getNoteItem={this.props.getNoteItem}
+                        setLiked={this.props.setLiked}
+                        cancelLiked={this.props.cancelLiked}
+                    />
+
+                    <FloatingButton/>
+                </View>
+            )
+        }
     }
 };
 

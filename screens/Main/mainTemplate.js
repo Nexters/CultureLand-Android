@@ -48,11 +48,12 @@ export default class MainScreen extends Component {
 
     componentDidMount(){
         this.props.getMainWishList();
-        this.props.getMainCount();
+        this.props.getMainCount(this.state.selectedYear);
     }
 
     onDropDownChangeHandler(year){
-        this.setState({selectedYear : year})
+        this.setState({selectedYear : year});
+        this.props.getMainCount(this.state.selectedYear);
     }
 
     render () {
@@ -106,7 +107,11 @@ export default class MainScreen extends Component {
                             <View style={styles.carousel_wrapper}>
                                 <View style = {styles.main_title_line} />
                                 <Text style={styles.main_title}>월별 기록</Text>
-                                <MainCarousel style={styles.main_carousel_container}/>
+                                <MainCarousel
+                                    style={styles.main_carousel_container}
+                                    onMonthPressHandler={this.props.getDiaryList}
+
+                                />
                             </View>
                             <View style={styles.wishlist_wrapper}>
                                 <View style = {styles.main_title_line} />

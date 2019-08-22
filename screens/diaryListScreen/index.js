@@ -12,8 +12,8 @@ function mapStateToProps(state) {
         listTitle  : getTitle(state),
         listType : getListType(state),
         cultureList : getCultureList(state),
-        getLoading : getLoading(state),
         getError : getError(state),
+        loading :  getLoading(state),
     }
 }
 

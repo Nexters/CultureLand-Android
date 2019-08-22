@@ -105,9 +105,6 @@ async function setWished(id) {
 
     const response = await Client.addNewWishItem(id);
 
-    console.log("위시리스폰 : "+ JSON.stringify(response));
-
-
     if (response.error) {
         return {error: response.error};
     }
@@ -121,8 +118,6 @@ async function setWished(id) {
 export function* setWishedFlow() {
 
     while (true) {
-        console.log("플라우");
-
         const request = yield take(SET_WISHED_ACTION.REQUEST);
         let response = yield call(setWished, request.payload.id);
 
