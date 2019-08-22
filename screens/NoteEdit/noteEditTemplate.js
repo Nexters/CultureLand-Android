@@ -25,7 +25,7 @@ import CalendarImage from "../../assets/images/icon/cal.svg"
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
 import {Ionicons} from '@expo/vector-icons'
-import {numberWithCommas, RatioCalculator, CATEGORY, CATEGORY_KOR} from "../../util";
+import {numberWithCommas, RatioCalculator, CATEGORY, CATEGORY_KOR, ISNULL} from "../../util";
 import NavigatorService from "../../util/NavigatorService";
 
 const calc = new RatioCalculator(screenWidth, screenHeight);
@@ -77,7 +77,6 @@ export default class NoteEditScreen extends Component {
 
     render() {
         let { image } = this.state;
-        
         return (
             <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
                 <View style={styles.header}>
@@ -104,11 +103,13 @@ export default class NoteEditScreen extends Component {
                             style={styles.image_wrapper}
                         >
                             {
-                                <Image source={{ uri: image }} style={styles.image}/>
+                                ISNULL(image)?
+                                (<View style={styles.image_icon_wrapper}>
+                                    <AddPhotoImage width={92} height={92} style={styles.image_icon}/>
+                                </View>)
+                                :
+                                (<Image source={{ uri: image }} style={styles.image}/>)
                             }
-                            <View style={styles.image_icon_wrapper}>
-                                <AddPhotoImage width={92} height={92} style={styles.image_icon}/>
-                            </View>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.note_bottom_wrapper}>
@@ -116,16 +117,17 @@ export default class NoteEditScreen extends Component {
                             <Text style={styles.note_required_icon}>*</Text>
                             <TextInput
                                 style={styles.note_titleinput}
+                                placeholderStyle={styles.note_titleinput_placeholder}
                                 onChangeText={(title) => this.setState({title})}
                                 value={this.state.title}
-                                // placeholder={"제목을 입력해주세요"}
+                                placeholder={"제목을 써주세요"}
                             />
                         </View>
                         <View style={styles.note_line}></View>
                         <Text style={styles.note_required}>*필수항목</Text>
                         <View style={styles.note_info_wrapper}>
                             <View style={styles.note_info_item}>
-                                <Text style={styles.note_sub_title}>유형</Text><Text style={styles.note_required_icon}>*</Text>
+                                <Text style={styles.note_sub_title}>유형<Text style={styles.note_required_icon}>*</Text></Text>
                                 <View style={styles.note_picker_wrapper}>
                                     <Dropdown
                                         value={CATEGORY_KOR(this.props.note.category)}
@@ -149,33 +151,43 @@ export default class NoteEditScreen extends Component {
                                                 value: "기타"
                                             },
                                         ]}
-                                        dropdownOffset={{top: 7}}
+                                        dropdownOffset={{top: 13, left: 14}}
                                         dropdownPosition={0}
                                         inputContainerStyle={{
                                             borderBottomColor: 'transparent',
                                         }}
                                         containerStyle={{
+                                            justifyContent: 'center',
                                             width: calc.getRegWidthDp(114),
                                             height: calc.getRegHeightDp(40),
                                             paddingHorizontal: calc.getRegWidthDp(9),
-                                            marginLeft: 'auto',
+                                            // marginTop : -calc.getRegHeightDp(15),
                                         }}
                                         pickerStyle={{
-                                            // width: calc.getRegWidthDp(114),
-                                            marginTop : calc.getRegHeightDp(42),
-
+                                            width: calc.getRegWidthDp(114),
+                                            marginTop : calc.getRegHeightDp(50),
+                                        }}
+                                        itemTextStyle={{
+                                            fontFamily: "noto-sans",
+                                            fontSize: 16,
+                                            lineHeight: 19,
+                                        }}
+                                        style={{
+                                            fontFamily: "noto-sans",
+                                            fontSize: 16,
+                                            lineHeight: 19,
                                         }}
                                         onChangeText={(value, index) => this.onSelectedChange(value, index)}
                                     />
                                 </View>
                             </View>
                             <View style={styles.note_info_item}>
-                                <Text style={styles.note_sub_title}>언제</Text><Text style={styles.note_required_icon}>*</Text>
+                                <Text style={styles.note_sub_title}>언제<Text style={styles.note_required_icon}>*</Text></Text>
                                 <DatePicker
                                     style={styles.note_datepicker}
                                     date={this.state.sometime}
                                     mode="date"
-                                    placeholder="select date"
+                                    placeholder="0000-00-00"
                                     format="YYYY-MM-DD"
                                     // minDate="2016-05-01"
                                     // maxDate="2020-06-01"
@@ -186,17 +198,21 @@ export default class NoteEditScreen extends Component {
                                     }
                                     customStyles={{
                                         dateInput: {
+                                            fontFamily: "noto-sans",
+                                            fontSize: 16,
                                             position: 'absolute',
                                             left: 0,
                                             textAlign: 'left',
                                             borderColor: "transparent",
-                                        }
+                                        },
+                                        fontFamily: "noto-sans",
+                                        fontSize: 16,
                                     }}
                                     onDateChange={(sometime) => {this.setState({sometime: sometime})}}
                                 />
                             </View>
                             <View style={styles.note_info_item}>
-                                <Text style={styles.note_sub_title}>어디서</Text><Text style={styles.note_required_icon}>*</Text>
+                                <Text style={styles.note_sub_title}>어디서<Text style={styles.note_required_icon}>*</Text></Text>
                                 <TextInput 
                                     style={styles.note_textinput}
                                     onChangeText={(place) => this.setState({place})}

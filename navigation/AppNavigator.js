@@ -42,7 +42,7 @@ export default createAppContainer(
             ItemDetail : ItemDetailStack,
         },
         {
-            initialRouteName: 'App',
+            initialRouteName: 'AuthLoading',
 
         }
     )

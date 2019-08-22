@@ -23,6 +23,9 @@ export default styles = function(screenWidth,screenHeight) {
         },
         main_picker : {
             fontFamily: "noto-sans-bold",
+            fontWeight: '700',
+            fontSize: 24,
+            lineHeight: 28,
         },
         main_top_description: {
             flexDirection: 'row',

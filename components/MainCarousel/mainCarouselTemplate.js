@@ -43,7 +43,7 @@ export default class MainCarousel extends Component {
                 <View style={styles.slide}>
                     <View style={styles.image_container}>
                         <Image
-                            source={{uri : 'http://newsteacher.chosun.com/site/data/img_dir/2017/08/16/2017081600120_0.jpg'}} 
+                            source={{uri : item.imageUrl}} 
                             style={styles.image}
                         />
                     </View>

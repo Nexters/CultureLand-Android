@@ -26,6 +26,7 @@ export default styles = function (screenWidth, screenHeight, calc) {
         },
         category_tabBar_text_style : {
             fontFamily: "noto-sans",
+            // fontWeight: '400'
         },
         category_tabStyle : {
             marginRight : -15,
@@ -58,8 +59,6 @@ export default styles = function (screenWidth, screenHeight, calc) {
 
         suggestion_text: {
             fontFamily : 'noto-sans',
-            width: 191,
-            height: 41,
             paddingTop: 5,
             marginTop: 76,
             marginLeft : 85,
@@ -68,7 +67,7 @@ export default styles = function (screenWidth, screenHeight, calc) {
             fontSize: 18,
             fontWeight: "300",
             fontStyle: "normal",
-            lineHeight: 18,
+            lineHeight: 22,
             letterSpacing: -0.37,
             textAlign: "center",
         },

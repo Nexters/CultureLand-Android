@@ -58,7 +58,7 @@ export default class ListItem extends Component {
                     onPress={() => NavigatorService.push('NoteDetail')}
                     style={styles.list_item_wrapper}
                 >
-                {/* <View style={styles.list_shadow}></View> */}
+                <View style={styles.list_shadow}></View>
 
                     <View style={styles.list_item}>
                         <View style={styles.list_item_left}>
@@ -97,7 +97,7 @@ export default class ListItem extends Component {
                                         <LikeImage  width={27} height={27} style={styles.item_like_image}/>
                                     }
                                 </TouchableOpacity>
-                                <Image style={styles.item_thumb}/>
+                                <Image style={styles.item_thumb} source={{uri : this.props.imageUrl}}/>
                             </View>
                         </View>
                     </View>
@@ -150,25 +150,10 @@ const styles = StyleSheet.create({
         position: 'relative',
         width: '100%',
         height: calc.getRegWidthDp(102),
-        // paddingHorizontal: calc.getRegWidthDp(21),
-        paddingBottom: calc.getRegHeightDp(12),
-    },
-    list_shadow : {
-        position: 'absolute',
-        zIndex: 1,
-        top: calc.getRegWidthDp(10),
-        left: '2%',
-        width: '96%',
-        height: calc.getRegWidthDp(70),
-        padding: 10,
-        right: 0,
-        bottom: 0,
-        elevation: 5,
-        backgroundColor: '#fff',
+        paddingHorizontal: 23,
+        paddingBottom: 12,
     },
     list_item : {
-        position: 'absolute',
-        zIndex: 100,
         flexDirection: 'row',
         justifyContent: 'space-between',
         width: '100%',
@@ -176,14 +161,13 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
         borderRadius: 6,
         overflow: 'hidden',
-        // elevation: 5,
     },
     list_item_left : {
         justifyContent: 'space-between',
         zIndex: 1,
         flex: 1,
-        paddingHorizontal: calc.getRegWidthDp(12),
-        paddingVertical: calc.getRegWidthDp(6),
+        paddingHorizontal: 12,
+        paddingVertical: 12,
         borderTopLeftRadius: 6,
         borderBottomLeftRadius: 6,
         backgroundColor: 'white',
@@ -192,13 +176,12 @@ const styles = StyleSheet.create({
         flex: 1,
         fontFamily: "noto-sans-bold",
         fontSize: 12,
-        // fontWeight: "bold",
         fontStyle: "normal",
         letterSpacing: -0.25,
-        color: "#464646"
+        color: "#464646",
+        lineHeight: 14,
     },
     item_category_container : {
-        // marginTop: calc.getRegHeightDp(20),
         flexDirection: 'row',
         justifyContent: 'flex-start',
         alignItems: 'center',
@@ -212,23 +195,23 @@ const styles = StyleSheet.create({
         fontFamily: "noto-sans",
         fontSize: 10,
         fontWeight: "normal",
-        fontStyle: "normal",
+        color: "#5e5e5e",
         letterSpacing: -0.2,
-        color: "#5e5e5e"
+        lineHeight: 12,
     },
     item_info_container : {
         flexDirection: 'row',
         justifyContent: 'flex-start',
         alignItems: 'center',
-        // marginTop: calc.getRegHeightDp(3),
+        marginTop: 4,
     },
     item_info_text : {
         fontFamily: "noto-sans",
         fontSize: 10,
         fontWeight: "normal",
-        fontStyle: "normal",
+        color: "#5e5e5e",
         letterSpacing: -0.2,
-        color: "#5e5e5e"
+        lineHeight: 12,
     },
     item_info_line : {
         width: calc.getRegWidthDp(1),
@@ -272,8 +255,10 @@ const styles = StyleSheet.create({
         borderWidth: calc.getRegWidthDp(7),
         borderRadius: 100,
         borderColor: '#fff',
+        backgroundColor: "#f6f6f6"
     },
     item_rip_bottom : {
+        zIndex: 10,
         position: 'absolute',
         width: calc.getRegWidthDp(30),
         height: calc.getRegWidthDp(30),
@@ -282,7 +267,7 @@ const styles = StyleSheet.create({
         borderWidth: calc.getRegWidthDp(7),
         borderRadius: 100,
         borderColor: '#fff',
-        // elevation: 10,
+        backgroundColor: "#f6f6f6"
     },
     list_item_right : {
         zIndex: 1,
@@ -297,9 +282,19 @@ const styles = StyleSheet.create({
     item_thumb_container : {
         flex: 1,
         borderRadius: 6,
-        backgroundColor: 'orange',
-        elevation: 5,
+        overflow: 'hidden',
+        shadowColor: "#4ca0a0a0",
+        shadowOffset: {
+                width: 0,
+                height: 2,
+        },
+        shadowOpacity: 0.23,
+        shadowRadius: 2.62,
+        elevation: 2,
     },
+    item_thumb : {
+        flex: 1,
+    },  
     item_like : {
         position: 'absolute',
         zIndex: 100,
@@ -318,7 +313,6 @@ const styles = StyleSheet.create({
         justifyContent: "flex-start",
         alignItems: "center",
         height: calc.getRegHeightDp(57),
-        
     },
     actionSheet_text : {
         marginLeft: calc.getRegWidthDp(8),

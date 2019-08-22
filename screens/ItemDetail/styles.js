@@ -76,12 +76,13 @@ export default styles = function (screenWidth, screenHeight, calc) {
 
         row_title: {
             fontFamily : 'noto-sans-mid',
-            width : 30,
+            width : 40,
             height : 24,
             marginRight : 13,
             letterSpacing: 0.01,
             fontSize: 16,
             color : "#bbbbbb",
+            lineHeight: 18,
         },
 
         row_content: {
@@ -91,6 +92,7 @@ export default styles = function (screenWidth, screenHeight, calc) {
             fontSize: 16,
             letterSpacing: 0.01,
             color: "#424242",
+            lineHeight: 18,
 
         }
 

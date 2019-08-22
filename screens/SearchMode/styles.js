@@ -10,10 +10,11 @@ export default styles = function (screenWidth, screenHeight, calc) {
 
 
         container: {
-            width: 330,
+            flex: 1,
             height: 44,
             marginTop : 26,
             marginLeft : 22,
+            marginRight : 22,
             paddingLeft : 13,
             paddingRight : 13,
             backgroundColor:"#fff",
@@ -28,7 +29,7 @@ export default styles = function (screenWidth, screenHeight, calc) {
             shadowOpacity: 0.050,
             shadowRadius: 30,
 
-            elevation: 200,
+            elevation: 3,
 
         },
 
@@ -42,9 +43,9 @@ export default styles = function (screenWidth, screenHeight, calc) {
         },
 
         active_wrapper: {
+            flex: 1,
             flexDirection: 'row',
             alignItems: 'flex-end',
-            width: calc.getRegWidthDp(295),
             height: calc.getRegHeightDp(44),
             paddingLeft  : calc.getRegWidthDp(13),
             backgroundColor:"#fff",
