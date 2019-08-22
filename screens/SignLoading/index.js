@@ -10,6 +10,7 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = {
 
+
 };
 
 export default connect(mapStateToProps,mapDispatchToProps)(template);

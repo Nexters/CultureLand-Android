@@ -39,10 +39,10 @@ export const isWishedAction = {
 
 export const setWishedAction = {
 
-    request : (itemObj) => ({
+    request : (id) => ({
         type : SET_WISHED_ACTION.REQUEST,
         payload : {
-            itemObj,
+            id,
         }
     }),
 

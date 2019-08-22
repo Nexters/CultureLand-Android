@@ -21,6 +21,7 @@ import ListIcon from '../assets/images/icon/navigationBar/list/unselected.svg';
 import ListSelectedIcon from '../assets/images/icon/navigationBar/list/selected.svg';
 import MypageIcon from '../assets/images/icon/navigationBar/mypage/unselected.svg';
 import MypageSelectedIcon from '../assets/images/icon/navigationBar/mypage/selected.svg';
+import SearchModeScreen from "../screens/SearchMode/index";
 
 import styleFn from "../screens/PlannedList/styles";
 import {RatioCalculator} from "../util";
@@ -41,6 +42,7 @@ const config = Platform.select({
 
 const CultureStack = createStackNavigator(
     {
+        Search : SearchModeScreen,
         Culture: PlanedListScreen,
         CultureDetail: ItemDetailScreen,
     },

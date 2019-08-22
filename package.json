@@ -27,6 +27,8 @@
     "expo-web-browser": "^5.0.0",
     "jwt-decode": "^2.2.0",
     "key-mirror": "^1.0.1",
+    "lottie-ios": "^3.0.3",
+    "lottie-react-native": "^3.1.0",
     "moment": "^2.24.0",
     "prop-types": "^15.7.2",
     "react": "16.8.3",

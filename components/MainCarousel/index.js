@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import template from './mainCarouselTemplate';
-import {getMainCount, getMainWishlist} from "../../actions/main";
+import {getMainCount, getMainWishList} from "../../actions/main";
 import {getNoteList, getWishList, getLoading, getError} from "../../selectors/mainSelector";
 
 function mapStateToProps(state) {
@@ -15,7 +15,7 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = {
     getMainCount : getMainCount.request,
-    getMainWishlist : getMainWishlist.request,
+    getMainWishList : getMainWishList.request,
 };
 
 export default connect(mapStateToProps,mapDispatchToProps)(template);

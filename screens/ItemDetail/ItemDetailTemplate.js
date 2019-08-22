@@ -51,6 +51,9 @@ export default class ItemDetailScreen extends Component {
             isWished: false,
             error: this.props.error,
         };
+
+
+
     }
 
     componentDidMount() {
@@ -68,16 +71,10 @@ export default class ItemDetailScreen extends Component {
 
         if (this.props.isWished) {
             console.log("Cancel wish triggered");
-            return this.props.cancelWishedRequest();
+            return this.props.cancelWishedRequest(id);
         } else {
             console.log("set wish triggered");
-            return this.props.setWishedRequest({
-                imageUrl: imageUrl,
-                title: title,
-                place: place,
-                startDate: startDate,
-                endDate: endDate
-            });
+            return this.props.setWishedRequest(id);
         }
     }
 
@@ -125,19 +122,10 @@ export default class ItemDetailScreen extends Component {
                             name="left" size={25} color="#f4f4f4"/>
                     </TouchableWithoutFeedback>
                 </View>
-                <Image style={styles.center_image}
-                       source={{uri: this.props.imageUrl}}
-                />
-                <Toast ref="toast"/>
 
-                <View style={styles.back_button}>
-                    <AntDesign
-                        name="left" size={25} color="#f4f4f4"/>
-                </View>
                 <Image style={styles.center_image}
                        source={{uri: this.props.imageUrl}}
                 >
-
                 </Image>
                 <View style={styles.bottom_info_wrapper}>
 

@@ -7,17 +7,35 @@ function getMyPageCountActionRefiner(response){
 
 }
 
-function getMyPageCountAction(){
+function zeroIfNone(value){
+    if(!value){
+        return 0
+    }else{
+        return value;
+    }
+}
+
+async function getMyPageCountAction(){
+
+    const response = await Client.getMyPageDiaryCount();
+    console.log("마이페이지 카우늩  : " +JSON.stringify(response));
+
+    if(response.error){
+        return { error : response.error }
+    }
+
+
+
     return {
         error : null,
         result : {
-            totalNumberOfDiaryCount : 13,
-            likedDiaryCount : 4,
-            exhibitionCount : 5,
-            concertCount : 3,
-            musicalCount : 4,
-            playCount : 1,
-            etcCount : 0,
+            totalNumberOfDiaryCount : zeroIfNone(response.message.totalNumberOfDiaryCount),
+            likedDiaryCount : zeroIfNone(response.message.likedDiaryCount),
+            exhibitionCount : zeroIfNone(response.message.exhibitionCount),
+            concertCount : zeroIfNone(response.message.concertCount),
+            musicalCount : zeroIfNone(response.message.musicalCount),
+            playCount : zeroIfNone(response.message.playCount),
+            etcCount : zeroIfNone(response.message.etcCount),
         }
     }
 

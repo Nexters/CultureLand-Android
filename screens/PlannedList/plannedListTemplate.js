@@ -101,7 +101,6 @@ export default class PlanedListScreen extends Component {
 
     make_bottom() {
         let items = [];
-        console.log("프로밴쓰 :"+this.props.productList.length);
         for (let i = 0; i < this.props.productList.length/3 ; i++) {
 
             items.push(<View
@@ -225,7 +224,7 @@ export default class PlanedListScreen extends Component {
                         <SearchModeScreen
                             isSearchMode={true}
                             doSearch={this.searchManager.doSearch.bind(this)}
-                            onSelectSearchResult={this.searchManager.onSelectSearchResult.bind(this)}
+                            onSelectSearchResult={this.navigateToDetailView.bind(this)}
                             cancelSearch={this.searchManager.cancelSearch.bind(this)}
 
                         />

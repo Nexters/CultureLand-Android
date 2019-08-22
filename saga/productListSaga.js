@@ -6,8 +6,13 @@ async function getProductListAction(category,page) {
 
     // MOCK //
 
+
+
+    if(category === CATEGORY.ALL_PRODUCT){
+
+    }
+
     let response = await Client.getCultureByQueries(category,page);
-    console.log("겟프로덕트리스트액션");
     if(response.error){
         console.log(`getProductListAction error = > [${response.error}]`);
         return { error : response.error }

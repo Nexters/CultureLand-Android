@@ -15,11 +15,39 @@ function getItemDetailRefiner(response) {
             id: response.id,
             imageUrl: response.imageUrl,
             title: function () {
+
+                let title = response.title;
+
+                if(!title){
+                    return '';
+                }
+
+                if(title.length <= 14){
+                    return title;
+                }
+
+                for(let i=1; i <= 3; i++){
+
+                }
+                let narrowChars = title.slice(0,14).match(/(\[)|(\])|(\()|(\))|(\.)|(\,)/g);
+                let temp;
+                if(narrowChars) {
+
+                    let count = narrowChars.length;
+
+                    temp = title.slice(0, 14 + count) + "\n";
+                }
+
+
                 if (response.title.length > 14) {
                     return `${response.title.slice(0, 14)}${"\n"}${response.title.slice(14)}`;
                 } else {
                     return response.title;
                 }
+
+
+
+
             }(),
             startDate: response.startDate,
             endDate: response.endDate,
@@ -33,11 +61,6 @@ async function getItemDetail(id) {
     let response = await Client.getCultureDetailById(id);
 
 
-
-
-    let res = await Client.getAllWishList();
-    console.log("우웅 : "+ JSON.stringify(res));
-    console.log("받으려는 아이템 : "+id);
     if (response.error) {
         return {error: response.error}
     }
@@ -57,7 +80,6 @@ async function getItemDetail(id) {
 export function* getItemDetailFlow() {
 
     while (true) {
-
         const request = yield take(GET_ITEM_DETAIL_ACTION.REQUEST);
         let response = yield call(getItemDetail, request.payload.id);
 
@@ -78,14 +100,10 @@ export function* getItemDetailFlow() {
 
 }
 
-async function setWished(itemObj) {
+async function setWished(id) {
 
 
-    const response = await Client.addNewWishItem(
-        itemObj.imageUrl, itemObj.title,
-        itemObj.place, itemObj.startDate,
-        itemObj.endDate
-    );
+    const response = await Client.addNewWishItem(id);
 
     console.log("위시리스폰 : "+ JSON.stringify(response));
 
@@ -99,12 +117,14 @@ async function setWished(itemObj) {
     }
 }
 
+
 export function* setWishedFlow() {
 
     while (true) {
+        console.log("플라우");
 
         const request = yield take(SET_WISHED_ACTION.REQUEST);
-        let response = yield call(setWished, request.payload.itemObj);
+        let response = yield call(setWished, request.payload.id);
 
         if (response.error) {
 
@@ -121,7 +141,16 @@ export function* setWishedFlow() {
     }
 }
 
-function cancelWished(id) {
+async function cancelWished(id) {
+
+    const response = await Client.deleteWishItem(id);
+
+    console.log("위시아이템 삭제 : " + JSON.stringify(response)  +" , 아이디 : "+id);
+
+    if(response.error){
+        return { error : response.error }
+    }
+
     return {
         error: null,
         result: {}
@@ -150,10 +179,9 @@ export function* cancelWishedFlow() {
 
 async function isWished(id) {
 
-    console.log("이즈위시드! :"+id);
-    const response = await Client.getWishItemById(2);
-    console.log("우훙ㅎ : "+JSON.stringify(response));
+    const response = await Client.getWishItemById(id);
 
+    console.log("이즈위시드 : "+ JSON.stringify(response) +" , 아이디 : "+id);
     if(response.error){
         return { error : response.error }
     }

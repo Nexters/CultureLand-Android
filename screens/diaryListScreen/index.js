@@ -1,13 +1,16 @@
 
 import {connect} from 'react-redux';
 import template from './diaryListScreen';
-import {getAdditionalList, getDiaryList} from "../../actions/diaryList";
-import {getCultureList,getLoading,getError} from "../../selectors/diaryListSelector";
+import {cancelLiked, getAdditionalList, getDiaryList, setLiked} from "../../actions/diaryList";
+import {getCultureList,getLoading,getError,getListType,getTitle} from "../../selectors/diaryListSelector";
+import { getNoteItem} from "../../actions/noteItem";
 
 
 function mapStateToProps(state) {
 
     return {
+        listTitle  : getTitle(state),
+        listType : getListType(state),
         cultureList : getCultureList(state),
         getLoading : getLoading(state),
         getError : getError(state),
@@ -15,6 +18,9 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = {
+     setLiked : setLiked.request,
+     cancelLiked : cancelLiked.request,
+     getNoteItem : getNoteItem.request,
      getDiaryList : getDiaryList.request,
      getAdditionalList : getAdditionalList.request,
 

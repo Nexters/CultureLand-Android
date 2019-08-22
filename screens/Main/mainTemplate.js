@@ -42,11 +42,17 @@ export default class MainScreen extends Component {
 
         this.state = {
             isData : true,
+            selectedYear : 2019,
         }
     }
 
     componentDidMount(){
-        
+        this.props.getMainWishList();
+        this.props.getMainCount();
+    }
+
+    onDropDownChangeHandler(year){
+        this.setState({selectedYear : year})
     }
 
     render () {
@@ -71,6 +77,7 @@ export default class MainScreen extends Component {
                                     value: "2016"
                                 },
                             ]}
+                            onChangeText={value=>this.onDropDownChangeHandler(value)}
                             fontSize={24}
                             dropdownPosition={0}
                             inputContainerStyle={{

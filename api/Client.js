@@ -69,15 +69,31 @@ class ClientClass {
     getDiaryByDiaryIdURL(diaryId) {
         return `${this.getDiaryBaseURL()}/${diaryId}`;
     }
-
+    getDiariesByCategoryURL(category){
+        return `${this.getDiaryBaseURL()}?category=${category}`;
+    }
+    getDiariesByDateURL(date){
+        return `${this.getDiaryBaseURL()}?date=${date}`;
+    }
+    getDiaryLikeURL(diaryId){
+        return `${this.getDiaryBaseURL()}/${diaryId}/like`;
+    }
+    getMonthDiariesListByYearURL(year){
+        return `${this.getDiaryBaseURL()}/all/summaries?year=${year}`;
+    }
+    getMyPageDiaryCountURL(){
+        return `${this.getDiaryBaseURL()}/all/counts`;
+    }
     getWishListBaseURL() {
-        return `${this.getUserBaseURL()}/dibs`;
+        return `${this.getUserBaseURL()}/wishList`;
     }
 
-    getWishedItemByIdURL(dibsId) {
-        return `${this.getWishListBaseURL()}/${dibsId}`;
+    getWishedItemByIdURL(cultureInfoId) {
+        return `${this.getWishListBaseURL()}?cultureInfoId=${cultureInfoId}`;
     }
-
+    getDeleteWishedItemURL(wishListId){
+        return `${this.getWishListBaseURL()}/${wishListId}`;
+    }
     getCultureInfoBaseURL() {
         return `${this.getBaseURL()}/cultureInfos`;
     }
@@ -92,6 +108,11 @@ class ClientClass {
         return `${this.getCultureInfoBaseURL()}?category=${category}\
         &page=${page}`;
     }
+
+    getAllCultureQueriesURL(sort,page){
+        return `${this.getCultureInfoBaseURL()}?sort=${sort}&page=${page}`;
+    }
+
 
     getCultureSearchURL(keyword) {
         return `${this.getCultureInfoBaseURL()}/search?query=${keyword}`;
@@ -184,19 +205,58 @@ class ClientClass {
         })
     }
 
-
     // DIARY API //
 
-    writeNewDiary(title, time, place, withWho, content) { // VERIFIED
+    writeNewDiary(title, someTime, place, withWho, content, cultureName, imageUrl) { // VERIFIED
         return this.credentialCall(this.getDiaryBaseURL(), {
             method: "POST",
             body: JSON.stringify({
-                "title": "테스트다이어리",
-                "sometime": "2019-07-31T17:00:33.903", "place": "place",
-                "withWho": "컬러팀",
-                "content": "아아아아아아",
-                "cultureName": "concert",
+                "title": title,
+                "sometime": someTime,
+                "place": place,
+                "withWho": withWho,
+                "content": content,
+                "cultureName": cultureName,
+                "imageUrl" : '',
             })
+        })
+    }
+
+    getDiariesByCategory(category){
+        return this.credentialCall(this.getDiariesByCategoryURL(category),{
+            method : "GET",
+        })
+    }
+
+    getDiariesByDate(date){
+        return this.credentialCall(this.getDiariesByDateURL(date),{
+            method : "GET",
+        })
+    }
+
+    getDiaryByDiaryId(diaryId){
+        return this.credentialCall(this.getDiaryByDiaryIdURL(diaryId),{
+            method : "GET",
+        })
+    }
+
+    getMonthDiariesInfoByYear(year){
+        return this.credentialCall(this.getMonthDiariesListByYearURL(year),{
+            method : "GET",
+        })
+    }
+
+
+
+    getMyPageDiaryCount(){
+        return this.credentialCall(this.getMyPageDiaryCountURL(), {
+            method: "GET",
+        })
+    }
+
+    setDiaryLikeState(diaryId){
+        return this.credentialCall(this.getDiaryLikeURL(diaryId),{
+            method : "GET",
         })
     }
 
@@ -206,7 +266,14 @@ class ClientClass {
         })
     }
 
+
     // CULTUREINFO API GROUP //
+
+    getAllCultureByQueries(sort, page){
+        return this.credentialCall(this.getAllCultureQueriesURL(sort,page), {
+            method : "GET",
+        })
+    }
 
     getCultureByQueries(category, page) { // VERIFIED
         return this.credentialCall(this.getCultureInfoByQueriesURL(category, page), {
@@ -243,24 +310,19 @@ class ClientClass {
     }
 
     // TODO 파라미터 이용해서 call 하는 걸로 수정하기
-    addNewWishItem(imgUrl, title, place, startDate, endDate) { // VERIFIED /users/dibs
-        return this.credentialCall(this.getWishListBaseURL(), {
+    addNewWishItem(id) { // VERIFIED /users/dibs
+        return this.credentialCall(this.getWishedItemByIdURL(id), {
             method: "POST",
-            body: JSON.stringify({
-                "imgUrl": imgUrl,
-                "title": title,
-                "place": place,
-                "startDate": startDate,
-                "endDate": endDate
-            })
         })
     }
 
     deleteWishItem(wishId) { // VERIFIED /users/dibs/:wishId
-        return this.credentialCall(this.getWishedItemByIdURL(wishId), {
+        return this.credentialCall(this.getDeleteWishedItemURL(wishId), {
             method: "DELETE",
         })
     }
+
+
 
 
 }
