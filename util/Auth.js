@@ -70,7 +70,6 @@ class AuthManager {
 
         try {
             const response = await Client.signInOrUp(FACEBOOK);
-            console.log("여기서 : "+JSON.stringify(response));
 
             if(response.error){
                 this.setState({error : response.error});
@@ -105,13 +104,11 @@ class AuthManager {
 
             if (result.type === 'success') {
                 console.log("구글로그인 : "+JSON.stringify(result));
-                console.log("디코드 : "+JSON.stringify(jwtDecode(result.accessToken)));
 
                 await Auth.registerSocialCredentials(GOOGLE,result.accessToken);
 
                 const response = await Client.signInOrUp(GOOGLE);
 
-                console.log("리스폰스 : "+JSON.stringify(response));
                 /*
                 await this.registerServerCredentials(response.message);
                 */

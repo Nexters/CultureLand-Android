@@ -7,11 +7,9 @@ async function searchProduct(keyword) {
     let result = await Client.searchCultureByQuery(keyword);
 
     if (result.error) {
-        console.log("오류발생 : "+result.error);
         return {error: result.error}
 
     } else {
-        console.log("검색결과 : "+JSON.stringify(result.message));
 
         if(result.message === undefined){
             result.message = [];

@@ -18,7 +18,6 @@ function zeroIfNone(value){
 async function getMyPageCountAction(){
 
     const response = await Client.getMyPageDiaryCount();
-    console.log("마이페이지 카우늩  : " +JSON.stringify(response));
 
     if(response.error){
         return { error : response.error }

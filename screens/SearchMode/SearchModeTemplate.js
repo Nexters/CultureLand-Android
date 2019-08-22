@@ -55,7 +55,6 @@ export default class SearchModeScreen extends Component {
     }
 
     navigateToDetailView(itemId){
-        console.log("프롭 : "+ JSON.stringify(this.props));
         this.props.getItemInfo(itemId);
         this.props.isWishedRequest(itemId);
         this.props.navigation.navigate('ItemDetail');

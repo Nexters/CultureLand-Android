@@ -54,7 +54,6 @@ export default class MyPageScreen extends Component {
 
     componentDidMount(){
         this.props.navigation.addListener("didFocus",()=>{
-            console.log("디드포ㅓ스");
             this.props.getMyPageCount();
         });
 

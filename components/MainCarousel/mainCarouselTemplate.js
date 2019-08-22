@@ -84,7 +84,6 @@ export default class MainCarousel extends Component {
     render () {
         const noteList = this.props.noteList;
         const notePropsArray = [];
-        console.log("놋 리스트 : " +JSON.stringify(noteList));
         noteList.map((note, index) => {
             notePropsArray.push({
                 monthType: note.monthType,

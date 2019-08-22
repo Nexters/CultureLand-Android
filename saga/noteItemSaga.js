@@ -16,7 +16,6 @@ async function getNote(id) {
 
     const response = await Client.getDiaryByDiaryId(id);
 
-    console.log("겟노트 : "+JSON.stringify(response));
 
     if(response.error){
         return { error : response.error }
@@ -63,11 +62,8 @@ export function* getNoteFlow() {
 
 async function createNote(title,sometime,place,withWho,content,cultureName) {
     // MOCK
-    console.log("크일엥");
     const response = await Client.writeNewDiary(title,sometime,place,withWho,content,cultureName,'');
 
-    console.log("결과 : " +JSON.stringify(response)+" , " +
-        "타이틀 : "+title + " , 날짜 : "+ sometime+", 타입 : "+cultureName);
 
     if(response.error){
         return { error : response.error }

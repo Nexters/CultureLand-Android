@@ -176,7 +176,6 @@ async function isWished(id) {
 
     const response = await Client.getWishItemById(id);
 
-    console.log("이즈위시드 : "+ JSON.stringify(response) +" , 아이디 : "+id);
     if(response.error){
         return { error : response.error }
     }

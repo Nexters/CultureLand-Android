@@ -53,7 +53,6 @@ export default class ListItem extends Component {
     }
 
     navigateToNoteDetail(){
-        console.log("네비게잇");
         this.props.getNoteItem(this.props.id);
         NavigatorService.push('NoteDetail')
     }
@@ -99,7 +98,6 @@ export default class ListItem extends Component {
                             <View style={styles.item_thumb_container}>
                                 <TouchableOpacity style={styles.item_like}
                                      onPress={()=>{
-                                         console.log("셋라잌");
                                          this.props.setLiked(this.props.id);
                                          this.setState({favorite : !this.state.favorite})
                                      }}

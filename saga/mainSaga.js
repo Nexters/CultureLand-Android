@@ -8,7 +8,6 @@ async function getMainNoteCountAction(year){
 
     const response = await Client.getMonthDiariesInfoByYear(year);
 
-    console.log("릿폰스 : " + JSON.stringify(response));
     if(response.error){
         return { error : response.error }
     }

@@ -241,7 +241,6 @@ class ClientClass {
     }
 
     getMonthDiariesInfoByYear(year){
-        console.log('요청유아렐 : '+this.getMonthDiariesListByYearURL(year));
         return this.credentialCall(this.getMonthDiariesListByYearURL(year),{
             method : "GET",
         })

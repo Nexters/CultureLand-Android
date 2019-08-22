@@ -9,7 +9,6 @@ import {CANCEL_LIKED, CANCEL_LIKED_ACTION, SET_LIKED_ACTION} from "../actionType
 
 async function varyDiaryLikedStateAction(id){
     const response = await Client.setDiaryLikeState(id);
-    console.log("셋 : "+ JSON.stringify(response));
 
     if(response.error){
         return { error : response.error }

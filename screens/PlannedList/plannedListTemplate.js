@@ -116,7 +116,6 @@ export default class PlanedListScreen extends Component {
 
     changeListCategory(event) {
 
-        console.log("탭 인덱스변화  " + JSON.stringify(event.i));
         this.props.getProductList(CATEGORY_BY_INDEX(event.i), 0);
         this.setState({categoryTabIndex : event.i});
 
@@ -132,8 +131,6 @@ export default class PlanedListScreen extends Component {
             productList
         } = this.props;
 
-        console.log("렌더시작" + JSON.stringify(this.props.productList));
-        console.log("렌더시작" + typeof this.props.productList);
 
         if(this.props.loading){
                 return (<Text> 데이터 로딩중입니다</Text>);
