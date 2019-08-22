@@ -14,14 +14,32 @@ import StarImage from "../assets/images/icon/star.svg";
 import StarChkImage from "../assets/images/icon/star_checked.svg";
 import RBSheet from "react-native-raw-bottom-sheet";
 import CategoryType from '../domain/CategoryType';
+import {createNoteItem, getNoteItem} from "../actions/noteItem";
+import {getSometime, getTitle} from "../selectors/noteItemSelector";
+import {connect} from 'react-redux';
+import {getItemDetailAction, isWishedAction} from "../actions/itemDetail";
+import {getError} from "../selectors/itemDetailSelector";
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
 
 const calc = new RatioCalculator(screenWidth, screenHeight);
 
+function mapStateToProps(state) {
+    return {
+        error : getError(state),
 
-export class WishListItem extends Component {
+    }
+}
+
+const mapDispatchToProps = {
+    getItemInfo : getItemDetailAction.request,
+    isWishedRequest : isWishedAction.request,
+};
+
+
+
+class WishListItem extends Component {
     /**
      *
      *  처음 불러올 떄, 위시리스트에 있으면 별 채워진 상태로 로딩!
@@ -47,12 +65,20 @@ export class WishListItem extends Component {
 
     }
 
+    navigateToItemDetailWithAction(){
+        console.log("아이디 : " +JSON.stringify(this.props));
+        this.props.getItemInfo(this.props.id);
+        this.props.isWishedRequest(this.props.id);
+        console.log("네비게이트");
+        NavigatorService.push('ItemDetail')
+    }
+
     render() {
         return (
 
             <TouchableOpacity
                 activeOpacity={0.7}
-                onPress={() => NavigatorService.push('ItemDetail')}
+                onPress={this.navigateToItemDetailWithAction.bind(this)}
                 style={styles.wishlist_item}
             >
                 <View style={styles.wishlist_image_container}>
@@ -159,3 +185,6 @@ const styles = StyleSheet.create({
         // backgroundColor: '#ebebeb',
     },
 })
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(WishListItem);

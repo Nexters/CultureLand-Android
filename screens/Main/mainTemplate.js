@@ -15,7 +15,7 @@ import {
 
 import PropTypes from 'prop-types';
 import {Dropdown} from 'react-native-material-dropdown';
-import {RatioCalculator} from "../../util";
+import {CATEGORY_KOR, LIST_TYPE, RatioCalculator} from "../../util";
 import NavigatorService from "../../util/NavigatorService";
 import MainCarousel from "../../components/MainCarousel/index"
 import {FloatingButton} from "../../components/FloatingButton"
@@ -47,14 +47,19 @@ export default class MainScreen extends Component {
     }
 
     componentDidMount(){
-        this.props.getMainWishList();
-        this.props.getMainCount(this.state.selectedYear);
+
+        this.props.navigation.addListener("willFocus",()=>{
+            console.log("메인화면갱신");
+            this.props.getMainWishList();
+            this.props.getMainCount(this.state.selectedYear);
+        });
     }
 
     onDropDownChangeHandler(year){
         this.setState({selectedYear : year});
         this.props.getMainCount(this.state.selectedYear);
     }
+
 
     render () {
         const currentDate= moment(new Date()).format("YYYY-MM-DD")

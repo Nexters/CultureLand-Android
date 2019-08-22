@@ -41,7 +41,7 @@ export default class SearchModeScreen extends Component {
         let now  = parseInt((new Date).getTime());
         let diff = parseInt(now-this.state.lastSearchRequest);
 
-        if(diff < 500){
+        if(diff < 100){
             return;
         }else{
             console.log("now : "+now +" , "+this.state.lastSearchRequest+", "+
@@ -61,6 +61,8 @@ export default class SearchModeScreen extends Component {
 
     }
 
+    submitEditing(){
+    }
 
     render() {
 
@@ -87,6 +89,7 @@ export default class SearchModeScreen extends Component {
                             <View style={styles.active_wrapper}>
                                 <TextInput style={styles.active_input_text}
                                            onChangeText={this.searchByKeyword.bind(this)}
+                                           onSubmitEditing={this.submitEditing.bind(this)}
                                            selectionColor={"#f15642"}
                                 >
                                 </TextInput>

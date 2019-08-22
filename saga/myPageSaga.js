@@ -72,7 +72,6 @@ async function getMyPageAccountAction(){
 
     let user = await Client.getUser();
 
-    console.log("마이페이지유저 : "+JSON.stringify(user));
     if(user.error){
         return { error : user.error };
     }else{

@@ -68,6 +68,7 @@ export class RatioCalculator {
  * 스타일을 리턴한다
  */
 
+
 const deepCopy = function (obj) {
     let clone = {};
     for (let prop in obj) {
@@ -272,3 +273,11 @@ export function trimCurrentMillisTo10Fig() {
 }
 
 
+export function KOR_SORT_TO_CONST(sort){
+    switch(sort){
+        case "최신순":
+            return SORT_BY_NEW;
+        case "인기순":
+            return SORT_BY_POPULAR;
+    }
+}

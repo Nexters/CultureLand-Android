@@ -140,7 +140,6 @@ async function cancelWished(id) {
 
     const response = await Client.deleteWishItem(id);
 
-    console.log("위시아이템 삭제 : " + JSON.stringify(response)  +" , 아이디 : "+id);
 
     if(response.error){
         return { error : response.error }
