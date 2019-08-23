@@ -79,7 +79,7 @@ class ListItem extends Component {
 
                     <View style={styles.list_item}>
                         <View style={styles.list_item_left}>
-                            <Text style={styles.item_tit}>{this.props.title}</Text>
+                            <Text style={styles.item_tit} numberOfLines={2}>{this.props.title}</Text>
                             <View style={styles.item_category_container}>
                                 <ExhibitionImage  width={13} height={13} style={styles.item_category_icon}/>
                                 <Text style={styles.item_category_text}>{this.props.culture}</Text>
@@ -87,7 +87,7 @@ class ListItem extends Component {
                             <View style={styles.item_info_container}>
                                 <Text style={styles.item_info_text}>{this.props.date}</Text>
                                 <View style={styles.item_info_line}></View>
-                                <Text style={styles.item_info_text}>{this.props.place}</Text>
+                                <Text style={styles.item_info_text} numberOfLines={1}>{this.props.place}</Text>
                             </View>
                             <TouchableOpacity
                                 style={styles.item_more}

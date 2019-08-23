@@ -162,9 +162,12 @@ export default class MyPageScreen extends Component {
                                     </Text>
                                 </View>
                                 <View style={styles.top_user_right}>
-                                    <Text style={styles.user_logout}>
-                                        로그아웃
-                                    </Text>
+                                    <TouchableOpacity 
+                                        style={styles.user_logout} 
+                                        onPress={() => NavigatorService.navigate('Auth')}
+                                    >
+                                        <Text>로그아웃</Text>
+                                    </TouchableOpacity>
                                 </View>
                             </View>
                             <View style={styles.number_of_data_wrapper}>

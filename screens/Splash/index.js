@@ -47,7 +47,7 @@ export default class SplashScreens extends Component {
                             backgroundColor: '#fff',
                         }}
                         speed={0.7}
-                        source={require('./asset/simpleLoading.json')}
+                        // source={require('./asset/simpleLoading.json')}
                         // imageAssetsFolder={'images/'}
                         autoPlay
                         loop
