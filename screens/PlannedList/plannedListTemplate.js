@@ -10,7 +10,6 @@ import {
     Image,
     ScrollView,
     TouchableWithoutFeedback,
-
     Keyboard
 
 } from 'react-native';

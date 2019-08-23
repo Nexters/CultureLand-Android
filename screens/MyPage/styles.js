@@ -18,7 +18,7 @@ export default styles = function (screenWidth, screenHeight, calc) {
                 flexDirection: "column",
                 width: "100%",
                 height: 167,
-                paddingTop: calc.getRegHeightDp(55.4),
+                paddingTop: calc.getRegHeightDp(23),
                 paddingLeft: 40,
                 paddingRight: calc.getRegWidthDp(28),
                 backgroundColor: "#fff"

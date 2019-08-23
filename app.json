@@ -12,8 +12,17 @@
    
     "version": "1.0.0",
     "orientation": "portrait",
-    
-    
+    "loading": {
+        "backgroundColor": "#f15642",
+        "hideExponentText": false,
+        "icon": "./assets/images/splash.png"
+    },
+    "icon": "./assets/images/icon.png",
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#f15642"
+    },
     "packagerOpts": {
       "config": "metro.config.js",
       "sourceExts": ["js", "jsx", "svgx","svg"],

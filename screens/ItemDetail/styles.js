@@ -18,7 +18,7 @@ export default styles = function (screenWidth, screenHeight, calc) {
         back_button: {
             width: 25,
             height: 25,
-            marginTop: 45,
+            marginTop: 21,
             marginLeft : 22,
         },
 

@@ -17,8 +17,13 @@ export default styles = function (screenWidth, screenHeight, calc) {
             backgroundColor: "#f15642",
         },
 
+        thumbnail: {
+            resizeMode: 'contain',
+        },
+
         splash_image: {
-            marginBottom : calc.getRegHeightDp(19.8),
+            // width: 144,
+            // marginBottom : 20,
         },
 
         splash_message : {
