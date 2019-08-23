@@ -9,6 +9,7 @@ import SignLoadingScreen from '../screens/SignLoading/index';
 import ItemDetailScreen from '../screens/ItemDetail/index';
 import NoteDetailScreen from '../screens/NoteDetail/index';
 import NoteEditScreen from '../screens/NoteEdit/index';
+import SplashScreen from '../screens/Splash';
 
 const AppStack = createStackNavigator({
     MainTabNavigator: {

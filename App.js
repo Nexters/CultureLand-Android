@@ -114,7 +114,6 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
         paddingTop: (Platform.OS === 'ios') ? (24) : (StatusBar.currentHeight),
-        overflow: 'hidden',
     },
     loginScreen: {
         padding: 30,
