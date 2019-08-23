@@ -47,7 +47,7 @@ export default class NoteDetailScreen extends Component {
                     <TouchableOpacity
                         activeOpacity={0.7} 
                         style={styles.header_right}
-                        onPress={() => NavigatorService.push('NoteEdit')}
+                        onPress={() => NavigatorService.push('NoteEdit', { id : this.props.id , state : this.props})}
                     >
                         <Text style={styles.header_right_text}>수정</Text>
                     </TouchableOpacity>

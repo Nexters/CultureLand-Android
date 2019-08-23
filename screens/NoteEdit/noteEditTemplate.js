@@ -306,9 +306,8 @@ export default class NoteEditScreen extends Component {
                                         fontFamily: "noto-sans",
                                         fontSize: 16,
                                     }}
-                                    onDateChange={(sometime) => {
-                                        this.setState({sometime: sometime})
-                                    }}
+                                    
+                                    onDateChange={(sometime) => this.onTextChange(sometime)}
                                 />
                             </View>
                             <View style={styles.note_info_item}>
