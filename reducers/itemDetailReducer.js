@@ -36,7 +36,7 @@ function isWishedActions(state = initialState, action) {
             return {
                 ...state,
                 error : null,
-                isWished : action.result.isWished,
+                isWished : action.result.isMyWishList,
             };
         case IS_WISHED_ACTION.FAILURE:
             return {

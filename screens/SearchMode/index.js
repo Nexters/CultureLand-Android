@@ -3,9 +3,9 @@ import template from "./SearchModeTemplate";
 import {
     getSearchedProductList,
     getSearchedProductError,
-    getSearchedProductKeyword
+    getSearchedProductKeyword, getSubmitted
 } from "../../selectors/searchProductSelector";
-import {searchProduct} from '../../actions/searchProduct'
+import {searchProduct, submitSearchResult} from '../../actions/searchProduct'
 import {getItemDetailAction, isWishedAction} from "../../actions/itemDetail";
 
 
@@ -14,11 +14,12 @@ function mapStateToProps(state) {
     const searchedProductList = getSearchedProductList(state);
     const searchedProductError = getSearchedProductError(state);
     const searchedProductKeyword = getSearchedProductKeyword(state);
-
+    const submitted = getSubmitted(state);
     return {
         searchedProductList,
         searchedProductError,
-        searchedProductKeyword
+        searchedProductKeyword,
+        submitted,
     }
 }
 
@@ -26,6 +27,8 @@ const mapDispatchToProps = {
     getItemInfo: getItemDetailAction.request,
     isWishedRequest: isWishedAction.request,
     searchRequest: searchProduct.request,
+    submitSearchRequest : submitSearchResult.request,
+
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(template);

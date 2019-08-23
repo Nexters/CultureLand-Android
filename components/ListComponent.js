@@ -18,6 +18,22 @@ export default class ListComponent extends Component {
     }
 
 
+    _renderItem = ({item}) => (
+
+        <ListItem
+            key={item.key}
+            getNoteItem={this.props.getNoteItem}
+            id={item.id}
+            title={item.title}
+            cultureName={CATEGORY_KOR(item.culture)}
+            sometime={item.sometime}
+            place={item.place}
+            favorite={item.favorite}
+            imageUrl={item.imageUrl}
+            withWho={item.withWho}
+        />
+    );
+
     state = {
         data: [
             {
@@ -30,29 +46,14 @@ export default class ListComponent extends Component {
                 imageUrl : "",
                 favorite: false,
                 culture : '콘서트',
+
             },
 
         ]
     };
-
-    _renderItem = ({item}) => (
-        <ListItem
-            key={item.key}
-            getNoteItem={this.props.getNoteItem}
-            id={item.id}
-            title={item.title}
-            culture={CATEGORY_KOR(item.culture)}
-            date={item.sometime}
-            place={item.place}
-            favorite={item.favorite}
-
-        />
-    );
     render() {
         const cultureList = this.props.cultureList;
         const listTitle = this.props.listTitle;
-        console.log(ISNULL(cultureList));
-        console.log(ISNULL(listTitle));
         return (
             ISNULL(cultureList) ?
                 ISNULL(listTitle) ?

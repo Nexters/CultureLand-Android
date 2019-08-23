@@ -50,7 +50,7 @@ export function getNoteItemActions(state = initialState, action) {
                 withWho : action.result.withWho,
                 isLiked : action.result.isLiked,
                 cultureName : action.result.cultureName,
-                image : action.result.image,
+                imageUrl : action.result.imageUrl,
                 loading : false,
             };
         case GET_NOTE_ACTION.FAILURE:
@@ -120,11 +120,10 @@ export function removeNoteItemActions(state = initialState, action) {
         case REMOVE_NOTE_ACTION.REQUEST:
             return {
                 ...state,
-            }
+            };
         case REMOVE_NOTE_ACTION.SUCCESS:
             return {
                 ...state,
-                notes: state.notes.filter(note => note.id !== note_id),
             };
         case REMOVE_NOTE_ACTION.FAILURE:
             return {

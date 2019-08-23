@@ -20,9 +20,11 @@ import EditImage from "../assets/images/icon/edit.svg";
 import DeleteImage from "../assets/images/icon/delete.svg";
 
 import RBSheet from "react-native-raw-bottom-sheet";
-import {getError} from "../selectors/diaryListSelector";
+import {getError} from "../selectors/itemDetailSelector";
 import {connect} from 'react-redux';
-import {setLiked} from "../actions/diaryList";
+import {getDiaryList, setLiked} from "../actions/diaryList";
+import {getNoteItem, removeNoteItem} from "../actions/noteItem";
+import {getListType, getTitle} from "../selectors/diaryListSelector";
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
@@ -32,13 +34,19 @@ const calc = new RatioCalculator(screenWidth, screenHeight);
 
 function mapStateToProps(state) {
     return {
-        error : state.diaryListItemReducer.diaryListRootAction.error,
+        error : getError(state),
+        listTitle  : getTitle(state),
+        listType : getListType(state),
 
     }
 }
 
 const mapDispatchToProps = {
         setLiked : setLiked.request,
+        getNoteItem : getNoteItem.request,
+        removeNoteItem : removeNoteItem.request,
+        getDiaryList : getDiaryList.request,
+
 };
 
 
@@ -66,6 +74,17 @@ class ListItem extends Component {
         this.props.getNoteItem(this.props.id);
         NavigatorService.push('NoteDetail')
     }
+    navigateToNoteEdit(){
+       // this.props.getNoteItem(this.props.id);
+        NavigatorService.push('NoteEdit', { id : this.props.id , state : this.props});
+    }
+
+    removeNoteItem(){
+        this.props.removeNoteItem(this.props.id);
+        this.props.getNoteItem();
+        this.props.getDiaryList(this.props.listType,this.props.listTitle);
+        this.RBSheet.close();
+    }
     render() {
 
 
@@ -82,10 +101,10 @@ class ListItem extends Component {
                             <Text style={styles.item_tit}>{this.props.title}</Text>
                             <View style={styles.item_category_container}>
                                 <ExhibitionImage  width={13} height={13} style={styles.item_category_icon}/>
-                                <Text style={styles.item_category_text}>{this.props.culture}</Text>
+                                <Text style={styles.item_category_text}>{this.props.cultureName}</Text>
                             </View>
                             <View style={styles.item_info_container}>
-                                <Text style={styles.item_info_text}>{this.props.date}</Text>
+                                <Text style={styles.item_info_text}>{this.props.sometime}</Text>
                                 <View style={styles.item_info_line}></View>
                                 <Text style={styles.item_info_text}>{this.props.place}</Text>
                             </View>
@@ -141,11 +160,12 @@ class ListItem extends Component {
                                 }
                             }}
                         >
-                            
+
                         <TouchableOpacity
                             style={styles.actionSheet_item}
                             onPress={() => {
-                                NavigatorService.push('NoteEdit');
+                                this.navigateToNoteEdit();
+
                                 this.RBSheet.close();
                             }}
                         >
@@ -154,9 +174,7 @@ class ListItem extends Component {
                         </TouchableOpacity>
                         <TouchableOpacity
                             style={styles.actionSheet_item}
-                            onPress={() => {
-                                this.RBSheet.close();
-                            }}
+                            onPress={this.removeNoteItem.bind(this)}
                         >
                             <DeleteImage width={34} height={34}/>
                             <Text style={styles.actionSheet_text}>삭제하기</Text>
