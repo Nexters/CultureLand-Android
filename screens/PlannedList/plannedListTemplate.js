@@ -10,7 +10,7 @@ import {
     Image,
     ScrollView,
     TouchableWithoutFeedback,
-
+    ActivityIndicator,
     Keyboard
 
 } from 'react-native';
@@ -133,7 +133,15 @@ export default class PlanedListScreen extends Component {
 
 
         if(this.props.loading){
-                return (<Text> 데이터 로딩중입니다</Text>);
+            return (
+                <View style = {styles.activityIndicator_container}>
+                    <ActivityIndicator 
+                        color = '#f15642'
+                        size = "large"
+                        style = {styles.activityIndicator}
+                    />
+                </View>
+            );
         }else{
 
             return (

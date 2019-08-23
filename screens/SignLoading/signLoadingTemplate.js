@@ -5,15 +5,24 @@ import {
     StatusBar,
     StyleSheet,
     View,
-
+    Dimensions,
+    Text,
+    Image
 } from 'react-native';
-
+import styleFn from "./styles"
 var jwtDecode = require('jwt-decode');
 import * as SecureStore from 'expo-secure-store';
 import NavigatorService from "../../util/NavigatorService";
 import PropTypes from 'prop-types';
 import {OAUH_SOCIAL_SERVICE, SERVICE_ACCESS_TOKEN, EXPIRED_AT, SOCIAL_ACCESS_TOKEN} from "../../util";
 import {Client} from "../../api/Client";
+import SplashIcon from './asset/appIcon_splash.svg';
+
+const screenWidth = Math.round(Dimensions.get('window').width);
+const screenHeight = Math.round(Dimensions.get('window').height);
+import {RatioCalculator} from "../../util";
+const calc = new RatioCalculator(screenWidth, screenHeight);
+const styles = styleFn(screenWidth, screenHeight, calc);
 
 export default class SignLoadingScreen extends Component {
 
@@ -76,8 +85,22 @@ export default class SignLoadingScreen extends Component {
     render() {
         return (
             <View>
-                <ActivityIndicator/>
+                {/* <ActivityIndicator/>
                 <StatusBar barStyle="default"/>
+                <SplashIcon  width={73} height={73}/> */}
+                <View style={styles.container}>
+                    <Image source={{uri: './asset/splash.png'}} style={styles.thumbnail}/>
+                    {/* <View style={styles.splash_image}>
+                        <SplashIcon  width={73} height={73}/>
+                    </View>
+                    <Text style={styles.splash_message}>
+                        당신의 기록은{"\n"}
+                        <Text style={styles.splash_bold}>
+                            어떤 색인가요?
+                        </Text>
+                    </Text> */}
+
+                </View>
             </View>
         );
     }

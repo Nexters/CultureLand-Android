@@ -60,13 +60,13 @@ export default function App(props) {
         return (
             <Provider store={store}>
                 <View style={styles.container}>
-                    {/* <AppNavigator
+                    {/* <SignScreen/> */}
+                    <AppNavigator
                         ref={navigatorRef => {
                             NavigatorService.setTopLevelNavigator(navigatorRef);
                         }}
-                    /> */}
-                    <SplashScreen/>
-
+                    />
+                    {/* <SplashScreen/> */}
                 </View>
             </Provider>
         );

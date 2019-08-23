@@ -187,6 +187,18 @@ export default styles = function (screenWidth, screenHeight, calc) {
             height: calc.getRegHeightDp(21),
             marginLeft : 'auto'
 
+        },
+        activityIndicator_container : {
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginTop: 70
+        },
+        activityIndicator : {
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: 80
         }
 
 
