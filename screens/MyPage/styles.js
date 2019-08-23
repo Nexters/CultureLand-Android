@@ -10,75 +10,84 @@ export default styles = function (screenWidth, screenHeight, calc) {
 
 
             container: {
-                width: "100%",
-                height: 720,
+                width: '100%',
+                height: '100%',
+                flex: 1,
             },
 
             top_wrapper: {
                 flexDirection: "column",
                 width: "100%",
-                height: 167,
-                paddingTop: calc.getRegHeightDp(23),
-                paddingLeft: 40,
-                paddingRight: calc.getRegWidthDp(28),
-                backgroundColor: "#fff"
+                paddingTop: 40,
+                paddingHorizontal: 40,
+                paddingBottom: 20,
+                backgroundColor: "#fff",
+                elevation: 3,
+            },
+
+            top_user_wrapper: {
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'flex-end',
 
             },
 
+            top_user_left: {
+                flexDirection: 'row',
+                flexWrap: 'wrap',
+                flex: 1,
+                justifyContent: 'flex-start',
+                alignItems: 'flex-end',
+            },
+
+            top_user_right: {
+                justifyContent: 'flex-end',
+            },
+
             user_name_text: {
+                width: "90%",
                 fontFamily: "noto-sans-bold",
                 width: "100%",
-                height: 33,
                 fontSize: 24,
                 fontWeight: "bold",
                 fontStyle: "normal",
                 letterSpacing: 0.01,
-                color:
-                    "#4c4c4c"
-            },
-
-            user_wrapper: {
-                flexDirection: "row",
-                width: "100%",
-                height: calc.getRegHeightDp(20),
-                marginTop: 2.2,
+                color: "#4c4c4c",
+                lineHeight: 28,
             },
 
             user_email: {
                 fontFamily : 'noto-sans-thin',
                 fontSize: 14,
-                width: 215,
-                height: 20,
-                marginRight: 25 ,
                 marginTop : 2,
                 fontStyle: "normal",
                 fontWeight: "100",
-                lineHeight: 20,
+                lineHeight: 18,
                 letterSpacing: -0.2,
                 color: "#5e5e5e",
                 opacity: 0.7,
-
             },
 
             user_logout: {
-                fontFamily : 'noto-sans-mid',
+                fontFamily: 'noto-sans-bold',
                 textAlign: 'right',
-                width: 45,
-                height: 18,
                 fontSize: 12,
                 opacity: 0.5,
-                fontWeight: "500",
+                // fontWeight: "500",
                 fontStyle: "normal",
                 letterSpacing: -0.3,
-                textDecorationLine: 'underline',
-                color: "#949494"
+                // textDecorationLine: 'underline',
+                color: "#949494",
+                lineHeight: 18,
+                borderBottomWidth: 1,
+                borderBottomColor: "#949494",
             },
 
             number_of_data_wrapper: {
                 flexDirection: 'row',
                 width: "100%",
                 height: 28,
-                marginTop: 16.3,
+                marginTop: 17,
             },
 
             data_symbol: {
@@ -157,7 +166,7 @@ export default styles = function (screenWidth, screenHeight, calc) {
                 shadowColor: "black",
                 shadowOpacity: 0.07,
                 shadowOffset: {width: -2, height: 2},
-
+                elevation: 3,
             },
 
 

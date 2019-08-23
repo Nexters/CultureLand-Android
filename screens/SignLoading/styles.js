@@ -18,6 +18,8 @@ export default styles = function (screenWidth, screenHeight, calc) {
         },
 
         thumbnail: {
+            width: "100%",
+            height: "100%",
             resizeMode: 'contain',
         },
 

@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 
 import PropTypes from 'prop-types';
-import {CATEGORY, RatioCalculator} from "../../util";
+import {CATEGORY, RatioCalculator, ISNULL} from "../../util";
 import NavigatorService from "../../util/NavigatorService";
 import CategoryType from "../../domain/CategoryType";
 import Entypo from '@expo/vector-icons/Entypo'
@@ -132,7 +132,7 @@ export default class MyPageScreen extends Component {
             totalCount  ,
             error ,
         } = this.props;
-
+        console.log(ISNULL(userEmail));
         this.props.getMyPageAccount();
 
         this.categories = [
@@ -152,19 +152,20 @@ export default class MyPageScreen extends Component {
                 return (
                     <View>
                         <View style={styles.top_wrapper}>
-                            <Text style={styles.user_name_text}>
-                                {userId}
-                            </Text>
-                            <View style={styles.user_wrapper}>
-
-                                <Text style={styles.user_email}>
-                                    {userEmail}
-                                </Text>
-                                <Text style={styles.user_logout}>
-                                    로그아웃
-                                </Text>
-                                <View/>
-
+                            <View style={styles.top_user_wrapper}>
+                                <View style={styles.top_user_left}>
+                                    <Text style={styles.user_name_text}>
+                                        {userId}
+                                    </Text>
+                                    <Text style={styles.user_email}>
+                                        {userEmail}
+                                    </Text>
+                                </View>
+                                <View style={styles.top_user_right}>
+                                    <Text style={styles.user_logout}>
+                                        로그아웃
+                                    </Text>
+                                </View>
                             </View>
                             <View style={styles.number_of_data_wrapper}>
                                 <View style={styles.data_symbol}>
