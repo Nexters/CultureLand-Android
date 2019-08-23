@@ -9,7 +9,7 @@ import {
 import ListItem from './ListItem';
 import PropTypes from 'prop-types';
 import {CATEGORY_KOR, KOR_CATEGORY_TO_ENG, ISNULL} from "../util";
-
+import Highlighter from 'react-native-highlight-words';
 
 
 export default class ListComponent extends Component {
@@ -57,13 +57,23 @@ export default class ListComponent extends Component {
             ISNULL(cultureList) ?
                 ISNULL(listTitle) ?
                     <View style={styles.culture_null_wrapper}>
-                        <Text style={styles.culture_null_title}>{'아직 기록하신\n문화생활이 없으시군요!'}</Text>
-                        <Text style={styles.culture_null_subtitle}>{'어서 밖으로 나가서 문화생활을 즐기고\n컬러에 기록을 남겨주세요!'}</Text>
+                        <Text style={styles.culture_null_subtitle}>{'경험한 문화생활을 기록하세요!'}</Text>
+                        <Highlighter
+                            highlightStyle={{
+                                color: "#f15642"
+                            }}
+                            searchWords={
+                                ["♥"]
+                            }
+                            style={styles.culture_null_title}
+                            textToHighlight={`맘에 드는 컬러들에 ♥ 하세요!`}>
+
+                        </Highlighter>
                     </View>
                 :
                     <View style={styles.culture_null_wrapper}>
-                        <Text style={styles.culture_null_title}>{'아직 기록하신\n문화생활이 없으시군요!'}</Text>
-                        <Text style={styles.culture_null_subtitle}>{'어서 밖으로 나가서 문화생활을 즐기고\n컬러에 기록을 남겨주세요!'}</Text>
+                        <Text style={styles.culture_null_title}>{'다양한 문화생활이\n당신을 기다리고 있어요!'}</Text>
+                        <Text style={styles.culture_null_subtitle}>{'지금 바로 검색을 통해 새로운 컬러를 찾아보세요!'}</Text>
                     </View>
             :
                 <FlatList
@@ -88,6 +98,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     culture_null_title : {
+        marginTop: 10,
         fontFamily: "noto-sans-bold",
         fontSize: 18,
         fontStyle: "normal",
@@ -97,8 +108,8 @@ const styles = StyleSheet.create({
         color: "#5c5c5c"
     },
     culture_null_subtitle : {
-        marginTop: 15,
-        fontFamily: "noto-sans",
+        marginTop: 10,
+        fontFamily: 'noto-sans-light',
         fontSize: 14,
         fontStyle: "normal",
         lineHeight: 18,

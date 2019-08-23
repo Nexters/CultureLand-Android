@@ -91,8 +91,12 @@ export default class DiaryListScreen extends Component {
                     setLiked={this.props.setLiked}
                     cancelLiked={this.props.cancelLiked}
                 />
-
-                <FloatingButton/>
+                {
+                    this.props.listType == "category" ?
+                        null
+                    :
+                        <FloatingButton/>
+                }
             </View>
         )
     }
