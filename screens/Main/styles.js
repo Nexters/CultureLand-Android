@@ -1,7 +1,6 @@
 import {StyleSheet} from "react-native";
 import {ConvertZepSizeToRegularizedSize, RatioCalculator} from "../../util";
 import {screenWidth,screenHeight} from "../../App";
-import {StatusBar,Platform} from 'react-native';
 
 
 export default styles = function(screenWidth,screenHeight) {
@@ -14,7 +13,6 @@ export default styles = function(screenWidth,screenHeight) {
             width: '100%',
             height: '100%',
             flex: 1,
-            paddingTop: (Platform.OS === 'ios') ?(24) :(StatusBar.currentHeight),
             backgroundColor: '#f6f6f6',
         },
         main_top_wrapper: {

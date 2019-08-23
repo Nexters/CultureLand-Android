@@ -37,7 +37,7 @@ export default styles = function (screenWidth, screenHeight, calc) {
             flexDirection: 'row',
             alignItems: 'flex-end',
             width: '100%',
-            marginTop : calc.getRegHeightDp(46),
+            marginTop : calc.getRegHeightDp(22),
             paddingLeft  : calc.getRegWidthDp(9),
             paddingRight: calc.getRegWidthDp(22),
         },

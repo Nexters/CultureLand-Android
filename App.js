@@ -60,13 +60,12 @@ export default function App(props) {
         return (
             <Provider store={store}>
                 <View style={styles.container}>
-                    {/* <SignScreen/> */}
-                    <AppNavigator
+                    {/* <AppNavigator
                         ref={navigatorRef => {
                             NavigatorService.setTopLevelNavigator(navigatorRef);
                         }}
-                    />
-                    {/* <AppNavigator/> */}
+                    /> */}
+                    <SplashScreen/>
 
                 </View>
             </Provider>
@@ -114,6 +113,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
+        paddingTop: (Platform.OS === 'ios') ? (24) : (StatusBar.currentHeight),
+        overflow: 'hidden',
     },
     loginScreen: {
         padding: 30,

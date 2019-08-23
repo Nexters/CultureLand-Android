@@ -1,7 +1,6 @@
 import {Platform, StyleSheet} from "react-native";
 import {ConvertZepSizeToRegularizedSize, RatioCalculator} from "../../util";
 import {screenWidth,screenHeight} from "../../App";
-import {StatusBar} from 'react-native';
 
 
 export default styles = function(screenWidth,screenHeight,calc) {
@@ -9,11 +8,8 @@ export default styles = function(screenWidth,screenHeight,calc) {
 
     return StyleSheet.create({
         container: {
-            // overflow: 'hidden',
             width : "100%",
             height : "100%",
-            // marginTop: StatusBar.currentHeight,
-            paddingTop: (Platform.OS === 'ios') ?(70+24) :(70 + StatusBar.currentHeight),
             backgroundColor: '#f6f6f6',
         },
         header : {
@@ -22,7 +18,7 @@ export default styles = function(screenWidth,screenHeight,calc) {
             justifyContent: 'space-between',
             alignItems: 'center',
             position: 'absolute',
-            top: (Platform.OS === 'ios') ?(24) :(StatusBar.currentHeight),
+            top: 0,
             left: 0,
             right: 0,
             zIndex: 100,
