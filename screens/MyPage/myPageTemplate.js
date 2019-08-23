@@ -161,6 +161,19 @@ export default class MyPageScreen extends Component {
                                         {userEmail}
                                     </Text>
                                 </View>
+                            </View>
+                            <View style={styles.top_total_wrapper}>
+                                <View style={styles.number_of_data_wrapper}>
+                                    <View style={styles.data_symbol}>
+                                        <TicketImage width={28} height={25}/>
+                                    </View>
+                                    <Text style={styles.number_of_data_title}>
+                                        총 기록 개수
+                                    </Text>
+                                    <Text style={styles.number_of_data_content}>
+                                        {totalCount}
+                                    </Text>
+                                </View>
                                 <View style={styles.top_user_right}>
                                     <TouchableOpacity 
                                         style={styles.user_logout} 
@@ -169,18 +182,6 @@ export default class MyPageScreen extends Component {
                                         <Text>로그아웃</Text>
                                     </TouchableOpacity>
                                 </View>
-                            </View>
-                            <View style={styles.number_of_data_wrapper}>
-                                <View style={styles.data_symbol}>
-                                    <TicketImage width={28} height={25}/>
-                                </View>
-                                <Text style={styles.number_of_data_title}>
-                                    총 기록 개수
-                                </Text>
-                                <Text style={styles.number_of_data_content}>
-                                    {totalCount}
-                                </Text>
-
                             </View>
                         </View>
 
