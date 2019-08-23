@@ -165,6 +165,7 @@ export const CATEGORY = {
     MUSICAL: "musical",
     PLAY: "play",
     ETC: "etc",
+    LIKE : "like",
 };
 
 /**
@@ -184,6 +185,8 @@ export function CATEGORY_KEY(category) {
             return 4;
         case CATEGORY.ETC:
             return 5;
+        case CATEGORY.LIKE:
+            return 6;
     }
 }
 export function CATEGORY_BY_INDEX(index) {
@@ -217,8 +220,11 @@ export function CATEGORY_KOR(category) {
             return "연극";
         case CATEGORY.ETC:
             return "기타";
+        case CATEGORY.LIKE:
+            return "좋아하는 기록";
     }
 }
+
 
 export function KOR_CATEGORY_TO_ENG(category) {
     switch (category) {

@@ -1,5 +1,6 @@
 import * as WebBrowser from 'expo-web-browser';
 import React, {Component} from 'react';
+
 import styleFn from "./styles"
 import {
     View,

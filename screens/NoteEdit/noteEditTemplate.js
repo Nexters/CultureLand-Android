@@ -52,27 +52,33 @@ export default class NoteEditScreen extends Component {
         };
 
 
-        let id = this.props.navigation.getParam("id");
-        console.log("아이디 : " + id);
-        if (id === -1) {
-            this.state = {
-                ...this.state,
-                title: '',
-                category: '',
-                sometime: '',
-                place: '',
-                withWho: '',
-                content: '',
-                cultureName: '',
+        try {
+
+            let id = this.props.navigation.getParam("id");
+            if (id === -1) {
+                this.state = {
+                    ...this.state,
+                    title: '',
+                    category: '',
+                    sometime: '',
+                    place: '',
+                    withWho: '',
+                    content: '',
+                    cultureName: '',
+                }
+            } else {
+                console.log("여기선 : " + JSON.stringify(this.props.navigation.getParam("state")));
+                let newState = this.props.navigation.getParam("state");
+                this.state = {
+                    category : KOR_CATEGORY_TO_ENG(newState.cultureName),
+                    ...newState
+                }
             }
-        } else {
-            console.log("여기선 : " + JSON.stringify(this.props.navigation.getParam("state")));
-            let newState = this.props.navigation.getParam("state");
-            this.state = {
-                category : KOR_CATEGORY_TO_ENG(newState.cultureName),
-                ...newState
-            }
+        }catch(e){
+            console.log("익 : "+e);
+
         }
+
     }
 
 

@@ -203,7 +203,7 @@ class ClientClass {
 
         let defaultContentType = "application/json; charset=utf-8";
         if (options.headers) {
-            defaultContentType = options.headers.ContentType
+            defaultContentType = options.headers["Content-Type"];
         }
 
         let credentialOptions = {
