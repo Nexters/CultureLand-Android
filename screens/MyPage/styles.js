@@ -39,11 +39,7 @@ export default styles = function (screenWidth, screenHeight, calc) {
                 justifyContent: 'flex-start',
                 alignItems: 'flex-end',
             },
-
-            top_user_right: {
-                justifyContent: 'flex-end',
-            },
-
+            
             user_name_text: {
                 width: "90%",
                 fontFamily: "noto-sans-bold",
@@ -67,7 +63,14 @@ export default styles = function (screenWidth, screenHeight, calc) {
                 color: "#5e5e5e",
                 opacity: 0.7,
             },
-
+            top_total_wrapper: {
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                width: '100%',
+                marginTop: 17,
+            },
+            top_user_right: {
+            },
             user_logout: {
                 fontFamily: 'noto-sans-bold',
                 textAlign: 'right',
@@ -82,12 +85,11 @@ export default styles = function (screenWidth, screenHeight, calc) {
                 borderBottomWidth: 1,
                 borderBottomColor: "#949494",
             },
-
             number_of_data_wrapper: {
+                flex: 1,
                 flexDirection: 'row',
-                width: "100%",
-                height: 28,
-                marginTop: 17,
+                // width: "100%",
+                // height: 28,
             },
 
             data_symbol: {
@@ -98,7 +100,6 @@ export default styles = function (screenWidth, screenHeight, calc) {
 
             number_of_data_title: {
                 fontFamily : 'noto-sans-light',
-                width: calc.getRegWidthDp(70),
                 height: calc.getRegHeightDp(20),
                 marginTop: calc.getRegHeightDp(5),
                 marginRight: 2,
