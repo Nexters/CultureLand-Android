@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import {RatioCalculator, MAIN_MONTH, ISNULL, CATEGORY_KOR} from "../../util";
-import {WishListItem} from '../WishListItem'
+import WishListItem from '../WishListItem'
 import InactiveImage from "../../assets/images/icon/search/inactive.svg";
 
 const screenWidth = Math.round(Dimensions.get('window').width);
@@ -23,8 +23,10 @@ export default class WishListComponent extends Component {
     }
 
     _renderItem = ({item}) => (
+
         <WishListItem 
-            key={item.key} 
+            key={item.key}
+            id={item.id}
             category={item.category}
             title={item.title}
             date={item.date}
@@ -51,6 +53,7 @@ export default class WishListComponent extends Component {
                 wishList.map((item, index) => {
                     wishListPropsArray.push({
                         key: index,
+                        id : item.cultureInfo.id,
                         category: CATEGORY_KOR(item.cultureInfo.cultureName),
                         title: item.cultureInfo.title,
                         date: `${item.cultureInfo.startDate} ~ ${item.cultureInfo.endDate}`,

@@ -21,7 +21,7 @@ import {combineReducers} from 'redux';
 const initialState = {
     id: '',
     title: '',
-    sometime: '',
+    sometime: '2019-09-09',
     place: '',
     withWho: '',
     content: '',

@@ -15,17 +15,14 @@ import MenuImage from "../assets/images/icon/menu.svg";
 import LikeImage from "../assets/images/icon/like.svg";
 import LikeChkImage from "../assets/images/icon/like_checked.svg";
 import ExhibitionImage from "../assets/images/icon/type/exhibition.svg";
-import MusicalImage from "../assets/images/icon/type/musical.svg";
-import PlayImage from "../assets/images/icon/type/play.svg";
-import EtcImage from "../assets/images/icon/type/etc.svg";
-import ConcertImage from "../assets/images/icon/type/concert.svg";
 import Dashline from "../assets/images/icon/dashline.svg";
 import EditImage from "../assets/images/icon/edit.svg";
 import DeleteImage from "../assets/images/icon/delete.svg";
 
 import RBSheet from "react-native-raw-bottom-sheet";
-import CategoryType from '../domain/CategoryType';
-import {getNoteItem} from "../actions/noteItem";
+import {getError} from "../selectors/diaryListSelector";
+import {connect} from 'react-redux';
+import {setLiked} from "../actions/diaryList";
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
@@ -33,7 +30,20 @@ const screenHeight = Math.round(Dimensions.get('window').height);
 const calc = new RatioCalculator(screenWidth, screenHeight);
 
 
-export default class ListItem extends Component {
+function mapStateToProps(state) {
+    return {
+        error : state.diaryListItemReducer.diaryListRootAction.error,
+
+    }
+}
+
+const mapDispatchToProps = {
+        setLiked : setLiked.request,
+};
+
+
+
+class ListItem extends Component {
     /**
      *
      *  처음 불러올 떄, 좋아요리스트에 있으면 하트 채워진 상태로 로딩!
@@ -135,7 +145,7 @@ export default class ListItem extends Component {
                         <TouchableOpacity
                             style={styles.actionSheet_item}
                             onPress={() => {
-                                NavigatorService.push('NoteEdit')
+                                NavigatorService.push('NoteEdit');
                                 this.RBSheet.close();
                             }}
                         >
@@ -306,6 +316,7 @@ const styles = StyleSheet.create({
     },
     item_thumb : {
         flex: 1,
+        backgroundColor : "#000"
     },  
     item_like : {
         position: 'absolute',
@@ -334,3 +345,5 @@ const styles = StyleSheet.create({
         color: "#424242"
     },
 })
+
+export default connect(mapStateToProps,mapDispatchToProps)(ListItem);

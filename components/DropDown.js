@@ -50,6 +50,7 @@ export default class DropDown extends Component {
                     fontSize: 16,
                     lineHeight: 19,
                 }}
+                onChangeText={(value)=>this.props.onChangeSort(value)}
 
             />
         );
