@@ -84,7 +84,7 @@ class WishListItem extends Component {
                   </View>
                   <View style={styles.wishlist_text_container}>
                       <Text style={styles.wishlist_subtitle}>{this.props.category}</Text>
-                      <Text style={styles.wishlist_title}>{this.props.title}</Text>
+                      <Text style={styles.wishlist_title} numberOfLines={2}>{this.props.title}</Text>
                       <Text style={styles.wishlist_date}>{this.props.date}</Text>
                   </View>
 
