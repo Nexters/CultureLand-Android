@@ -84,6 +84,8 @@ export default class DiaryListScreen extends Component {
                     <Text style={styles.header_right}></Text>
                 </View>
                 <ListComponent
+                    listTitle={this.state.title}
+                    listType={this.props.listType}
                     cultureList={this.props.cultureList}
                     getNoteItem={this.props.getNoteItem}
                     setLiked={this.props.setLiked}
