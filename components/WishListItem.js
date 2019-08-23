@@ -6,6 +6,7 @@ import {
     Image,
     StyleSheet,
     TouchableOpacity,
+    TouchableWithoutFeedback,
     Button,
 } from 'react-native';
 import {RatioCalculator} from "../util";
@@ -17,7 +18,8 @@ import CategoryType from '../domain/CategoryType';
 import {createNoteItem, getNoteItem} from "../actions/noteItem";
 import {getSometime, getTitle} from "../selectors/noteItemSelector";
 import {connect} from 'react-redux';
-import {getItemDetailAction, isWishedAction} from "../actions/itemDetail";
+import { getItemDetailAction, isWishedAction} from "../actions/itemDetail";
+import { cancelWishItemAction  } from '../actions/main';
 import {getError} from "../selectors/itemDetailSelector";
 
 const screenWidth = Math.round(Dimensions.get('window').width);
@@ -35,6 +37,7 @@ function mapStateToProps(state) {
 const mapDispatchToProps = {
     getItemInfo : getItemDetailAction.request,
     isWishedRequest : isWishedAction.request,
+    cancelWish : cancelWishItemAction.request,
 };
 
 
@@ -55,14 +58,9 @@ class WishListItem extends Component {
         }
     }
 
-    doWish(){
-
-    }
     cancelWish(){
-
-    }
-    checkIsWished(){
-
+        console.log("삭제될 아이템 아이디 : "+this.props.id);
+        this.props.cancelWish(this.props.id);
     }
 
     navigateToItemDetailWithAction(){
@@ -82,13 +80,17 @@ class WishListItem extends Component {
                 style={styles.wishlist_item}
             >
                 <View style={styles.wishlist_image_container}>
-                    <Image source={{uri : this.props.imageUrl}}/>
+                    <Image  style={styles.wishlist_image} source={{uri : this.props.imageUrl}}/>
                 </View>
                 <View style={styles.wishlist_text_container}>
                     <Text style={styles.wishlist_subtitle}>{this.props.category}</Text>
                     <Text style={styles.wishlist_title}>{this.props.title}</Text>
                     <Text style={styles.wishlist_date}>{this.props.date}</Text>
                 </View>
+
+                <TouchableWithoutFeedback
+                    onPress={this.cancelWish.bind(this)}
+                >
                 <View style={styles.wishlist_icon_container}>
                     {this.state.isWished ?
                         // 위시 리스트에 있으면 채워진 상태로 로딩
@@ -98,6 +100,7 @@ class WishListItem extends Component {
                     }
                     
                 </View>
+                </TouchableWithoutFeedback>
             </TouchableOpacity>
         )
     }
@@ -136,6 +139,8 @@ const styles = StyleSheet.create({
     wishlist_image : {
         flex: 1,
         backgroundColor: '#ebebeb',
+        width : "100%",
+        height : "100%",
     },
     wishlist_text_container : {
         flex: 1,

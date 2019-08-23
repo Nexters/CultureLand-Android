@@ -19,29 +19,35 @@ class ClientClass {
         this.expiredAt = null;
     }
 
-    getSocialService(){
+    getSocialService() {
         return this.socialService;
     }
-    setSocialService(socialService){
+
+    setSocialService(socialService) {
         this.socialService = socialService;
     }
-    setServerAccessToken(token){
+
+    setServerAccessToken(token) {
         this.serverAccessToken = token;
     }
-    setSocialAccessToken(token){
+
+    setSocialAccessToken(token) {
         this.socialAccessToken = token;
     }
-    getServerToken(){
+
+    getServerToken() {
         return this.serverAccessToken;
     }
-    getSocialToken(){
+
+    getSocialToken() {
         return this.socialAccessToken;
     }
-    setExpiredAt(expiredAt){
-        this.expiredAt =  expiredAt;
+
+    setExpiredAt(expiredAt) {
+        this.expiredAt = expiredAt;
     }
 
-    async init(){
+    async init() {
         let serverToken = await SecureStore.getItemAsync(SERVICE_ACCESS_TOKEN);
         let socialToken = await SecureStore.getItemAsync(SOCIAL_ACCESS_TOKEN);
         let socialService = await SecureStore.getItemAsync(OAUH_SOCIAL_SERVICE);
@@ -69,31 +75,48 @@ class ClientClass {
     getDiaryByDiaryIdURL(diaryId) {
         return `${this.getDiaryBaseURL()}/${diaryId}`;
     }
-    getDiariesByCategoryURL(category){
+
+    getDiariesByCategoryURL(category) {
         return `${this.getDiaryBaseURL()}?category=${category}`;
     }
-    getDiariesByDateURL(date){
+
+    getDiariesByDateURL(date) {
         return `${this.getDiaryBaseURL()}?date=${date}`;
     }
-    getDiaryLikeURL(diaryId){
+
+    getDiaryLikeURL(diaryId) {
         return `${this.getDiaryBaseURL()}/${diaryId}/like`;
     }
-    getMonthDiariesListByYearURL(year){
+
+    getDiaryImageS3UploadURL() {
+        return `${this.getDiaryBaseURL()}/upload/image`;
+    }
+
+    getMonthDiariesListByYearURL(year) {
         return `${this.getDiaryBaseURL()}/all/summaries?year=${year}`;
     }
-    getMyPageDiaryCountURL(){
+
+    getMyPageDiaryCountURL() {
         return `${this.getDiaryBaseURL()}/all/counts`;
     }
+
     getWishListBaseURL() {
         return `${this.getUserBaseURL()}/wishList`;
     }
 
-    getWishedItemByIdURL(cultureInfoId) {
+    setItemWishedByIdURL(cultureInfoId) {
         return `${this.getWishListBaseURL()}?cultureInfoId=${cultureInfoId}`;
     }
-    getDeleteWishedItemURL(wishListId){
+
+    getWishedItemByIdURL(cultureInfoId) {
+        return `${this.getWishListBaseURL()}/find?cultureInfoId=${cultureInfoId}`;
+    }
+
+    getDeleteWishedItemURL(wishListId) {
+        console.log("삭제 요청 유알엘 : " + `${this.getWishListBaseURL()}/${wishListId}`);
         return `${this.getWishListBaseURL()}/${wishListId}`;
     }
+
     getCultureInfoBaseURL() {
         return `${this.getBaseURL()}/cultureInfos`;
     }
@@ -104,11 +127,11 @@ class ClientClass {
         &sort=${sort}&page=${page}`;
     }
     */
-    getCultureInfoByQueriesURL(category, sort,page) {
+    getCultureInfoByQueriesURL(category, sort, page) {
         return `${this.getCultureInfoBaseURL()}?category=${category}&sort=${sort}&page=${page}`;
     }
 
-    getAllCultureQueriesURL(sort,page){
+    getAllCultureQueriesURL(sort, page) {
         return `${this.getCultureInfoBaseURL()}?sort=${sort}&page=${page}`;
     }
 
@@ -121,9 +144,12 @@ class ClientClass {
         return `${this.getCultureInfoBaseURL()}/id/${cultureId}`;
     }
 
+    getCultureListByTitleURL(title) {
+        return `${this.getCultureInfoBaseURL()}/title?title=${title}`;
+    }
 
 
-    signInOrUp(socialService){
+    signInOrUp(socialService) {
         return fetch(this.getSignInOrUpURL(socialService), {
 
             method: "POST",
@@ -137,7 +163,7 @@ class ClientClass {
         }).then((res) => {
             return res.json();
         }).catch(err => {
-            return { error : err }
+            return {error: err}
         })
     }
 
@@ -154,7 +180,7 @@ class ClientClass {
 
                 let response = await this.signInOrUp(this.socialService);
 
-                console.log("인증후 서버 :" +JSON.stringify(response));
+                console.log("인증후 서버 :" + JSON.stringify(response));
                 const decodedToken = jwtDecode(response.message.token);
                 this.setServerAccessToken(response.message.token);
                 await SecureStore.setItemAsync(SERVICE_ACCESS_TOKEN, response.message.token);
@@ -169,26 +195,43 @@ class ClientClass {
                 this.setExpiredAt(decodedToken.exp.toString());
 
 
-
-            }else{
+            } else {
                 console.log(`Token이 유효함  [${expiredDate}]`);
             }
         }).catch(e => {
             console.log(`credentialCall 예외발생 [ ${e} ]`);
         });
 
-        const credentialOptions = {
-            headers: {
-                "Content-Type": "application/json; charset=utf-8",
-                "Authorization": `Bearer ${this.serverAccessToken}`
-            },
-            ...options
-        };
+        let defaultContentType = "application/json; charset=utf-8";
+        if (options.headers) {
+            console.log("새운 콘텐트타입 " + options.headers.ContentType);
+            defaultContentType = options.headers.ContentType
+        }
+
+        let credentialOptions = {
+                headers: {
+                    "Content-Type": `${defaultContentType}`,
+                    "Authorization": `Bearer ${this.serverAccessToken}`,
+                },
+
+            };
+
+        if(options.body){
+            credentialOptions["body"] = options.body
+        }
+
+        try {
+            console.log("새로운옵션 ! : " + JSON.stringify(credentialOptions))
+            credentialOptions["method"] = options["method"]
+        } catch (e) {
+            console.log("credential exception :  " + e);
+        }
+
 
         return fetch(url, credentialOptions).then((res) => {
             return res.json();
         }).catch(err => {
-            return { err }
+            return {err}
         });
     }
 
@@ -216,46 +259,57 @@ class ClientClass {
                 "withWho": withWho,
                 "content": content,
                 "cultureName": cultureName,
-                "imageUrl" : '',
+                "imageUrl": imageUrl,
             })
         })
     }
 
-    getDiariesByCategory(category){
-        return this.credentialCall(this.getDiariesByCategoryURL(category),{
-            method : "GET",
+    getDiariesByCategory(category) {
+        return this.credentialCall(this.getDiariesByCategoryURL(category), {
+            method: "GET",
         })
     }
 
-    getDiariesByDate(date){
-        return this.credentialCall(this.getDiariesByDateURL(date),{
-            method : "GET",
+    getDiariesByDate(date) {
+        return this.credentialCall(this.getDiariesByDateURL(date), {
+            method: "GET",
         })
     }
 
-    getDiaryByDiaryId(diaryId){
-        return this.credentialCall(this.getDiaryByDiaryIdURL(diaryId),{
-            method : "GET",
+    getDiaryByDiaryId(diaryId) {
+        return this.credentialCall(this.getDiaryByDiaryIdURL(diaryId), {
+            method: "GET",
         })
     }
 
-    getMonthDiariesInfoByYear(year){
-        return this.credentialCall(this.getMonthDiariesListByYearURL(year),{
-            method : "GET",
+    getMonthDiariesInfoByYear(year) {
+        return this.credentialCall(this.getMonthDiariesListByYearURL(year), {
+            method: "GET",
         })
     }
 
+    uploadImageToS3(imageBinary) {
 
+        console.log("이미지바이나리 : " + JSON.stringify(imageBinary));
+        return this.credentialCall(this.getDiaryImageS3UploadURL(), {
+            method: "POST",
+            headers: {
+                "Content-Type" : "multipart/form-data; charset=utf-8; boundary=--------------------------605340083993630461301957",
 
-    getMyPageDiaryCount(){
+            },
+            body : imageBinary,
+        })
+    }
+
+    getMyPageDiaryCount() {
         return this.credentialCall(this.getMyPageDiaryCountURL(), {
             method: "GET",
         })
     }
 
-    setDiaryLikeState(diaryId){
-        return this.credentialCall(this.getDiaryLikeURL(diaryId),{
-            method : "GET",
+    setDiaryLikeState(diaryId) {
+        return this.credentialCall(this.getDiaryLikeURL(diaryId), {
+            method: "GET",
         })
     }
 
@@ -265,17 +319,16 @@ class ClientClass {
         })
     }
 
-
     // CULTUREINFO API GROUP //
 
-    getAllCultureByQueries(sort, page){
-        return this.credentialCall(this.getAllCultureQueriesURL(sort,page), {
-            method : "GET",
+    getAllCultureByQueries(sort, page) {
+        return this.credentialCall(this.getAllCultureQueriesURL(sort, page), {
+            method: "GET",
         })
     }
 
-    getCultureByQueries(category,sort, page) { // VERIFIED
-        return this.credentialCall(this.getCultureInfoByQueriesURL(category, sort,page), {
+    getCultureByQueries(category, sort, page) { // VERIFIED
+        return this.credentialCall(this.getCultureInfoByQueriesURL(category, sort, page), {
             method: "GET",
         })
     }
@@ -292,6 +345,12 @@ class ClientClass {
         })
     }
 
+    getCultureListByTitle(title) {
+        return this.credentialCall(this.getCultureListByTitleURL(title), {
+            method: "GET",
+        })
+    }
+
     // WISH LIST API GROUP //
 
 
@@ -302,7 +361,7 @@ class ClientClass {
     }
 
 
-    getWishItemById(wishId) { // VERIFIED users/dibs/:wishId
+    getWishItemById(wishId) { // VERIFIED users/wishList/find
         return this.credentialCall(this.getWishedItemByIdURL(wishId), {
             method: "GET",
         })
@@ -310,18 +369,16 @@ class ClientClass {
 
     // TODO 파라미터 이용해서 call 하는 걸로 수정하기
     addNewWishItem(id) { // VERIFIED /users/dibs
-        return this.credentialCall(this.getWishedItemByIdURL(id), {
+        return this.credentialCall(this.setItemWishedByIdURL(id), {
             method: "POST",
         })
     }
 
-    deleteWishItem(wishId) { // VERIFIED /users/dibs/:wishId
+    deleteWishItem(wishId) { // VERIFIED /users/wishList/:wishListId
         return this.credentialCall(this.getDeleteWishedItemURL(wishId), {
             method: "DELETE",
         })
     }
-
-
 
 
 }

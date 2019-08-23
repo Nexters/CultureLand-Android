@@ -39,9 +39,8 @@ export default class WishListComponent extends Component {
     componentDidMount(){
     }
     render() {
-
-
         const wishList = this.props.wishList;
+        console.log("위시리스트 : "+JSON.stringify(wishList));
 
         const wishListPropsArray = [];
 
@@ -58,7 +57,7 @@ export default class WishListComponent extends Component {
                         title: item.cultureInfo.title,
                         date: `${item.cultureInfo.startDate} ~ ${item.cultureInfo.endDate}`,
                         isLiked: item.cultureInfo.isLiked,
-                        imageUrl: item.cultureInfo.imageUrl,
+                        imageUrl: 'http:'+item.cultureInfo.imageUrl,
                     })
                 });
             }

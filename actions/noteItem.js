@@ -26,7 +26,7 @@ export const getNoteItem = {
 
 // CREATE
 export const createNoteItem = {
-    request : (title,sometime,place,withWho,content,cultureName) => ({
+    request : (title,sometime,place,withWho,content,cultureName,image) => ({
         type : CREATE_NOTE_ACTION.REQUEST,
         payload : {
             title,
@@ -34,7 +34,8 @@ export const createNoteItem = {
             place,
             withWho,
             content,
-            cultureName
+            cultureName,
+            image,
         }
     }),
 

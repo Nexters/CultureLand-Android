@@ -8,7 +8,7 @@ import {
     CANCEL_LIKED_ACTION,
 } from "../actionTypes/noteItem";
 import {call, put, take} from "redux-saga/effects";
-import {Client } from '../api/Client';
+import {Client} from '../api/Client';
 import {CATEGORY_KOR} from "../util";
 
 async function getNote(id) {
@@ -16,9 +16,9 @@ async function getNote(id) {
 
     const response = await Client.getDiaryByDiaryId(id);
 
-
-    if(response.error){
-        return { error : response.error }
+    console.log("리스폰스 : "+ JSON.stringify(response));
+    if (response.error) {
+        return {error: response.error}
     }
 
     return {
@@ -27,12 +27,12 @@ async function getNote(id) {
             id: response.message.id,
             title: response.message.title,
             sometime: response.message.sometime,
-            content : response.message.content,
-            withWho : response.message.withWho,
-            place : response.message.place,
+            content: response.message.content,
+            withWho: response.message.withWho,
+            place: response.message.place,
             isLiked: response.message.favorite,
-            cultureName : response.message.culture,
-            image: 'https://t1.daumcdn.net/movie/af91402ca4d84418b7becf6624043eb61563411826019',
+            cultureName: response.message.culture,
+            imageUrl: response.message.imageUrl,
         },
 
     };
@@ -54,26 +54,39 @@ export function* getNoteFlow() {
         } else {
             yield put({
                 type: GET_NOTE_ACTION.SUCCESS,
-                result : response.result,
+                result: response.result,
             })
         }
     }
 }
 
-async function createNote(title,sometime,place,withWho,content,cultureName) {
-    // MOCK
-    const response = await Client.writeNewDiary(title,sometime,place,withWho,content,cultureName,'');
+async function createNote(title, sometime, place, withWho, content, cultureName, image) {
+    console.log("업로드 리퀘스트 : " + JSON.stringify(image));
 
+    const imageUploadResponse = await Client.uploadImageToS3(image);
 
-    if(response.error){
-        return { error : response.error }
+    console.log("업로드 리스폰스 : " + JSON.stringify(imageUploadResponse));
+
+    if (imageUploadResponse.error) {
+        console.log("이미지 업로드 에러 : " + JSON.stringify(imageUploadResponse.error));
+        return {error: imageUploadResponse.error}
+
+    }
+
+    const response = await Client.writeNewDiary(title, sometime, place,
+        withWho, content, cultureName,
+        imageUploadResponse.message
+        );
+
+    console.log("다이어리 쓰기 응답 : " + JSON.stringify(response));
+
+    if (response.error) {
+        return {error: response.error}
     }
 
     return {
-        error : null,
-        result : {
-
-        }
+        error: null,
+        result: {}
     }
 
 }
@@ -83,11 +96,11 @@ export function* createNoteFlow() {
     while (true) {
 
         const request = yield take(CREATE_NOTE_ACTION.REQUEST);
-        console.log("페이로드 : "+JSON.stringify(request.payload));
         let response = yield call(createNote,
-            request.payload.title,request.payload.sometime,
-            request.payload.place,request.payload.withWho,
-            request.payload.content,request.payload.cultureName);
+            request.payload.title, request.payload.sometime,
+            request.payload.place, request.payload.withWho,
+            request.payload.content, request.payload.cultureName,
+            request.payload.image);
 
         if (response.error) {
 
@@ -131,7 +144,18 @@ export function* updateNoteFlow() {
 
 
 function removeNote(id) {
-    // MOCK
+    const response = Client.deleteDiaryById(id);
+
+    console.log("결과 : "+JSON.stringify(response));
+
+    if(response.error){
+        return { error : response.error}
+    }
+
+    return {
+        error : null,
+        result : response.message
+    }
 }
 
 export function* removeNoteFlow() {
@@ -156,8 +180,8 @@ export function* removeNoteFlow() {
 }
 
 
-export function isLiked(id) {
-    //MOCK
+async function isLiked(diaryId) {
+
 }
 
 export function* isLikedFlow() {
@@ -183,14 +207,13 @@ export function* isLikedFlow() {
 async function setLiked(diaryId) {
     // MOCK
     const response = await Client.setDiaryLikeState(diaryId);
-    if(response.error){
-        return { error : response.error }
+    console.log(diaryId +" 노트를 : "+JSON.stringify(response));
+    if (response.error) {
+        return {error: response.error}
     }
     return {
-        error : null,
-        result : {
-
-        }
+        error: null,
+        result: {}
     }
 }
 

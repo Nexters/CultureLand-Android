@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import styleFn from "./styles"
-import {Dimensions, ScrollView, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View} from 'react-native';
-import {omitAutoCompleteText, RatioCalculator} from "../../util";
+import {Dimensions, ScrollView, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, Image,View} from 'react-native';
+import {numberWithCommas, omitAutoCompleteText, RatioCalculator} from "../../util";
 import Entypo from '@expo/vector-icons/Entypo'
 import AntDesign from '@expo/vector-icons/AntDesign'
 import PropTypes from 'prop-types';
@@ -25,6 +25,7 @@ export default class SearchModeScreen extends Component {
             errorMessage: "",
             lastSearchRequest : 0,
             keyword : '',
+            submitted : false,
         };
 
 
@@ -62,6 +63,9 @@ export default class SearchModeScreen extends Component {
     }
 
     submitEditing(){
+        this.props.submitSearchRequest(this.state.keyword);
+        console.log("결과 : "+JSON.stringify(this.props.searchedProductList));
+
     }
 
     render() {
@@ -104,31 +108,85 @@ export default class SearchModeScreen extends Component {
                         <View
                             style={styles.active_hor_line}>
                         </View>
-                        <ScrollView>
-                            {
-                                searchedProductList.map((item) => {
-                                    return (
-                                        <TouchableOpacity
-                                            onPress={
-                                                ()=>this.props.onSelectSearchResult(item.id)
-                                            }>
-                                            <View style={styles.active_search_result_wrapper}>
-                                                <Highlighter
 
-                                                    highlightStyle={{
-                                                        color: '#f15642',
+                        {
+
+                            this.props.submitted?
+                                <ScrollView contentContainerStyle={{ flexGrow: 1, paddingBottom :330}} >
+
+
+                                    <Highlighter
+
+                                        highlightStyle={{
+                                            fontFamily: 'noto-sans-bold',
+                                        }}
+                                        searchWords={
+                                            [`${numberWithCommas(searchedProductList.length)}`]
+                                        }
+                                        style={styles.number_of_items}
+                                        textToHighlight={`총 ${numberWithCommas(searchedProductList.length)} 건`}>
+
+                                    </Highlighter>
+
+                                    <View style={{flexDirection : 'row', flexWrap : 'wrap',
+                                        alignItems : 'flex-start',
+                                        paddingLeft : 12, paddingRight : 12 }}>
+
+                                    {
+
+                                        searchedProductList.map((item) => {
+                                            return (
+                                                <TouchableOpacity
+                                                    onPress={
+                                                        ()=>this.props.onSelectSearchResult(item.id)
+                                                    }>
+                                                    <Image style={{
+                                                        backgroundColor : "#000",
+                                                        width : 96,
+                                                        height : 136,
+                                                        marginLeft : 14,
+                                                        marginBottom : 12,
+                                                        borderRadius : 10,
                                                     }}
-                                                    searchWords={
-                                                        [this.state.keyword]
-                                                    }
-                                                    style={styles.active_search_result_content}
-                                                    textToHighlight={omitAutoCompleteText(item.title)}>
-                                                </Highlighter>
-                                            </View>
-                                        </TouchableOpacity>)
-                                })
-                            }
-                        </ScrollView>
+                                                           source={{uri: 'http:' + item.imageUrl}}
+                                                    >
+                                                    </Image>
+                                                </TouchableOpacity>)
+                                        })
+                                    }
+                                    </View>
+                                </ScrollView>
+
+                                :
+
+
+
+                                <ScrollView>
+                                    {
+                                        searchedProductList.map((item) => {
+                                            return (
+                                                <TouchableOpacity
+                                                    onPress={
+                                                        ()=>this.props.onSelectSearchResult(item.id)
+                                                    }>
+                                                    <View style={styles.active_search_result_wrapper}>
+                                                        <Highlighter
+
+                                                            highlightStyle={{
+                                                                color: '#f15642',
+                                                            }}
+                                                            searchWords={
+                                                                [this.state.keyword]
+                                                            }
+                                                            style={styles.active_search_result_content}
+                                                            textToHighlight={omitAutoCompleteText(item.title)}>
+                                                        </Highlighter>
+                                                    </View>
+                                                </TouchableOpacity>)
+                                        })
+                                    }
+                                </ScrollView>
+                        }
                     </View>
                     :
                     <TouchableWithoutFeedback
