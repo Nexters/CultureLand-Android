@@ -49,7 +49,6 @@ export default class MainScreen extends Component {
     componentDidMount(){
 
         this.props.navigation.addListener("willFocus",()=>{
-            console.log("메인화면갱신");
             this.props.getMainWishList();
             this.props.getMainCount(this.state.selectedYear);
         });

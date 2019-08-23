@@ -71,7 +71,7 @@ async function getItemDetail(id) {
         imageUrl: `http:${response.message.imageUrl}`,
         title: response.message.title,
         startDate: `${response.message.startDate}`,
-        endDate: `${response.message.endDate}}`,
+        endDate: `${response.message.endDate}`,
         place: response.message.place,
         category: CATEGORY_KOR(response.message.cultureName)
     })
@@ -104,6 +104,7 @@ async function setWished(id) {
 
 
     const response = await Client.addNewWishItem(id);
+    console.log('위시 아이템 추가 요청 : '+JSON.stringify(response));
 
     if (response.error) {
         return {error: response.error};
@@ -138,8 +139,21 @@ export function* setWishedFlow() {
 
 async function cancelWished(id) {
 
-    const response = await Client.deleteWishItem(id);
 
+    const wishList  = await Client.getAllWishList(id);
+    console.log('위시 아이템 리스트 : '+JSON.stringify(wishList));
+    let targetWishItemId;
+    if(!wishList.error){
+        for(let i=0; i < wishList.message.length; i++){
+            if(wishList.message[i].cultureInfo.id === id){
+                targetWishItemId = wishList.message[i].wishListId;
+            }
+        }
+    }
+
+    const response = await Client.deleteWishItem(targetWishItemId);
+
+    console.log('위시 아이템 삭제 요청  : '+JSON.stringify(response)+", 아이디 : "+id);
 
     if(response.error){
         return { error : response.error }
@@ -173,14 +187,18 @@ export function* cancelWishedFlow() {
 
 async function isWished(id) {
 
+
     const response = await Client.getWishItemById(id);
+    console.log('위시 아이템 확인 요청 : '+JSON.stringify(response));
 
     if(response.error){
         return { error : response.error }
     }
     return {
         error: null,
-        result: {}
+        result: {
+            isMyWishList : response.message.isMyWishList
+        }
     }
 }
 

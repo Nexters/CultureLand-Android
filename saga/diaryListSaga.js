@@ -83,8 +83,6 @@ async function getDiariesAction(listType,listTitle){
     }else{
         response = await Client.getDiariesByDate(listTitle);
     }
-    console.log("리스폰스 :  "+ JSON.stringify(response)+
-    " 리스트타입 "+listType + ", 리스트타이틀 : "+listTitle);
 
     if(response.error){
         return { error : response.error }
