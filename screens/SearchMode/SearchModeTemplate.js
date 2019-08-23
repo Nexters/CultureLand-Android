@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import styleFn from "./styles"
-import {Dimensions, ScrollView, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View} from 'react-native';
-import {RatioCalculator} from "../../util";
+import {Dimensions, ScrollView, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, Image,View} from 'react-native';
+import {numberWithCommas, omitAutoCompleteText, RatioCalculator} from "../../util";
 import Entypo from '@expo/vector-icons/Entypo'
 import AntDesign from '@expo/vector-icons/AntDesign'
 import PropTypes from 'prop-types';
-
+import Highlighter from 'react-native-highlight-words';
+import PlanedListScreen from "../PlannedList/plannedListTemplate";
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
 
@@ -23,18 +24,10 @@ export default class SearchModeScreen extends Component {
             isSearchMode: this.props.isSearchMode,
             errorMessage: "",
             lastSearchRequest : 0,
+            keyword : '',
+            submitted : false,
         };
 
-        this.item = [
-            "친구랑 친척이랑", "친구랑 손절", "친구와의 우정",
-            "친구랑 친척이랑", "친구랑 손절", "친구와의 우정",
-            "친구랑 친척이랑", "친구랑 손절", "친구와의 우정",
-            "친구랑 친척이랑", "친구랑 손절", "친구와의 우정",
-            "친구랑 친척이랑", "친구랑 손절", "친구와의 우정",
-            "친구랑 친척이랑", "친구랑 손절", "친구와의 우정",
-            "친구랑 친척이랑", "친구랑 손절", "친구와의 우정",
-            "친구랑 친척이랑", "친구랑 손절", "친구와의 우정",
-        ];
 
     }
 
@@ -49,18 +42,30 @@ export default class SearchModeScreen extends Component {
         let now  = parseInt((new Date).getTime());
         let diff = parseInt(now-this.state.lastSearchRequest);
 
-        if(diff < 500){
+        if(diff < 100){
             return;
         }else{
             console.log("now : "+now +" , "+this.state.lastSearchRequest+", "+
                 diff+", 입력 텍스트"+keyword);
 
             this.setState({lastSearchRequest : now});
+            this.setState({keyword : keyword});
 
             this.props.searchRequest(keyword);
         }
     }
 
+    navigateToDetailView(itemId){
+        this.props.getItemInfo(itemId);
+        this.props.isWishedRequest(itemId);
+        this.props.navigation.navigate('ItemDetail');
+
+    }
+
+    submitEditing(){
+        this.props.submitSearchRequest(this.state.keyword);
+
+    }
 
     render() {
 
@@ -87,6 +92,7 @@ export default class SearchModeScreen extends Component {
                             <View style={styles.active_wrapper}>
                                 <TextInput style={styles.active_input_text}
                                            onChangeText={this.searchByKeyword.bind(this)}
+                                           onSubmitEditing={this.submitEditing.bind(this)}
                                            selectionColor={"#f15642"}
                                 >
                                 </TextInput>
@@ -102,24 +108,85 @@ export default class SearchModeScreen extends Component {
                             style={styles.active_hor_line}>
                         </View>
 
-                        <ScrollView>
-                            {
-                                searchedProductList.map((item) => {
-                                    return (
-                                        <TouchableOpacity
-                                            onPress={this.props.onSelectSearchResult}>
-                                            <View style={styles.active_search_result_wrapper}>
+                        {
 
-                                                <Text style={styles.active_search_result_content}>
-                                                    {item.title}
-                                                </Text>
-                                            </View>
-                                        </TouchableOpacity>)
-                                })
-                            }
-                        </ScrollView>
+                            this.props.submitted?
+                                <ScrollView contentContainerStyle={{ flexGrow: 1, paddingBottom :330}} >
+
+
+                                    <Highlighter
+
+                                        highlightStyle={{
+                                            fontFamily: 'noto-sans-bold',
+                                        }}
+                                        searchWords={
+                                            [`${numberWithCommas(searchedProductList.length)}`]
+                                        }
+                                        style={styles.number_of_items}
+                                        textToHighlight={`총 ${numberWithCommas(searchedProductList.length)} 건`}>
+
+                                    </Highlighter>
+
+                                    <View style={{flexDirection : 'row', flexWrap : 'wrap',
+                                        alignItems : 'flex-start',
+                                        paddingLeft : 12, paddingRight : 12 }}>
+
+                                    {
+
+                                        searchedProductList.map((item) => {
+                                            return (
+                                                <TouchableOpacity
+                                                    onPress={
+                                                        ()=>this.props.onSelectSearchResult(item.id)
+                                                    }>
+                                                    <Image style={{
+                                                        backgroundColor : "#000",
+                                                        width : 96,
+                                                        height : 136,
+                                                        marginLeft : 14,
+                                                        marginBottom : 12,
+                                                        borderRadius : 10,
+                                                    }}
+                                                           source={{uri: 'http:' + item.imageUrl}}
+                                                    >
+                                                    </Image>
+                                                </TouchableOpacity>)
+                                        })
+                                    }
+                                    </View>
+                                </ScrollView>
+
+                                :
+
+
+
+                                <ScrollView>
+                                    {
+                                        searchedProductList.map((item) => {
+                                            return (
+                                                <TouchableOpacity
+                                                    onPress={
+                                                        ()=>this.props.onSelectSearchResult(item.id)
+                                                    }>
+                                                    <View style={styles.active_search_result_wrapper}>
+                                                        <Highlighter
+
+                                                            highlightStyle={{
+                                                                color: '#f15642',
+                                                            }}
+                                                            searchWords={
+                                                                [this.state.keyword]
+                                                            }
+                                                            style={styles.active_search_result_content}
+                                                            textToHighlight={omitAutoCompleteText(item.title)}>
+                                                        </Highlighter>
+                                                    </View>
+                                                </TouchableOpacity>)
+                                        })
+                                    }
+                                </ScrollView>
+                        }
                     </View>
-
                     :
                     <TouchableWithoutFeedback
                         ref={(input) => {
@@ -143,7 +210,6 @@ export default class SearchModeScreen extends Component {
                         </View>
 
                     </TouchableWithoutFeedback>
-
                 }
 
 
@@ -152,6 +218,10 @@ export default class SearchModeScreen extends Component {
         )
     }
 }
+
+SearchModeScreen.navigationOptions = {
+    header: null,
+};
 
 
 SearchModeScreen.propTypes = {

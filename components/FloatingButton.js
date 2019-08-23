@@ -7,18 +7,30 @@ import {
     TouchableOpacity
 } from 'react-native';
 import {RatioCalculator} from "../util";
+import NavigatorService from "../util/NavigatorService";
 import WriteImage from "../assets/images/icon/write.svg";
+
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
 
 const calc = new RatioCalculator(screenWidth, screenHeight);
 
+
 export class FloatingButton extends Component {
+    navigateToNoteEdit(){
+        try {
+            NavigatorService.navigate('NoteEdit',{ id : -1})
+
+        }catch (e){
+            console.log("익 : "+e);
+        }
+    }
     render () {
         return (
             <TouchableOpacity 
-                onPress={() => alert('FAB clicked')}
+                //onPress={() => NavigatorService.navigate('NoteEdit',{ id : -1})}
+                onPress={this.navigateToNoteEdit.bind(this)}
                 activeOpacity={0.7} 
                 style={styles.floating_button}
             >
@@ -27,6 +39,7 @@ export class FloatingButton extends Component {
         );
     }
 }
+
 
 const styles = StyleSheet.create({
     floating_button: {

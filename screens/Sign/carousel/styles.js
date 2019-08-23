@@ -1,44 +1,39 @@
 import {StyleSheet} from "react-native";
-import {ConvertZepSizeToRegularizedSize, RatioCalculator} from "../../util";
-import {screenWidth, screenHeight} from "../../App";
+import {ConvertZepSizeToRegularizedSize, RatioCalculator} from "../../../util";
+import {screenWidth, screenHeight} from "../../../App";
 
 
-export default styles = function (screenWidth, screenHeight) {
-    const calc = new RatioCalculator(screenWidth, screenHeight);
-
-
+export default styles = function (screenWidth, screenHeight, calc) {
     return StyleSheet.create({
-
-
-        container: {
+        slide_container: {
             width: "100%",
-            height: "100%",
+            height: calc.getRegHeightDp(490),
+            paddingTop: calc.getRegHeightDp(50),
             backgroundColor: '#fff',
-        },
+            shadowColor: "#4ca0a0a0",
+            shadowOffset: {
+                width: 0,
+                height: 2,
+            },
+            shadowOpacity: 0.23,
+            shadowRadius: 2.62,
 
-        phrase : {
-            width: calc.getRegWidthDp(200),
-            height : calc.getRegHeightDp(200),
-            backgroundColor: "#000",
-            marginLeft : calc.getRegWidthDp(30)
+            elevation: 5,
         },
-
-        slide: {
+        slide_wrapper : {
+            width: '100%',
+            height: '100%',
+            justifyContent: 'center',
+            alignItems: 'center',
         },
-
-        image_wrapper: {
-            width: calc.getRegWidthDp(500),
-            height: calc.getRegHeightDp(500),
-            backgroundColor: "#000"
-        },
-
-        image: {
+        slide_image : {
             width: calc.getRegWidthDp(150),
             height: calc.getRegHeightDp(150),
-
-
-    }
-
-
+        },
+        slide_text : {
+            fontFamily: 'noto-sans-light',
+            fontSize: 20,
+            color: "#424242"
+        },
     });
 }

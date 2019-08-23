@@ -10,13 +10,14 @@ export default styles = function (screenWidth, screenHeight, calc) {
 
 
         container: {
-            width: 330,
+            flex: 1,
             height: 44,
-            marginTop : 26,
-            marginLeft : 22,
-            paddingLeft : 13,
-            paddingRight : 13,
-            backgroundColor:"#fff",
+            marginTop: 26,
+            marginLeft: 22,
+            marginRight: 22,
+            paddingLeft: 13,
+            paddingRight: 13,
+            backgroundColor: "#fff",
             borderRadius: 25.5,
             shadowColor: "#000",
             flexDirection: 'row',
@@ -28,7 +29,7 @@ export default styles = function (screenWidth, screenHeight, calc) {
             shadowOpacity: 0.050,
             shadowRadius: 30,
 
-            elevation: 200,
+            elevation: 3,
 
         },
 
@@ -36,18 +37,18 @@ export default styles = function (screenWidth, screenHeight, calc) {
             flexDirection: 'row',
             alignItems: 'flex-end',
             width: '100%',
-            marginTop : calc.getRegHeightDp(46),
+            marginTop : calc.getRegHeightDp(22),
             paddingLeft  : calc.getRegWidthDp(9),
             paddingRight: calc.getRegWidthDp(22),
         },
 
         active_wrapper: {
+            flex: 1,
             flexDirection: 'row',
             alignItems: 'flex-end',
-            width: calc.getRegWidthDp(295),
             height: calc.getRegHeightDp(44),
-            paddingLeft  : calc.getRegWidthDp(13),
-            backgroundColor:"#fff",
+            paddingLeft: calc.getRegWidthDp(13),
+            backgroundColor: "#fff",
             borderRadius: 25.5,
             shadowColor: "#4ca0a0a0",
             shadowOffset: {
@@ -59,60 +60,78 @@ export default styles = function (screenWidth, screenHeight, calc) {
             elevation: 4,
         },
 
-        input_text : {
+        input_text: {
             width: calc.getRegWidthDp(265),
             height: calc.getRegHeightDp(44),
         },
 
-        active_input_text : {
+        active_input_text: {
             width: calc.getRegWidthDp(255),
             height: calc.getRegHeightDp(44),
         },
 
-        back_button : {
+        back_button: {
             width: calc.getRegWidthDp(25),
             height: calc.getRegHeightDp(25),
-            marginTop : calc.getRegHeightDp(15),
+            marginTop: calc.getRegHeightDp(15),
             marginBottom: calc.getRegHeightDp(6),
 
         },
 
 
-
-        active_hor_line : {
-            width : "100%",
-            marginTop : calc.getRegHeightDp(20),
+        active_hor_line: {
+            width: "100%",
+            marginTop: calc.getRegHeightDp(20),
             borderBottomColor: '#dddddd',
             borderBottomWidth: 1,
         },
 
-        active_scroll_view : {
+        active_scroll_view: {},
 
-        },
+        active_search_result_wrapper: {
 
-        active_search_result_wrapper    : {
-
-            width: "100%",
-            height : calc.getRegHeightDp(15.5+16.5+21),
-            paddingTop : calc.getRegHeightDp(16.5),
-            paddingLeft : calc.getRegWidthDp(45),
-            paddingBottom : calc.getRegHeightDp(15.5),
+            height: 15.5 + 16.5 + 21,
+            paddingTop: calc.getRegHeightDp(16.5),
+            paddingLeft: 15,
+            paddingBottom: calc.getRegHeightDp(15.5),
             borderBottomColor: '#e9e9e9',
             borderBottomWidth: 1,
         },
+        number_of_items : {
 
-        active_search_result_content : {
-            width : "100%",
-            height : calc.getRegHeightDp(21),
-            fontSize : 16,
+            fontFamily : 'noto-sans',
+            width: calc.getRegWidthDp(74),
+            height: calc.getRegHeightDp(21),
+            fontSize: 16,
+            marginTop : 35.7,
+            marginLeft:  27,
+            marginBottom : 11,
+
+        },
+        active_search_result_content: {
+            fontFamily: 'noto-sans-mid',
+            height: 21,
+            fontWeight: "500",
+            fontStyle: "normal",
+            fontSize: 16,
+            lineHeight: 21,
+            letterSpacing: -0.53,
+            color: "#424242"
 
         },
 
-        magnifying_glass : {
+        magnifying_glass: {
             width: calc.getRegWidthDp(20),
             height: calc.getRegHeightDp(20),
-            marginTop : calc.getRegHeightDp(14),
+            marginTop: calc.getRegHeightDp(14),
             marginBottom: calc.getRegHeightDp(14),
+        },
+
+        submit_scroll_view: {
+            flex: 1, flexDirection: 'row',
+            flexWrap: 'nowrap', justifyContent: 'space-between',
+            paddingLeft: 24, paddingRight: 24,
+
         },
 
     });

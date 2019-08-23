@@ -1,4 +1,4 @@
-import { GET_MAIN_NOTELIST_ACTION, GET_MAIN_WISHLIST_ACTION } from "../actionTypes/main";
+import {CANCEL_WISH_ITEM_ACTION, GET_MAIN_NOTELIST_ACTION, GET_MAIN_WISHLIST_ACTION} from "../actionTypes/main";
 
 export const getMainCount = {
 
@@ -18,7 +18,7 @@ export const getMainCount = {
     }),
 };
 
-export const getMainWishlist = {
+export const getMainWishList = {
 
     request : (isWished) => ({
         type : GET_MAIN_WISHLIST_ACTION.REQUEST,
@@ -33,5 +33,23 @@ export const getMainWishlist = {
 
     failure : () => ({
         type : GET_MAIN_WISHLIST_ACTION.FAILURE,
+    }),
+};
+
+export const cancelWishItemAction = {
+
+    request : (id) => ({
+        type : CANCEL_WISH_ITEM_ACTION.REQUEST,
+        payload : {
+            id,
+        }
+    }),
+
+    success : () => ({
+        type : CANCEL_WISH_ITEM_ACTION.SUCCESS,
+    }),
+
+    failure : () => ({
+        type : CANCEL_WISH_ITEM_ACTION.FAILURE,
     }),
 };

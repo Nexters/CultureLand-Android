@@ -1,9 +1,10 @@
 export default class CategoryType {
 
 
-    constructor(name,  numberOfItem, textColor, image) {
+    constructor(name, category, numberOfItem, textColor, image) {
         //this.type = type;
         this.name = name;
+        this.category = category;
         this.numberOfItem = numberOfItem;
         this.textColor = textColor;
         this.image = image;
@@ -15,6 +16,9 @@ export default class CategoryType {
 
     getName() {
         return this.name;
+    }
+    getCategory(){
+        return this.category;
     }
 
     getNumberOfItem() {

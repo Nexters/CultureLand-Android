@@ -1,22 +1,39 @@
 import { MY_PAGE_ACCOUNT_ACTION,MY_PAGE_COUNT_ACTION} from "../actionTypes/myPage";
 import {call, put, take} from "redux-saga/effects";
+import {Client} from "../api/Client";
 
 // 서버로 부터 온 데이터를 자체 디자인 가이드와 타입설계에 맞는 오브젝트로 바꾸어줌
 function getMyPageCountActionRefiner(response){
 
 }
 
-function getMyPageCountAction(){
+function zeroIfNone(value){
+    if(!value){
+        return 0
+    }else{
+        return value;
+    }
+}
+
+async function getMyPageCountAction(){
+
+    const response = await Client.getMyPageDiaryCount();
+    if(response.error){
+        return { error : response.error }
+    }
+
+
+
     return {
         error : null,
         result : {
-            totalNumberOfDiaryCount : 13,
-            likedDiaryCount : 4,
-            exhibitionCount : 5,
-            concertCount : 3,
-            musicalCount : 4,
-            playCount : 1,
-            etcCount : 0,
+            totalNumberOfDiaryCount : zeroIfNone(response.message.totalNumberOfDiaryCount),
+            likedDiaryCount : zeroIfNone(response.message.likedDiaryCount),
+            exhibitionCount : zeroIfNone(response.message.exhibitionCount),
+            concertCount : zeroIfNone(response.message.concertCount),
+            musicalCount : zeroIfNone(response.message.musicalCount),
+            playCount : zeroIfNone(response.message.playCount),
+            etcCount : zeroIfNone(response.message.etcCount),
         }
     }
 
@@ -48,13 +65,21 @@ export function* myPageCountFlow () {
 // 서버로 부터 온 데이터를 자체 디자인 가이드와 타입설계에 맞는 오브젝트로 바꾸어줌
 function getMyPageAccountActionRefiner(response){
 
+
 }
-function getMyPageAccountAction(){
-    return {
-        error : null,
-        result : {
-            userId : "이컬쳐",
-            userEmail : "helloworld@gmail.com",
+async function getMyPageAccountAction(){
+
+    let user = await Client.getUser();
+
+    if(user.error){
+        return { error : user.error };
+    }else{
+        return {
+            error : null,
+            result : {
+                userId : user.message.userId,
+                userName : user.message.userName,
+            }
         }
     }
 }

@@ -10,20 +10,23 @@ import {
     Image,
     ScrollView,
     TouchableWithoutFeedback,
-
     Keyboard
 
 } from 'react-native';
+import {Dropdown} from 'react-native-material-dropdown';
 
 // import {CATEGORY, CATEGORY_KEY} from "../../actionTypes/productList";
-import {numberWithCommas, RatioCalculator, CATEGORY, CATEGORY_KEY} from "../../util";
+import {
+    numberWithCommas, RatioCalculator, CATEGORY, CATEGORY_KEY, CATEGORY_BY_INDEX, SORT_BY_NEW,
+    SORT_BY_POPULAR, KOR_SORT_TO_CONST
+} from "../../util";
 import SearchBar from '../../components/SearchBar';
 import Highlighter from 'react-native-highlight-words';
 import ScrollableTabView, {DefaultTabBar, ScrollableTabBar} from 'react-native-scrollable-tab-view-forked'
-import DropDown from "../../components/DropDown";
 import TabBarIcon from "../../components/TabBarIcon";
 import SearchModeScreen from '../SearchMode/index'
 import PlannedListSearchManagerImpl from "../../util/PlannedListSearchImpl";
+import NavigatorService from "../../util/NavigatorService";
 import MyPageScreen from "../MyPage";
 
 const screenWidth = Math.round(Dimensions.get('window').width);
@@ -33,10 +36,6 @@ const screenHeight = Math.round(Dimensions.get('window').height);
 const calc = new RatioCalculator(screenWidth, screenHeight);
 const styles = styleFn(screenWidth, screenHeight, calc);
 
-const category_types = ["영화", "뮤지컬", "콘서트", "연극", "기타"];
-const sorting_types = ["신규순", "인기순"];
-
-
 export default class PlanedListScreen extends Component {
 
     constructor(props) {
@@ -45,14 +44,20 @@ export default class PlanedListScreen extends Component {
             isSearchMode: false,
             filter: true,
             data: 1,
-
+            loading: true,
+            categoryTabIndex: 0,
+            sort: "최신순",
         };
         this.searchManager = new PlannedListSearchManagerImpl(this);
+        this.props.getProductList(CATEGORY.ALL_PRODUCT, KOR_SORT_TO_CONST(this.state.sort),
+            this.props.page);
 
     }
 
+
     componentDidMount() {
-        this.props.getProductList(CATEGORY.ALL_PRODUCT);
+
+        //this.props.getProductList(CATEGORY.ALL_PRODUCT,0);
 
     }
 
@@ -61,29 +66,45 @@ export default class PlanedListScreen extends Component {
         this.setState({isSearchMode: true});
     }
 
+    navigateToDetailView(itemId) {
+        this.props.getItemInfo(itemId);
+        this.props.isWishedRequest(itemId);
+        this.props.navigation.navigate('ItemDetail', {id: itemId});
+
+    }
+
     make_items(index) {
         let items = [];
-        const {navigate} = this.props.navigation;
         for (let i = 0; i < 3; i++) {
-            items.push(
-                <View
-                    key={i + index}
-                    style={styles.item_wrapper}>
-                    <TouchableWithoutFeedback onPress={() => navigate('ItemDetail')}>
-                        <View>
-                            <Text stye={{fontcolor : "#fff"}}>Hello world</Text>
-                        </View>
-                    </TouchableWithoutFeedback>
-                </View>
-            )
+            let item = this.props.productList[index + i];
+
+            if (index + i < this.props.productList.length) {
+                items.push(
+                    <View
+                        key={item.id}
+                        style={styles.item_wrapper}
+                    >
+                        <TouchableWithoutFeedback
+
+                            onPress={() => this.navigateToDetailView(item.id)}
+                        >
+
+                            <Image source={{uri: 'http:' + item.imageUrl}}
+
+                                   style={styles.thumbnail}
+                            />
+                        </TouchableWithoutFeedback>
+
+                    </View>
+                )
+            }
         }
         return items;
     }
 
     make_bottom() {
         let items = [];
-
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < this.props.productList.length / 3; i++) {
 
             items.push(<View
                     key={i}
@@ -96,13 +117,45 @@ export default class PlanedListScreen extends Component {
 
     }
 
+    changeListCategory(event) {
+        this.props.changeProductList(CATEGORY_BY_INDEX(event.i), SORT_BY_NEW, this.props.page);
+    }
+
+    onChangeSort(value) {
+        this.setState({sort: value});
+        this.props.changeProductListSort(CATEGORY_BY_INDEX(this.state.categoryTabIndex)
+            , KOR_SORT_TO_CONST(value));
+
+    }
+
+    detectScrollEnd(nativeEvent) {
+        if (this.isCloseToBottom(nativeEvent)) {
+        }
+    }
+
 
     render() {
+
+
+        const isCloseToBottom = ({layoutMeasurement, contentOffset, contentSize}) => {
+            const paddingToBottom = 20;
+            return layoutMeasurement.height + contentOffset.y >=
+                contentSize.height - paddingToBottom;
+        };
 
 
         const {
             productList
         } = this.props;
+
+        let data = [{
+            value: '최신순',
+        }, {
+            value: '인기순',
+        },
+
+        ];
+
 
         return (
             <View>
@@ -112,6 +165,16 @@ export default class PlanedListScreen extends Component {
                                 this.scrollView = ref;
                             }}
                             style={styles.container}
+                            onScroll={({nativeEvent}) => {
+                                if (isCloseToBottom(nativeEvent)) {
+                                    if (this.props.isNextPageExists) {
+                                        this.props.getProductList(CATEGORY_BY_INDEX(this.state.categoryTabIndex)
+                                            , KOR_SORT_TO_CONST(this.state.sort), this.props.page + 1)
+                                    }
+
+                                }
+                            }}
+                            scrollEventThrottle={400}
                         >
                             <View>
                                 <Highlighter
@@ -141,11 +204,11 @@ export default class PlanedListScreen extends Component {
                                         />
                                     )}
                                     tabBarTextStyle={styles.category_tabBar_text_style}
-
                                     tabBarInactiveTextColor={"#797979"}
                                     tabBarActiveTextColor={'black'}
                                     tabBarUnderlineStyle={styles.category_underline}
-                                    initialPage={0}
+
+                                    onChangeTab={this.changeListCategory.bind(this)}
                                 >
                                     <View key={CATEGORY_KEY(CATEGORY.ALL_PRODUCT)} tabLabel={'전체'}
                                           style={styles.category_item}/>
@@ -169,6 +232,41 @@ export default class PlanedListScreen extends Component {
                                         textToHighlight={`총 ${numberWithCommas(productList.length)} 건`}>
 
                                     </Highlighter>
+
+
+                                    <Dropdown
+                                        value={this.state.sort}
+                                        data={data}
+                                        dropdownOffset={{top: 0, left: 0}}
+                                        dropdownPosition={0}
+                                        inputContainerStyle={{
+                                            borderBottomColor: 'transparent',
+
+                                        }}
+                                        containerStyle={{
+                                            width: calc.getRegWidthDp(65),
+                                            height: calc.getRegHeightDp(21),
+                                            marginLeft: 'auto',
+                                        }}
+                                        overlayStyle={{}}
+                                        pickerStyle={{
+                                            marginTop: 42,
+
+                                        }}
+                                        itemTextStyle={{
+                                            fontFamily: "noto-sans",
+                                            fontSize: 16,
+                                            lineHeight: 19,
+                                        }}
+                                        style={{
+                                            fontFamily: "noto-sans",
+                                            fontSize: 16,
+                                            lineHeight: 19,
+                                        }}
+                                        onChangeText={(value) => this.onChangeSort(value)}
+
+                                    />
+
                                 </View>
 
 
@@ -184,7 +282,7 @@ export default class PlanedListScreen extends Component {
                     <SearchModeScreen
                         isSearchMode={true}
                         doSearch={this.searchManager.doSearch.bind(this)}
-                        onSelectSearchResult={this.searchManager.onSelectSearchResult.bind(this)}
+                        onSelectSearchResult={this.navigateToDetailView.bind(this)}
                         cancelSearch={this.searchManager.cancelSearch.bind(this)}
 
                     />

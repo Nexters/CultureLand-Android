@@ -4,41 +4,82 @@ import {
     SET_WISHED_ACTION,
     CANCEL_WISHED_ACTION, GET_ITEM_DETAIL_ACTION
 } from "../actionTypes/itemDetail";
+import {Client} from "../api/Client";
+import {CATEGORY_KOR} from "../util";
 
 // 서버로 부터 온 데이터를 자체 디자인 가이드와 타입설계에 맞는 오브젝트로 바꾸어줌
-function getItemDetailRefiner(response){
+function getItemDetailRefiner(response) {
     return {
-        error : response.error,
-        id : response.id,
-        imageUrl : response.imageUrl,
-        title : function(){
-            if(response.title.length > 14){
-                return `${response.title.slice(0,14)}${"\n"}${response.title.slice(14)}`;
-            }else{
-                return response.title;
-            }
-        }(),
-        period : response.period,
-        place : response.place,
-        category : response.category,
+        error: response.error,
+        result: {
+            id: response.id,
+            imageUrl: response.imageUrl,
+            title: function () {
+
+                let title = response.title;
+
+                if(!title){
+                    return '';
+                }
+
+                if(title.length <= 14){
+                    return title;
+                }
+
+                for(let i=1; i <= 3; i++){
+
+                }
+                let narrowChars = title.slice(0,14).match(/(\[)|(\])|(\()|(\))|(\.)|(\,)/g);
+                let temp;
+                if(narrowChars) {
+
+                    let count = narrowChars.length;
+
+                    temp = title.slice(0, 14 + count) + "\n";
+                }
+
+
+                if (response.title.length > 14) {
+                    return `${response.title.slice(0, 14)}${"\n"}${response.title.slice(14)}`;
+                } else {
+                    return response.title;
+                }
+
+
+
+
+            }(),
+            startDate: response.startDate,
+            endDate: response.endDate,
+            place: response.place,
+            category: response.category,
+        },
     }
 }
-function getItemDetail() {
+
+async function getItemDetail(id) {
+    let response = await Client.getCultureDetailById(id);
+
+
+    if (response.error) {
+        return {error: response.error}
+    }
+
     return getItemDetailRefiner({
         error: null,
-        id: 1,
-        imageUrl: "http://t.011st.com/Down/Perf/201905/11m_27.jpg",
-        title: '김사월 : 누구라도 상관없이 당신이 좋겠어',
-        period: "2019.08.18 ~ 2019.08.19",
-        place: "대학로",
-        category: "공연"
+        id: response.message.id,
+        imageUrl: `http:${response.message.imageUrl}`,
+        title: response.message.title,
+        startDate: `${response.message.startDate}`,
+        endDate: `${response.message.endDate}`,
+        place: response.message.place,
+        category: CATEGORY_KOR(response.message.cultureName)
     })
 }
 
 export function* getItemDetailFlow() {
 
     while (true) {
-
         const request = yield take(GET_ITEM_DETAIL_ACTION.REQUEST);
         let response = yield call(getItemDetail, request.payload.id);
 
@@ -51,7 +92,7 @@ export function* getItemDetailFlow() {
         } else {
             yield put({
                 type: GET_ITEM_DETAIL_ACTION.SUCCESS,
-                result: response,
+                result: response.result,
 
             })
         }
@@ -59,17 +100,25 @@ export function* getItemDetailFlow() {
 
 }
 
-function setWished() {
+async function setWished(id) {
+
+
+    const response = await Client.addNewWishItem(id);
+    console.log('위시 아이템 추가 요청 : '+JSON.stringify(response));
+
+    if (response.error) {
+        return {error: response.error};
+    }
     return {
         error: null,
         result: {}
     }
 }
 
+
 export function* setWishedFlow() {
 
     while (true) {
-
         const request = yield take(SET_WISHED_ACTION.REQUEST);
         let response = yield call(setWished, request.payload.id);
 
@@ -88,7 +137,28 @@ export function* setWishedFlow() {
     }
 }
 
-function cancelWished(id) {
+async function cancelWished(id) {
+
+
+    const wishList  = await Client.getAllWishList(id);
+    console.log('위시 아이템 리스트 : '+JSON.stringify(wishList));
+    let targetWishItemId;
+    if(!wishList.error){
+        for(let i=0; i < wishList.message.length; i++){
+            if(wishList.message[i].cultureInfo.id === id){
+                targetWishItemId = wishList.message[i].wishListId;
+            }
+        }
+    }
+
+    const response = await Client.deleteWishItem(targetWishItemId);
+
+    console.log('위시 아이템 삭제 요청  : '+JSON.stringify(response)+", 아이디 : "+id);
+
+    if(response.error){
+        return { error : response.error }
+    }
+
     return {
         error: null,
         result: {}
@@ -115,12 +185,23 @@ export function* cancelWishedFlow() {
     }
 }
 
-export function isWished(id) {
+async function isWished(id) {
+
+
+    const response = await Client.getWishItemById(id);
+    console.log('위시 아이템 확인 요청 : '+JSON.stringify(response));
+
+    if(response.error){
+        return { error : response.error }
+    }
     return {
         error: null,
-        result: {}
+        result: {
+            isMyWishList : response.message.isMyWishList
+        }
     }
 }
+
 
 export function* isWishedFlow() {
     while (true) {

@@ -1,7 +1,6 @@
 import {StyleSheet} from "react-native";
 import {ConvertZepSizeToRegularizedSize, RatioCalculator} from "../../util";
 import {screenWidth, screenHeight} from "../../App";
-import {StatusBar, Platform} from 'react-native';
 
 
 export default styles = function (screenWidth, screenHeight, calc) {
@@ -13,11 +12,6 @@ export default styles = function (screenWidth, screenHeight, calc) {
             width: "100%",
             height: "100%",
             backgroundColor: '#f6f6f6',
-
-
-            paddingTop: (Platform.OS === 'ios') ?
-                (calc.getRegHeightDp(70) + 24) :
-                (calc.getRegHeightDp(70) + StatusBar.currentHeight),
         },
 
 
@@ -27,7 +21,7 @@ export default styles = function (screenWidth, screenHeight, calc) {
             justifyContent: 'space-between',
             alignItems: 'center',
             position: 'absolute',
-            top:  (Platform.OS === 'ios') ?(24) :(StatusBar.currentHeight),
+            top: 0,
             left: 0,
             right: 0,
             zIndex: 100,
@@ -66,14 +60,21 @@ export default styles = function (screenWidth, screenHeight, calc) {
             letterSpacing: 0.01,
             color: "#5c5c5c"
         },
+        header_right_text_diasble : {
+            fontFamily: "noto-sans-bold",
+            textAlign: 'right',
+            fontSize: 16,
+            fontStyle: "normal",
+            letterSpacing: 0.01,
+            color: "#c4c4c4"
+        },
         note_wrapper : {
             
         },
         note_top_wrapper: {
             flex: 1,
             width: '100%',
-            marginTop: calc.getRegHeightDp(3),
-
+            marginTop: calc.getRegHeightDp(72),
             paddingHorizontal: calc.getRegWidthDp(28),
         },
         image_wrapper: {
@@ -116,12 +117,11 @@ export default styles = function (screenWidth, screenHeight, calc) {
             flexDirection: 'row',
             alignItems: 'center',
             width: "100%",
-            height: calc.getRegHeightDp(30),
             marginTop: calc.getRegHeightDp(21),
         },
         note_titleinput: {
             flex: 1,
-            height: calc.getRegHeightDp(30),
+            height: calc.getRegHeightDp(50),
             paddingLeft: calc.getRegWidthDp(4),
             fontFamily: "noto-sans-bold",
             fontSize: 18,
@@ -129,7 +129,15 @@ export default styles = function (screenWidth, screenHeight, calc) {
             lineHeight: calc.getRegHeightDp(30),
             letterSpacing: -0.37,
             color: "#393939",
-            textAlignVertical: "top",
+            textAlignVertical: 'center',
+        },
+        note_titleinput_placeholder : {
+            paddingLeft: calc.getRegWidthDp(4),
+            fontFamily: 'noto-sans',
+            fontSize: 18,
+            fontStyle: "normal",
+            lineHeight: calc.getRegHeightDp(30),
+            textAlignVertical: 'center',
         },
         note_line: {
             marginTop: calc.getRegHeightDp(3),
@@ -169,6 +177,7 @@ export default styles = function (screenWidth, screenHeight, calc) {
             color: "#bbbbbb"
         },
         note_required_icon: {
+            paddingHorizontal: calc.getRegWidthDp(2),
             fontFamily: "noto-sans",
             fontSize: 14,
             fontStyle: "normal",
@@ -177,13 +186,13 @@ export default styles = function (screenWidth, screenHeight, calc) {
         },
         note_textinput: {
             flex: 1,
-            height: calc.getRegHeightDp(24),
+            height: calc.getRegHeightDp(28),
             paddingHorizontal: calc.getRegWidthDp(9),
             fontFamily: "noto-sans",
             fontSize: 16,
             fontWeight: "normal",
             fontStyle: "normal",
-            lineHeight: calc.getRegHeightDp(24),
+            lineHeight: calc.getRegHeightDp(28),
             letterSpacing: -0.2,
             color: "#393939",
             textAlignVertical: "top",
@@ -192,14 +201,13 @@ export default styles = function (screenWidth, screenHeight, calc) {
             borderColor: "#e9e9e9"
         },
         note_picker_wrapper: {
-            alignItems: 'center',
+            // alignItems: 'center',
             width: calc.getRegWidthDp(114),
             height: calc.getRegHeightDp(40),
             borderRadius: 2,
             borderStyle: "solid",
             borderWidth: 1,
             borderColor: "#e9e9e9",
-
         },
         note_picker: {
             flex: 1,
@@ -210,6 +218,10 @@ export default styles = function (screenWidth, screenHeight, calc) {
             fontStyle: "normal",
             letterSpacing: -0.2,
             color: "#393939",
+        },
+        dropdown_text: {
+            fontFamily: "noto-sans",
+            fontSize: 16,
         },
         note_datepicker: {
             position: 'relative',

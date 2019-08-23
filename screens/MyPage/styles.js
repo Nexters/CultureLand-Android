@@ -10,75 +10,86 @@ export default styles = function (screenWidth, screenHeight, calc) {
 
 
             container: {
-                width: "100%",
-                height: 720,
+                width: '100%',
+                height: '100%',
+                flex: 1,
             },
 
             top_wrapper: {
                 flexDirection: "column",
                 width: "100%",
-                height: 167,
-                paddingTop: calc.getRegHeightDp(55.4),
-                paddingLeft: 40,
-                paddingRight: calc.getRegWidthDp(28),
-                backgroundColor: "#fff"
+                paddingTop: 40,
+                paddingHorizontal: 40,
+                paddingBottom: 20,
+                backgroundColor: "#fff",
+                elevation: 3,
+            },
+
+            top_user_wrapper: {
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'flex-end',
 
             },
 
+            top_user_left: {
+                flexDirection: 'row',
+                flexWrap: 'wrap',
+                flex: 1,
+                justifyContent: 'flex-start',
+                alignItems: 'flex-end',
+            },
+            
             user_name_text: {
-                fontFamily: 'noto-sans-bold',
+                width: "90%",
+                fontFamily: "noto-sans-bold",
                 width: "100%",
-                height: 33,
                 fontSize: 24,
                 fontWeight: "bold",
                 fontStyle: "normal",
                 letterSpacing: 0.01,
-                color:
-                    "#4c4c4c"
-            },
-
-            user_wrapper: {
-                flexDirection: "row",
-                width: "100%",
-                height: calc.getRegHeightDp(20),
-                marginTop: 2.2,
+                color: "#4c4c4c",
+                lineHeight: 28,
             },
 
             user_email: {
                 fontFamily : 'noto-sans-thin',
                 fontSize: 14,
-                width: 215,
-                height: 20,
-                marginRight: 25 ,
                 marginTop : 2,
                 fontStyle: "normal",
                 fontWeight: "100",
-                lineHeight: 20,
+                lineHeight: 18,
                 letterSpacing: -0.2,
                 color: "#5e5e5e",
                 opacity: 0.7,
-
             },
-
+            top_total_wrapper: {
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                width: '100%',
+                marginTop: 17,
+            },
+            top_user_right: {
+            },
             user_logout: {
-                fontFamily : 'noto-sans-mid',
+                fontFamily: 'noto-sans-bold',
                 textAlign: 'right',
-                width: 45,
-                height: 18,
                 fontSize: 12,
                 opacity: 0.5,
-                fontWeight: "500",
+                // fontWeight: "500",
                 fontStyle: "normal",
                 letterSpacing: -0.3,
-                textDecorationLine: 'underline',
-                color: "#949494"
+                // textDecorationLine: 'underline',
+                color: "#949494",
+                lineHeight: 18,
+                borderBottomWidth: 1,
+                borderBottomColor: "#949494",
             },
-
             number_of_data_wrapper: {
+                flex: 1,
                 flexDirection: 'row',
-                width: "100%",
-                height: 28,
-                marginTop: 16.3,
+                // width: "100%",
+                // height: 28,
             },
 
             data_symbol: {
@@ -89,12 +100,11 @@ export default styles = function (screenWidth, screenHeight, calc) {
 
             number_of_data_title: {
                 fontFamily : 'noto-sans-light',
-                width: calc.getRegWidthDp(70),
                 height: calc.getRegHeightDp(20),
                 marginTop: calc.getRegHeightDp(5),
                 marginRight: 2,
                 fontSize: 14,
-
+                lineHeight: 16,
             },
 
             number_of_data_content: {
@@ -104,6 +114,7 @@ export default styles = function (screenWidth, screenHeight, calc) {
                 marginTop: calc.getRegHeightDp(3),
                 fontSize: 15,
                 fontWeight: "500",
+                lineHeight: 18,
             },
 
             bottom_wrapper: {
@@ -156,7 +167,7 @@ export default styles = function (screenWidth, screenHeight, calc) {
                 shadowColor: "black",
                 shadowOpacity: 0.07,
                 shadowOffset: {width: -2, height: 2},
-
+                elevation: 3,
             },
 
 
@@ -183,26 +194,31 @@ export default styles = function (screenWidth, screenHeight, calc) {
             },
 
             category_item_title: {
+                fontFamily: "noto-sans-bold",
                 fontSize: 14,
                 fontWeight: "700",
                 letterSpacing: 0.01,
                 color: "#292929",
                 position: 'absolute',
                 bottom: 0,
+                lineHeight: 16,
             },
 
             category_item_number: {
+                fontFamily: 'noto-sans-light',
                 fontSize: 14,
                 height: calc.getRegHeightDp(20),
                 marginTop: calc.getRegHeightDp(31),
                 letterSpacing: 0.01,
-                color: "#292929"
+                color: "#292929",
+                lineHeight: 16,
             },
 
             category_item_arrow_button: {
                 width: calc.getRegWidthDp(15),
                 height: calc.getRegHeightDp(18),
-                marginTop: calc.getRegHeightDp(31),
+                marginTop: calc.getRegHeightDp(33),
+                marginLeft: 5,
             }
 
 

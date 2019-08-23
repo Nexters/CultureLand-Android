@@ -13,19 +13,16 @@ export default styles = function (screenWidth, screenHeight, calc) {
             width: "100%",
             height: "100%",
             backgroundColor: "#f6f6f6",
-            paddingTop: 21,
-
         },
         active_container: {
             width: "100%",
             height: "100%",
             backgroundColor: "#f6f6f6",
             paddingTop: 46,
-
-
         },
         category_tabBar_text_style : {
             fontFamily: "noto-sans",
+            // fontWeight: '400'
         },
         category_tabStyle : {
             marginRight : -15,
@@ -58,17 +55,15 @@ export default styles = function (screenWidth, screenHeight, calc) {
 
         suggestion_text: {
             fontFamily : 'noto-sans',
-            width: 191,
-            height: 41,
             paddingTop: 5,
-            marginTop: 76,
+            marginTop: 52,
             marginLeft : 85,
             marginRight : 84,
             color : "#5c5c5c",
             fontSize: 18,
             fontWeight: "300",
             fontStyle: "normal",
-            lineHeight: 18,
+            lineHeight: 22,
             letterSpacing: -0.37,
             textAlign: "center",
         },
@@ -159,18 +154,24 @@ export default styles = function (screenWidth, screenHeight, calc) {
             height: calc.getRegHeightDp(136),
             marginRight : calc.getRegWidthDp(12),
             borderRadius : 10,
-            backgroundColor : "#000"
         },
-
+        thumbnail : {
+            flex: 1,
+            // width : "100%",
+            // height: "100%",
+            // resizeMode : 'contain',
+            borderRadius : 10,
+            backgroundColor : "#fff"
+        },
         item_information_labels_wrapper : {
             width: calc.getRegWidthDp(360-27-30),
             height: calc.getRegHeightDp(21),
             display : 'flex',
             flexDirection : 'row',
+            alignItems: 'flex-end',
             marginTop : calc.getRegHeightDp(35.7),
             marginLeft: calc.getRegWidthDp(27),
             marginRight: calc.getRegWidthDp(30),
-
         },
 
         number_of_items : {
@@ -178,7 +179,7 @@ export default styles = function (screenWidth, screenHeight, calc) {
             width: calc.getRegWidthDp(74),
             height: calc.getRegHeightDp(21),
             fontSize: 16,
-
+            lineHeight: 21,
         },
 
         type_of_sorting : {
@@ -186,6 +187,18 @@ export default styles = function (screenWidth, screenHeight, calc) {
             height: calc.getRegHeightDp(21),
             marginLeft : 'auto'
 
+        },
+        activityIndicator_container : {
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginTop: 70
+        },
+        activityIndicator : {
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: 80
         }
 
 

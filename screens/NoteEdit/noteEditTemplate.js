@@ -1,5 +1,5 @@
 import * as WebBrowser from 'expo-web-browser';
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import styleFn from "./styles"
 import {
     View,
@@ -9,12 +9,15 @@ import {
     TextInput,
     ScrollView,
     TouchableOpacity,
+    TouchableWithoutFeedback,
     KeyboardAvoidingView,
+    Alert,
 
 } from 'react-native';
 import DatePicker from 'react-native-datepicker'
 import {Dropdown} from 'react-native-material-dropdown';
-import { ImagePicker, Permissions } from 'expo';
+import * as ImagePicker from 'expo-image-picker'
+import * as Permissions from 'expo-permissions'
 import moment from "moment";
 import PropTypes from 'prop-types';
 
@@ -24,31 +27,83 @@ import CalendarImage from "../../assets/images/icon/cal.svg"
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
 import {Ionicons} from '@expo/vector-icons'
-import {numberWithCommas, RatioCalculator, CATEGORY, CATEGORY_KOR} from "../../util";
+
+import {numberWithCommas, RatioCalculator, CATEGORY, CATEGORY_KOR, ISNULL, KOR_CATEGORY_TO_ENG} from "../../util";
+import NavigatorService from "../../util/NavigatorService";
 
 const calc = new RatioCalculator(screenWidth, screenHeight);
 const styles = styleFn(screenWidth, screenHeight, calc);
 
 export default class NoteEditScreen extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
         this.state = {
-            title: this.props.note.title,
-            category: this.props.note.category,
-            sometime: this.props.note.sometime,
-            place: this.props.note.place,
-            withWho: this.props.note.withWho,
-            content: this.props.note.content,
-            image: this.props.note.image,
+            title: this.props.title,
+            category: this.props.category,
+            sometime: this.props.sometime,
+            place: this.props.place,
+            withWho: this.props.withWho,
+            content: this.props.content,
+            image: this.props.image,
+            cultureName: this.props.cultureName,
             isRequired: false,
+            hasCameraPermission: '',
+            formData: '',
+        };
+
+
+        try {
+
+            let id = this.props.navigation.getParam("id");
+            if (id === -1) {
+                this.state = {
+                    ...this.state,
+                    title: '',
+                    category: '',
+                    sometime: '',
+                    place: '',
+                    withWho: '',
+                    content: '',
+                    cultureName: '',
+                }
+            } else {
+                console.log("여기선 : " + JSON.stringify(this.props.navigation.getParam("state")));
+                let newState = this.props.navigation.getParam("state");
+                this.state = {
+                    category : KOR_CATEGORY_TO_ENG(newState.cultureName),
+                    ...newState
+                }
+            }
+        }catch(e){
+            console.log("익 : "+e);
+
         }
-    }
-    async componentDidMount(){
-        const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+
     }
 
-    onSelectedChange(value, index){
-        this.setState({category: value});
+
+    async componentDidMount() {
+        const {status} = await Permissions.askAsync(Permissions.CAMERA);
+        this.setState({hasCameraPermission: status === 'granted'});
+    }
+
+    onSelectedChange(value, index) {
+        this.setState({cultureName: KOR_CATEGORY_TO_ENG(value)});
+        this.onCheckRequired();
+    }
+
+    onTextChange(sometime){
+        this.setState({sometime: sometime});
+        this.onCheckRequired();
+    }
+
+    onCheckRequired(){
+        let { title, cultureName, sometime, place, image } = this.state;
+        !ISNULL(title) && !ISNULL(cultureName) && !ISNULL(sometime) && !ISNULL(place) && !ISNULL(image) ? 
+            this.setState({isRequired: true})
+        :
+            this.setState({isRequired: false});
+            
     }
 
     _showWarningAlert = () => {
@@ -56,43 +111,90 @@ export default class NoteEditScreen extends Component {
             '이 화면을 벗어나면\n작성하던 내용이 사라집니다.',
             '계속하시겠습니까?',
             [
-                {text: '취소', onPress: () => console.log('잘생각했어여'), style: 'cancel'},
-                {text: '확인', onPress: () => console.log('왜죠..!!!')},
+                {text: '취소', style: 'cancel'},
+                {text: '확인', onPress: () => NavigatorService.pop()},
+            ],
+            {cancelable: true}
+        )
+    }
+
+    _showRequiredAlert = () => {
+        Alert.alert(
+            '필수항목을 작성해주세요.',
+            '필수항목 : 사진/제목/유형/언제/어디서',
+            [
+                {text: '확인', style: 'cancel'},
             ],
             { cancelable: true }
         )
     }
-    
     _showConfirmAlert = () => {
-        Alert.alert(
-            '컬러가 저장되었습니다!','',
-            [
-                {text: '확인', onPress: () => console.log('성공')},
-            ],
-            { cancelable: false }
-        )
-    }
+
+        console.log("저장!");
+
+        this.props.createNoteItem(this.state.title, this.state.sometime,
+            this.state.place, this.state.withWho,
+            this.state.content, this.state.cultureName, this.state.formData);
+
+        let start = Date.now();
+        while (1) {
+
+            if (Date.now() - start > 1000) {
+                Alert.alert(
+                    '서버에 장애가 발생했습니다 잠시 후, 다시 시도해주세요!', '',
+                    [
+                        {text: '확인', onPress: () => NavigatorService.pop()},
+                    ],
+                    {cancelable: false}
+                );
+                return;
+            }
+            if (!this.props.loading) {
+
+                Alert.alert(
+                    '컬러가 저장되었습니다!', '',
+                    [
+                        {text: '확인', onPress: () => NavigatorService.pop()},
+                    ],
+                    {cancelable: false}
+                );
+
+                return;
+            }
+        }
+    };
 
     render() {
-        let { image } = this.state;
-        
+
+        let {image} = this.state;
+
         return (
             <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
                 <View style={styles.header}>
-                    <TouchableOpacity 
+                    <TouchableOpacity
                         onPress={this._showWarningAlert}
-                        activeOpacity={0.7} 
+                        activeOpacity={0.7}
                         style={styles.header_left}
                     >
                         <Ionicons name="ios-arrow-back" size={24} color="#292929" style={styles.header_button}/>
                     </TouchableOpacity>
-                    <TouchableOpacity
-                        onPress={this._showConfirmAlert}
-                        activeOpacity={0.7} 
-                        style={styles.header_right}
-                    >
-                        <Text style={styles.header_right_text}>저장</Text>
-                    </TouchableOpacity>
+                    {
+                        this.state.isRequired ?
+                        (<TouchableOpacity
+                            onPress={this._showConfirmAlert}
+                            activeOpacity={0.7} 
+                            style={styles.header_right}
+                        >
+                            <Text style={styles.header_right_text}>저장</Text>
+                        </TouchableOpacity>)
+                        :
+                        (<TouchableWithoutFeedback
+                            onPress={this._showRequiredAlert}
+                            style={styles.header_right}
+                        >
+                            <Text style={styles.header_right_text_diasble}>저장</Text>
+                        </TouchableWithoutFeedback>)
+                    }
                 </View>
                 <ScrollView>
                     <View style={styles.note_top_wrapper}>
@@ -102,11 +204,13 @@ export default class NoteEditScreen extends Component {
                             style={styles.image_wrapper}
                         >
                             {
-                                <Image source={{ uri: image }} style={styles.image}/>
+                                ISNULL(image) ?
+                                    (<View style={styles.image_icon_wrapper}>
+                                        <AddPhotoImage width={92} height={92} style={styles.image_icon}/>
+                                    </View>)
+                                    :
+                                    (<Image source={{uri: image}} style={styles.image}/>)
                             }
-                            <View style={styles.image_icon_wrapper}>
-                                <AddPhotoImage width={92} height={92} style={styles.image_icon}/>
-                            </View>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.note_bottom_wrapper}>
@@ -114,19 +218,22 @@ export default class NoteEditScreen extends Component {
                             <Text style={styles.note_required_icon}>*</Text>
                             <TextInput
                                 style={styles.note_titleinput}
+                                placeholderStyle={styles.note_titleinput_placeholder}
                                 onChangeText={(title) => this.setState({title})}
                                 value={this.state.title}
-                                // placeholder={"제목을 입력해주세요"}
+                                placeholder={"제목을 써주세요"}
+                                onChange={() => this.onCheckRequired()}
                             />
                         </View>
                         <View style={styles.note_line}></View>
                         <Text style={styles.note_required}>*필수항목</Text>
                         <View style={styles.note_info_wrapper}>
                             <View style={styles.note_info_item}>
-                                <Text style={styles.note_sub_title}>유형</Text><Text style={styles.note_required_icon}>*</Text>
+                                <Text style={styles.note_sub_title}>유형<Text
+                                    style={styles.note_required_icon}>*</Text></Text>
                                 <View style={styles.note_picker_wrapper}>
                                     <Dropdown
-                                        value={CATEGORY_KOR(this.props.note.category)}
+                                        value={CATEGORY_KOR(this.state.category)}
                                         data={[
                                             {
                                                 value: "유형"
@@ -147,33 +254,44 @@ export default class NoteEditScreen extends Component {
                                                 value: "기타"
                                             },
                                         ]}
-                                        dropdownOffset={{top: 7}}
+                                        dropdownOffset={{top: 13, left: 14}}
                                         dropdownPosition={0}
                                         inputContainerStyle={{
                                             borderBottomColor: 'transparent',
                                         }}
                                         containerStyle={{
+                                            justifyContent: 'center',
                                             width: calc.getRegWidthDp(114),
                                             height: calc.getRegHeightDp(40),
                                             paddingHorizontal: calc.getRegWidthDp(9),
-                                            marginLeft: 'auto',
+                                            // marginTop : -calc.getRegHeightDp(15),
                                         }}
                                         pickerStyle={{
-                                            // width: calc.getRegWidthDp(114),
-                                            marginTop : calc.getRegHeightDp(42),
-
+                                            width: calc.getRegWidthDp(114),
+                                            marginTop: calc.getRegHeightDp(50),
+                                        }}
+                                        itemTextStyle={{
+                                            fontFamily: "noto-sans",
+                                            fontSize: 16,
+                                            lineHeight: 19,
+                                        }}
+                                        style={{
+                                            fontFamily: "noto-sans",
+                                            fontSize: 16,
+                                            lineHeight: 19,
                                         }}
                                         onChangeText={(value, index) => this.onSelectedChange(value, index)}
                                     />
                                 </View>
                             </View>
                             <View style={styles.note_info_item}>
-                                <Text style={styles.note_sub_title}>언제</Text><Text style={styles.note_required_icon}>*</Text>
+                                <Text style={styles.note_sub_title}>언제<Text
+                                    style={styles.note_required_icon}>*</Text></Text>
                                 <DatePicker
                                     style={styles.note_datepicker}
                                     date={this.state.sometime}
                                     mode="date"
-                                    placeholder="select date"
+                                    placeholder="0000-00-00"
                                     format="YYYY-MM-DD"
                                     // minDate="2016-05-01"
                                     // maxDate="2020-06-01"
@@ -184,26 +302,32 @@ export default class NoteEditScreen extends Component {
                                     }
                                     customStyles={{
                                         dateInput: {
+                                            fontFamily: "noto-sans",
+                                            fontSize: 16,
                                             position: 'absolute',
                                             left: 0,
                                             textAlign: 'left',
                                             borderColor: "transparent",
-                                        }
+                                        },
+                                        fontFamily: "noto-sans",
+                                        fontSize: 16,
                                     }}
-                                    onDateChange={(sometime) => {this.setState({sometime: sometime})}}
+                                    
+                                    onDateChange={(sometime) => this.onTextChange(sometime)}
                                 />
                             </View>
                             <View style={styles.note_info_item}>
-                                <Text style={styles.note_sub_title}>어디서</Text><Text style={styles.note_required_icon}>*</Text>
-                                <TextInput 
+                                <Text style={styles.note_sub_title}>어디서<Text style={styles.note_required_icon}>*</Text></Text>
+                                <TextInput
                                     style={styles.note_textinput}
                                     onChangeText={(place) => this.setState({place})}
                                     value={this.state.place}
+                                    onChange={() => this.onCheckRequired()}
                                 />
                             </View>
                             <View style={styles.note_info_item}>
                                 <Text style={styles.note_sub_title}>누구와</Text>
-                                <TextInput 
+                                <TextInput
                                     style={styles.note_textinput}
                                     onChangeText={(withWho) => this.setState({withWho})}
                                     value={this.state.withWho}
@@ -213,7 +337,7 @@ export default class NoteEditScreen extends Component {
                         <View style={styles.note_textarea_wrapper}>
                             <Text style={styles.note_sub_title}>느낀것</Text>
                             <TextInput
-                                multiline={true} 
+                                multiline={true}
                                 onChangeText={(content) => this.setState({content})}
                                 value={this.state.content}
                                 // numberOfLines={11}
@@ -228,7 +352,7 @@ export default class NoteEditScreen extends Component {
 
     getPermissionAsync = async () => {
         if (Constants.platform.ios) {
-            const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+            const {status} = await Permissions.askAsync(Permissions.CAMERA_ROLL);
             if (status !== 'granted') {
                 alert('Sorry, we need camera roll permissions to make this work!');
             }
@@ -237,13 +361,33 @@ export default class NoteEditScreen extends Component {
 
     _pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
-        allowsEditing: true,
-        aspect: [4, 3],
+            allowsEditing: true,
+            aspect: [4, 3],
         });
 
+        let localUri = result.uri;
+        let fileName = localUri.split('/').pop();
+        let match = /\.(\w+)$/.exec(fileName);
+        let type = match ? `image/${match[1]}` : `image`;
+        let formData = new FormData();
+        const cleanURL = localUri.replace("file://", "");
+
+
+        let img = {
+            uri: localUri,
+            type: type,
+            name: fileName,
+        };
+        formData.append("image", img);
+        formData.append('fileName', fileName);
         if (!result.cancelled) {
-            this.setState({ image: result.uri });
+            this.setState({
+                image: localUri,
+                formData: formData
+
+            });
         }
+        this.onCheckRequired();
     };
 };
 
@@ -251,6 +395,7 @@ NoteEditScreen.navigationOptions = {
     header: null,
 };
 
-NoteEditScreen.PropTypes ={
+NoteEditScreen.PropTypes = {
     note: PropTypes.string,
 };
+

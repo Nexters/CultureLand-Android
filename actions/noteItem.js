@@ -26,8 +26,17 @@ export const getNoteItem = {
 
 // CREATE
 export const createNoteItem = {
-    request : () => ({
+    request : (title,sometime,place,withWho,content,cultureName,image) => ({
         type : CREATE_NOTE_ACTION.REQUEST,
+        payload : {
+            title,
+            sometime,
+            place,
+            withWho,
+            content,
+            cultureName,
+            image,
+        }
     }),
 
     success : () => ({
@@ -73,61 +82,4 @@ export const removeNoteItem = {
     failure : () => ({
         type : REMOVE_NOTE_ACTION.FAILURE,
     })
-};
-
-// ISLIKED
-export const isLiked = {
-    request : (id) => ({
-        type : IS_LIKED_ACTION.REQUEST,
-        payload : {
-            id,
-        }
-    }),
-
-    success : () => ({
-        type : IS_LIKED_ACTION.SUCCESS,
-    }),
-
-    failure : () => ({
-        type : IS_LIKED_ACTION.FAILURE,
-    })
-};
-
-// SETLIKED
-export const setLiked = {
-
-    request : (id) => ({
-        type : SET_LIKED_ACTION.REQUEST,
-        payload : {
-            id,
-        }
-    }),
-
-    success : () => ({
-        type : SET_LIKED_ACTION.SUCCESS,
-    }),
-
-    failure : () => ({
-        type : SET_LIKED_ACTION.FAILURE,
-    })
-};
-
-// CANCELLIKED
-export const cancelLiked = {
-
-    request : (id) => ({
-        type : CANCEL_LIKED_ACTION.REQUEST,
-        payload : {
-            id,
-        }
-    }),
-
-    success : () => ({
-        type : CANCEL_LIKED_ACTION.SUCCESS,
-    }),
-
-    failure : () => ({
-        type : CANCEL_LIKED_ACTION.FAILURE,
-    })
-
 };

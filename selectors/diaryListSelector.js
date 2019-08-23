@@ -1,6 +1,13 @@
+import {diaryListRootAction} from "../reducers/diaryListReducer";
 
 export function baseSelector(state){
-    return state.diaryListReducer.getDiaryListAction;
+    return state.diaryListReducer.diaryListRootAction;
+}
+export function getTitle(state){
+    return baseSelector(state).listTitle;
+}
+export function getListType(state){
+    return baseSelector(state).listType;
 }
 export function getCultureList(state){
     return baseSelector(state).culture_list;

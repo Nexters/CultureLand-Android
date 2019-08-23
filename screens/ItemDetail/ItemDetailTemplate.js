@@ -7,13 +7,16 @@ import {
     Dimensions,
     TouchableWithoutFeedback,
     Image,
-    ImageBackground
+    ImageBackground,
 } from 'react-native';
 import {RatioCalculator} from "../../util";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import PropTypes from 'prop-types';
 import Toast, {DURATION} from 'react-native-easy-toast';
+
+import NavigatorService from "../../util/NavigatorService";
+
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
@@ -46,24 +49,32 @@ export default class ItemDetailScreen extends Component {
 
         this.state = {
             isWished: false,
-            error : this.props.error,
+            error: this.props.error,
         };
 
-        this.props.getItemInfo(1);
+
+
     }
 
-    componentDidMount(){
+    componentDidMount() {
+
     }
 
     wishButtonClickListener() {
 
 
+        const {
+            imageUrl, title, category,
+            startDate, endDate, place,
+            isWished, error, id
+        } = this.props;
+
         if (this.props.isWished) {
             console.log("Cancel wish triggered");
-            return this.props.cancelWishedRequest(this.props.id);
+            return this.props.cancelWishedRequest(id);
         } else {
             console.log("set wish triggered");
-            return this.props.setWishedRequest(this.props.id);
+            return this.props.setWishedRequest(id);
         }
     }
 
@@ -84,9 +95,10 @@ export default class ItemDetailScreen extends Component {
     }
 
     errorRenderer() {
-        if(this.props.error){
+        if (this.props.error) {
             this.refs.toast.show(this.props.error, 1000, () => {
                 // something you want to do at close
+                this.props.error = null;
             });
         }
     }
@@ -97,23 +109,24 @@ export default class ItemDetailScreen extends Component {
 
             <ImageBackground
                 style={styles.container}
-                source={{uri : this.props.imageUrl}}
+                source={{uri: this.props.imageUrl}}
                 opacity={0.3}
-                blurRadius={2}
-
-
-            >
+                blurRadius={2}>
                 <Toast ref="toast"/>
                 {this.errorRenderer()}
                 <View style={styles.back_button}>
-                    <AntDesign
-                        name="left" size={25} color="#f4f4f4"/>
+                    <TouchableWithoutFeedback
+                        onPress={() => NavigatorService.pop()}
+                    >
+                        <AntDesign
+                            name="left" size={25} color="#f4f4f4"/>
+                    </TouchableWithoutFeedback>
                 </View>
+                
                 <Image style={styles.center_image}
-                    source={{uri : this.props.imageUrl}}
-                >
+                       source={{uri: this.props.imageUrl}}
+                />
 
-                </Image>
                 <View style={styles.bottom_info_wrapper}>
 
                     <View style={styles.title_row}>
@@ -137,7 +150,7 @@ export default class ItemDetailScreen extends Component {
                             기간
                         </Text>
                         <Text style={styles.row_content}>
-                            {this.props.period}
+                            {`${this.props.startDate} ~ ${this.props.endDate}`}
                         </Text>
                     </View>
                     <View style={styles.info_row}>
@@ -154,7 +167,6 @@ export default class ItemDetailScreen extends Component {
             </ImageBackground>
         )
     }
-
 };
 
 

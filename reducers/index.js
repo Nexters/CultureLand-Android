@@ -13,6 +13,7 @@ import mainReducer from "./mainReducer";
 
 export default combineReducers({
     diaryListReducer : diaryListReducer,
+    diaryListItemReducer : diaryListReducer,
     itemDetailReducer : itemDetailReducer,
     myPageReducer : myPageReducer,
     noteItemReducer : noteItemReducer,

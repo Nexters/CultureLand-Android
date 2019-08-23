@@ -6,12 +6,14 @@ import {
     Text,
     Dimensions,
     Image,
-    FlatList
+    FlatList,
+    TouchableOpacity,
 
 } from 'react-native';
 
 import PropTypes from 'prop-types';
-import {CATEGORY, RatioCalculator} from "../../util";
+import {CATEGORY, RatioCalculator, ISNULL} from "../../util";
+import NavigatorService from "../../util/NavigatorService";
 import CategoryType from "../../domain/CategoryType";
 import Entypo from '@expo/vector-icons/Entypo'
 import ConcertImage from './asset/concert.svg';
@@ -21,6 +23,8 @@ import LikeImage from './asset/like.svg';
 import MusicalImage from './asset/musical.svg';
 import PlayImage from './asset/play.svg';
 import TicketImage from './asset/ticket.svg';
+import {LIST_TYPE} from "../../util/index";
+
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
@@ -43,13 +47,21 @@ export default class MyPageScreen extends Component {
         return (
             <View style={styles.category_item_arrow_button}>
                 <Entypo
-                    name="chevron-thin-right" size={calc.getRegHeightDp(16)} color="#292929"/>
+                    name="chevron-thin-right" size={calc.getRegHeightDp(12)} color="#c4c4c4"/>
             </View>
         )
     }
 
     componentDidMount(){
+        this.props.navigation.addListener("didFocus",()=>{
+            this.props.getMyPageCount();
+        });
 
+    }
+
+    navigateToCategoryList(category){
+        this.props.getDiaryList(LIST_TYPE.FOR_CATEGORY,category);
+        NavigatorService.navigate('DiaryList');
     }
 
     generateCategories() {
@@ -63,42 +75,46 @@ export default class MyPageScreen extends Component {
                 <View style={styles.item_pair_wrapper}>
                     <View style={styles.category_left_wrapper}>
                         <View style={styles.category_item_wrapper}>
-                            <View style={styles.category_item_icon}>
-                                {this.categories[i*2].getSVGImage()}
-                            </View>
-                            <View style={styles.category_item_content_wrapper}>
-                                <View style={styles.category_item_title_wrapper}>
-                                    <Text style={{
-                                        ...styles.category_item_title,
-                                        color: this.categories[i * 2].getTextColor()
-                                    }}>
-                                        {this.categories[i * 2].getName()}
-                                    </Text>
+                            <TouchableOpacity onPress={() => this.navigateToCategoryList(this.categories[i*2].getCategory())}>
+                                <View style={styles.category_item_icon}>
+                                    {this.categories[i*2].getSVGImage()}
                                 </View>
-                                <Text style={styles.category_item_number}>
-                                    {this.categories[i * 2].getNumberOfItem()}
-                                </Text>
-                                {this.returnArrowButton()}
-                            </View>
+                                <View style={styles.category_item_content_wrapper}>
+                                    <View style={styles.category_item_title_wrapper}>
+                                        <Text style={{
+                                            ...styles.category_item_title,
+                                            color: this.categories[i * 2].getTextColor()
+                                        }}>
+                                            {this.categories[i * 2].getName()}
+                                        </Text>
+                                    </View>
+                                    <Text style={styles.category_item_number}>
+                                        {this.categories[i * 2].getNumberOfItem()}
+                                    </Text>
+                                    {this.returnArrowButton()}
+                                </View>
+                            </TouchableOpacity>
                         </View>
                     </View>
                     {this.categories.length > (i * 2 + 1) ?
                         <View style={styles.category_right_wrapper}>
                             <View style={styles.category_item_wrapper}>
-                                <View style={styles.category_item_icon}>
-                                    {this.categories[i*2+1].getSVGImage()}
-                                </View>
-                                <View style={styles.category_item_content_wrapper}>
-                                    <View style={styles.category_item_title_wrapper}>
-                                        <Text style={styles.category_item_title}>
-                                            {this.categories[i * 2 + 1].getName()}
-                                        </Text>
+                                <TouchableOpacity onPress={() => this.navigateToCategoryList(this.categories[i*2+1].getCategory())}>
+                                    <View style={styles.category_item_icon}>
+                                        {this.categories[i*2+1].getSVGImage()}
                                     </View>
-                                    <Text style={styles.category_item_number}>
-                                        {this.categories[i * 2 + 1].getNumberOfItem()}
-                                    </Text>
-                                    {this.returnArrowButton()}
-                                </View>
+                                    <View style={styles.category_item_content_wrapper}>
+                                        <View style={styles.category_item_title_wrapper}>
+                                            <Text style={styles.category_item_title}>
+                                                {this.categories[i * 2 + 1].getName()}
+                                            </Text>
+                                        </View>
+                                        <Text style={styles.category_item_number}>
+                                            {this.categories[i * 2 + 1].getNumberOfItem()}
+                                        </Text>
+                                        {this.returnArrowButton()}
+                                    </View>
+                                </TouchableOpacity>
                             </View>
                         </View>
                         : <View/>
@@ -116,59 +132,67 @@ export default class MyPageScreen extends Component {
             totalCount  ,
             error ,
         } = this.props;
-
+        console.log(ISNULL(userEmail));
         this.props.getMyPageAccount();
-        this.props.getMyPageCount();
 
         this.categories = [
-            new CategoryType("좋아하는\n기록", this.props.likedCount,"#e44343",<LikeImage width={38} height={38}/>),
-            new CategoryType("전시", this.props.exhibitionCount,"",<ExhibitionImage width={38} height={38}/>),
-            new CategoryType("콘서트", this.props.concertCount,"",<ConcertImage width={38} height={38}/>),
-            new CategoryType("뮤지컬", this.props.musicalCount,"",<MusicalImage width={38} height={38}/>),
-            new CategoryType("연극", this.props.playCount,"",<PlayImage width={38} height={38}/>),
-            new CategoryType("기타", this.props.etcCount,"",<EtcImage width={38} height={38}/>)
+            new CategoryType("좋아하는\n기록", "like",this.props.likedCount,"#e44343",<LikeImage width={38} height={38}/>),
+            new CategoryType("전시", CATEGORY.EXHIBITION,this.props.exhibitionCount,"",<ExhibitionImage width={38} height={38}/>),
+            new CategoryType("콘서트",CATEGORY.CONCERT, this.props.concertCount,"",<ConcertImage width={38} height={38}/>),
+            new CategoryType("뮤지컬",CATEGORY.MUSICAL,this.props.musicalCount,"",<MusicalImage width={38} height={38}/>),
+            new CategoryType("연극", CATEGORY.PLAY,this.props.playCount,"",<PlayImage width={38} height={38}/>),
+            new CategoryType("기타",CATEGORY.ETC, this.props.etcCount,"",<EtcImage width={38} height={38}/>)
         ];
         this.contentJSX = new Array(6);
 
-        return (
-
-            <View>
-                <View style={styles.top_wrapper}>
-                    <Text style={styles.user_name_text}>
-                        {userId}
-                    </Text>
-                    <View style={styles.user_wrapper}>
-
-                        <Text style={styles.user_email}>
-                            {userEmail}
-                        </Text>
-                        <Text style={styles.user_logout}>
-                            로그아웃
-                        </Text>
-                        <View/>
-
-                    </View>
-                    <View style={styles.number_of_data_wrapper}>
-                        <View style={styles.data_symbol}>
-                            <TicketImage width={28} height={25}/>
+        if(this.props.loading) {
+            return (<Text> 대충 로딩중 </Text>)
+        }else
+            {
+                return (
+                    <View>
+                        <View style={styles.top_wrapper}>
+                            <View style={styles.top_user_wrapper}>
+                                <View style={styles.top_user_left}>
+                                    <Text style={styles.user_name_text}>
+                                        {userId}
+                                    </Text>
+                                    <Text style={styles.user_email}>
+                                        {userEmail}
+                                    </Text>
+                                </View>
+                            </View>
+                            <View style={styles.top_total_wrapper}>
+                                <View style={styles.number_of_data_wrapper}>
+                                    <View style={styles.data_symbol}>
+                                        <TicketImage width={28} height={25}/>
+                                    </View>
+                                    <Text style={styles.number_of_data_title}>
+                                        총 기록 개수
+                                    </Text>
+                                    <Text style={styles.number_of_data_content}>
+                                        {totalCount}
+                                    </Text>
+                                </View>
+                                <View style={styles.top_user_right}>
+                                    <TouchableOpacity 
+                                        style={styles.user_logout} 
+                                        onPress={() => NavigatorService.navigate('Auth')}
+                                    >
+                                        <Text>로그아웃</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
                         </View>
-                        <Text style={styles.number_of_data_title}>
-                            총 기록 개수
-                        </Text>
-                        <Text style={styles.number_of_data_content}>
-                            {totalCount}
-                        </Text>
-
-                    </View>
-                </View>
 
 
-                <View style={styles.bottom_wrapper}>
-                    {this.generateCategories()}
-                </View>
-            </View>
-        )
-    }
+                        <View style={styles.bottom_wrapper}>
+                            {this.generateCategories()}
+                        </View>
+                    </View>)
+            }
+
+        }
 }
 
 MyPageScreen.propTypes = {

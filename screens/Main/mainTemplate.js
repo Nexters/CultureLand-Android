@@ -15,7 +15,7 @@ import {
 
 import PropTypes from 'prop-types';
 import {Dropdown} from 'react-native-material-dropdown';
-import {RatioCalculator} from "../../util";
+import {CATEGORY_KOR, LIST_TYPE, RatioCalculator} from "../../util";
 import NavigatorService from "../../util/NavigatorService";
 import MainCarousel from "../../components/MainCarousel/index"
 import {FloatingButton} from "../../components/FloatingButton"
@@ -42,12 +42,23 @@ export default class MainScreen extends Component {
 
         this.state = {
             isData : true,
+            selectedYear : 2019,
         }
     }
 
     componentDidMount(){
-        
+
+        this.props.navigation.addListener("willFocus",()=>{
+            this.props.getMainWishList();
+            this.props.getMainCount(this.state.selectedYear);
+        });
     }
+
+    onDropDownChangeHandler(year){
+        this.setState({selectedYear : year});
+        this.props.getMainCount(this.state.selectedYear);
+    }
+
 
     render () {
         const currentDate= moment(new Date()).format("YYYY-MM-DD")
@@ -71,6 +82,7 @@ export default class MainScreen extends Component {
                                     value: "2016"
                                 },
                             ]}
+                            onChangeText={value=>this.onDropDownChangeHandler(value)}
                             fontSize={24}
                             dropdownPosition={0}
                             inputContainerStyle={{
@@ -80,26 +92,37 @@ export default class MainScreen extends Component {
                                 width: calc.getRegWidthDp(114),
                                 height: calc.getRegHeightDp(70),
                             }}
-                            overlayStyle={{
-    
-                            }}
                             pickerStyle={{
                                 marginTop : calc.getRegHeightDp(60),
-    
                             }}
-                            style={styles.main_picker}
+                            itemTextStyle={{
+                                fontFamily: "noto-sans",
+                                fontWeight: '400',
+                                fontSize: 24,
+                                lineHeight: 28,
+                            }}
+                            style={{
+                                fontFamily: "noto-sans",
+                                fontWeight: '700',
+                                fontSize: 24,
+                                lineHeight: 28,
+                            }}
                         />
-                        <Text style={styles.main_top_description}>
-                        Today is 
+                        <View style={styles.main_top_description}>
+                            <Text style={styles.main_top_text}>Today is </Text>
                             <Text style={styles.main_top_date}> {currentDate} </Text>
-                        </Text>
+                        </View>
                     </View>
                     {this.state.isData ?
                         (<View style={styles.main_wrapper}>
                             <View style={styles.carousel_wrapper}>
                                 <View style = {styles.main_title_line} />
                                 <Text style={styles.main_title}>월별 기록</Text>
-                                <MainCarousel style={styles.main_carousel_container}/>
+                                <MainCarousel
+                                    style={styles.main_carousel_container}
+                                    onMonthPressHandler={this.props.getDiaryList}
+
+                                />
                             </View>
                             <View style={styles.wishlist_wrapper}>
                                 <View style = {styles.main_title_line} />
@@ -129,4 +152,5 @@ MainScreen.PropTypes = {
 
 MainScreen.navigationOptions = {
     header: null,
+    headerMode: 'none',
 };

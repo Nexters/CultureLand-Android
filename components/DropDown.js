@@ -37,15 +37,20 @@ export default class DropDown extends Component {
 
                 }}
                 pickerStyle={{
-                    marginTop : calc.getRegHeightDp(42),
+                    marginTop : 42,
 
                 }}
-
-
                 itemTextStyle={{
-
-                }
-                }
+                    fontFamily: "noto-sans",
+                    fontSize: 16,
+                    lineHeight: 19,
+                }}
+                style={{
+                    fontFamily: "noto-sans",
+                    fontSize: 16,
+                    lineHeight: 19,
+                }}
+                onChangeText={(value)=>this.props.onChangeSort(value)}
 
             />
         );

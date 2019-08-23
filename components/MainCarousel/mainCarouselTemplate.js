@@ -9,7 +9,9 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import Carousel from 'react-native-snap-carousel';
-import {RatioCalculator, MAIN_MONTH, ISNULL} from "../../util";
+import {RatioCalculator, MAIN_MONTH, ISNULL, LIST_TYPE} from "../../util";
+import NavigatorService from "../../util/NavigatorService";
+
 import CardImageFirst from "../../assets/images/illustration/Home_card01.svg";
 import CardImageSecond from "../../assets/images/illustration/Home_card02.svg";
 import CardImageThird from "../../assets/images/illustration/Home_card03.svg";
@@ -31,19 +33,30 @@ export default class MainCarousel extends Component {
         super(props);
     }
 
+    _monthListHandler(item){
+        this.props.getDiaryList(LIST_TYPE.FOR_DATE,
+            this.props.yearType.toString() +item.title
+        );
+        NavigatorService.push('DiaryList')
+    }
+
     _renderNoteItem ({item, index}) {
+
         return (
             <TouchableOpacity
-                activeOpacity={1}
+                activeOpacity={0.7}
                 style={styles.slide_inner_container}
-                onPress={()=> {alert(`You've clicked this!`)}}
+                onPress={()=>this._monthListHandler(item)}
             >
                 <View style={styles.slide}>
                     <View style={styles.image_container}>
-                        <Image style={styles.image}/>
+                        <Image
+                            source={{uri : item.imageUrl}} 
+                            style={styles.image}
+                        />
                     </View>
                     <View style={styles.text_container}>
-                        <Text style={styles.title}>{ item.title }</Text>
+                        <Text style={styles.title}>{ MAIN_MONTH(item.title) }</Text>
                         <View style={styles.count_container}>
                             <TicketImage style={styles.count_icon}/>
                             <Text style={styles.count}>{ item.count }</Text>
@@ -58,7 +71,6 @@ export default class MainCarousel extends Component {
             <TouchableOpacity
                 activeOpacity={1}
                 style={styles.slide_inner_container}
-                onPress={()=> {alert(`You've clicked this!`)}}
             >
                 <View style={styles.slide}>
                     <View style={styles.intro_container}>
@@ -71,15 +83,15 @@ export default class MainCarousel extends Component {
     }
     render () {
         const noteList = this.props.noteList;
-        const notePropsArray = []
+        const notePropsArray = [];
         noteList.map((note, index) => {
             notePropsArray.push({
                 monthType: note.monthType,
-                title: MAIN_MONTH(note.monthType),
+                title: note.monthTime,
                 count: note.count,
                 imageUrl: note.imageUrl,
             })
-        })
+        });
         
         const noteData = notePropsArray;
         const infoData = [
@@ -102,7 +114,7 @@ export default class MainCarousel extends Component {
                 <Carousel
                     ref={(c) => { this._carousel = c; }}
                     data={ ISNULL(noteList) ? infoData : noteData}
-                    renderItem={ ISNULL(noteList) ? this._renderInfoItem : this._renderNoteItem}
+                    renderItem={ ISNULL(noteList) ? this._renderInfoItem : this._renderNoteItem.bind(this)}
                     sliderWidth={sliderWidth}
                     itemWidth={itemWidth}
                     firstItem={0}
@@ -111,16 +123,17 @@ export default class MainCarousel extends Component {
                     layout={'default'}
                     inactiveSlideOpacity={1}
                     inactiveSlideScale={1}
+
                 />
             </View>
         );
     }
 }
 
-const horizontalMargin = calc.getRegWidthDp(9);
-const verticalMargin = calc.getRegWidthDp(9);
-const slideWidth = calc.getRegWidthDp(216);
-const slideHeight = calc.getRegHeightDp(250);
+const horizontalMargin = 9;
+const verticalMargin = 9;
+const slideWidth = 216;
+const slideHeight = 250;
 
 const sliderWidth = Dimensions.get('window').width;
 const itemWidth = slideWidth + horizontalMargin * 2;
@@ -129,10 +142,10 @@ const itemHeight = slideHeight + verticalMargin;
 const styles = StyleSheet.create({
     slide_container : {
         width: sliderWidth,
-        marginTop: calc.getRegHeightDp(12),
+        marginTop: 12,
     },
     slider_content_container : {
-        marginLeft: - (sliderWidth / 2) + (slideWidth / 2) + calc.getRegWidthDp(29),
+        marginLeft: - (sliderWidth / 2) + (slideWidth / 2) + 29,
     },
     slide_inner_container : {
         flex: 1,
@@ -144,57 +157,54 @@ const styles = StyleSheet.create({
     },  
     slide : {
         flex: 1,
-        borderRadius: 7,
+        justifyContent: 'space-between',
         padding: calc.getRegWidthDp(7),
+        borderRadius: 7,
         backgroundColor: 'white',
+        shadowColor: "#4ca0a0a0",
+        shadowOffset: {
+                width: 0,
+                height: 2,
+        },
+        shadowOpacity: 0.23,
+        shadowRadius: 2.62,
         elevation: 3,
     },
-    // shadow: {
-    //     position: 'absolute',
-    //     top: 0,
-    //     left: horizontalMargin,
-    //     right: horizontalMargin,
-    //     bottom: verticalMargin,
-    //     elevation: 6,
-    //     // opacity: .5,
-    //     shadowColor: '#787878',
-    //     shadowOpacity: 0.25,
-    //     shadowOffset: { width: 20, height: 20 },
-    //     shadowRadius: 10,
-    //     borderRadius: 8,
-    // },
     image_container : {
-        flex: 1,
-        height: calc.getRegHeightDp(150),
-        // padding: calc.getRegWidthDp(8),
+        overflow: 'hidden',
+        width: '100%',
+        height: 150,
         borderRadius: 7,
+        shadowColor: "#4ca0a0a0",
+        shadowOffset: {
+                width: 0,
+                height: 2,
+        },
+        shadowOpacity: 0.23,
+        shadowRadius: 2.62,
         elevation: 3,
     },
     image: {
         flex: 1,
         resizeMode: "cover",
-        borderRadius: 7,
         backgroundColor: "#ebebeb"
     },
     text_container : {
         flexDirection: "row",
         width: '100%',
         justifyContent: 'space-between',
-        alignItems: 'center',
-        marginTop: calc.getRegHeightDp(45),
+        alignItems: 'flex-end',
         paddingHorizontal: calc.getRegWidthDp(6),
     },
     title : {
-        fontFamily: "noto-sans",
+        fontFamily: 'noto-sans-light',
         fontSize: 22,
-        // fontWeight: "300",
-        fontStyle: "normal",
-        letterSpacing: -0.45,
+        lineHeight: 24,
         color: "#464646",
     },
     count_container : {
         flexDirection: "row",
-        alignItems: 'center',
+        alignItems: 'flex-end',
     },
     count : {
         fontFamily: "noto-sans",
@@ -203,12 +213,12 @@ const styles = StyleSheet.create({
         fontStyle: "normal",
         letterSpacing: -0.29,
         color: "#464646",
+        lineHeight: 24,
     },
     count_icon : {
-        width: calc.getRegWidthDp(22),
-        height: calc.getRegWidthDp(22),
-        marginRight: calc.getRegWidthDp(4),
-        // backgroundColor: "#ebebeb"
+        width: 34,
+        height: 34,
+        marginRight: 4,
     },
     intro_container : {
         flex: 1,
@@ -219,10 +229,10 @@ const styles = StyleSheet.create({
         marginTop: calc.getRegWidthDp(30),
         fontFamily: "noto-sans",
         fontSize: 12,
-        // fontWeight: "300",
         fontStyle: "normal",
         textAlign: "center",
-        color: "#424242"
+        color: "#424242",
+        lineHeight: 16,
     }
 })
 

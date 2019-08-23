@@ -9,6 +9,7 @@ import {
 } from "../../selectors/myPageSelector";
 
 import {getMyPageAccount,getMyPageCount} from '../../actions/myPage'
+import {getDiaryList} from "../../actions/diaryList";
 
 function mapStateToProps(state) {
 
@@ -26,6 +27,7 @@ function mapStateToProps(state) {
     }
 }
 const mapDispatchToProps = {
+    getDiaryList : getDiaryList.request,
     getMyPageAccount : getMyPageAccount.request,
     getMyPageCount : getMyPageCount.request,
 };

@@ -9,21 +9,22 @@ import {
     Button,
 } from 'react-native';
 import {RatioCalculator} from "../util";
+import NavigatorService from "../util/NavigatorService";
 
 import MenuImage from "../assets/images/icon/menu.svg";
 import LikeImage from "../assets/images/icon/like.svg";
 import LikeChkImage from "../assets/images/icon/like_checked.svg";
 import ExhibitionImage from "../assets/images/icon/type/exhibition.svg";
-import MusicalImage from "../assets/images/icon/type/musical.svg";
-import PlayImage from "../assets/images/icon/type/play.svg";
-import EtcImage from "../assets/images/icon/type/etc.svg";
-import ConcertImage from "../assets/images/icon/type/concert.svg";
 import Dashline from "../assets/images/icon/dashline.svg";
 import EditImage from "../assets/images/icon/edit.svg";
 import DeleteImage from "../assets/images/icon/delete.svg";
 
 import RBSheet from "react-native-raw-bottom-sheet";
-import CategoryType from '../domain/CategoryType';
+import {getError} from "../selectors/itemDetailSelector";
+import {connect} from 'react-redux';
+import {getDiaryList, setLiked} from "../actions/diaryList";
+import {getNoteItem, removeNoteItem} from "../actions/noteItem";
+import {getListType, getTitle} from "../selectors/diaryListSelector";
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
@@ -31,7 +32,26 @@ const screenHeight = Math.round(Dimensions.get('window').height);
 const calc = new RatioCalculator(screenWidth, screenHeight);
 
 
-export default class ListItem extends Component {
+function mapStateToProps(state) {
+    return {
+        error : getError(state),
+        listTitle  : getTitle(state),
+        listType : getListType(state),
+
+    }
+}
+
+const mapDispatchToProps = {
+        setLiked : setLiked.request,
+        getNoteItem : getNoteItem.request,
+        removeNoteItem : removeNoteItem.request,
+        getDiaryList : getDiaryList.request,
+
+};
+
+
+
+class ListItem extends Component {
     /**
      *
      *  처음 불러올 떄, 좋아요리스트에 있으면 하트 채워진 상태로 로딩!
@@ -46,30 +66,47 @@ export default class ListItem extends Component {
         // ]
 
         this.state = {
-            isLiked : true,
+            favorite : this.props.favorite
         }
     }
 
+    navigateToNoteDetail(){
+        this.props.getNoteItem(this.props.id);
+        NavigatorService.push('NoteDetail')
+    }
+    navigateToNoteEdit(){
+       // this.props.getNoteItem(this.props.id);
+        NavigatorService.push('NoteEdit', { id : this.props.id , state : this.props});
+    }
+
+    removeNoteItem(){
+        this.props.removeNoteItem(this.props.id);
+        this.props.getNoteItem();
+        this.props.getDiaryList(this.props.listType,this.props.listTitle);
+        this.RBSheet.close();
+    }
     render() {
+
+
         return (
                 <TouchableOpacity
                     activeOpacity={0.7}
-                    onPress={() => alert('hello')}
+                    onPress={() => this.navigateToNoteDetail()}
                     style={styles.list_item_wrapper}
                 >
-                {/* <View style={styles.list_shadow}></View> */}
+                <View style={styles.list_shadow}></View>
 
                     <View style={styles.list_item}>
                         <View style={styles.list_item_left}>
-                            <Text style={styles.item_tit}>{this.props.title}</Text>
+                            <Text style={styles.item_tit} numberOfLines={2}>{this.props.title}</Text>
                             <View style={styles.item_category_container}>
                                 <ExhibitionImage  width={13} height={13} style={styles.item_category_icon}/>
-                                <Text style={styles.item_category_text}>{this.props.category}</Text>
+                                <Text style={styles.item_category_text}>{this.props.cultureName}</Text>
                             </View>
                             <View style={styles.item_info_container}>
-                                <Text style={styles.item_info_text}>{this.props.date}</Text>
+                                <Text style={styles.item_info_text}>{this.props.sometime}</Text>
                                 <View style={styles.item_info_line}></View>
-                                <Text style={styles.item_info_text}>{this.props.where}</Text>
+                                <Text style={styles.item_info_text} numberOfLines={1}>{this.props.place}</Text>
                             </View>
                             <TouchableOpacity
                                 style={styles.item_more}
@@ -88,15 +125,20 @@ export default class ListItem extends Component {
                         </View>
                         <View style={styles.list_item_right}>
                             <View style={styles.item_thumb_container}>
-                                <TouchableOpacity style={styles.item_like}>
-                                    {this.state.isLiked ?
+                                <TouchableOpacity style={styles.item_like}
+                                     onPress={()=>{
+                                         this.props.setLiked(this.props.id);
+                                         this.setState({favorite : !this.state.favorite})
+                                     }}
+                                >
+                                    {this.state.favorite ?
                                         // 좋아요 리스트에 있으면 채워진 상태로 로딩
                                         <LikeChkImage  width={27} height={27} style={styles.item_like_image}/>
                                         :
                                         <LikeImage  width={27} height={27} style={styles.item_like_image}/>
                                     }
                                 </TouchableOpacity>
-                                <Image style={styles.item_thumb}/>
+                                <Image style={styles.item_thumb} source={{uri : this.props.imageUrl}}/>
                             </View>
                         </View>
                     </View>
@@ -118,10 +160,12 @@ export default class ListItem extends Component {
                                 }
                             }}
                         >
-                            
+
                         <TouchableOpacity
                             style={styles.actionSheet_item}
                             onPress={() => {
+                                this.navigateToNoteEdit();
+
                                 this.RBSheet.close();
                             }}
                         >
@@ -130,9 +174,7 @@ export default class ListItem extends Component {
                         </TouchableOpacity>
                         <TouchableOpacity
                             style={styles.actionSheet_item}
-                            onPress={() => {
-                                this.RBSheet.close();
-                            }}
+                            onPress={this.removeNoteItem.bind(this)}
                         >
                             <DeleteImage width={34} height={34}/>
                             <Text style={styles.actionSheet_text}>삭제하기</Text>
@@ -148,25 +190,10 @@ const styles = StyleSheet.create({
         position: 'relative',
         width: '100%',
         height: calc.getRegWidthDp(102),
-        // paddingHorizontal: calc.getRegWidthDp(21),
-        paddingBottom: calc.getRegHeightDp(12),
-    },
-    list_shadow : {
-        position: 'absolute',
-        zIndex: 1,
-        top: calc.getRegWidthDp(10),
-        left: '2%',
-        width: '96%',
-        height: calc.getRegWidthDp(70),
-        padding: 10,
-        right: 0,
-        bottom: 0,
-        elevation: 5,
-        backgroundColor: '#fff',
+        paddingHorizontal: 23,
+        paddingBottom: 12,
     },
     list_item : {
-        position: 'absolute',
-        zIndex: 100,
         flexDirection: 'row',
         justifyContent: 'space-between',
         width: '100%',
@@ -174,14 +201,13 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
         borderRadius: 6,
         overflow: 'hidden',
-        // elevation: 5,
     },
     list_item_left : {
         justifyContent: 'space-between',
         zIndex: 1,
         flex: 1,
-        paddingHorizontal: calc.getRegWidthDp(12),
-        paddingVertical: calc.getRegWidthDp(6),
+        paddingHorizontal: 12,
+        paddingVertical: 12,
         borderTopLeftRadius: 6,
         borderBottomLeftRadius: 6,
         backgroundColor: 'white',
@@ -190,13 +216,12 @@ const styles = StyleSheet.create({
         flex: 1,
         fontFamily: "noto-sans-bold",
         fontSize: 12,
-        // fontWeight: "bold",
         fontStyle: "normal",
         letterSpacing: -0.25,
-        color: "#464646"
+        color: "#464646",
+        lineHeight: 14,
     },
     item_category_container : {
-        // marginTop: calc.getRegHeightDp(20),
         flexDirection: 'row',
         justifyContent: 'flex-start',
         alignItems: 'center',
@@ -210,23 +235,23 @@ const styles = StyleSheet.create({
         fontFamily: "noto-sans",
         fontSize: 10,
         fontWeight: "normal",
-        fontStyle: "normal",
+        color: "#5e5e5e",
         letterSpacing: -0.2,
-        color: "#5e5e5e"
+        lineHeight: 12,
     },
     item_info_container : {
         flexDirection: 'row',
         justifyContent: 'flex-start',
         alignItems: 'center',
-        // marginTop: calc.getRegHeightDp(3),
+        marginTop: 4,
     },
     item_info_text : {
         fontFamily: "noto-sans",
         fontSize: 10,
         fontWeight: "normal",
-        fontStyle: "normal",
+        color: "#5e5e5e",
         letterSpacing: -0.2,
-        color: "#5e5e5e"
+        lineHeight: 12,
     },
     item_info_line : {
         width: calc.getRegWidthDp(1),
@@ -270,8 +295,10 @@ const styles = StyleSheet.create({
         borderWidth: calc.getRegWidthDp(7),
         borderRadius: 100,
         borderColor: '#fff',
+        backgroundColor: "#f6f6f6"
     },
     item_rip_bottom : {
+        zIndex: 10,
         position: 'absolute',
         width: calc.getRegWidthDp(30),
         height: calc.getRegWidthDp(30),
@@ -280,7 +307,7 @@ const styles = StyleSheet.create({
         borderWidth: calc.getRegWidthDp(7),
         borderRadius: 100,
         borderColor: '#fff',
-        // elevation: 10,
+        backgroundColor: "#f6f6f6"
     },
     list_item_right : {
         zIndex: 1,
@@ -295,9 +322,20 @@ const styles = StyleSheet.create({
     item_thumb_container : {
         flex: 1,
         borderRadius: 6,
-        backgroundColor: 'orange',
-        elevation: 5,
+        overflow: 'hidden',
+        shadowColor: "#4ca0a0a0",
+        shadowOffset: {
+                width: 0,
+                height: 2,
+        },
+        shadowOpacity: 0.23,
+        shadowRadius: 2.62,
+        elevation: 2,
     },
+    item_thumb : {
+        flex: 1,
+        backgroundColor : "#000"
+    },  
     item_like : {
         position: 'absolute',
         zIndex: 100,
@@ -316,7 +354,6 @@ const styles = StyleSheet.create({
         justifyContent: "flex-start",
         alignItems: "center",
         height: calc.getRegHeightDp(57),
-        
     },
     actionSheet_text : {
         marginLeft: calc.getRegWidthDp(8),
@@ -326,3 +363,5 @@ const styles = StyleSheet.create({
         color: "#424242"
     },
 })
+
+export default connect(mapStateToProps,mapDispatchToProps)(ListItem);

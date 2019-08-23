@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="74px" height="73px" viewBox="0 0 74 73" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.2 (78181) - https://sketchapp.com -->
+    <title>appIcon_splash</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M58.7962772,36.6260369 C58.7615098,42.1166104 56.6580806,47.5984918 52.4686061,51.7881326 C44.0230195,60.231157 30.3362438,60.231157 21.8935545,51.7881326 C13.4508652,43.3451082 13.4508652,29.6548918 21.8935545,21.2118674 C26.0366725,17.068585 31.4459041,14.9679698 36.8754167,14.8926374 L36.8754167,0 C16.7740514,0.0666402064 0.5,16.3819012 0.5,36.4985513 C0.5,56.6586624 16.8435863,73 37.0028973,73 C57.118749,73 73.4304652,56.7282 73.5,36.6260369 L58.7962772,36.6260369 Z" id="path-1"></path>
+        <filter x="-7.5%" y="-4.8%" width="115.1%" height="115.1%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="1.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.545098039   0 0 0 0 0.184313725   0 0 0 0 0.0941176471  0 0 0 0.3 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <path d="M56.2397661,0 C51.9649123,0 48.5,3.4861846 48.5,7.78365667 C48.5,12.0811287 51.9649123,15.0940623 56.2397661,15.0940623 C57.1754386,15.0940623 58.0614035,14.9265138 58.8918129,14.6560847 C58.6432749,15.4614932 58.4853801,16.313933 58.4853801,17.2163433 C58.4853801,21.5167549 61.4824561,25 65.7573099,25 C69.9883041,25 73.4152047,21.5843621 73.4853801,17.345679 L73.5,17.3486185 L73.5,0 L56.2397661,0 Z" id="path-3"></path>
+        <filter x="-22.0%" y="-14.0%" width="144.0%" height="144.0%" filterUnits="objectBoundingBox" id="filter-4">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="1.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.545098039   0 0 0 0 0.184313725   0 0 0 0 0.0941176471  0 0 0 0.3 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="appIcon_splash" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-8">
+            <g id="Fill-4">
+                <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+            </g>
+            <g id="Fill-6">
+                <use fill="black" fill-opacity="1" filter="url(#filter-4)" xlink:href="#path-3"></use>
+                <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-3"></use>
+            </g>
+        </g>
+    </g>
+</svg>

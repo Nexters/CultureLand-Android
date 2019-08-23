@@ -6,15 +6,17 @@ import {
 import {combineReducers} from 'redux';
 
 const initialState = {
+
     userId: '김컬쳐',
     userEmail: 'culture_kim@culor.com',
-    totalNumberOfDiaryCount: 1,
-    likedDiaryCount: 2,
-    exhibitionCount: 3,
-    concertCount: 4,
-    musicalCount: 5,
-    playCount: 6,
-    etcCount: 7,
+    totalNumberOfDiaryCount: 0,
+    likedDiaryCount: 0,
+    exhibitionCount: 0,
+    concertCount: 0,
+    musicalCount: 0,
+    playCount: 0,
+    etcCount: 0,
+    loading : false,
     error: undefined,
 };
 
@@ -23,6 +25,7 @@ export function getMyPageCountActions(state = initialState, action) {
 
         case MY_PAGE_COUNT_ACTION.REQUEST:
             return {
+                loading : true,
                 ...state,
             };
 
@@ -36,11 +39,13 @@ export function getMyPageCountActions(state = initialState, action) {
                 musicalCount: action.result.musicalCount,
                 playCount: action.result.playCount,
                 etcCount: action.result.etcCount,
+                loading : false,
             };
         case MY_PAGE_COUNT_ACTION.FAILURE:
             return {
                 ...state,
                 error: action.error,
+                loading : false,
             }
     }
 }
@@ -49,6 +54,7 @@ export function getMyPageAccountActions(state = initialState, action) {
     switch (action.type) {
         case MY_PAGE_ACCOUNT_ACTION.REQUEST :
             return {
+                loading : true,
                 ...state,
             };
 
@@ -57,12 +63,14 @@ export function getMyPageAccountActions(state = initialState, action) {
                 ...state,
                 userId: action.result.userId,
                 userEmail: action.result.userEmail,
+                loading : false,
             };
 
         case MY_PAGE_ACCOUNT_ACTION.FAILURE :
             return {
                 ...state,
                 error: action.error,
+                loading : false,
             }
     }
 }

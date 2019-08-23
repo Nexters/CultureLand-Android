@@ -1,4 +1,4 @@
-
+import {Client} from './api/Client';
 import {AppLoading} from 'expo';
 import {Asset} from 'expo-asset';
 import * as Font from 'expo-font';
@@ -37,6 +37,7 @@ const store = createStore(
 
 sagaMiddleware.run(rootSaga);
 
+Client.init();
 
 
 export default function App(props) {
@@ -62,30 +63,28 @@ export default function App(props) {
                     {/* <SignScreen/> */}
                     <AppNavigator
                         ref={navigatorRef => {
-                            NavigatorService.setContainer(navigatorRef);
+                            NavigatorService.setTopLevelNavigator(navigatorRef);
                         }}
                     />
-                    {/* <AppNavigator/> */}
+                    {/* <SplashScreen/> */}
                 </View>
             </Provider>
         );
     }
 }
 
+
 async function loadResourcesAsync() {
 
 
     await Promise.all([
         Asset.loadAsync([
-            require('./assets/images/robot-dev.png'),
-            require('./assets/images/robot-prod.png'),
         ]),
         Font.loadAsync({
             // This is the font that we are using for our tab bar
             ...Ionicons.font,
             // We include SpaceMono because we use it in HomeScreen.js. Feel free to
             // remove this if you are not using it in your app
-            'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
             'noto-sans': require('./assets/fonts/NotoSansCJKkr-Regular.otf'),
             'noto-sans-bold': require('./assets/fonts/NotoSansCJKkr-Bold.otf'),
             'noto-sans-mid' : require('./assets/fonts/NotoSansCJKkr-Medium.otf'),
@@ -114,6 +113,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
+        paddingTop: (Platform.OS === 'ios') ? (24) : (StatusBar.currentHeight),
     },
     loginScreen: {
         padding: 30,

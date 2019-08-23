@@ -7,9 +7,7 @@ export function getNote(state){
 export function getTitle(state){
     return baseSelector(state).title;
 }
-export function getCategory(state){
-    return baseSelector(state).category;
-}
+
 export function getSometime(state){
     return baseSelector(state).sometime;
 }
@@ -27,4 +25,10 @@ export function getImage(state){
 }
 export function getIsLiked(state){
     return baseSelector(state).isLiked;
+}
+export function getCultureName(state){
+    return baseSelector(state).cultureName;
+}
+export function getImageUrl(state){
+    return baseSelector(state).imageUrl;
 }

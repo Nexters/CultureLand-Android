@@ -11,11 +11,12 @@ import {combineReducers} from 'redux';
 
 const initialState = {
 
-    id : '컬러유저',
+    id : 0,
     imageUrl : '',
     title : '문화정보',
     category : '뮤지컬',
-    period : '2019.08.18 ~ 2019.08.18',
+    startDate : '2019.08.18',
+    endDate : '2019.08.18',
     place : '충무로',
     isWished: true,
     error : false,
@@ -34,17 +35,20 @@ function isWishedActions(state = initialState, action) {
         case IS_WISHED_ACTION.SUCCESS:
             return {
                 ...state,
-                isWished : action.result.isWished,
+                error : null,
+                isWished : action.result.isMyWishList,
             };
         case IS_WISHED_ACTION.FAILURE:
             return {
                 ...state,
+                isWished : false,
                 error: action.error,
             };
         default:
             return state
     }
 }
+
 
 function setWishedActions(state = initialState, action){
     switch (action.type) {
@@ -103,13 +107,15 @@ function getItemDetailAction(state = initialState, action) {
                 ...state,
             };
         case GET_ITEM_DETAIL_ACTION.SUCCESS:
+
             return {
                 ...state,
                 id : action.result.id,
                 imageUrl : action.result.imageUrl,
                 title : action.result.title,
                 category : action.result.category,
-                period : action.result.period,
+                startDate : action.result.startDate,
+                endDate : action.result.endDate,
                 place :action.result.place,
                 error : null,
             };

@@ -1,42 +1,89 @@
-import { SEARCH_PRODUCT } from "../actionTypes/searchProduct";
+import {SEARCH_PRODUCT_ACTION, SUBMIT_SEARCH_RESULT_ACTION} from "../actionTypes/searchProduct";
 import {call, put, take} from "redux-saga/effects";
+import {Client} from '../api/Client';
 
-function* searchProduct(keyword){
-    // MOCK //
+async function searchProduct(keyword) {
+
+    const result = await Client.searchCultureByQuery(keyword);
+
+    if (result.error) {
+        return {error: result.error}
+
+    } else {
+
+        if(result.message === undefined){
+            result.message = [];
+        }
+
+        return {
+            error: null,
+            result: {
+                category: "all",
+                searched_product_list: result.message
+            },
+        }
+    }
+}
+
+export function* searchProductFlow() {
+
+    while (true) {
+
+        const request = yield take(SEARCH_PRODUCT_ACTION.REQUEST);
+        let response = yield call(searchProduct, request.payload.keyword);
+
+        if (response.error) {
+
+            yield put({
+                type: SEARCH_PRODUCT_ACTION.FAILURE,
+                error: response.error,
+            })
+
+        } else {
+
+            yield put({
+                type: SEARCH_PRODUCT_ACTION.SUCCESS,
+                result: response.result,
+            })
+        }
+    }
+}
+
+
+
+async function submitSearchResult(keyword){
+
+    const response =  await Client.getCultureListByTitle(keyword);
+    if(response.error){
+        return { error : response.error }
+    }
+
     return {
         error : null,
         result : {
-            category: "all",
-            searched_product_list : [
-                {title: "캣츠"},
-                {title: "안중근"},
-                {title: "엠씨더맥스"},
-                {title: "샤갈 색채의 마술사"}
-            ]
-
+            searched_product_list: response.message,
         }
-    };
+    }
 }
+export function* submitSearchResultFlow() {
 
-export function* searchProductFlow(){
+    while (true) {
 
-    while(true){
+        const request = yield take(SUBMIT_SEARCH_RESULT_ACTION.REQUEST);
+        let response = yield call(submitSearchResult, request.payload.keyword);
 
-        const request = yield take(SEARCH_PRODUCT.REQUEST);
-        let response = yield call(searchProduct,request.keyword);
-
-        if(response.error){
+        if (response.error) {
 
             yield put({
-                type : SEARCH_PRODUCT.FAILURE,
-                error : response.error,
+                type: SUBMIT_SEARCH_RESULT_ACTION.FAILURE,
+                error: response.error,
             })
 
-        }else{
+        } else {
 
             yield put({
-                type : SEARCH_PRODUCT.SUCCESS,
-                result : response.result,
+                type: SUBMIT_SEARCH_RESULT_ACTION.SUCCESS,
+                result: response.result,
             })
         }
     }
