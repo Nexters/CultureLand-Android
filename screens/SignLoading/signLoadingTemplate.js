@@ -7,7 +7,7 @@ import {
     View,
     Dimensions,
     Text,
-    Image
+    Image,
 } from 'react-native';
 import styleFn from "./styles"
 var jwtDecode = require('jwt-decode');
@@ -16,7 +16,6 @@ import NavigatorService from "../../util/NavigatorService";
 import PropTypes from 'prop-types';
 import {OAUH_SOCIAL_SERVICE, SERVICE_ACCESS_TOKEN, EXPIRED_AT, SOCIAL_ACCESS_TOKEN} from "../../util";
 import {Client} from "../../api/Client";
-import SplashIcon from './asset/appIcon_splash.svg';
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
@@ -28,7 +27,7 @@ export default class SignLoadingScreen extends Component {
 
     constructor(props) {
         super(props);
-        this._bootstrapAsync();
+        // this._bootstrapAsync();
     }
 
     _bootstrapAsync = async () => {
@@ -83,24 +82,12 @@ export default class SignLoadingScreen extends Component {
 
     render() {
         return (
-            <View>
-                {/* <ActivityIndicator/>
-                <StatusBar barStyle="default"/>
-                <SplashIcon  width={73} height={73}/> */}
-                <View style={styles.container}>
-                    <Image source={{uri: './asset/splash.png'}} style={styles.thumbnail}/>
-                    {/* <View style={styles.splash_image}>
-                        <SplashIcon  width={73} height={73}/>
-                    </View>
-                    <Text style={styles.splash_message}>
-                        당신의 기록은{"\n"}
-                        <Text style={styles.splash_bold}>
-                            어떤 색인가요?
-                        </Text>
-                    </Text> */}
-
+            <View style={styles.container}>
+                    <Image
+                        style={styles.thumbnail}
+                        source={require('./asset/splash.png')}
+                    />
                 </View>
-            </View>
         );
     }
 }
