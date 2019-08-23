@@ -66,15 +66,16 @@ export default class WishListComponent extends Component {
 
                 <View style={styles.wishlist_container}>
                     {  ISNULL(wishList) ?
-                        <TouchableOpacity
-                            activeOpacity={0.7}
-                            onPress={() => alert('hello')}
-                            style={styles.wishlist_noitem}
-                        >
-                            <InactiveImage style={styles.noitem_icon}/>
-                            <Text style={styles.noitem_text}>{'당신의 다이어리를 채울\n'}<Text style={styles.noitem_text_bold}>새로운 컬러</Text>를 찾아보세요!</Text>
-                        </TouchableOpacity>
-
+                        <View style={styles.wishlist_noitem_container}>
+                            <TouchableOpacity
+                                activeOpacity={0.7}
+                                onPress={() => alert('hello')}
+                                style={styles.wishlist_noitem}
+                            >
+                                <InactiveImage style={styles.noitem_icon}/>
+                                <Text style={styles.noitem_text}>{'당신의 다이어리를 채울\n'}<Text style={styles.noitem_text_bold}>새로운 컬러</Text>를 찾아보세요!</Text>
+                            </TouchableOpacity>
+                        </View>
                         :
                         <FlatList
                             data={wishListPropsArray}

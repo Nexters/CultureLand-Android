@@ -66,8 +66,7 @@ export default function App(props) {
                             NavigatorService.setTopLevelNavigator(navigatorRef);
                         }}
                     />
-                    {/* <AppNavigator/> */}
-
+                    {/* <SplashScreen/> */}
                 </View>
             </Provider>
         );
@@ -114,6 +113,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
+        paddingTop: (Platform.OS === 'ios') ? (24) : (StatusBar.currentHeight),
     },
     loginScreen: {
         padding: 30,

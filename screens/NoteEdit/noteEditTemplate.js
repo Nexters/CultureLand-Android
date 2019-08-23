@@ -9,6 +9,7 @@ import {
     TextInput,
     ScrollView,
     TouchableOpacity,
+    TouchableWithoutFeedback,
     KeyboardAvoidingView,
     Alert,
 
@@ -82,6 +83,21 @@ export default class NoteEditScreen extends Component {
 
     onSelectedChange(value, index) {
         this.setState({cultureName: KOR_CATEGORY_TO_ENG(value)});
+        this.onCheckRequired();
+    }
+
+    onTextChange(sometime){
+        this.setState({sometime: sometime});
+        this.onCheckRequired();
+    }
+
+    onCheckRequired(){
+        let { title, cultureName, sometime, place, image } = this.state;
+        !ISNULL(title) && !ISNULL(cultureName) && !ISNULL(sometime) && !ISNULL(place) && !ISNULL(image) ? 
+            this.setState({isRequired: true})
+        :
+            this.setState({isRequired: false});
+            
     }
 
     _showWarningAlert = () => {
@@ -96,6 +112,16 @@ export default class NoteEditScreen extends Component {
         )
     }
 
+    _showRequiredAlert = () => {
+        Alert.alert(
+            '필수항목을 작성해주세요.',
+            '필수항목 : 사진/제목/유형/언제/어디서',
+            [
+                {text: '확인', style: 'cancel'},
+            ],
+            { cancelable: true }
+        )
+    }
     _showConfirmAlert = () => {
 
         console.log("저장!");
@@ -146,13 +172,23 @@ export default class NoteEditScreen extends Component {
                     >
                         <Ionicons name="ios-arrow-back" size={24} color="#292929" style={styles.header_button}/>
                     </TouchableOpacity>
-                    <TouchableOpacity
-                        onPress={this._showConfirmAlert}
-                        activeOpacity={0.7}
-                        style={styles.header_right}
-                    >
-                        <Text style={styles.header_right_text}>저장</Text>
-                    </TouchableOpacity>
+                    {
+                        this.state.isRequired ?
+                        (<TouchableOpacity
+                            onPress={this._showConfirmAlert}
+                            activeOpacity={0.7} 
+                            style={styles.header_right}
+                        >
+                            <Text style={styles.header_right_text}>저장</Text>
+                        </TouchableOpacity>)
+                        :
+                        (<TouchableWithoutFeedback
+                            onPress={this._showRequiredAlert}
+                            style={styles.header_right}
+                        >
+                            <Text style={styles.header_right_text_diasble}>저장</Text>
+                        </TouchableWithoutFeedback>)
+                    }
                 </View>
                 <ScrollView>
                     <View style={styles.note_top_wrapper}>
@@ -180,6 +216,7 @@ export default class NoteEditScreen extends Component {
                                 onChangeText={(title) => this.setState({title})}
                                 value={this.state.title}
                                 placeholder={"제목을 써주세요"}
+                                onChange={() => this.onCheckRequired()}
                             />
                         </View>
                         <View style={styles.note_line}></View>
@@ -280,6 +317,7 @@ export default class NoteEditScreen extends Component {
                                     style={styles.note_textinput}
                                     onChangeText={(place) => this.setState({place})}
                                     value={this.state.place}
+                                    onChange={() => this.onCheckRequired()}
                                 />
                             </View>
                             <View style={styles.note_info_item}>
@@ -344,6 +382,7 @@ export default class NoteEditScreen extends Component {
 
             });
         }
+        this.onCheckRequired();
     };
 };
 

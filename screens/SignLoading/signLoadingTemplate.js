@@ -5,15 +5,23 @@ import {
     StatusBar,
     StyleSheet,
     View,
-
+    Dimensions,
+    Text,
+    Image,
 } from 'react-native';
-
+import styleFn from "./styles"
 var jwtDecode = require('jwt-decode');
 import * as SecureStore from 'expo-secure-store';
 import NavigatorService from "../../util/NavigatorService";
 import PropTypes from 'prop-types';
 import {OAUH_SOCIAL_SERVICE, SERVICE_ACCESS_TOKEN, EXPIRED_AT, SOCIAL_ACCESS_TOKEN} from "../../util";
 import {Client} from "../../api/Client";
+
+const screenWidth = Math.round(Dimensions.get('window').width);
+const screenHeight = Math.round(Dimensions.get('window').height);
+import {RatioCalculator} from "../../util";
+const calc = new RatioCalculator(screenWidth, screenHeight);
+const styles = styleFn(screenWidth, screenHeight, calc);
 
 export default class SignLoadingScreen extends Component {
 
@@ -74,10 +82,12 @@ export default class SignLoadingScreen extends Component {
 
     render() {
         return (
-            <View>
-                <ActivityIndicator/>
-                <StatusBar barStyle="default"/>
-            </View>
+            <View style={styles.container}>
+                    <Image
+                        style={styles.thumbnail}
+                        source={require('./asset/splash.png')}
+                    />
+                </View>
         );
     }
 }

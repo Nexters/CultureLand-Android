@@ -1,7 +1,6 @@
 import {StyleSheet} from "react-native";
 import {ConvertZepSizeToRegularizedSize, RatioCalculator} from "../../util";
 import {screenWidth, screenHeight} from "../../App";
-import {StatusBar, Platform} from 'react-native';
 
 
 export default styles = function (screenWidth, screenHeight, calc) {
@@ -13,11 +12,6 @@ export default styles = function (screenWidth, screenHeight, calc) {
             width: "100%",
             height: "100%",
             backgroundColor: '#f6f6f6',
-
-
-            paddingTop: (Platform.OS === 'ios') ?
-                (calc.getRegHeightDp(70) + 24) :
-                (calc.getRegHeightDp(70) + StatusBar.currentHeight),
         },
 
 
@@ -27,7 +21,7 @@ export default styles = function (screenWidth, screenHeight, calc) {
             justifyContent: 'space-between',
             alignItems: 'center',
             position: 'absolute',
-            top:  (Platform.OS === 'ios') ?(24) :(StatusBar.currentHeight),
+            top: 0,
             left: 0,
             right: 0,
             zIndex: 100,
@@ -66,14 +60,21 @@ export default styles = function (screenWidth, screenHeight, calc) {
             letterSpacing: 0.01,
             color: "#5c5c5c"
         },
+        header_right_text_diasble : {
+            fontFamily: "noto-sans-bold",
+            textAlign: 'right',
+            fontSize: 16,
+            fontStyle: "normal",
+            letterSpacing: 0.01,
+            color: "#c4c4c4"
+        },
         note_wrapper : {
             
         },
         note_top_wrapper: {
             flex: 1,
             width: '100%',
-            marginTop: calc.getRegHeightDp(3),
-
+            marginTop: calc.getRegHeightDp(72),
             paddingHorizontal: calc.getRegWidthDp(28),
         },
         image_wrapper: {
