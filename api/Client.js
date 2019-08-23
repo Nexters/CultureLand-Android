@@ -113,7 +113,6 @@ class ClientClass {
     }
 
     getDeleteWishedItemURL(wishListId) {
-        console.log("삭제 요청 유알엘 : " + `${this.getWishListBaseURL()}/${wishListId}`);
         return `${this.getWishListBaseURL()}/${wishListId}`;
     }
 
@@ -204,7 +203,6 @@ class ClientClass {
 
         let defaultContentType = "application/json; charset=utf-8";
         if (options.headers) {
-            console.log("새운 콘텐트타입 " + options.headers.ContentType);
             defaultContentType = options.headers.ContentType
         }
 
@@ -221,7 +219,6 @@ class ClientClass {
         }
 
         try {
-            console.log("새로운옵션 ! : " + JSON.stringify(credentialOptions))
             credentialOptions["method"] = options["method"]
         } catch (e) {
             console.log("credential exception :  " + e);
@@ -290,7 +287,6 @@ class ClientClass {
 
     uploadImageToS3(imageBinary) {
 
-        console.log("이미지바이나리 : " + JSON.stringify(imageBinary));
         return this.credentialCall(this.getDiaryImageS3UploadURL(), {
             method: "POST",
             headers: {

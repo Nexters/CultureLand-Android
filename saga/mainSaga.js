@@ -50,7 +50,6 @@ async function getMainWishListAction(){
 
     const response = await Client.getAllWishList();
 
-    console.log("모든 희망목록 : "+ JSON.stringify(response));
 
     if(response.error){
         return { error : response.error }
@@ -93,7 +92,6 @@ export function* mainWishListFlow(){
 async function cancelWishAction(wishId){
 
     const wishList  = await Client.getAllWishList();
-    console.log('위시 아이템 리스트 : '+JSON.stringify(wishList));
     let targetWishItemId;
     if(!wishList.error){
         for(let i=0; i < wishList.message.length; i++){
@@ -125,7 +123,6 @@ export function* cancelWishFlow(){
     while(true) {
 
         const request = yield take(CANCEL_WISH_ITEM_ACTION.REQUEST);
-        console.log("캔슬해야지~");
         let response = yield call(cancelWishAction,request.payload.id);
 
         if (response.error) {
@@ -136,7 +133,6 @@ export function* cancelWishFlow(){
             })
         } else {
             // 성공
-            console.log("성공!");
             yield  put({
                 type: CANCEL_WISH_ITEM_ACTION.SUCCESS,
                 result : response.result,

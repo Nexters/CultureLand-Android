@@ -329,7 +329,6 @@ export default class NoteEditScreen extends Component {
         let formData = new FormData();
         const cleanURL = localUri.replace("file://", "");
 
-        console.log("유아렐 : " + localUri + " , 파일이름 : " + fileName + " 타입 : " + type);
 
         let img = {
             uri: localUri,
@@ -338,7 +337,6 @@ export default class NoteEditScreen extends Component {
         };
         formData.append("image", img);
         formData.append('fileName', fileName);
-        console.log("폼데이타 : " + JSON.stringify(formData));
         if (!result.cancelled) {
             this.setState({
                 image: localUri,

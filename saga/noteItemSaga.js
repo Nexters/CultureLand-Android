@@ -16,7 +16,6 @@ async function getNote(id) {
 
     const response = await Client.getDiaryByDiaryId(id);
 
-    console.log("리스폰스 : "+ JSON.stringify(response));
     if (response.error) {
         return {error: response.error}
     }
@@ -146,7 +145,6 @@ export function* updateNoteFlow() {
 function removeNote(id) {
     const response = Client.deleteDiaryById(id);
 
-    console.log("결과 : "+JSON.stringify(response));
 
     if(response.error){
         return { error : response.error}
@@ -207,7 +205,6 @@ export function* isLikedFlow() {
 async function setLiked(diaryId) {
     // MOCK
     const response = await Client.setDiaryLikeState(diaryId);
-    console.log(diaryId +" 노트를 : "+JSON.stringify(response));
     if (response.error) {
         return {error: response.error}
     }

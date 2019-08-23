@@ -40,7 +40,6 @@ export default class WishListComponent extends Component {
     }
     render() {
         const wishList = this.props.wishList;
-        console.log("위시리스트 : "+JSON.stringify(wishList));
 
         const wishListPropsArray = [];
 

@@ -54,7 +54,6 @@ export function* searchProductFlow() {
 async function submitSearchResult(keyword){
 
     const response =  await Client.getCultureListByTitle(keyword);
-    console.log("결과 : "+ JSON.stringify(response));
     if(response.error){
         return { error : response.error }
     }

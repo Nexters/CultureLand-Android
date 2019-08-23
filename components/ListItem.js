@@ -75,13 +75,11 @@ class ListItem extends Component {
         NavigatorService.push('NoteDetail')
     }
     navigateToNoteEdit(){
-        console.log('겟노트아팅 : '+JSON.stringify(this.props));
        // this.props.getNoteItem(this.props.id);
         NavigatorService.push('NoteEdit', { id : this.props.id , state : this.props});
     }
 
     removeNoteItem(){
-        console.log("삭제 : "+JSON.stringify(this.props));
         this.props.removeNoteItem(this.props.id);
         this.props.getNoteItem();
         this.props.getDiaryList(this.props.listType,this.props.listTitle);
@@ -166,7 +164,6 @@ class ListItem extends Component {
                         <TouchableOpacity
                             style={styles.actionSheet_item}
                             onPress={() => {
-                                console.log("프롭 : "+JSON.stringify(this.props));
                                 this.navigateToNoteEdit();
 
                                 this.RBSheet.close();

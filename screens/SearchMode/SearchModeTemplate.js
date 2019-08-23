@@ -64,7 +64,6 @@ export default class SearchModeScreen extends Component {
 
     submitEditing(){
         this.props.submitSearchRequest(this.state.keyword);
-        console.log("결과 : "+JSON.stringify(this.props.searchedProductList));
 
     }
 
