@@ -1,4 +1,4 @@
-import {StyleSheet} from "react-native";
+import {StyleSheet, Dimensions} from "react-native";
 import {ConvertZepSizeToRegularizedSize, RatioCalculator} from "../../util";
 import {screenWidth, screenHeight} from "../../App";
 
@@ -10,10 +10,13 @@ export default styles = function (screenWidth, screenHeight, calc) {
 
 
         container: {
+            position: 'absolute',
+            left: 0,
+            top: 0,
             justifyContent: 'center',
             alignItems: 'center',
-            width: "100%",
-            height: "100%",
+            width: Dimensions.get('window').width,
+            height: Dimensions.get('window').height,
             backgroundColor: "#f15642",
         },
 

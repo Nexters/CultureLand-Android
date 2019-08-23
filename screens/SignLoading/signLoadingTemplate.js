@@ -27,7 +27,7 @@ export default class SignLoadingScreen extends Component {
 
     constructor(props) {
         super(props);
-        // this._bootstrapAsync();
+        this._bootstrapAsync();
     }
 
     _bootstrapAsync = async () => {
