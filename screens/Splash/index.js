@@ -2,8 +2,6 @@ import * as WebBrowser from 'expo-web-browser';
 import React, {Component} from 'react';
 // import {LottieView} from 'lottie-react-native'
 // import LottieView from "lottie-react-native";
-import { DangerZone } from "expo";
-const { Lottie } = DangerZone;
 import styleFn from "./styles"
 import {
     View,

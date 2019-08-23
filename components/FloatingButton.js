@@ -16,11 +16,21 @@ const screenHeight = Math.round(Dimensions.get('window').height);
 
 const calc = new RatioCalculator(screenWidth, screenHeight);
 
+
 export class FloatingButton extends Component {
+    navigateToNoteEdit(){
+        try {
+            NavigatorService.navigate('NoteEdit',{ id : -1})
+
+        }catch (e){
+            console.log("익 : "+e);
+        }
+    }
     render () {
         return (
             <TouchableOpacity 
-                onPress={() => NavigatorService.navigate('NoteEdit',{ id : -1})}
+                //onPress={() => NavigatorService.navigate('NoteEdit',{ id : -1})}
+                onPress={this.navigateToNoteEdit.bind(this)}
                 activeOpacity={0.7} 
                 style={styles.floating_button}
             >

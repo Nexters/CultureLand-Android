@@ -136,7 +136,7 @@ export default class MyPageScreen extends Component {
         this.props.getMyPageAccount();
 
         this.categories = [
-            new CategoryType("좋아하는\n기록", "favorite",this.props.likedCount,"#e44343",<LikeImage width={38} height={38}/>),
+            new CategoryType("좋아하는\n기록", "like",this.props.likedCount,"#e44343",<LikeImage width={38} height={38}/>),
             new CategoryType("전시", CATEGORY.EXHIBITION,this.props.exhibitionCount,"",<ExhibitionImage width={38} height={38}/>),
             new CategoryType("콘서트",CATEGORY.CONCERT, this.props.concertCount,"",<ConcertImage width={38} height={38}/>),
             new CategoryType("뮤지컬",CATEGORY.MUSICAL,this.props.musicalCount,"",<MusicalImage width={38} height={38}/>),
