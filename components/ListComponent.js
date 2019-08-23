@@ -62,7 +62,7 @@ export default class ListComponent extends Component {
 const styles = StyleSheet.create({
     list_container: {
         flex: 1,
-        marginTop: 28,
+        marginTop: 84,
     }
 });
 

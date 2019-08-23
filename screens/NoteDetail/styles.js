@@ -66,7 +66,7 @@ export default styles = function (screenWidth, screenHeight, calc) {
         note_top_wrapper: {
             flex: 1,
             width: '100%',
-            marginTop: calc.getRegHeightDp(3),
+            marginTop: calc.getRegHeightDp(72),
             paddingHorizontal: calc.getRegWidthDp(28),
         },
         image_wrapper: {
