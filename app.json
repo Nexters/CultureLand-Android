@@ -9,7 +9,7 @@
       "android",
       "web"
     ],
-   
+    "primaryColor": "#f15642",
     "version": "1.0.0",
     "orientation": "portrait",
     "loading": {
@@ -36,6 +36,9 @@
     ],
     "ios": {
       "supportsTablet": true
+    },
+    "android": {
+      "package": "com.cultureland.culor"
     }
   }
 }

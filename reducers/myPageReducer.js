@@ -62,7 +62,8 @@ export function getMyPageAccountActions(state = initialState, action) {
             return {
                 ...state,
                 userId: action.result.userId,
-                userEmail: action.result.userEmail,
+                email: action.result.email,
+                userName : action.result.userName,
                 loading : false,
             };
 

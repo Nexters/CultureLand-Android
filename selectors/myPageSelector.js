@@ -6,7 +6,10 @@ export function getUserId(state){
     return baseSelector(state).userId;
 }
 export function getUserEmail(state){
-    return baseSelector(state).userEmail;
+    return baseSelector(state).email;
+}
+export function getUserName(state){
+    return baseSelector(state).userName;
 }
 export function getTotalNumberOfDiaryCount(state){
     return baseSelector(state).totalNumberOfDiaryCount;

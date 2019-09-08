@@ -145,23 +145,26 @@ export default styles = function (screenWidth, screenHeight, calc) {
             width: "100%",
             flexDirection: 'row',
             marginBottom : calc.getRegHeightDp(12)
-
         },
-
-
         item_wrapper: {
             width: calc.getRegWidthDp(96),
-            height: calc.getRegHeightDp(136),
             marginRight : calc.getRegWidthDp(12),
             borderRadius : 10,
         },
+        item_img_wrapper : {
+            width: '100%',
+            height: calc.getRegHeightDp(136),
+        },
         thumbnail : {
             flex: 1,
-            // width : "100%",
-            // height: "100%",
-            // resizeMode : 'contain',
+            height: calc.getRegHeightDp(136),
             borderRadius : 10,
             backgroundColor : "#fff"
+        },
+        item_text : {
+            fontFamily : 'noto-sans',
+            fontSize: 10,
+            lineHeight: 24,
         },
         item_information_labels_wrapper : {
             width: calc.getRegWidthDp(360-27-30),
@@ -176,14 +179,12 @@ export default styles = function (screenWidth, screenHeight, calc) {
 
         number_of_items : {
             fontFamily : 'noto-sans',
-            width: calc.getRegWidthDp(74),
-            height: calc.getRegHeightDp(21),
             fontSize: 16,
             lineHeight: 21,
         },
 
         type_of_sorting : {
-            width: calc.getRegWidthDp(48),
+            width: calc.getRegWidthDp(70),
             height: calc.getRegHeightDp(21),
             marginLeft : 'auto'
 

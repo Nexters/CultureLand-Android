@@ -23,7 +23,9 @@ import LikeImage from './asset/like.svg';
 import MusicalImage from './asset/musical.svg';
 import PlayImage from './asset/play.svg';
 import TicketImage from './asset/ticket.svg';
+import {Auth} from '../../util/Auth';
 import {LIST_TYPE} from "../../util/index";
+
 
 
 const screenWidth = Math.round(Dimensions.get('window').width);
@@ -41,6 +43,11 @@ export default class MyPageScreen extends Component {
 
 
 
+    }
+
+    logOutThenNavigateToLoginScreen(){
+        Auth.deleteRegisterCredentials();
+        NavigatorService.navigate('Auth');
     }
 
     returnArrowButton(){
@@ -128,12 +135,16 @@ export default class MyPageScreen extends Component {
 
         const {
             userId,
-            userEmail ,
+            userName,
+            email ,
             totalCount  ,
             error ,
         } = this.props;
-        console.log(ISNULL(userEmail));
-        this.props.getMyPageAccount();
+
+
+        if(this.props.email == null && this.props.userName == null){
+            this.props.getMyPageAccount();
+        }
 
         this.categories = [
             new CategoryType("좋아하는\n기록", "like",this.props.likedCount,"#e44343",<LikeImage width={38} height={38}/>),
@@ -155,10 +166,10 @@ export default class MyPageScreen extends Component {
                             <View style={styles.top_user_wrapper}>
                                 <View style={styles.top_user_left}>
                                     <Text style={styles.user_name_text}>
-                                        {userId}
+                                        {userName}
                                     </Text>
                                     <Text style={styles.user_email}>
-                                        {userEmail}
+                                        {email}
                                     </Text>
                                 </View>
                             </View>
@@ -177,7 +188,7 @@ export default class MyPageScreen extends Component {
                                 <View style={styles.top_user_right}>
                                     <TouchableOpacity 
                                         style={styles.user_logout} 
-                                        onPress={() => NavigatorService.navigate('Auth')}
+                                        onPress={this.logOutThenNavigateToLoginScreen.bind(this)}
                                     >
                                         <Text>로그아웃</Text>
                                     </TouchableOpacity>

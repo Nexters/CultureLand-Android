@@ -90,7 +90,7 @@ export default styles = function (screenWidth, screenHeight, calc) {
 
         active_search_result_wrapper: {
 
-            height: 15.5 + 16.5 + 21,
+            // height: 15.5 + 16.5 + 21,
             paddingTop: calc.getRegHeightDp(16.5),
             paddingLeft: 15,
             paddingBottom: calc.getRegHeightDp(15.5),
@@ -100,9 +100,10 @@ export default styles = function (screenWidth, screenHeight, calc) {
         number_of_items : {
 
             fontFamily : 'noto-sans',
-            width: calc.getRegWidthDp(74),
-            height: calc.getRegHeightDp(21),
+            // width: calc.getRegWidthDp(74),
+            // height: calc.getRegHeightDp(21),
             fontSize: 16,
+            lineHeight: 19,
             marginTop : 35.7,
             marginLeft:  27,
             marginBottom : 11,

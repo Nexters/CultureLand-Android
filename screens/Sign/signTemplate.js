@@ -36,94 +36,12 @@ export default class SignScreen extends Component {
         }
     }
 
-    async faceBookAuth() {
-
-
-        try {
-            const {
-                type,
-                token,
-                expires,
-                permissions,
-                declinedPermissions,
-            } = await Facebook.logInWithReadPermissionsAsync(FACE_BOOK_APP_ID, {
-                permissions: ['public_profile', 'email'],
-            });
-            if (type === 'success') {
-                // Get the user's name using Facebook's Graph API
-                const response = await fetch(`https://graph.facebook.com/me?fields=id,name,email&access_token=${token}`);
-                const responseJSON = await response.json();
-                console.log(`접속 ${JSON.stringify(responseJSON)}! token with ${token}`);
-                try {
-
-                    await this.registerSocialCredentials(FACEBOOK,token);
-
-                } catch (e) {
-                    console.log("SecureStore exception " + e);
-                }
-
-            } else {
-                console.log("cancel!");
-            }
-        } catch ({message}) {
-            console.log("")
-            return;
-        }
-
-
-        try {
-            const response = await Client.signInOrUp(FACEBOOK);
-
-            if(response.error){
-                this.setState({error : response.error});
-                return;
-            }
-            await Auth.registerServerCredentials(response.message);
-            this.props.navigation.navigate('App');
-
-        } catch (e) {
-            // TODO 토스트메세지 오류알림
-            console.log("익셉션발생 : " + e);
-        }
-
-    }
-
     errorRenderer(){
         if(this.state.error){
             this.refs.toast.show(this.state.error, 1000, () => {
                 // something you want to do at close
                 this.setState({error : null});
             });
-        }
-    }
-
-    async googleAuth() {
-        try {
-            const result = await Google.logInAsync({
-                androidClientId: GOOGLE_ANDROID_ID,
-                iosClientId: GOOGLE_IOS_ID,
-                scopes: ['profile', 'email'],
-            });
-
-            if (result.type === 'success') {
-                console.log("구글로그인 : "+result.accessToken);
-
-                await this.registerSocialCredentials(GOOGLE,result.accessToken);
-
-                const response = await Client.signInOrUp(GOOGLE);
-
-                console.log("리스폰스 : "+JSON.stringify(response));
-                /*
-                await this.registerServerCredentials(response.message);
-                */
-
-            } else {
-                return { cancelled: true };
-            }
-        } catch (e) {
-            console.log("구글로그인 예외 : "+e);
-
-            return { error: true };
         }
     }
 
