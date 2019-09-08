@@ -127,24 +127,36 @@ export default class SearchModeScreen extends Component {
 
                                     </Highlighter>
 
-                                    <View style={{flexDirection : 'row', flexWrap : 'wrap',
+                                    <View style={{
+                                        flexDirection : 'row', 
+                                        flexWrap : 'wrap',
                                         alignItems : 'flex-start',
-                                        paddingLeft : 12, paddingRight : 12 }}>
+                                        width: '100%',
+                                        paddingHorizontal: 18
+
+                                        }}>
 
                                     {
 
                                         searchedProductList.map((item) => {
                                             return (
                                                 <TouchableOpacity
+                                                    style={{
+                                                        width : "33.3%",
+                                                        height : 150,
+                                                        padding: 6,
+                                                        // paddingHorizontal: 12,
+                                                    }}
                                                     onPress={
                                                         ()=>this.props.onSelectSearchResult(item.id)
                                                     }>
                                                     <Image style={{
                                                         backgroundColor : "#000",
-                                                        width : 96,
-                                                        height : 136,
-                                                        marginLeft : 14,
-                                                        marginBottom : 12,
+                                                        flex: 1,
+                                                        // width : "33.3%",
+                                                        // height : 136,
+                                                        // marginLeft : 14,
+                                                        // marginBottom : 12,
                                                         borderRadius : 10,
                                                     }}
                                                            source={{uri: 'http:' + item.imageUrl}}
