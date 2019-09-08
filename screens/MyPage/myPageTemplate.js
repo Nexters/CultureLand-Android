@@ -135,11 +135,12 @@ export default class MyPageScreen extends Component {
 
         const {
             userId,
-            userEmail ,
+            userName,
+            email ,
             totalCount  ,
             error ,
         } = this.props;
-        console.log(ISNULL(userEmail));
+
         this.props.getMyPageAccount();
 
         this.categories = [
@@ -162,10 +163,10 @@ export default class MyPageScreen extends Component {
                             <View style={styles.top_user_wrapper}>
                                 <View style={styles.top_user_left}>
                                     <Text style={styles.user_name_text}>
-                                        {userId}
+                                        {userName}
                                     </Text>
                                     <Text style={styles.user_email}>
-                                        {userEmail}
+                                        {email}
                                     </Text>
                                 </View>
                             </View>

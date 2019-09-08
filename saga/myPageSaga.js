@@ -74,11 +74,14 @@ async function getMyPageAccountAction(){
     if(user.error){
         return { error : user.error };
     }else{
+
+        console.log("그ㅓㄱ : " + JSON.stringify(user));
         return {
             error : null,
             result : {
                 userId : user.message.userId,
                 userName : user.message.userName,
+                email : user.message.email,
             }
         }
     }

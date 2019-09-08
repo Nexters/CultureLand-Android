@@ -5,7 +5,7 @@ import {
     getLikedDiaryCount, getExhibitionCount,
     getConcertCount, getMusicalCount,
     getPlayCount, getEtcCount,
-    getError,
+    getUserName,getError,
 } from "../../selectors/myPageSelector";
 
 import {getMyPageAccount,getMyPageCount} from '../../actions/myPage'
@@ -15,7 +15,8 @@ function mapStateToProps(state) {
 
     return {
         userId : getUserId(state),
-        userEmail : getUserEmail(state),
+        userName : getUserName(state),
+        email : getUserEmail(state),
         totalCount : getTotalNumberOfDiaryCount(state),
         likedCount : getLikedDiaryCount(state),
         exhibitionCount : getExhibitionCount(state),
