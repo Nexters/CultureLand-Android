@@ -66,7 +66,7 @@ class AuthManager {
                 }
 
             } else {
-                console.log("cancel!");
+                return;
             }
         } catch ({message}) {
             console.log("")
@@ -122,8 +122,8 @@ class AuthManager {
             }
         } catch (e) {
             console.log("구글로그인 예외 : "+e);
-
-            return { error: true };
+            this.setState({error : JSON.stringify(e)});
+            return;
         }
     }
 
