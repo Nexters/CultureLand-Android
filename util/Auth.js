@@ -66,7 +66,7 @@ class AuthManager {
                 }
 
             } else {
-                console.log("cancel!");
+                return;
             }
         } catch ({message}) {
             console.log("")
