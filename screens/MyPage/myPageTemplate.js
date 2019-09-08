@@ -141,7 +141,10 @@ export default class MyPageScreen extends Component {
             error ,
         } = this.props;
 
-        this.props.getMyPageAccount();
+
+        if(this.props.email == null && this.props.userName == null){
+            this.props.getMyPageAccount();
+        }
 
         this.categories = [
             new CategoryType("좋아하는\n기록", "like",this.props.likedCount,"#e44343",<LikeImage width={38} height={38}/>),
