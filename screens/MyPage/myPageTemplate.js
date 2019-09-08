@@ -23,7 +23,9 @@ import LikeImage from './asset/like.svg';
 import MusicalImage from './asset/musical.svg';
 import PlayImage from './asset/play.svg';
 import TicketImage from './asset/ticket.svg';
+import {Auth} from '../../util/Auth';
 import {LIST_TYPE} from "../../util/index";
+
 
 
 const screenWidth = Math.round(Dimensions.get('window').width);
@@ -41,6 +43,11 @@ export default class MyPageScreen extends Component {
 
 
 
+    }
+
+    logOutThenNavigateToLoginScreen(){
+        Auth.deleteRegisterCredentials();
+        NavigatorService.navigate('Auth');
     }
 
     returnArrowButton(){
@@ -177,7 +184,7 @@ export default class MyPageScreen extends Component {
                                 <View style={styles.top_user_right}>
                                     <TouchableOpacity 
                                         style={styles.user_logout} 
-                                        onPress={() => NavigatorService.navigate('Auth')}
+                                        onPress={this.logOutThenNavigateToLoginScreen.bind(this)}
                                     >
                                         <Text>로그아웃</Text>
                                     </TouchableOpacity>

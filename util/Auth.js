@@ -33,6 +33,12 @@ class AuthManager {
         });
     }
 
+    async deleteRegisterCredentials(){
+        await  SecureStore.deleteItemAsync(SOCIAL_ACCESS_TOKEN);
+        await  SecureStore.deleteItemAsync(SERVICE_ACCESS_TOKEN);
+        await  SecureStore.deleteItemAsync(EXPIRED_AT);
+    }
+
     async faceBookAuth() {
 
 
@@ -106,12 +112,10 @@ class AuthManager {
                 console.log("구글로그인 : "+JSON.stringify(result));
 
                 await Auth.registerSocialCredentials(GOOGLE,result.accessToken);
-
                 const response = await Client.signInOrUp(GOOGLE);
+                await Auth.registerServerCredentials.bind(this,response.message.token);
+                this.props.navigation.navigate('App');
 
-                /*
-                await this.registerServerCredentials(response.message);
-                */
 
             } else {
                 return { cancelled: true };

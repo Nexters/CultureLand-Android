@@ -78,6 +78,7 @@ export default class SearchModeScreen extends Component {
         } = this.props;
 
         return (
+
             <View>
                 {this.state.isSearchMode ?
                     <View>
@@ -98,8 +99,10 @@ export default class SearchModeScreen extends Component {
                                 </TextInput>
 
                                 <View style={styles.magnifying_glass}>
+                                    <TouchableWithoutFeedback onPress={this.submitEditing.bind(this)}>
                                     <Entypo
                                         name="magnifying-glass" size={calc.getRegHeightDp(20)} color="#292929"/>
+                                    </TouchableWithoutFeedback>
                                 </View>
                             </View>
                         </View>
@@ -128,7 +131,7 @@ export default class SearchModeScreen extends Component {
                                     </Highlighter>
 
                                     <View style={{
-                                        flexDirection : 'row', 
+                                        flexDirection : 'row',
                                         flexWrap : 'wrap',
                                         alignItems : 'flex-start',
                                         width: '100%',

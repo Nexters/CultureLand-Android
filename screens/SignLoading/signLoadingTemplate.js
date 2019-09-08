@@ -72,7 +72,6 @@ export default class SignLoadingScreen extends Component {
                 await SecureStore.setItemAsync(EXPIRED_AT, decodedToken.exp.toString());
                 await SecureStore.setItemAsync(SERVICE_ACCESS_TOKEN,token);
                 isLoginValid = true;
-
         }else{
             console.log("에러"+JSON.stringify(response));
         }
