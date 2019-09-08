@@ -85,16 +85,15 @@ export default class PlanedListScreen extends Component {
                         style={styles.item_wrapper}
                     >
                         <TouchableWithoutFeedback
-
                             onPress={() => this.navigateToDetailView(item.id)}
+                            style={styles.item_img_wrapper}
                         >
-
                             <Image source={{uri: 'http:' + item.imageUrl}}
 
-                                   style={styles.thumbnail}
+                                style={styles.thumbnail}
                             />
                         </TouchableWithoutFeedback>
-
+                            <Text style={styles.item_text} numberOfLines={1}>{item.title}</Text>
                     </View>
                 )
             }
@@ -244,7 +243,7 @@ export default class PlanedListScreen extends Component {
 
                                         }}
                                         containerStyle={{
-                                            width: calc.getRegWidthDp(65),
+                                            width: calc.getRegWidthDp(73),
                                             height: calc.getRegHeightDp(21),
                                             marginLeft: 'auto',
                                         }}
