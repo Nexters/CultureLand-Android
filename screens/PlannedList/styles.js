@@ -176,14 +176,14 @@ export default styles = function (screenWidth, screenHeight, calc) {
 
         number_of_items : {
             fontFamily : 'noto-sans',
-            width: calc.getRegWidthDp(74),
-            height: calc.getRegHeightDp(21),
+            // width: calc.getRegWidthDp(74),
+            // height: calc.getRegHeightDp(21),
             fontSize: 16,
             lineHeight: 21,
         },
 
         type_of_sorting : {
-            width: calc.getRegWidthDp(48),
+            width: calc.getRegWidthDp(70),
             height: calc.getRegHeightDp(21),
             marginLeft : 'auto'
 
