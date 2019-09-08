@@ -162,6 +162,7 @@ export default styles = function (screenWidth, screenHeight, calc) {
             backgroundColor : "#fff"
         },
         item_text : {
+            height: 24,
             fontFamily : 'noto-sans',
             fontSize: 10,
             lineHeight: 24,

@@ -153,18 +153,21 @@ export default class SearchModeScreen extends Component {
                                                     onPress={
                                                         ()=>this.props.onSelectSearchResult(item.id)
                                                     }>
-                                                    <Image style={{
-                                                        backgroundColor : "#000",
-                                                        flex: 1,
-                                                        // width : "33.3%",
-                                                        // height : 136,
-                                                        // marginLeft : 14,
-                                                        // marginBottom : 12,
-                                                        borderRadius : 10,
-                                                    }}
-                                                           source={{uri: 'http:' + item.imageUrl}}
-                                                    >
-                                                    </Image>
+                                                    <View style={styles.item_img_wrapper}>
+                                                        <Image style={{
+                                                            backgroundColor : "#000",
+                                                            flex: 1,
+                                                            // width : "33.3%",
+                                                            // height : 136,
+                                                            // marginLeft : 14,
+                                                            // marginBottom : 12,
+                                                            borderRadius : 10,
+                                                        }}
+                                                            source={{uri: 'http:' + item.imageUrl}}
+                                                        >
+                                                        </Image>
+                                                        <Text style={styles.item_text} numberOfLines={1}>{item.title}</Text>
+                                                    </View>
                                                 </TouchableOpacity>)
                                         })
                                     }

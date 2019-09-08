@@ -109,6 +109,15 @@ export default styles = function (screenWidth, screenHeight, calc) {
             marginBottom : 11,
 
         },
+        item_img_wrapper : {
+            width: '100%',
+            height: calc.getRegHeightDp(136),
+        },
+        item_text : {
+            fontFamily : 'noto-sans',
+            fontSize: 10,
+            lineHeight: 24,
+        },
         active_search_result_content: {
             fontFamily: 'noto-sans-mid',
             height: 21,
