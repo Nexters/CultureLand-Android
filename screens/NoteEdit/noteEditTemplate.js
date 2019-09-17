@@ -271,12 +271,12 @@ export default class NoteEditScreen extends Component {
                                             marginTop: calc.getRegHeightDp(50),
                                         }}
                                         itemTextStyle={{
-                                            fontFamily: "noto-sans",
+                                            fontFamily: "Noto Sans KR",
                                             fontSize: 16,
                                             lineHeight: 19,
                                         }}
                                         style={{
-                                            fontFamily: "noto-sans",
+                                            fontFamily: "Noto Sans KR",
                                             fontSize: 16,
                                             lineHeight: 19,
                                         }}
@@ -302,14 +302,14 @@ export default class NoteEditScreen extends Component {
                                     }
                                     customStyles={{
                                         dateInput: {
-                                            fontFamily: "noto-sans",
+                                            fontFamily: "Noto Sans KR",
                                             fontSize: 16,
                                             position: 'absolute',
                                             left: 0,
                                             textAlign: 'left',
                                             borderColor: "transparent",
                                         },
-                                        fontFamily: "noto-sans",
+                                        fontFamily: "Noto Sans KR",
                                         fontSize: 16,
                                     }}
                                     

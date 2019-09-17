@@ -53,7 +53,8 @@ export default styles = function (screenWidth, screenHeight, calc) {
             flex: 1,
         },
         header_right_text : {
-            fontFamily: "noto-sans-bold",
+            fontFamily: "Noto Sans KR",
+            fontWeight: "700",
             textAlign: 'right',
             fontSize: 16,
             fontStyle: "normal",
@@ -61,7 +62,8 @@ export default styles = function (screenWidth, screenHeight, calc) {
             color: "#5c5c5c"
         },
         header_right_text_diasble : {
-            fontFamily: "noto-sans-bold",
+            fontFamily: "Noto Sans KR",
+            fontWeight: "700",
             textAlign: 'right',
             fontSize: 16,
             fontStyle: "normal",
@@ -123,7 +125,8 @@ export default styles = function (screenWidth, screenHeight, calc) {
             flex: 1,
             height: calc.getRegHeightDp(50),
             paddingLeft: calc.getRegWidthDp(4),
-            fontFamily: "noto-sans-bold",
+            fontFamily: "Noto Sans KR",
+            fontWeight: "700",
             fontSize: 18,
             fontStyle: "normal",
             lineHeight: calc.getRegHeightDp(30),
@@ -133,7 +136,7 @@ export default styles = function (screenWidth, screenHeight, calc) {
         },
         note_titleinput_placeholder : {
             paddingLeft: calc.getRegWidthDp(4),
-            fontFamily: 'noto-sans',
+            fontFamily: "Noto Sans KR",
             fontSize: 18,
             fontStyle: "normal",
             lineHeight: calc.getRegHeightDp(30),
@@ -150,7 +153,7 @@ export default styles = function (screenWidth, screenHeight, calc) {
         },
         note_required: {
             marginTop: calc.getRegHeightDp(3),
-            fontFamily: "noto-sans",
+            fontFamily: "Noto Sans KR",
             textAlign: 'right',
             fontSize: 10,
             fontWeight: "normal",
@@ -169,7 +172,7 @@ export default styles = function (screenWidth, screenHeight, calc) {
         },
         note_sub_title: {
             width: calc.getRegWidthDp(62),
-            fontFamily: "noto-sans",
+            fontFamily: "Noto Sans KR",
             fontSize: 14,
             fontWeight: "normal",
             fontStyle: "normal",
@@ -178,7 +181,7 @@ export default styles = function (screenWidth, screenHeight, calc) {
         },
         note_required_icon: {
             paddingHorizontal: calc.getRegWidthDp(2),
-            fontFamily: "noto-sans",
+            fontFamily: "Noto Sans KR",
             fontSize: 14,
             fontStyle: "normal",
             letterSpacing: 0.01,
@@ -188,7 +191,7 @@ export default styles = function (screenWidth, screenHeight, calc) {
             flex: 1,
             height: calc.getRegHeightDp(28),
             paddingHorizontal: calc.getRegWidthDp(9),
-            fontFamily: "noto-sans",
+            fontFamily: "Noto Sans KR",
             fontSize: 16,
             fontWeight: "normal",
             fontStyle: "normal",
@@ -212,7 +215,7 @@ export default styles = function (screenWidth, screenHeight, calc) {
         note_picker: {
             flex: 1,
             paddingHorizontal: calc.getRegWidthDp(9),
-            fontFamily: "noto-sans",
+            fontFamily: "Noto Sans KR",
             fontSize: 16,
             fontWeight: "normal",
             fontStyle: "normal",
@@ -220,7 +223,7 @@ export default styles = function (screenWidth, screenHeight, calc) {
             color: "#393939",
         },
         dropdown_text: {
-            fontFamily: "noto-sans",
+            fontFamily: "Noto Sans KR",
             fontSize: 16,
         },
         note_datepicker: {
@@ -228,7 +231,7 @@ export default styles = function (screenWidth, screenHeight, calc) {
             width: calc.getRegWidthDp(160),
             height: calc.getRegHeightDp(40),
             paddingHorizontal: calc.getRegWidthDp(9),
-            fontFamily: "noto-sans",
+            fontFamily: "Noto Sans KR",
             fontSize: 16,
             fontWeight: "normal",
             fontStyle: "normal",
@@ -254,7 +257,7 @@ export default styles = function (screenWidth, screenHeight, calc) {
         },
         note_textarea: {
             marginTop: calc.getRegHeightDp(7),
-            fontFamily: "noto-sans",
+            fontFamily: "Noto Sans KR",
             fontSize: 14,
             fontStyle: "normal",
             lineHeight: 24,

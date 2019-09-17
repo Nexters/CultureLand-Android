@@ -85,14 +85,15 @@ async function loadResourcesAsync() {
             ...Ionicons.font,
             // We include SpaceMono because we use it in HomeScreen.js. Feel free to
             // remove this if you are not using it in your app
-            'noto-sans': require('./assets/fonts/NotoSansCJKkr-Regular.otf'),
-            'noto-sans-bold': require('./assets/fonts/NotoSansCJKkr-Bold.otf'),
-            'noto-sans-mid' : require('./assets/fonts/NotoSansCJKkr-Medium.otf'),
-            'noto-sans-demi' : require('./assets/fonts/NotoSansCJKkr-DemiLight.otf'),
-            'noto-sans-light' : require('./assets/fonts/NotoSansCJKkr-Light.otf'),
-            'noto-sans-thin' : require('./assets/fonts/NotoSansCJKkr-Thin.otf'),
+            // 'noto-sans': require('./assets/fonts/NotoSansCJKkr-Regular.otf'),
+            // 'noto-sans-bold': require('./assets/fonts/NotoSansCJKkr-Bold.otf'),
+            // 'noto-sans-mid' : require('./assets/fonts/NotoSansCJKkr-Medium.otf'),
+            // 'noto-sans-demi' : require('./assets/fonts/NotoSansCJKkr-DemiLight.otf'),
+            // 'noto-sans-light' : require('./assets/fonts/NotoSansCJKkr-Light.otf'),
+            // 'noto-sans-thin' : require('./assets/fonts/NotoSansCJKkr-Thin.otf'),
 
         }),
+        Font.loadAsync("Noto Sans KR", 'https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700&display=swap&subset=korean')
 
     ]);
 }

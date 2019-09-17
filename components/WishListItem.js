@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
         paddingVertical: calc.getRegWidthDp(2),
     },
     wishlist_subtitle : {
-        fontFamily: "noto-sans",
+        fontFamily: "Noto Sans KR",
         fontSize: 10,
         fontWeight: "normal",
         fontStyle: "normal",
@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
     wishlist_title : {
         flex: 1,
         paddingTop: 3,
-        fontFamily: "noto-sans",
+        fontFamily: "Noto Sans KR",
         fontSize: 12,
         fontWeight: "normal",
         fontStyle: "normal",
@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
         color: "#464646"
     },
     wishlist_date : {
-        fontFamily: "noto-sans",
+        fontFamily: "Noto Sans KR",
         fontSize: 12,
         fontStyle: "normal",
         letterSpacing: -0.15,

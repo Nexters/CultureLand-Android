@@ -31,7 +31,8 @@ export default styles = function (screenWidth, screenHeight, calc) {
             height: calc.getRegHeightDp(150),
         },
         slide_text : {
-            fontFamily: 'noto-sans-light',
+            fontFamily: "Noto Sans KR",
+            fontWeight: "300",
             fontSize: 20,
             color: "#424242"
         },

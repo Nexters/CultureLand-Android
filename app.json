@@ -38,7 +38,14 @@
       "supportsTablet": true
     },
     "android": {
-      "package": "com.cultureland.culor"
+      "config" : {
+          "googleSignIn" : {
+            "apiKey" :"AIzaSyDMrXIlkyuvzb0RBvbYCdZCXsHss8FpXN0",
+            "certificateHash" : "4D13315CDDE3F4523D0BA962ADC770F81D4E025B"
+          }
+      },
+      "package": "host.exp.exponent",
+      "googleServicesFile" : "./google-services.json"
     }
   }
 }
