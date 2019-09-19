@@ -54,7 +54,7 @@ export default styles = function (screenWidth, screenHeight) {
             height: 56,
         },
         sign_social_item_text: {
-            fontFamily : 'noto-sans',
+            fontFamily : "Noto Sans KR",
             marginTop: 11,
             fontSize: 14,
             fontWeight: "normal",

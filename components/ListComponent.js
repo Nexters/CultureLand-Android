@@ -100,7 +100,8 @@ const styles = StyleSheet.create({
     },
     culture_null_title : {
         marginTop: 10,
-        fontFamily: "noto-sans-bold",
+        fontFamily: "Noto Sans KR",
+        fontWeight: "700",
         fontSize: 18,
         fontStyle: "normal",
         lineHeight: 22,
@@ -110,7 +111,8 @@ const styles = StyleSheet.create({
     },
     culture_null_subtitle : {
         marginTop: 10,
-        fontFamily: 'noto-sans-light',
+        fontFamily: "Noto Sans KR",
+        fontWeight: "300",
         fontSize: 14,
         fontStyle: "normal",
         lineHeight: 18,

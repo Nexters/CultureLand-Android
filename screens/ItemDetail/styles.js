@@ -51,7 +51,8 @@ export default styles = function (screenWidth, screenHeight, calc) {
         },
 
         title : {
-            fontFamily : 'noto-sans-bold',
+            fontFamily: "Noto Sans KR",
+            fontWeight: "700",
             width : calc.getRegWidthDp(173+65),
             fontSize: 18,
             lineHeight: 28,
@@ -71,7 +72,8 @@ export default styles = function (screenWidth, screenHeight, calc) {
         },
 
         row_title: {
-            fontFamily : 'noto-sans-mid',
+            fontFamily: "Noto Sans KR",
+            fontWeight: "500",
             width : 40,
             marginRight : 13,
             letterSpacing: 0.01,
@@ -81,7 +83,8 @@ export default styles = function (screenWidth, screenHeight, calc) {
         },
 
         row_content: {
-            fontFamily : 'noto-sans-demi',
+            fontFamily: "Noto Sans KR",
+            fontWeight: "300",
             width : calc.getRegWidthDp(324-30-13-69-10),
             fontSize: 16,
             letterSpacing: 0.01,

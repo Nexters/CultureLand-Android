@@ -120,7 +120,8 @@ export default class SearchModeScreen extends Component {
                                     <Highlighter
 
                                         highlightStyle={{
-                                            fontFamily: 'noto-sans-bold',
+                                            fontFamily: "Noto Sans KR",
+                                            fontWeight: "700",
                                         }}
                                         searchWords={
                                             [`${numberWithCommas(searchedProductList.length)}`]

@@ -197,7 +197,8 @@ const styles = StyleSheet.create({
         paddingHorizontal: calc.getRegWidthDp(6),
     },
     title : {
-        fontFamily: 'noto-sans-light',
+        fontFamily: "Noto Sans KR",
+        fontWeight: "300",
         fontSize: 22,
         lineHeight: 24,
         color: "#464646",
@@ -207,7 +208,7 @@ const styles = StyleSheet.create({
         alignItems: 'flex-end',
     },
     count : {
-        fontFamily: "noto-sans",
+        fontFamily: "Noto Sans KR",
         fontSize: 14,
         fontWeight: "normal",
         fontStyle: "normal",
@@ -227,7 +228,7 @@ const styles = StyleSheet.create({
     },
     intro_title : {
         marginTop: calc.getRegWidthDp(30),
-        fontFamily: "noto-sans",
+        fontFamily: "Noto Sans KR",
         fontSize: 12,
         fontStyle: "normal",
         textAlign: "center",

@@ -20,8 +20,8 @@ export default styles = function(screenWidth,screenHeight) {
             paddingHorizontal : calc.getRegWidthDp(40),
         },
         main_picker : {
-            fontFamily: "noto-sans-bold",
-            fontWeight: '700',
+            fontFamily: "Noto Sans KR",
+            fontWeight: "700",
             fontSize: 24,
             lineHeight: 28,
         },
@@ -30,7 +30,7 @@ export default styles = function(screenWidth,screenHeight) {
             justifyContent: 'flex-start',
         },
         main_top_text : {
-            fontFamily: "noto-sans",
+            fontFamily: "Noto Sans KR",
             fontSize: 16,
             fontWeight: "normal",
             fontStyle: "normal",
@@ -39,7 +39,7 @@ export default styles = function(screenWidth,screenHeight) {
         },
         main_top_date: {
             paddingLeft : calc.getRegWidthDp(2),
-            fontFamily: "noto-sans",
+            fontFamily: "Noto Sans KR",
             fontSize: 16,
             fontWeight: "normal",
             fontStyle: "normal",
@@ -52,7 +52,8 @@ export default styles = function(screenWidth,screenHeight) {
             textAlign: 'center',
         },
         main_starter_title : {
-            fontFamily: "noto-sans-bold",
+            fontFamily: "Noto Sans KR",
+            fontWeight: "700",
             fontSize: 18,
             fontStyle: "normal",
             lineHeight: 22,
@@ -62,7 +63,7 @@ export default styles = function(screenWidth,screenHeight) {
         },
         main_starter_subtitle : {
             marginTop: calc.getRegHeightDp(15),
-            fontFamily: "noto-sans",
+            fontFamily: "Noto Sans KR",
             fontSize: 14,
             fontStyle: "normal",
             lineHeight: 18,
@@ -90,12 +91,10 @@ export default styles = function(screenWidth,screenHeight) {
             borderColor: "#eb5a48"
         },
         main_title : {
-            // width: calc.getRegWidthDp(54),
-            // height: calc.getRegHeightDp(20),
             marginLeft : calc.getRegWidthDp(40),
-            fontFamily: "noto-sans-bold",
+            fontFamily: "Noto Sans KR",
+            fontWeight: "700",
             fontSize: 14,
-            fontStyle: "normal",
             letterSpacing: -0.29,
             color: "#464646",
         },
