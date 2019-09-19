@@ -41,12 +41,12 @@ export default class DropDown extends Component {
 
                 }}
                 itemTextStyle={{
-                    fontFamily: "noto-sans",
+                    fontFamily: "Noto Sans KR",
                     fontSize: 16,
                     lineHeight: 19,
                 }}
                 style={{
-                    fontFamily: "noto-sans",
+                    fontFamily: "Noto Sans KR",
                     fontSize: 16,
                     lineHeight: 19,
                 }}

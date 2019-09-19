@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
     },
     noitem_text : {
         marginLeft: calc.getRegWidthDp(13),
-        fontFamily: "noto-sans",
+        fontFamily: "Noto Sans KR",
         fontSize: 12,
         fontWeight: "normal",
         fontStyle: "normal",

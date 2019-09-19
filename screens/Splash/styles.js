@@ -22,7 +22,7 @@ export default styles = function (screenWidth, screenHeight, calc) {
         },
 
         splash_message : {
-            fontFamily: 'noto-sans',
+            fontFamily: "Noto Sans KR",
             fontSize: 16,
             letterSpacing: -0.33,
             textAlign: "center",
@@ -30,7 +30,8 @@ export default styles = function (screenWidth, screenHeight, calc) {
             lineHeight: 19,
         },
         splash_bold : {
-            fontFamily: 'noto-sans-bold',
+            fontFamily: "Noto Sans KR",
+            fontWeight: "700",
         },
     });
 }

@@ -96,13 +96,13 @@ export default class MainScreen extends Component {
                                 marginTop : calc.getRegHeightDp(60),
                             }}
                             itemTextStyle={{
-                                fontFamily: "noto-sans",
+                                fontFamily: "Noto Sans KR",
                                 fontWeight: '400',
                                 fontSize: 24,
                                 lineHeight: 28,
                             }}
                             style={{
-                                fontFamily: "noto-sans",
+                                fontFamily: "Noto Sans KR",
                                 fontWeight: '700',
                                 fontSize: 24,
                                 lineHeight: 28,

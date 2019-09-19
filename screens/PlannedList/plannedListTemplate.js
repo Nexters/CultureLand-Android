@@ -179,7 +179,8 @@ export default class PlanedListScreen extends Component {
                                 <Highlighter
 
                                     highlightStyle={{
-                                        fontFamily: 'noto-sans-bold',
+                                        fontFamily: "Noto Sans KR",
+                                        fontWeight: "700",
                                     }}
                                     searchWords={
                                         ["새로운 컬러"]
@@ -222,7 +223,8 @@ export default class PlanedListScreen extends Component {
                                     <Highlighter
 
                                         highlightStyle={{
-                                            fontFamily: 'noto-sans-bold',
+                                            fontFamily: "Noto Sans KR",
+                                            fontWeight: "700",
                                         }}
                                         searchWords={
                                             [`${numberWithCommas(productList.length)}`]
@@ -253,12 +255,12 @@ export default class PlanedListScreen extends Component {
 
                                         }}
                                         itemTextStyle={{
-                                            fontFamily: "noto-sans",
+                                            fontFamily: "Noto Sans KR",
                                             fontSize: 16,
                                             lineHeight: 19,
                                         }}
                                         style={{
-                                            fontFamily: "noto-sans",
+                                            fontFamily: "Noto Sans KR",
                                             fontSize: 16,
                                             lineHeight: 19,
                                         }}

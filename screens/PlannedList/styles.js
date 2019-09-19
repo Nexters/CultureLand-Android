@@ -21,7 +21,7 @@ export default styles = function (screenWidth, screenHeight, calc) {
             paddingTop: 46,
         },
         category_tabBar_text_style : {
-            fontFamily: "noto-sans",
+            fontFamily: "Noto Sans KR",
             // fontWeight: '400'
         },
         category_tabStyle : {
@@ -54,7 +54,7 @@ export default styles = function (screenWidth, screenHeight, calc) {
         // @@카테고리 탭  레이아웃 관련 끝//
 
         suggestion_text: {
-            fontFamily : 'noto-sans',
+            fontFamily : "Noto Sans KR",
             paddingTop: 5,
             marginTop: 52,
             marginLeft : 85,
@@ -163,7 +163,7 @@ export default styles = function (screenWidth, screenHeight, calc) {
         },
         item_text : {
             height: 24,
-            fontFamily : 'noto-sans',
+            fontFamily : "Noto Sans KR",
             fontSize: 10,
             lineHeight: 24,
         },
@@ -179,7 +179,7 @@ export default styles = function (screenWidth, screenHeight, calc) {
         },
 
         number_of_items : {
-            fontFamily : 'noto-sans',
+            fontFamily : "Noto Sans KR",
             fontSize: 16,
             lineHeight: 21,
         },

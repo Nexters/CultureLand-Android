@@ -1,9 +1,12 @@
 import {EXPIRED_AT, FACEBOOK, GOOGLE, OAUH_SOCIAL_SERVICE, SERVICE_ACCESS_TOKEN, SOCIAL_ACCESS_TOKEN} from "./index";
-import {FACE_BOOK_APP_ID, GOOGLE_ANDROID_ID, GOOGLE_IOS_ID} from "../Constant";
+import {FACE_BOOK_APP_ID, GOOGLE_ANDROID_ID, GOOGLE_ANDROID_STANDALONE_ID, GOOGLE_IOS_ID} from "../Constant";
 import {Client} from "../api/Client";
+import {Platform } from 'react-native';
+import { GoogleSignIn } from 'expo';
 import * as Google from "expo-google-app-auth/build/Google";
 import * as Facebook from "expo-facebook/build/Facebook";
 import * as SecureStore from "expo-secure-store/build/SecureStore";
+import * as AppAuth from 'expo-app-auth';
 var jwtDecode = require('jwt-decode');
 
 class AuthManager {
@@ -94,35 +97,44 @@ class AuthManager {
     errorRenderer(){
         if(this.state.error){
             this.refs.toast.show(this.state.error, 1000, () => {
-                // something you want to do at close
-                this.setState({error : null});
-            });
-        }
-    }
+    // something you want to do at close
+    this.setState({error : null});
+});
+}
+}
 
-    async googleAuth() {
+async googleAuth() {
         try {
             const result = await Google.logInAsync({
+                clientId : Platform.OS==='android'?GOOGLE_ANDROID_ID:GOOGLE_IOS_ID,
+                //androidStandaloneAppClientId: GOOGLE_ANDROID_ID,
                 androidClientId: GOOGLE_ANDROID_ID,
                 iosClientId: GOOGLE_IOS_ID,
                 scopes: ['profile', 'email'],
+                redirectUrl: `${AppAuth.OAuthRedirect}:/oauth2redirect/google` // this is the LINE
             });
-
             if (result.type === 'success') {
                 console.log("구글로그인 : "+JSON.stringify(result));
+
+                /*
+                let userInfoResponse = await fetch('https://www.googleapis.com/userinfo/v2/me', {
+                    headers: { Authorization: `Bearer ${result.accessToken}` },
+                });
+                */
 
                 await Auth.registerSocialCredentials(GOOGLE,result.accessToken);
                 const response = await Client.signInOrUp(GOOGLE);
                 await Auth.registerServerCredentials.bind(this,response.message.token);
                 this.props.navigation.navigate('App');
 
-
             } else {
-                return { cancelled: true };
+                this.setState({ error : result.type });
+
             }
         } catch (e) {
-            console.log("구글로그인 예외 : "+e);
             this.setState({error : JSON.stringify(e)});
+
+        }finally {
             return;
         }
     }
@@ -137,3 +149,4 @@ class AuthManager {
 
 
 export const Auth = new AuthManager();
+

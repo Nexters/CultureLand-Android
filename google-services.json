@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1096693013930",
+    "firebase_url": "https://culor-250408.firebaseio.com",
+    "project_id": "culor-250408",
+    "storage_bucket": "culor-250408.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1096693013930:android:d5fd811d19448378441fd3",
+        "android_client_info": {
+          "package_name": "host.exp.exponent"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1096693013930-u011tjhbnv2c0342vfmp7kp9o7bg3qlp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLmUS1K8SORwPEFlwiNKLuaWzhYA8kMIQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1096693013930-u011tjhbnv2c0342vfmp7kp9o7bg3qlp.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1096693013930-e49vsrd2du1ta241nh925vosf0bev8r2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "host.exp.exponent"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

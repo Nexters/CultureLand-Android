@@ -214,7 +214,8 @@ const styles = StyleSheet.create({
     },
     item_tit : {
         flex: 1,
-        fontFamily: "noto-sans-bold",
+        fontFamily: "Noto Sans KR",
+        fontWeight: "700",
         fontSize: 12,
         fontStyle: "normal",
         letterSpacing: -0.25,
@@ -232,7 +233,7 @@ const styles = StyleSheet.create({
     },
     item_category_text : {
         marginLeft: calc.getRegWidthDp(3),
-        fontFamily: "noto-sans",
+        fontFamily: "Noto Sans KR",
         fontSize: 10,
         fontWeight: "normal",
         color: "#5e5e5e",
@@ -246,7 +247,7 @@ const styles = StyleSheet.create({
         marginTop: 4,
     },
     item_info_text : {
-        fontFamily: "noto-sans",
+        fontFamily: "Noto Sans KR",
         fontSize: 10,
         fontWeight: "normal",
         color: "#5e5e5e",

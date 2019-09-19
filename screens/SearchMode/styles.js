@@ -99,7 +99,7 @@ export default styles = function (screenWidth, screenHeight, calc) {
         },
         number_of_items : {
 
-            fontFamily : 'noto-sans',
+            fontFamily : "Noto Sans KR",
             // width: calc.getRegWidthDp(74),
             // height: calc.getRegHeightDp(21),
             fontSize: 16,
@@ -114,14 +114,14 @@ export default styles = function (screenWidth, screenHeight, calc) {
             height: calc.getRegHeightDp(136),
         },
         item_text : {
-            fontFamily : 'noto-sans',
+            fontFamily : "Noto Sans KR",
             fontSize: 10,
             lineHeight: 24,
         },
         active_search_result_content: {
-            fontFamily: 'noto-sans-mid',
-            height: 21,
+            fontFamily: "Noto Sans KR",
             fontWeight: "500",
+            height: 21,
             fontStyle: "normal",
             fontSize: 16,
             lineHeight: 21,

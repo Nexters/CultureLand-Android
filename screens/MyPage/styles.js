@@ -42,7 +42,8 @@ export default styles = function (screenWidth, screenHeight, calc) {
             
             user_name_text: {
                 width: "90%",
-                fontFamily: "noto-sans-bold",
+                fontFamily: "Noto Sans KR",
+                fontWeight: "700",
                 width: "100%",
                 fontSize: 24,
                 fontWeight: "bold",
@@ -53,11 +54,11 @@ export default styles = function (screenWidth, screenHeight, calc) {
             },
 
             user_email: {
-                fontFamily : 'noto-sans-thin',
+                fontFamily: "Noto Sans KR",
+                fontWeight: "300",
                 fontSize: 14,
                 marginTop : 2,
                 fontStyle: "normal",
-                fontWeight: "100",
                 lineHeight: 18,
                 letterSpacing: -0.2,
                 color: "#5e5e5e",
@@ -72,14 +73,13 @@ export default styles = function (screenWidth, screenHeight, calc) {
             top_user_right: {
             },
             user_logout: {
-                fontFamily: 'noto-sans-bold',
+                fontFamily: "Noto Sans KR",
+                fontWeight: "700",
                 textAlign: 'right',
                 fontSize: 12,
                 opacity: 0.5,
-                // fontWeight: "500",
                 fontStyle: "normal",
                 letterSpacing: -0.3,
-                // textDecorationLine: 'underline',
                 color: "#949494",
                 lineHeight: 18,
                 borderBottomWidth: 1,
@@ -88,8 +88,6 @@ export default styles = function (screenWidth, screenHeight, calc) {
             number_of_data_wrapper: {
                 flex: 1,
                 flexDirection: 'row',
-                // width: "100%",
-                // height: 28,
             },
 
             data_symbol: {
@@ -99,7 +97,8 @@ export default styles = function (screenWidth, screenHeight, calc) {
             },
 
             number_of_data_title: {
-                fontFamily : 'noto-sans-light',
+                fontFamily: "Noto Sans KR",
+                fontWeight: "300",
                 height: calc.getRegHeightDp(20),
                 marginTop: calc.getRegHeightDp(5),
                 marginRight: 2,
@@ -108,7 +107,8 @@ export default styles = function (screenWidth, screenHeight, calc) {
             },
 
             number_of_data_content: {
-                fontFamily : 'noto-sans-mid',
+                fontFamily: "Noto Sans KR",
+                fontWeight: "500",
                 width: "100%",
                 height: calc.getRegHeightDp(20),
                 marginTop: calc.getRegHeightDp(3),
@@ -194,9 +194,9 @@ export default styles = function (screenWidth, screenHeight, calc) {
             },
 
             category_item_title: {
-                fontFamily: "noto-sans-bold",
-                fontSize: 14,
+                fontFamily: "Noto Sans KR",
                 fontWeight: "700",
+                fontSize: 14,
                 letterSpacing: 0.01,
                 color: "#292929",
                 position: 'absolute',
@@ -205,7 +205,8 @@ export default styles = function (screenWidth, screenHeight, calc) {
             },
 
             category_item_number: {
-                fontFamily: 'noto-sans-light',
+                fontFamily: "Noto Sans KR",
+                fontWeight: "300",
                 fontSize: 14,
                 height: calc.getRegHeightDp(20),
                 marginTop: calc.getRegHeightDp(31),
