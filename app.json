@@ -44,7 +44,7 @@
             "certificateHash" : "4D13315CDDE3F4523D0BA962ADC770F81D4E025B"
           }
       },
-      "package": "host.exp.exponent",
+      "package": "com.cultureland.culor",
       "googleServicesFile" : "./google-services.json"
     }
   }
