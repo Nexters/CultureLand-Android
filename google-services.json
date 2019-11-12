@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:1096693013930:android:d5fd811d19448378441fd3",
         "android_client_info": {
-          "package_name": "host.exp.exponent"
+          "package_name": "com.cultureland.culor"
         }
       },
       "oauth_client": [
@@ -35,7 +35,7 @@
               "client_id": "1096693013930-e49vsrd2du1ta241nh925vosf0bev8r2.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "host.exp.exponent"
+                "bundle_id": "com.cultureland.culor"
               }
             }
           ]

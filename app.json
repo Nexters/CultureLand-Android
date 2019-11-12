@@ -35,7 +35,13 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.cultureland.culor",
+      "config" : {
+        "googleSignIn" : {
+          "reservedClientId" :"com.googleusercontent.apps.1096693013930-u011tjhbnv2c0342vfmp7kp9o7bg3qlp"
+        }
+      }
     },
     "android": {
       "config" : {
@@ -44,8 +50,13 @@
             "certificateHash" : "4D13315CDDE3F4523D0BA962ADC770F81D4E025B"
           }
       },
-      "package": "host.exp.exponent",
-      "googleServicesFile" : "./google-services.json"
+      "package": "com.cultureland.culor",
+      "googleServicesFile" : "./google-services.json",
+      "permissions": [
+        "CAMERA",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"
+      ]
     }
   }
 }
